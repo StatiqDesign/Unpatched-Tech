@@ -106,12 +106,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -f .github/workflows/live-performance-pass-2.yml
-          rmdir .github/workflows 2>/dev/null || true
-          rmdir .github 2>/dev/null || true
           git config user.name "Statiq Design"
           git config user.email "hello@statiqdesign.com"
           git add -A
           git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "No theme changes to commit"
+            exit 0
+          fi
           git commit -m "Fix CLS and trim storefront runtime overhead"
           git push origin HEAD:main
