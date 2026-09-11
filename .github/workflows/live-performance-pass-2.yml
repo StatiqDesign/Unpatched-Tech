@@ -1,4 +1,5 @@
 name: Finish validated live performance pass
+# Manual retrigger after PageSpeed review on 2026-09-11.
 
 on:
   push:
