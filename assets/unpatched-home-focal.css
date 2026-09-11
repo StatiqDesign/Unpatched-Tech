@@ -357,9 +357,8 @@
     overflow: visible;
   }
 
-  /* Mobile browsers can briefly composite a fading slide outside the rounded
-     clipping layer. Clip the actual slide stack and keep the mask on the GPU so
-     outgoing/incoming images cannot flash square corners during transitions. */
+  /* Clip the mobile slide stack with native overflow/border-radius only.
+     Avoid forcing an extra GPU mask/compositing layer on the LCP image. */
   .shopify-section--slideshow .slideshow__slide-list,
   .shopify-section--slideshow .slideshow__slide,
   .shopify-section--slideshow .slideshow__slide-inner,
@@ -371,20 +370,6 @@
   .shopify-section--slideshow .slideshow__slide,
   .shopify-section--slideshow .slideshow__slide-inner {
     overflow: hidden;
-  }
-
-  .shopify-section--slideshow .slideshow__slide-list {
-    isolation: isolate;
-    transform: translateZ(0);
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
-  }
-
-  .shopify-section--slideshow .slideshow__slide,
-  .shopify-section--slideshow .slideshow__slide-inner,
-  .shopify-section--slideshow .slideshow__image-wrapper,
-  .shopify-section--slideshow .slideshow__image {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
   }
 
   .shopify-section--slideshow .slideshow__slide-inner::before {
