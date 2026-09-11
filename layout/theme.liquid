@@ -59,11 +59,6 @@
       <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 96 }}" type="image/png">
     {%- endif -%}
 
-    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-    {%- unless settings.heading_font.system? and settings.text_font.system? -%}
-      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-    {%- endunless -%}
-
     <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
     {% render 'unpatched-style-loader',
       is_unpatched_tracking_page: is_unpatched_tracking_page,
