@@ -1,0 +1,74 @@
+name: Apply LCP early hint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/live-lcp-early-hint.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply validated LCP changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          root = Path('.')
+
+          # Let Shopify discover render-blocking CSS as early as possible.
+          p = root / 'layout/theme.liquid'
+          s = p.read_text()
+          old = '''    {% render 'social-meta-tags' %}\n    {% render 'microdata-schema' %}\n    {% render 'css-variables', direction: direction %}\n    {% render 'js-variables', direction: direction %}\n\n    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">\n    {% render 'unpatched-style-loader',\n      is_unpatched_tracking_page: is_unpatched_tracking_page,\n      is_unpatched_faq_page: is_unpatched_faq_page,\n      is_unpatched_about_page: is_unpatched_about_page,\n      is_unpatched_services_page: is_unpatched_services_page,\n      is_unpatched_support_page: is_unpatched_support_page,\n      is_unpatched_policy_page: is_unpatched_policy_page,\n      is_unpatched_custom_legal_page: is_unpatched_custom_legal_page\n    %}\n'''
+          new = '''    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">\n    {% render 'unpatched-style-loader',\n      is_unpatched_tracking_page: is_unpatched_tracking_page,\n      is_unpatched_faq_page: is_unpatched_faq_page,\n      is_unpatched_about_page: is_unpatched_about_page,\n      is_unpatched_services_page: is_unpatched_services_page,\n      is_unpatched_support_page: is_unpatched_support_page,\n      is_unpatched_policy_page: is_unpatched_policy_page,\n      is_unpatched_custom_legal_page: is_unpatched_custom_legal_page\n    %}\n\n    {% render 'social-meta-tags' %}\n    {% render 'microdata-schema' %}\n    {% render 'css-variables', direction: direction %}\n    {% render 'js-variables', direction: direction %}\n'''
+          if old not in s:
+              raise SystemExit('Expected head stylesheet block not found')
+          p.write_text(s.replace(old, new, 1))
+
+          # Shopify image_tag preload emits Link/Early Hint headers for the current LCP image.
+          p = root / 'sections/slideshow.liquid'
+          s = p.read_text()
+          old = '''        {%- assign image = block.settings.image -%}\n        {%- assign split_image = block.settings.split_image -%}\n        {%- assign mobile_image = block.settings.mobile_image -%}\n\n        {%- assign image_aspect_ratio = image.aspect_ratio | default: 2.63 -%}'''
+          new = '''        {%- assign image = block.settings.image -%}\n        {%- assign split_image = block.settings.split_image -%}\n        {%- assign mobile_image = block.settings.mobile_image -%}\n        {%- assign preload_attribute_value = false -%}\n        {%- if forloop.first and mobile_image == blank -%}\n          {%- assign preload_attribute_value = true -%}\n        {%- endif -%}\n\n        {%- assign image_aspect_ratio = image.aspect_ratio | default: 2.63 -%}'''
+          if old not in s:
+              raise SystemExit('Expected slideshow image assignments not found')
+          s = s.replace(old, new, 1)
+
+          old = "image_tag: loading: loading_attribute_value, fetchpriority: fetch_priority_value, draggable: false, class: 'slideshow__image', sizes: sizes_attributes, widths: '600,800,1000,1200,1400,1600,1800,2000,2200,2400'"
+          new = "image_tag: loading: loading_attribute_value, fetchpriority: fetch_priority_value, preload: preload_attribute_value, draggable: false, class: 'slideshow__image', sizes: sizes_attributes, widths: '600,800,1000,1200,1400,1600,1800,2000,2200,2400'"
+          if old not in s:
+              raise SystemExit('Expected picture fallback image_tag not found')
+          s = s.replace(old, new, 1)
+
+          old = "image_tag: loading: loading_attribute_value, fetchpriority: fetch_priority_value, draggable: false, class: 'slideshow__image', sizes: sizes_attributes, widths: '400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400'"
+          new = "image_tag: loading: loading_attribute_value, fetchpriority: fetch_priority_value, preload: preload_attribute_value, draggable: false, class: 'slideshow__image', sizes: sizes_attributes, widths: '400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400'"
+          if old not in s:
+              raise SystemExit('Expected primary image_tag not found')
+          p.write_text(s.replace(old, new, 1))
+
+          assert 'preload: preload_attribute_value' in (root / 'sections/slideshow.liquid').read_text()
+          PY
+
+      - name: Commit directly to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/live-lcp-early-hint.yml
+          rmdir .github/workflows 2>/dev/null || true
+          rmdir .github 2>/dev/null || true
+          git config user.name "Statiq Design"
+          git config user.email "hello@statiqdesign.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "Preload homepage LCP with Shopify Early Hints"
+          git push origin HEAD:main
