@@ -48,7 +48,7 @@ jobs:
           p = root / 'sections/header.liquid'
           s = p.read_text()
           old = '''            {%- else -%}\n              <shopify-account menu="{{ section.settings.customer_account_menu }}"{% if section.settings.show_icons %} class="shopify-account--icons"{% endif %}>\n                <div slot="signed-out-avatar">\n                  <span class="header__icon-wrapper tap-area hidden-phone {% unless section.settings.show_icons %}hidden-desk{% endunless %}">\n                    {%- render 'icon' with 'header-customer' -%}\n                  </span>\n                </div>\n              </shopify-account>\n            {%- endif -%}'''
-          new = '''            {%- else -%}\n              <a href="{{ routes.account_login_url }}" class="header__icon-wrapper header__account-link tap-area hidden-phone {% unless section.settings.show_icons %}hidden-desk{% endunless %}" aria-label="{{ 'customer.login_page.title' | t | escape }}">\n                {%- render 'icon' with 'header-customer' -%}\n              </a>\n            {%- endif -%}'''
+          new = '''            {%- else -%}\n              <a href="{{ routes.account_login_url }}" class="header__icon-wrapper header__account-link tap-area hidden-phone {% unless section.settings.show_icons %}hidden-desk{% endunless %}" aria-label="{{ 'header.general.login' | t | escape }}">\n                {%- render 'icon' with 'header-customer' -%}\n              </a>\n            {%- endif -%}'''
           if old not in s:
               raise SystemExit('Expected signed-out icon shopify-account block not found')
           s = s.replace(old, new, 1)
@@ -83,6 +83,11 @@ jobs:
           if old not in s:
               raise SystemExit('Expected flagship mobile srcset not found')
           p.write_text(s.replace(old, new, 1))
+
+          # Theme Check cannot statically resolve snippets rendered from product
+          # template custom_liquid JSON. Keep the documented false-positive list
+          # in the repo so future checks remain meaningful instead of noisy.
+          (root / '.theme-check.yml').write_text('''extends: theme-check:recommended\n\nOrphanedSnippet:\n  ignore:\n    - snippets/unpatched-computer-specs.liquid\n    - snippets/unpatched-product-disclosures.liquid\n    - snippets/unpatched-refurbished-certified.liquid\n''')
 
           theme = (root / 'layout/theme.liquid').read_text()
           assert 'defer fetchpriority="low"' not in theme
