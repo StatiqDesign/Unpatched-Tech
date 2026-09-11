@@ -36,10 +36,7 @@ body.unpatched-home-page #main .unpatched-home-category-card {
     0 24px 44px rgba(24, 32, 59, .08);
   transform: translate3d(0, -2px, 0);
   transform-style: preserve-3d;
-  transition:
-    transform 220ms cubic-bezier(.2, .7, .2, 1),
-    box-shadow 220ms ease,
-    border-color 220ms ease;
+  transition: transform 220ms cubic-bezier(.2, .7, .2, 1);
 }
 
 /* Clip the actual clickable surface too. This prevents nested translucent
