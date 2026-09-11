@@ -3,7 +3,7 @@ name: Finish validated live performance pass
 
 on:
   push:
-    branches: [main]
+    branches: [performance-final-pass]
     paths:
       - '.github/workflows/live-performance-pass-2.yml'
 
@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: performance-final-pass
           fetch-depth: 0
 
       - name: Replace account web components with native login links
@@ -67,7 +67,7 @@ jobs:
       - name: Theme Check
         uses: shopify/theme-check-action@v2
 
-      - name: Commit final validated state to main
+      - name: Commit final validated state to feature branch
         shell: bash
         run: |
           set -euo pipefail
@@ -80,4 +80,4 @@ jobs:
             exit 0
           fi
           git commit -m "Finish validated storefront performance pass"
-          git push origin HEAD:main
+          git push origin HEAD:performance-final-pass
