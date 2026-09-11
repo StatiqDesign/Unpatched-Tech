@@ -88,7 +88,14 @@
           <a href="{{ resolved_link }}" class="unpatched-home-category-card__link" aria-label="{{ block.settings.title | default: block.settings.navigation_label | escape }}">
             <div class="unpatched-home-category-card__media" style="--up-media-scale: {{ block.settings.image_scale | divided_by: 100.0 }}; --up-media-fit: {{ block.settings.image_fit | default: 'cover' }}; --up-desktop-media-fit: {{ block.settings.desktop_image_fit | default: 'contain' }}; --up-media-background: {{ block.settings.media_background }};">
               {%- if card_image != blank -%}
-                {{ card_image | image_url: width: 800, format: 'webp' | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '280,320,360,400,480,560,640,800', sizes: '(max-width: 749px) min(82vw, 330px), (max-width: 999px) 44vw, 24vw', class: 'unpatched-home-category-card__image' }}
+                <picture>
+                  <source
+                    media="(max-width: 749px)"
+                    sizes="min(82vw, 330px)"
+                    srcset="{{ card_image | image_url: width: 320, height: 320, crop: 'center', format: 'webp' }} 320w, {{ card_image | image_url: width: 400, height: 400, crop: 'center', format: 'webp' }} 400w, {{ card_image | image_url: width: 480, height: 480, crop: 'center', format: 'webp' }} 480w, {{ card_image | image_url: width: 560, height: 560, crop: 'center', format: 'webp' }} 560w"
+                  >
+                  {{ card_image | image_url: width: 800, format: 'webp' | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '320,400,480,560,640,800', sizes: '(max-width: 999px) 44vw, 24vw', class: 'unpatched-home-category-card__image' }}
+                </picture>
               {%- elsif stock_image_url != blank -%}
                 <img src="{{ stock_image_400 }}" srcset="{{ stock_image_320 }} 320w, {{ stock_image_400 }} 400w, {{ stock_image_480 }} 480w, {{ stock_image_url }} 640w" sizes="(max-width: 749px) min(82vw, 330px), (max-width: 999px) 44vw, 24vw" alt="{{ stock_image_alt | escape }}" width="640" height="640" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer" class="unpatched-home-category-card__image">
               {%- else -%}
