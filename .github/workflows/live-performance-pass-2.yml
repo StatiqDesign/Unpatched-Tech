@@ -1,4 +1,4 @@
-name: Apply validated performance pass 2
+name: Finish validated live performance pass
 
 on:
   push:
@@ -10,111 +10,73 @@ permissions:
   contents: write
 
 jobs:
-  apply:
+  finish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
-      - name: Apply measured performance fixes
+      - name: Replace account web components with native login links
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
-
-          root = Path('.')
-
-          # Revert the homepage-only low-priority runtime experiment. It shortened
-          # the request chain but caused custom elements to upgrade after paint,
-          # producing the measured Shop-by-System CLS regression.
-          p = root / 'layout/theme.liquid'
+          p = Path('sections/header.liquid')
           s = p.read_text()
-          old = '''    <script src="{{ 'vendor.js' | asset_url }}" defer></script>\n    {%- unless request.page_type == 'index' -%}\n      <script src="{{ 'theme.js' | asset_url }}" defer></script>\n      <script src="{{ 'custom.js' | asset_url }}" defer></script>\n    {%- endunless -%}'''
-          new = '''    <script src="{{ 'vendor.js' | asset_url }}" defer></script>\n    <script src="{{ 'theme.js' | asset_url }}" defer></script>\n    <script src="{{ 'custom.js' | asset_url }}" defer></script>'''
-          if old not in s:
-              raise SystemExit('Expected homepage runtime head block not found')
-          s = s.replace(old, new, 1)
-          old = '''\n    {%- if request.page_type == 'index' -%}\n      <script src="{{ 'theme.js' | asset_url }}" defer fetchpriority="low"></script>\n      <script src="{{ 'custom.js' | asset_url }}" defer fetchpriority="low"></script>\n    {%- endif -%}'''
-          if old not in s:
-              raise SystemExit('Expected deferred homepage runtime block not found')
-          s = s.replace(old, '', 1)
-          p.write_text(s)
 
-          # Signed-out customers only need the normal Shopify login destination.
-          # Remove both Focal shopify-account web-component variants so the header
-          # does not bootstrap account/shop.app runtime merely to render login UI.
-          p = root / 'sections/header.liquid'
-          s = p.read_text()
           old = '''            {%- else -%}\n              <shopify-account menu="{{ section.settings.customer_account_menu }}"{% if section.settings.show_icons %} class="shopify-account--icons"{% endif %}>\n                <div slot="signed-out-avatar">\n                  <span class="header__icon-wrapper tap-area hidden-phone {% unless section.settings.show_icons %}hidden-desk{% endunless %}">\n                    {%- render 'icon' with 'header-customer' -%}\n                  </span>\n                </div>\n              </shopify-account>\n            {%- endif -%}'''
           new = '''            {%- else -%}\n              <a href="{{ routes.account_login_url }}" class="header__icon-wrapper header__account-link tap-area hidden-phone {% unless section.settings.show_icons %}hidden-desk{% endunless %}" aria-label="{{ 'header.general.login' | t | escape }}">\n                {%- render 'icon' with 'header-customer' -%}\n              </a>\n            {%- endif -%}'''
-          if old not in s:
-              raise SystemExit('Expected signed-out icon shopify-account block not found')
-          s = s.replace(old, new, 1)
+          if old in s:
+              s = s.replace(old, new, 1)
 
           old = '''                {%- else -%}\n                  <shopify-account menu="{{ section.settings.customer_account_menu }}">\n                    <div slot="signed-out-avatar">\n                      <span>{{ 'header.general.login' | t }}</span>\n                    </div>\n                  </shopify-account>\n                {%- endif -%}'''
           new = '''                {%- else -%}\n                  <a href="{{ routes.account_login_url }}">{{ 'header.general.login' | t }}</a>\n                {%- endif -%}'''
-          if old not in s:
-              raise SystemExit('Expected signed-out text shopify-account block not found')
-          p.write_text(s.replace(old, new, 1))
+          if old in s:
+              s = s.replace(old, new, 1)
 
-          # Serve Shopify-hosted pathway images as WebP and stop advertising
-          # unnecessarily large candidates for these below-the-fold cards.
-          p = root / 'sections/unpatched-pathways.liquid'
-          s = p.read_text()
-          old = "{{ pathway_image | image_url: width: 1200 | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '360,480,600,720,900,1080,1200', sizes: '(max-width: 749px) calc(100vw - 32px), (max-width: 999px) 48vw, 58vw', class: 'unpatched-home-pathway-card__image' }}"
-          new = "{{ pathway_image | image_url: width: 1000, format: 'webp' | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '360,480,600,720,900,1000', sizes: '(max-width: 749px) calc(100vw - 32px), (max-width: 999px) 48vw, 58vw', class: 'unpatched-home-pathway-card__image' }}"
-          if old not in s:
-              raise SystemExit('Expected Shopify pathway image tag not found')
-          s = s.replace(old, new, 1)
-          old = '''                  srcset="{{ pathway_asset | asset_img_url: '480x' }} 480w, {{ pathway_asset | asset_img_url: '600x' }} 600w, {{ pathway_asset | asset_img_url: '720x' }} 720w, {{ pathway_asset | asset_img_url: '900x' }} 900w, {{ pathway_asset | asset_img_url: '1200x' }} 1200w"'''
-          new = '''                  srcset="{{ pathway_asset | asset_img_url: '480x' }} 480w, {{ pathway_asset | asset_img_url: '600x' }} 600w, {{ pathway_asset | asset_img_url: '720x' }} 720w"'''
-          if old not in s:
-              raise SystemExit('Expected pathway asset srcset not found')
-          p.write_text(s.replace(old, new, 1))
+          if '<shopify-account' in s:
+              raise SystemExit('shopify-account still present after patch')
+          if s.count('routes.account_login_url') < 2:
+              raise SystemExit('native account login links missing')
+          p.write_text(s)
+          PY
 
-          # The flagship is displayed at ~404 CSS px in the mobile audit. Keep a
-          # modest density buffer without always advertising a 480px candidate.
-          p = root / 'sections/unpatched-flagship-pc.liquid'
-          s = p.read_text()
-          old = '''              srcset="{{ flagship_image | image_url: width: 320, format: 'webp' }} 320w, {{ flagship_image | image_url: width: 400, format: 'webp' }} 400w, {{ flagship_image | image_url: width: 480, format: 'webp' }} 480w"'''
-          new = '''              srcset="{{ flagship_image | image_url: width: 320, format: 'webp' }} 320w, {{ flagship_image | image_url: width: 400, format: 'webp' }} 400w, {{ flagship_image | image_url: width: 440, format: 'webp' }} 440w"'''
-          if old not in s:
-              raise SystemExit('Expected flagship mobile srcset not found')
-          p.write_text(s.replace(old, new, 1))
-
-          # Theme Check cannot statically resolve snippets rendered from product
-          # template custom_liquid JSON. Keep the documented false-positive list
-          # in the repo so future checks remain meaningful instead of noisy.
-          (root / '.theme-check.yml').write_text('''extends: theme-check:recommended\n\nOrphanedSnippet:\n  ignore:\n    - snippets/unpatched-computer-specs.liquid\n    - snippets/unpatched-product-disclosures.liquid\n    - snippets/unpatched-refurbished-certified.liquid\n''')
-
-          theme = (root / 'layout/theme.liquid').read_text()
+      - name: Verify validated live performance state
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          theme = Path('layout/theme.liquid').read_text()
           assert 'defer fetchpriority="low"' not in theme
           assert theme.count("'theme.js' | asset_url") == 1
-          header = (root / 'sections/header.liquid').read_text()
+          header = Path('sections/header.liquid').read_text()
           assert '<shopify-account' not in header
           assert header.count('routes.account_login_url') >= 2
-          pathways = (root / 'sections/unpatched-pathways.liquid').read_text()
-          assert "format: 'webp'" in pathways
+          pathways = Path('sections/unpatched-pathways.liquid').read_text()
+          assert "image_url: width: 1000, format: 'webp'" in pathways
+          assert "asset_img_url: '720x' }} 720w" in pathways
+          flagship = Path('sections/unpatched-flagship-pc.liquid').read_text()
+          assert "image_url: width: 440, format: 'webp' }} 440w" in flagship
           PY
 
       - name: Theme Check
         uses: shopify/theme-check-action@v2
 
-      - name: Commit directly to main
+      - name: Commit final validated state to main
         shell: bash
         run: |
           set -euo pipefail
+          rm -f .github/workflows/live-performance-pass-2.yml
           git config user.name "Statiq Design"
           git config user.email "hello@statiqdesign.com"
           git add -A
           git diff --cached --check
           if git diff --cached --quiet; then
-            echo "No theme changes to commit"
             exit 0
           fi
-          git commit -m "Fix CLS and trim storefront runtime overhead"
+          git commit -m "Finish validated storefront performance pass"
           git push origin HEAD:main
-
-# retry validated pass
