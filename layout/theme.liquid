@@ -78,10 +78,8 @@
     <style>:root { --unpatched-brand-blue-rgb: {{ settings.primary_button_background.red }}, {{ settings.primary_button_background.green }}, {{ settings.primary_button_background.blue }}; }</style>
 
     <script src="{{ 'vendor.js' | asset_url }}" defer></script>
-    {%- unless request.page_type == 'index' -%}
-      <script src="{{ 'theme.js' | asset_url }}" defer></script>
-      <script src="{{ 'custom.js' | asset_url }}" defer></script>
-    {%- endunless -%}
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    <script src="{{ 'custom.js' | asset_url }}" defer></script>
     {%- if is_unpatched_services_page -%}<script src="{{ 'unpatched-services.js' | asset_url }}" defer></script>{%- endif -%}
 
     {{ content_for_header }}
@@ -126,11 +124,6 @@
       {%- sections 'footer-group' -%}
       {%- sections 'overlay-group' -%}
       {%- unless settings.cart_type == 'page' or request.page_type == 'cart' -%}{%- section 'mini-cart' -%}{%- endunless -%}
-    {%- endif -%}
-
-    {%- if request.page_type == 'index' -%}
-      <script src="{{ 'theme.js' | asset_url }}" defer fetchpriority="low"></script>
-      <script src="{{ 'custom.js' | asset_url }}" defer fetchpriority="low"></script>
     {%- endif -%}
   </body>
 </html>
