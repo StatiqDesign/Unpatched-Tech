@@ -1,0 +1,49 @@
+{%- assign buy_buttons_block = section.blocks | where: 'type', 'buy_buttons' | first -%}
+
+{%- if buy_buttons_block != blank -%}
+  <product-rerender id="product-sticky-form-{{ product.id }}-{{ section.id }}" observe-form="{{ product_form_id }}">
+    {%- assign selected_variant = product.selected_or_first_available_variant -%}
+
+    {%- if selected_variant != nil -%}
+      <div class="unpatched-product-sticky hidden-tablet-and-up" aria-label="Quick purchase">
+        <div class="unpatched-product-sticky__inner">
+          <div class="unpatched-product-sticky__purchase">
+            <div class="unpatched-product-sticky__price-wrap">
+              <span class="unpatched-product-sticky__price">
+                {{- selected_variant.price | money -}}
+              </span>
+            </div>
+
+            {%- capture button_content -%}
+              {%- if product.template_suffix == 'pre-order' -%}
+                {{- 'product.form.pre_order' | t -}}
+              {%- else -%}
+                {{- 'product.form.add_to_cart' | t -}}
+              {%- endif -%}
+            {%- endcapture -%}
+
+            <button
+              id="StickyAddToCart"
+              is="loader-button"
+              form="{{ product_form_id }}"
+              type="submit"
+              data-product-add-to-cart-button
+              data-use-primary
+              data-button-content="{{ button_content | escape }}"
+              class="product-form__add-button button button--primary unpatched-product-sticky__button"
+              {% unless selected_variant.available %}disabled{% endunless %}
+            >
+              {%- if selected_variant.available -%}
+                {{- button_content -}}
+              {%- else -%}
+                {{- 'product.form.sold_out' | t -}}
+              {%- endif -%}
+            </button>
+
+            <span class="unpatched-product-sticky__promise">Tracked shipping <span aria-hidden="true">•</span> 30-day returns</span>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </product-rerender>
+{%- endif -%}

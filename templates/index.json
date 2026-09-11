@@ -1,0 +1,488 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "image_MbfwkP": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/ASUS_Prime_GeForce_RTX_40_series_3_3_bf1d3f2e-d733-4215-bbc1-b62ce42cf73a.png",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "image_background": "#f4f5f8",
+            "text_position": "middle_center",
+            "subheading": "",
+            "title": "Slide title",
+            "content": "<p>Test </p>",
+            "button_1_text": "",
+            "button_1_link": "",
+            "button_2_text": "",
+            "button_2_link": "",
+            "text_color": "#FFFFFF",
+            "content_backdrop_color": "#ffffff",
+            "content_backdrop_opacity": 0,
+            "button_background": "#ffffff",
+            "button_text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
+        },
+        "image_RGiNck": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Cover_Image_for_Intel_B860.jpg",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "image_background": "#f4f5f8",
+            "text_position": "middle_center",
+            "subheading": "",
+            "title": "Slide title",
+            "content": "<p>test</p>",
+            "button_1_text": "",
+            "button_1_link": "",
+            "button_2_text": "",
+            "button_2_link": "",
+            "text_color": "#FFFFFF",
+            "content_backdrop_color": "#ffffff",
+            "content_backdrop_opacity": 0,
+            "button_background": "#ffffff",
+            "button_text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
+        }
+      },
+      "block_order": [
+        "image_MbfwkP",
+        "image_RGiNck"
+      ],
+      "name": "HERO",
+      "settings": {
+        "section_height": "small",
+        "transition_type": "fade",
+        "show_initial_transition": true,
+        "autoplay": true,
+        "cycle_speed": 8,
+        "background": "#ffffff"
+      }
+    },
+    "unpatched_categories": {
+      "type": "unpatched-category-showcase",
+      "blocks": {
+        "pcs": {
+          "type": "category",
+          "settings": {
+            "navigation_label": "Pre Built PCs",
+            "collection": "prebuilt-gaming-pcs",
+            "link": "",
+            "image": "shopify://shop_images/TR100-Case-Hero_Snow.webp",
+            "stock_artwork": "none",
+            "image_fit": "cover",
+            "desktop_image_fit": "contain",
+            "image_scale": 100,
+            "media_background": "#ffffff",
+            "eyebrow": "BUILT TO PLAY",
+            "title": "Gaming PCs",
+            "description": "<p>Clean builds, balanced parts, and real upgrade paths without the bloated nonsense.</p>",
+            "button_text": "Explore PCs"
+          }
+        },
+        "xbox": {
+          "type": "category",
+          "settings": {
+            "navigation_label": "Xbox",
+            "collection": "microsoft",
+            "link": "",
+            "stock_artwork": "xbox_series_x",
+            "image_fit": "contain",
+            "desktop_image_fit": "contain",
+            "image_scale": 100,
+            "media_background": "#ffffff",
+            "eyebrow": "REFURBISHED",
+            "title": "Xbox",
+            "description": "<p>From the original Xbox through Series X|S, restored and ready for another round.</p>",
+            "button_text": "Explore Xbox"
+          }
+        },
+        "playstation": {
+          "type": "category",
+          "settings": {
+            "navigation_label": "PlayStation",
+            "collection": "sony",
+            "link": "",
+            "stock_artwork": "ps5_disc",
+            "image_fit": "contain",
+            "desktop_image_fit": "contain",
+            "image_scale": 100,
+            "media_background": "#ffffff",
+            "eyebrow": "REFURBISHED",
+            "title": "PlayStation",
+            "description": "<p>Classic PlayStation hardware through the latest generations, carefully cleaned and tested.</p>",
+            "button_text": "Explore PlayStation"
+          }
+        },
+        "nintendo": {
+          "type": "category",
+          "settings": {
+            "navigation_label": "Nintendo",
+            "collection": "nintendo",
+            "link": "",
+            "stock_artwork": "switch_zelda",
+            "image_fit": "contain",
+            "desktop_image_fit": "contain",
+            "image_scale": 100,
+            "media_background": "#ffffff",
+            "eyebrow": "REFURBISHED",
+            "title": "Nintendo",
+            "description": "<p>Handhelds and home consoles from the systems people still love to play.</p>",
+            "button_text": "Explore Nintendo"
+          }
+        }
+      },
+      "block_order": [
+        "pcs",
+        "xbox",
+        "playstation",
+        "nintendo"
+      ],
+      "name": "SHOP BY SYSTEM",
+      "settings": {
+        "subheading": "CHOOSE YOUR PLATFORM",
+        "title": "Shop by system",
+        "content": "<p>Find the console, handheld, or gaming PC that fits how you play.</p>",
+        "navigation_menu": "main-menu",
+        "background": "#ffffff",
+        "text_color": "#25252a"
+      }
+    },
+    "unpatched_flagship_pc": {
+      "type": "unpatched-flagship-pc",
+      "name": "FLAGSHIP PC",
+      "settings": {
+        "product": "mid-tier",
+        "eyebrow": "BUILT BY UNPATCHED",
+        "title_override": "",
+        "description": "<p>A balanced gaming system built around real-world performance, clean thermals, and an upgrade path that makes sense.</p>",
+        "cpu": "AMD Ryzen processor",
+        "gpu": "AMD Radeon graphics",
+        "memory": "32GB DDR5",
+        "storage": "1TB NVMe SSD",
+        "button_text": "VIEW BUILD",
+        "supporting_text": "Built, configured, and bench tested by Unpatched Tech."
+      }
+    },
+    "unpatched_pathways": {
+      "type": "unpatched-pathways",
+      "blocks": {
+        "gaming_pcs": {
+          "type": "pathway",
+          "settings": {
+            "eyebrow": "BUILT FOR YOU",
+            "title": "Gaming PCs",
+            "description": "<p>Balanced gaming systems built around performance, clean design, and room to upgrade.</p>",
+            "collection": "prebuilt-gaming-pcs",
+            "link": "/collections/all",
+            "button_text": "Explore PCs",
+            "image": "shopify://shop_images/PC_Build_Image.jpg",
+            "default_artwork": "none",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "card_background": "#25252a",
+            "card_text_color": "#ffffff"
+          }
+        },
+        "refurbished": {
+          "type": "pathway",
+          "settings": {
+            "eyebrow": "RESTORED",
+            "title": "Refurbished tech",
+            "description": "<p>Original hardware, cleaned up, tested properly, and ready for its next player.</p>",
+            "collection": "refurbished-consoles",
+            "link": "",
+            "button_text": "Shop refurbished",
+            "default_artwork": "retro_pc",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "card_background": "#25252a",
+            "card_text_color": "#ffffff"
+          }
+        },
+        "services": {
+          "type": "pathway",
+          "settings": {
+            "eyebrow": "FIX. MOD. UPGRADE.",
+            "title": "Repairs & mods",
+            "description": "<p>Repairs, restoration, reshells, upgrades, and the oddly specific screwdriver required to do it right.</p>",
+            "collection": "",
+            "link": "shopify://pages/services",
+            "button_text": "See services",
+            "default_artwork": "repair",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "card_background": "#25252a",
+            "card_text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "gaming_pcs",
+        "refurbished",
+        "services"
+      ],
+      "name": "HOW WE HELP",
+      "settings": {
+        "subheading": "YOUR TECH, YOUR WAY",
+        "title": "Three ways to get back in the game",
+        "content": "<p>Buy restored hardware, start with a fresh build, or bring us what you already own.</p>",
+        "background": "#ffffff",
+        "text_color": "#25252a"
+      }
+    },
+    "unpatched_featured": {
+      "type": "unpatched-featured-collection",
+      "blocks": {
+        "featured_xbox": {
+          "type": "collection",
+          "settings": {
+            "collection": "microsoft",
+            "label": "Xbox",
+            "product_1": "microsoft-xbox-series-s-all-digital-console-1tb-ssd-120fps-robot-white",
+            "product_2": "xbox-series-x",
+            "product_3": "xbox-one-x",
+            "product_4": "xbox-360-elite"
+          }
+        },
+        "featured_playstation": {
+          "type": "collection",
+          "settings": {
+            "collection": "sony",
+            "label": "PlayStation",
+            "product_1": "playstation-5",
+            "product_2": "playstation-4",
+            "product_3": "playstation-2",
+            "product_4": "sony-playstation-classic"
+          }
+        },
+        "featured_nintendo": {
+          "type": "collection",
+          "settings": {
+            "collection": "nintendo",
+            "label": "Nintendo",
+            "product_1": "nintendo-switch-oled",
+            "product_2": "nintendo-64",
+            "product_3": "nintendo-gamecube-platinum",
+            "product_4": "nintendo-game-boy-advance-black"
+          }
+        }
+      },
+      "block_order": [
+        "featured_xbox",
+        "featured_playstation",
+        "featured_nintendo"
+      ],
+      "name": "FEATURED TECH",
+      "settings": {
+        "subheading": "EXPERTLY REFURBISHED",
+        "title": "Featured tech",
+        "content": "<p>Hand-picked consoles restored by us—carefully cleaned, inspected, repaired when needed, and fully tested before they’re ready to play again.</p>",
+        "collection": "refurbished-consoles",
+        "products_count": 4,
+        "show_type": true,
+        "product_label": "REFURBISHED",
+        "show_price": true,
+        "image_fit": "contain",
+        "image_scale": 100,
+        "media_background": "#ffffff",
+        "button_text": "SHOP REFURBISHED",
+        "button_link": "",
+        "panel_background": "#f4f4f6",
+        "background": "#ffffff",
+        "text_color": "#25252a"
+      }
+    },
+    "multi_column_pmNkby": {
+      "type": "multi-column",
+      "blocks": {
+        "item_j6frBY": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/check.png",
+            "image_width": 10,
+            "image_border": "rgba(0,0,0,0)",
+            "title": "QUALITY FIRST",
+            "content": "<p>Every PC and refurb is carefully built, tested, and checked before it leaves us.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
+          }
+        },
+        "item_VzjM3W": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/pick.png",
+            "image_width": 10,
+            "image_border": "rgba(0,0,0,0)",
+            "title": "BUILT TO LAST",
+            "content": "<p>Thoughtful builds and repairs designed to perform now and stay useful longer.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
+          }
+        },
+        "item_t8hJ8q": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/device-gamepad-2.png",
+            "image_width": 10,
+            "image_border": "rgba(0,0,0,0)",
+            "title": "READY TO PLAY",
+            "content": "<p>Hardware arrives tested, prepared, and ready to become part of your setup.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
+          }
+        },
+        "item_63LD94": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/shield-half.png",
+            "image_width": 10,
+            "image_border": "rgba(0,0,0,0)",
+            "title": "REAL SUPPORT",
+            "content": "<p>When you need help, you can reach a real team that knows the hardware.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
+          }
+        }
+      },
+      "block_order": [
+        "item_j6frBY",
+        "item_VzjM3W",
+        "item_t8hJ8q",
+        "item_63LD94"
+      ],
+      "custom_css": [],
+      "name": "WHY UNPATCHED",
+      "settings": {
+        "reveal_on_scroll": false,
+        "stack_items": true,
+        "subheading": "WHY BUY FROM US",
+        "title": "Built around the hardware. Backed by real support.",
+        "content": "<p>Buying refurbished or custom-built tech should feel as dependable as buying new.</p>",
+        "column_alignment": "left",
+        "mobile_item_size": "medium",
+        "desktop_item_size": "medium",
+        "spacing": "normal",
+        "background": "#ffffff",
+        "text_color": "#25252a"
+      }
+    },
+    "logo-list": {
+      "type": "logo-list",
+      "blocks": {
+        "logo-1": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/xbox.com-logo.webp",
+            "link": ""
+          }
+        },
+        "logo-2": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/playstation.com-logo.webp",
+            "link": ""
+          }
+        },
+        "logo-3": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/nintendo.com-logo.webp",
+            "link": ""
+          }
+        },
+        "logo-5": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/asus.com-logo.webp",
+            "link": ""
+          }
+        },
+        "logo-4": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/nvidia.com-logo.webp",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo-1",
+        "logo-2",
+        "logo-3",
+        "logo-5",
+        "logo-4"
+      ],
+      "custom_css": [],
+      "name": "Brands",
+      "settings": {
+        "reveal_on_scroll": false,
+        "subheading": "Powered by the Best",
+        "title": "Brands We Trust",
+        "button_text": "",
+        "button_link": "",
+        "stack_logos": false,
+        "background": "rgba(0,0,0,0)",
+        "text_color": "#25252a",
+        "button_background": "rgba(0,0,0,0)",
+        "button_text_color": "rgba(0,0,0,0)",
+        "logo_background": "rgba(0,0,0,0)"
+      }
+    },
+    "blog-posts": {
+      "type": "blog-posts",
+      "name": "Blog",
+      "settings": {
+        "blog": "news",
+        "subheading": "LATEST FROM UNPATCHED",
+        "title": "THE UNPATCHED BLOG",
+        "articles_count": 3,
+        "stack_mobile": false,
+        "show_category": true,
+        "show_excerpt": true,
+        "background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)"
+      }
+    }
+  },
+  "order": [
+    "slideshow",
+    "unpatched_categories",
+    "unpatched_flagship_pc",
+    "unpatched_pathways",
+    "unpatched_featured",
+    "multi_column_pmNkby",
+    "logo-list",
+    "blog-posts"
+  ]
+}

@@ -1,0 +1,299 @@
+/* ========================================================================== 
+   UNPATCHED TECH — HOMEPAGE FLAGSHIP PC
+   Large single-product showcase placed directly beneath Shop by System.
+   ========================================================================== */
+
+body.unpatched-home-page #main .unpatched-home-flagship {
+  background: #fff;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship > .container {
+  padding-top: 12px;
+  padding-bottom: var(--up-home-section-pad);
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.42fr) minmax(390px, .9fr);
+  min-height: 620px;
+  overflow: hidden;
+  border: 1px solid rgba(37, 37, 42, .07);
+  border-radius: calc(var(--block-border-radius) + 10px);
+  background: rgba(255, 255, 255, .94);
+  box-shadow:
+    0 28px 70px rgba(25, 33, 62, .10),
+    0 8px 22px rgba(25, 33, 62, .045),
+    inset 0 1px 0 rgba(255, 255, 255, .98);
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__media {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 48% 44%, rgba(64, 93, 230, .16), rgba(64, 93, 230, 0) 48%),
+    linear-gradient(145deg, #eef2fb 0%, #f7f9fc 55%, #ffffff 100%);
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, .72), transparent 34%),
+    radial-gradient(circle at 75% 18%, rgba(255, 255, 255, .90), transparent 30%);
+  pointer-events: none;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__image,
+body.unpatched-home-page #main .unpatched-home-flagship__placeholder {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: 620px;
+  padding: clamp(28px, 4vw, 58px);
+  object-fit: contain;
+  object-position: center;
+  transition: transform 260ms cubic-bezier(.2, .7, .2, 1);
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__placeholder {
+  opacity: .24;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(42px, 5vw, 68px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .98), rgba(249, 250, 253, .95));
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__eyebrow {
+  margin: 0 0 12px;
+  color: #405DE6;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__title {
+  max-width: 10ch;
+  margin: 0;
+  color: var(--up-home-ink);
+  font-size: clamp(42px, 4.5vw, 68px);
+  line-height: .95;
+  letter-spacing: -.05em;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__description {
+  max-width: 560px;
+  margin-top: 20px;
+  color: var(--up-home-muted);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__description p {
+  margin: 0;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__specs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 34px;
+  border-top: 1px solid rgba(37, 37, 42, .09);
+  border-bottom: 1px solid rgba(37, 37, 42, .09);
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__spec {
+  min-width: 0;
+  padding: 17px 0 16px;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__spec:nth-child(odd) {
+  padding-right: 22px;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__spec:nth-child(even) {
+  padding-left: 22px;
+  border-left: 1px solid rgba(37, 37, 42, .09);
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__spec:nth-child(n + 3) {
+  border-top: 1px solid rgba(37, 37, 42, .09);
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__spec span {
+  display: block;
+  margin-bottom: 5px;
+  color: #405DE6;
+  font-family: var(--heading-font-family);
+  font-size: 10px;
+  font-weight: var(--heading-font-weight);
+  letter-spacing: .09em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__spec strong {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--up-home-ink);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__purchase {
+  display: flex;
+  margin-top: 30px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__price-label {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--up-home-muted);
+  font-size: 11px;
+  letter-spacing: .03em;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__price {
+  color: var(--up-home-ink);
+  font-family: var(--heading-font-family);
+  font-size: 26px;
+  font-weight: var(--heading-font-weight);
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__button {
+  display: inline-flex;
+  min-width: 154px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(64, 93, 230, .20);
+}
+
+body.unpatched-home-page #main .unpatched-home-flagship__supporting {
+  margin: 18px 0 0;
+  color: rgba(37, 37, 42, .50);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.unpatched-home-page #main .unpatched-home-flagship__card:hover .unpatched-home-flagship__image {
+    transform: scale(1.025) translateY(-4px);
+  }
+}
+
+@media screen and (max-width: 999px) {
+  body.unpatched-home-page #main .unpatched-home-flagship__card {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__media {
+    min-height: 480px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__title {
+    max-width: 12ch;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  body.unpatched-home-page #main .unpatched-home-flagship > .container {
+    padding-top: 6px;
+    padding-bottom: var(--up-home-section-pad);
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__card {
+    border-radius: calc(var(--block-border-radius) + 5px);
+    box-shadow:
+      0 18px 42px rgba(25, 33, 62, .08),
+      0 5px 14px rgba(25, 33, 62, .035);
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__media {
+    min-height: 0;
+    aspect-ratio: 1 / .86;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__image,
+  body.unpatched-home-page #main .unpatched-home-flagship__placeholder {
+    max-height: none;
+    padding: 24px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__content {
+    padding: 28px 20px 24px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__title {
+    max-width: 11ch;
+    font-size: clamp(34px, 10vw, 44px);
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__description {
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 1.58;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__specs {
+    margin-top: 24px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__spec {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__spec:nth-child(odd) {
+    padding-right: 14px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__spec:nth-child(even) {
+    padding-left: 14px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__spec strong {
+    font-size: 13px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__purchase {
+    margin-top: 24px;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__price {
+    font-size: 24px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__button {
+    width: 100%;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-flagship__supporting {
+    margin-top: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.unpatched-home-page #main .unpatched-home-flagship__image {
+    transition: none;
+  }
+}

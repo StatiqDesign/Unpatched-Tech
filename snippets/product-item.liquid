@@ -1,0 +1,231 @@
+{%- assign color_label_list = 'general.label.color' | t | replace: ', ', ',' | downcase | split: ',' -%}
+{%- assign color_white_label = 'general.label.white' | t | downcase -%}
+{%- assign color_swatch_config = settings.color_swatch_config | newline_to_br | split: '<br />' -%}
+{%- assign primary_image_loading = image_loading | default: 'lazy' -%}
+
+{%- comment -%}
+  Card description system:
+  1. custom.card_description is an optional merchant override.
+  2. Shopify Product category is the primary automatic classifier.
+  3. Product type/title/tags are fallback signals for uncategorized products.
+{%- endcomment -%}
+{%- assign card_description = product.metafields.custom.card_description.value | strip -%}
+{%- assign card_category = product.category.name | default: '' | downcase | strip -%}
+{%- capture card_context -%}
+  {{ product.type }} {{ product.title }}
+  {%- for tag in product.tags -%} {{ tag }}{%- endfor -%}
+{%- endcapture -%}
+{%- assign card_context = card_context | downcase -%}
+
+{%- if card_description == blank -%}
+  {%- if card_category contains 'handheld game console' -%}
+    {%- assign card_description = 'Cleaned, tested, and ready for portable play.' -%}
+  {%- elsif card_category contains 'video game console' -%}
+    {%- assign card_description = 'Tested hardware, ready to plug in and play.' -%}
+  {%- elsif card_context contains 'gaming pc' or card_context contains 'gaming computer' or card_context contains 'desktop pc' -%}
+    {%- if card_context contains 'entry' or card_context contains 'starter' or card_context contains 'budget' -%}
+      {%- assign card_description = 'A balanced starting point for modern PC gaming.' -%}
+    {%- elsif card_context contains 'mid tier' or card_context contains 'mid-tier' or card_context contains 'midrange' or card_context contains 'mid range' -%}
+      {%- assign card_description = 'More performance for higher settings and faster gameplay.' -%}
+    {%- elsif card_context contains 'high end' or card_context contains 'high-end' or card_context contains 'enthusiast' or card_context contains 'flagship' -%}
+      {%- assign card_description = 'High-performance hardware built for demanding games.' -%}
+    {%- else -%}
+      {%- assign card_description = 'Built for smooth gaming with upgrade-ready hardware.' -%}
+    {%- endif -%}
+  {%- elsif card_context contains 'gaming laptop' or card_context contains 'laptop' -%}
+    {%- assign card_description = 'Portable gaming performance, tested and ready to go.' -%}
+  {%- elsif card_context contains 'modded' or card_context contains 'restored' or card_context contains 'restoration' -%}
+    {%- assign card_description = 'Restored and upgraded for another generation.' -%}
+  {%- elsif card_context contains 'handheld' or card_context contains 'game boy' or card_context contains 'gameboy' or card_context contains 'gba' or card_context contains 'gbc' or card_context contains 'psp' or card_context contains 'vita' or card_context contains 'nintendo ds' or card_context contains 'ds original' or card_context contains 'ds lite' or card_context contains 'dsi' or card_context contains '2ds' or card_context contains '3ds' or card_context contains 'switch lite' -%}
+    {%- assign card_description = 'Cleaned, tested, and ready for portable play.' -%}
+  {%- elsif card_context contains 'refurbished' or card_context contains 'refurb' -%}
+    {%- assign card_description = 'Refurbished, tested, and ready to play.' -%}
+  {%- elsif card_context contains 'accessory' or card_context contains 'accessories' or card_context contains 'controller' or card_context contains 'cable' or card_context contains 'adapter' or card_context contains 'charger' -%}
+    {%- assign card_description = 'Reliable hardware made to complete your setup.' -%}
+  {%- elsif card_context contains 'console' or card_context contains 'xbox' or card_context contains 'playstation' or card_context contains 'nintendo' or card_context contains 'wii' or card_context contains 'gamecube' or card_context contains 'nes' or card_context contains 'n64' -%}
+    {%- assign card_description = 'Tested hardware, ready to plug in and play.' -%}
+  {%- else -%}
+    {%- assign card_description = 'Tested hardware, ready to use.' -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- capture card_instance_id -%}{{ section.id }}-{{ block.id }}-{{ product.id }}-{% increment up_product_card_index %}{%- endcapture -%}
+
+{%- capture card_traits -%}
+  {%- assign card_trait_count = 0 -%}
+
+  {%- comment -%}Explicit card: tags take priority.{%- endcomment -%}
+  {%- for tag in product.tags -%}
+    {%- assign clean_tag = tag | strip -%}
+    {%- assign tag_prefix = clean_tag | slice: 0, 5 | downcase -%}
+    {%- if tag_prefix == 'card:' and card_trait_count < 2 -%}
+      {%- assign trait_text = clean_tag | slice: 5, 999 | strip -%}
+      {%- if trait_text != blank -%}
+        <span class="up-global-product-card__trait">{{ trait_text | escape }}</span>
+        {%- assign card_trait_count = card_trait_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- comment -%}Fall back to ordinary product tags so cards work without special syntax.{%- endcomment -%}
+  {%- if card_trait_count < 2 -%}
+    {%- for tag in product.tags -%}
+      {%- assign clean_tag = tag | strip -%}
+      {%- assign tag_prefix = clean_tag | slice: 0, 5 | downcase -%}
+      {%- unless clean_tag contains '__label' -%}
+        {%- if clean_tag != blank and tag_prefix != 'card:' and card_trait_count < 2 -%}
+          <span class="up-global-product-card__trait">{{ clean_tag | escape }}</span>
+          {%- assign card_trait_count = card_trait_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+<product-item class="product-item up-global-product-card {% unless product.available %}product-item--sold-out up-global-product-card--sold-out{% endunless %}" {% if reveal %}reveal{% endif %}>
+  {%- capture product_labels -%}
+    {%- if product.metafields.custom.badges != blank -%}
+      {%- for custom_badge in product.metafields.custom.badges.value -%}
+        <span class="label {% if forloop.index == 1 %}label--custom{% else %}label--custom2{% endif %}">{{ custom_badge }}</span>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for tag in product.tags -%}
+        {%- if tag contains '__label' -%}
+          <span class="label label--custom{% if tag contains '__label2' %}2{% endif %}">{{ tag | split: ':' | last }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- unless product.available -%}
+      <span class="label label--subdued">{{ 'collection.product.sold_out' | t }}</span>
+    {%- endunless -%}
+
+    {%- assign cheapest_variant = product.variants | sort: 'price' | first -%}
+    {%- if settings.show_discount and product.available and product.price < product.compare_at_price and cheapest_variant.compare_at_price != blank -%}
+      {%- if settings.discount_mode == 'percentage' -%}
+        {%- assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round | append: '%' -%}
+      {%- else -%}
+        {%- capture savings -%}{{ product.compare_at_price | minus: product.price | money }}{%- endcapture -%}
+      {%- endif -%}
+      <span class="label label--highlight">{{ 'collection.product.discount_html' | t: savings: savings }}</span>
+    {%- endif -%}
+  {%- endcapture -%}
+
+  <div class="product-item__image-wrapper up-global-product-card__image-wrapper">
+    {%- if product_labels != blank and reduced_content != true -%}
+      <div class="product-item__label-list label-list">{{ product_labels }}</div>
+    {%- endif -%}
+
+    <a href="{{ product.url }}" {% if request.page_type == 'collection' %}data-no-instant{% else %}data-instant{% endif %} class="product-item__aspect-ratio aspect-ratio up-global-product-card__media" aria-label="{{ product.title | escape }}">
+      {%- if product.featured_media -%}
+        {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: primary_image_loading, decoding: 'async', sizes: sizes_attribute, widths: '200,300,400,500,600,700,800', class: 'product-item__primary-image up-global-product-card__image', data-media-id: product.featured_media.id -}}
+      {%- endif -%}
+    </a>
+  </div>
+
+  <div class="product-item__info up-global-product-card__info {% if show_cta %}product-item__info--with-button{% endif %} {% if reduced_font_size %}text--small{% endif %}">
+    <div class="product-item-meta up-global-product-card__meta">
+      {%- if settings.show_vendor -%}
+        {%- assign vendor_handle = product.vendor | handle -%}
+        {%- assign collection_for_vendor = collections[vendor_handle] -%}
+        {%- unless collection_for_vendor.empty? -%}
+          <a class="product-item-meta__vendor heading heading--xsmall" href="{{ collection_for_vendor.url }}">{{ product.vendor }}</a>
+        {%- else -%}
+          <a class="product-item-meta__vendor heading heading--xsmall" href="{{ product.vendor | url_for_vendor }}">{{ product.vendor }}</a>
+        {%- endunless -%}
+      {%- endif -%}
+
+      <a href="{{ product.url }}" {% if request.page_type == 'collection' %}data-no-instant{% else %}data-instant{% endif %} class="product-item-meta__title up-global-product-card__title">{{ product.title }}</a>
+
+      {%- if reduced_content != true and card_trait_count > 0 -%}
+        <div class="up-global-product-card__traits" aria-label="Product highlights">{{ card_traits }}</div>
+      {%- endif -%}
+
+      {%- if reduced_content != true -%}
+        <p class="up-global-product-card__description">{{ card_description | escape }}</p>
+      {%- endif -%}
+
+      {%- if settings.show_product_rating and reduced_content != true -%}
+        <a class="product-item-meta__reviews-badge up-global-product-card__rating text--small" href="{{ product.url }}" {% if request.page_type == 'collection' %}data-no-instant{% else %}data-instant{% endif %}>
+          {%- render 'product-rating', product: product -%}
+        </a>
+      {%- endif -%}
+
+      <div class="product-item-meta__price-list-container up-global-product-card__price">
+        <div class="price-list price-list--centered">
+          {%- if product.price_varies -%}
+            {%- capture price_min -%}{% if settings.currency_code_enabled %}{{ product.price_min | money_with_currency }}{% else %}{{ product.price_min | money }}{% endif %}{%- endcapture -%}
+            <span class="price">{{ 'collection.product.from_price_html' | t: price_min: price_min }}</span>
+          {%- elsif product.price < product.compare_at_price -%}
+            <span class="price price--highlight">{% if settings.currency_code_enabled %}{{ product.price | money_with_currency }}{% else %}{{ product.price | money }}{% endif %}</span>
+            <span class="price price--compare">{% if settings.currency_code_enabled %}{{ product.compare_at_price | money_with_currency }}{% else %}{{ product.compare_at_price | money }}{% endif %}</span>
+          {%- else -%}
+            <span class="price">{% if settings.currency_code_enabled %}{{ product.price | money_with_currency }}{% else %}{{ product.price | money }}{% endif %}</span>
+          {%- endif -%}
+
+          {%- if product.selected_or_first_available_variant.unit_price_measurement -%}
+            <div class="price price--block text--xsmall text--subdued">
+              <div class="unit-price-measurement">
+                <span class="unit-price-measurement__price">{{ product.selected_or_first_available_variant.unit_price | money }}</span>
+                <span class="unit-price-measurement__separator">/</span>
+                {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+                  <span class="unit-price-measurement__reference-value">{{ product.selected_or_first_available_variant.unit_price_measurement.reference_value }}</span>
+                {%- endif -%}
+                <span class="unit-price-measurement__reference-unit">{{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}</span>
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- if reduced_content != true -%}
+        {%- for color_label in color_label_list -%}
+          {%- if product.options_by_name[color_label] != blank -%}
+            {%- assign product_option = product.options_by_name[color_label] -%}
+            {%- assign variant_option = 'option' | append: product_option.position -%}
+            {%- capture color_name -%}up-card-color-{{ card_instance_id }}{%- endcapture -%}
+
+            <div class="product-item-meta__swatch-list color-swatch-list color-swatch-list--mini up-global-product-card__swatches" aria-label="Available colors">
+              {%- for value in product_option.values -%}
+                {%- capture color_id -%}{{ color_name }}-{{ forloop.index }}{%- endcapture -%}
+                {%- assign color_value_downcase = value | downcase -%}
+                {%- assign variant_for_value = product.variants | where: variant_option, value | first -%}
+                {%- assign variant_card_image = variant_for_value.featured_media.preview_image -%}
+
+                <div class="color-swatch {% if color_white_label == color_value_downcase %}color-swatch--white{% endif %}">
+                  <input class="color-swatch__radio visually-hidden" type="radio" name="{{ color_name }}" id="{{ color_id }}" value="{{ value | escape }}" {% if forloop.first %}checked="checked"{% endif %} data-variant-id="{{ variant_for_value.id }}" {% if variant_card_image %}data-variant-featured-media="{{ variant_for_value.featured_media.id }}" data-variant-image-src="{{ variant_card_image | image_url: width: 800 }}" data-variant-image-srcset="{{ variant_card_image | image_url: width: 200 }} 200w, {{ variant_card_image | image_url: width: 300 }} 300w, {{ variant_card_image | image_url: width: 400 }} 400w, {{ variant_card_image | image_url: width: 500 }} 500w, {{ variant_card_image | image_url: width: 600 }} 600w, {{ variant_card_image | image_url: width: 700 }} 700w, {{ variant_card_image | image_url: width: 800 }} 800w" data-variant-image-width="{{ variant_card_image.width }}" data-variant-image-height="{{ variant_card_image.height }}" data-variant-image-sizes="{{ sizes_attribute | escape }}"{% endif %}>
+                  <label class="color-swatch__item" for="{{ color_id }}" title="{{ value | escape }}" style="{% render 'color-swatch-style', swatch: value.swatch, color_swatch_config: color_swatch_config, value: value %}">
+                    <span class="visually-hidden">{{ value }}</span>
+                  </label>
+                </div>
+              {%- endfor -%}
+            </div>
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if show_cta and product.available -%}
+      <div class="product-item__cta-wrapper">
+        {%- if product.variants.size == 1 -%}
+          {%- capture form_id -%}product_form_{{ card_instance_id }}{%- endcapture -%}
+          {%- form 'product', product, is: 'product-form', id: form_id -%}
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="id" value="{{ product.first_available_variant.id }}">
+            <button type="submit" is="loader-button" class="product-item__cta button button--primary">{{ 'collection.product.add_to_cart_short' | t }}</button>
+          {%- endform -%}
+        {%- else -%}
+          <button type="button" loader is="toggle-button" aria-controls="product-{{ card_instance_id }}-drawer" aria-expanded="false" class="product-item__cta button button--primary hidden-phone">{{ 'collection.product.quick_view' | t }}</button>
+          <button type="button" loader is="toggle-button" aria-controls="product-{{ card_instance_id }}-popover" aria-expanded="false" class="product-item__cta button button--primary hidden-tablet-and-up">{{ 'collection.product.quick_view' | t }}</button>
+          <quick-buy-popover id="product-{{ card_instance_id }}-popover" href="{{ product.url }}" class="popover popover--quick-buy hidden-tablet-and-up"></quick-buy-popover>
+          <quick-buy-drawer id="product-{{ card_instance_id }}-drawer" href="{{ product.url }}" class="drawer drawer--large drawer--quick-buy hidden-phone"></quick-buy-drawer>
+        {%- endif -%}
+      </div>
+    {%- elsif reduced_content and product.available -%}
+      <div class="product-item__cta-wrapper"><a href="{{ product.url }}" class="product-item__link link text--subdued">View product</a></div>
+    {%- elsif reduced_content -%}
+      <div class="product-item__cta-wrapper"><span class="product-item__link text--subdued">{{ 'collection.product.sold_out' | t }}</span></div>
+    {%- endif -%}
+  </div>
+</product-item>

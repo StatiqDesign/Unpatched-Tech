@@ -1,0 +1,44 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "unpatched-services-hero",
+      "settings": {
+        "eyebrow": "MAIL-IN SERVICES",
+        "title": "SEND IT IN.",
+        "content": "<p>Repairs, upgrades, restorations, and data help for consoles, handhelds, and PCs. Tell us what is going on, ship it in, and we will take it from there.</p>",
+        "background": "#ffffff",
+        "text_color": "#25252a",
+        "muted_text_color": "#6f6f73"
+      }
+    },
+    "cards": {
+      "type": "unpatched-services-cards",
+      "blocks": {
+        "s1": {"type": "service", "settings": {"kicker": "BUILD + UPGRADE", "title": "PC BUILDS", "content": "<p>Custom gaming and workstation PCs, rebuilds, and component upgrades built around what you need.</p>", "details_label": "COMMON REQUESTS", "detail_1": "New gaming and workstation builds", "detail_2": "Component upgrades and rebuilds", "detail_3": "Cooling, cleanup, and cable management"}},
+        "s2": {"type": "service", "settings": {"kicker": "DIAGNOSE + FIX", "title": "TECH REPAIRS", "content": "<p>Diagnostics and repairs for PCs, consoles, handhelds, and everyday tech.</p>", "details_label": "COMMON REQUESTS", "detail_1": "No power or startup problems", "detail_2": "Overheating and cooling issues", "detail_3": "Ports, controls, and connectivity"}},
+        "s3": {"type": "service", "settings": {"kicker": "RESTORE + CUSTOMIZE", "title": "RESTORATION & MODS", "content": "<p>Bring older hardware back to life or make it your own with restoration work, upgrades, and custom mods.</p>", "details_label": "COMMON REQUESTS", "detail_1": "Deep cleaning and restoration", "detail_2": "Shell and display upgrades", "detail_3": "Console and handheld hardware mods"}},
+        "s4": {"type": "service", "settings": {"kicker": "FILES + STORAGE", "title": "DATA RECOVERY", "content": "<p>Help recovering important files, photos, and data from computers, drives, and storage devices.</p>", "details_label": "COMMON REQUESTS", "detail_1": "Photos, documents, and personal files", "detail_2": "External drives and removable storage", "detail_3": "Data transfers and system migrations"}}
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {
+        "button_text": "START A SERVICE REQUEST",
+        "button_link": "shopify://pages/contact-us",
+        "background": "#ffffff",
+        "text_color": "#25252a",
+        "muted_text_color": "#6f6f73",
+        "card_background": "#ffffff",
+        "border_color": "#e5e7eb"
+      }
+    }
+  },
+  "order": ["hero", "cards"]
+}

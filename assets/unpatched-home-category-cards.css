@@ -1,0 +1,211 @@
+/* ========================================================================== 
+   UNPATCHED TECH — SHOP BY SYSTEM 3D CARDS
+   Frosted, lifted card treatment with restrained motion and no heavy effects.
+   ========================================================================== */
+
+/* Every layer around the cards is only layout. The Shopify section wrapper is
+   included here because it becomes visible around the horizontal mobile rail. */
+body.unpatched-home-page #main .shopify-section--unpatched-category-showcase,
+body.unpatched-home-page #main .shopify-section--unpatched-category-showcase > .section,
+body.unpatched-home-page #main .unpatched-home-categories,
+body.unpatched-home-page #main .unpatched-home-categories > .container,
+body.unpatched-home-page #main .unpatched-home-category-grid {
+  background: transparent;
+  background-image: none;
+  border: 0;
+  box-shadow: none;
+}
+
+body.unpatched-home-page #main .unpatched-home-category-grid {
+  perspective: 1400px;
+}
+
+body.unpatched-home-page #main .unpatched-home-category-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .88);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, .92), rgba(244, 247, 255, .74));
+  -webkit-backdrop-filter: blur(12px) saturate(118%);
+  backdrop-filter: blur(12px) saturate(118%);
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, .94) inset,
+    0 -1px 0 rgba(37, 37, 42, .04) inset,
+    0 10px 22px rgba(24, 32, 59, .08),
+    0 24px 44px rgba(24, 32, 59, .08);
+  transform: translate3d(0, -2px, 0);
+  transform-style: preserve-3d;
+  transition:
+    transform 220ms cubic-bezier(.2, .7, .2, 1),
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+/* Clip the actual clickable surface too. This prevents nested translucent
+   layers from ever painting square pixels outside the card radius. */
+body.unpatched-home-page #main .unpatched-home-category-card__link {
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+/* Thin glass highlight gives the top edge a physical, beveled feel. */
+body.unpatched-home-page #main .unpatched-home-category-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, .42) 0,
+    rgba(255, 255, 255, .08) 16%,
+    transparent 42%
+  );
+  pointer-events: none;
+}
+
+body.unpatched-home-page #main .unpatched-home-category-card__media {
+  background: rgba(255, 255, 255, .68);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .72) inset;
+}
+
+body.unpatched-home-page #main .unpatched-home-category-card__content {
+  position: relative;
+  z-index: 2;
+  border-radius: 0 0 calc(var(--block-border-radius) - 1px) calc(var(--block-border-radius) - 1px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .62), rgba(248, 250, 255, .80));
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, .72) inset;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.unpatched-home-page #main .unpatched-home-category-card:hover {
+    border-color: rgba(255, 255, 255, 1);
+    transform: translate3d(0, -10px, 0) scale(1.012);
+    box-shadow:
+      0 2px 0 rgba(255, 255, 255, 1) inset,
+      0 -1px 0 rgba(37, 37, 42, .04) inset,
+      0 14px 26px rgba(24, 32, 59, .10),
+      0 34px 64px rgba(24, 32, 59, .16);
+  }
+
+  body.unpatched-home-page #main .unpatched-home-category-card:hover .unpatched-home-category-card__image {
+    transform: scale(calc(var(--up-media-scale, 1) * 1.025));
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  body.unpatched-home-page #main .unpatched-home-category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-flow: row;
+    grid-auto-columns: initial;
+    align-items: stretch;
+    gap: 18px;
+    overflow: visible;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-category-card {
+    width: auto;
+    min-width: 0;
+    height: auto;
+    min-height: 0;
+    grid-column: auto;
+    grid-row: auto;
+    align-self: stretch;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-category-card__link {
+    display: flex;
+    height: 100%;
+    min-height: 0;
+    flex-direction: column;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-category-card__media {
+    width: 100%;
+    height: clamp(220px, 17vw, 285px);
+    min-height: 0;
+    aspect-ratio: auto;
+    flex: 0 0 auto;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-category-card__image,
+  body.unpatched-home-page #main .unpatched-home-category-card__placeholder {
+    width: 100%;
+    height: 100%;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-category-card__content {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 170px;
+    padding: 20px 20px 22px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-category-card__description {
+    display: block;
+    margin-top: 9px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-category-card__content .unpatched-home-text-link {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 18px;
+    color: rgb(var(--primary-button-background, 64, 93, 230));
+  }
+}
+
+@media screen and (max-width: 740px) {
+  body.unpatched-home-page #main .shopify-section--unpatched-category-showcase,
+  body.unpatched-home-page #main .shopify-section--unpatched-category-showcase > .section,
+  body.unpatched-home-page #main .unpatched-home-categories,
+  body.unpatched-home-page #main .unpatched-home-categories > .container,
+  body.unpatched-home-page #main .unpatched-home-category-grid {
+    background: transparent;
+    background-image: none;
+    border: 0;
+    box-shadow: none;
+  }
+
+  body.unpatched-home-page #main .shopify-section--unpatched-category-showcase::before,
+  body.unpatched-home-page #main .shopify-section--unpatched-category-showcase::after,
+  body.unpatched-home-page #main .unpatched-home-categories::before,
+  body.unpatched-home-page #main .unpatched-home-categories::after,
+  body.unpatched-home-page #main .unpatched-home-category-grid::before,
+  body.unpatched-home-page #main .unpatched-home-category-grid::after {
+    background: none;
+    box-shadow: none;
+  }
+
+  /* Mobile browsers can composite backdrop-filter as a rectangular layer even
+     when the element is rounded. Keep the glass color, but disable that blur
+     layer and flatten the 3D context so the corner stays perfectly clipped. */
+  body.unpatched-home-page #main .unpatched-home-category-card {
+    transform: translate3d(0, -1px, 0);
+    transform-style: flat;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, .95) inset,
+      0 8px 18px rgba(24, 32, 59, .08),
+      0 18px 32px rgba(24, 32, 59, .08);
+  }
+
+  body.unpatched-home-page #main .unpatched-home-category-card__link {
+    overflow: hidden;
+    border-radius: inherit;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.unpatched-home-page #main .unpatched-home-category-card,
+  body.unpatched-home-page #main .unpatched-home-category-card__image {
+    transition: none;
+  }
+}

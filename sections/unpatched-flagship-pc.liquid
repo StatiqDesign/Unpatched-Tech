@@ -1,0 +1,136 @@
+{%- liquid
+  assign flagship_product = section.settings.product
+
+  if flagship_product == blank and collections['gaming-pcs'] != blank
+    assign flagship_product = collections['gaming-pcs'].products.first
+  endif
+
+  assign product_url = routes.all_products_collection_url
+  if flagship_product != blank
+    assign product_url = flagship_product.url
+  endif
+
+  assign flagship_image = section.settings.image
+  if flagship_image == blank and flagship_product != blank and flagship_product.featured_media != blank
+    assign flagship_image = flagship_product.featured_media.preview_image
+  endif
+
+  assign flagship_title = section.settings.title_override
+  if flagship_title == blank and flagship_product != blank
+    assign flagship_title = flagship_product.title
+  endif
+  if flagship_title == blank
+    assign flagship_title = 'Flagship Gaming PC'
+  endif
+
+  assign pc_cpu = section.settings.cpu
+  assign pc_gpu = section.settings.gpu
+  assign pc_memory = section.settings.memory
+  assign pc_storage = section.settings.storage
+
+  if flagship_product != blank
+    assign pc_cpu = flagship_product.metafields.custom.pc_cpu.value | default: pc_cpu
+    assign pc_gpu = flagship_product.metafields.custom.pc_gpu.value | default: pc_gpu
+    assign pc_memory = flagship_product.metafields.custom.pc_memory.value | default: pc_memory
+    assign pc_storage = flagship_product.metafields.custom.pc_storage.value | default: pc_storage
+  endif
+-%}
+
+<section class="section unpatched-home-section unpatched-home-flagship" aria-label="{{ flagship_title | escape }}">
+  <div class="container">
+    <article class="unpatched-home-flagship__card">
+      <a class="unpatched-home-flagship__media" href="{{ product_url }}" aria-label="View {{ flagship_title | escape }}">
+        {%- if flagship_image != blank -%}
+          {{ flagship_image | image_url: width: 1400, format: 'webp' | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '480,640,800,960,1120,1400', sizes: '(max-width: 749px) calc(100vw - 40px), 58vw', class: 'unpatched-home-flagship__image' }}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'unpatched-home-flagship__placeholder placeholder-svg' }}
+        {%- endif -%}
+      </a>
+
+      <div class="unpatched-home-flagship__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="heading heading--small unpatched-eyebrow unpatched-home-flagship__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+
+        <h2 class="heading h1 unpatched-home-flagship__title">{{ flagship_title | escape }}</h2>
+
+        {%- if section.settings.description != blank -%}
+          <div class="unpatched-home-flagship__description rte">{{ section.settings.description }}</div>
+        {%- endif -%}
+
+        <div class="unpatched-home-flagship__specs" aria-label="Key specifications">
+          <div class="unpatched-home-flagship__spec">
+            <span>Processor</span>
+            <strong>{{ pc_cpu | escape }}</strong>
+          </div>
+          <div class="unpatched-home-flagship__spec">
+            <span>Graphics</span>
+            <strong>{{ pc_gpu | escape }}</strong>
+          </div>
+          <div class="unpatched-home-flagship__spec">
+            <span>Memory</span>
+            <strong>{{ pc_memory | escape }}</strong>
+          </div>
+          <div class="unpatched-home-flagship__spec">
+            <span>Storage</span>
+            <strong>{{ pc_storage | escape }}</strong>
+          </div>
+        </div>
+
+        <div class="unpatched-home-flagship__purchase">
+          <div class="unpatched-home-flagship__price-wrap">
+            {%- if flagship_product != blank -%}
+              <span class="unpatched-home-flagship__price-label">Starting at</span>
+              <div class="unpatched-home-flagship__price">
+                {%- if flagship_product.price_varies -%}
+                  {{ flagship_product.price_min | money }}
+                {%- else -%}
+                  {{ flagship_product.price | money }}
+                {%- endif -%}
+              </div>
+            {%- else -%}
+              <span class="unpatched-home-flagship__price-label">Select a product in the theme editor</span>
+            {%- endif -%}
+          </div>
+
+          {%- if section.settings.button_text != blank -%}
+            <a class="button button--primary unpatched-home-flagship__button" href="{{ product_url }}">{{ section.settings.button_text | escape }}</a>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.supporting_text != blank -%}
+          <p class="unpatched-home-flagship__supporting">{{ section.settings.supporting_text | escape }}</p>
+        {%- endif -%}
+      </div>
+    </article>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Flagship PC",
+  "class": "shopify-section--unpatched-flagship-pc",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {"type":"product","id":"product","label":"Featured computer"},
+    {"type":"image_picker","id":"image","label":"Custom showcase image","info":"Optional. Uses the selected product image when empty."},
+    {"type":"text","id":"eyebrow","label":"Small heading","default":"BUILT BY UNPATCHED"},
+    {"type":"text","id":"title_override","label":"Custom product heading","info":"Optional. Uses the selected product title when empty."},
+    {"type":"richtext","id":"description","label":"Description","default":"<p>A balanced gaming system built around real-world performance, clean thermals, and an upgrade path that makes sense.</p>"},
+    {"type":"header","content":"Fallback specifications"},
+    {"type":"paragraph","content":"The selected product's PC metafields override these values when available."},
+    {"type":"text","id":"cpu","label":"Processor","default":"AMD Ryzen processor"},
+    {"type":"text","id":"gpu","label":"Graphics","default":"AMD Radeon graphics"},
+    {"type":"text","id":"memory","label":"Memory","default":"32GB DDR5"},
+    {"type":"text","id":"storage","label":"Storage","default":"1TB NVMe SSD"},
+    {"type":"text","id":"button_text","label":"Button text","default":"VIEW BUILD"},
+    {"type":"text","id":"supporting_text","label":"Supporting text","default":"Built, configured, and bench tested by Unpatched Tech."}
+  ],
+  "presets": [
+    {"name":"Flagship PC"}
+  ]
+}
+{% endschema %}

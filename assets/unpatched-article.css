@@ -1,0 +1,10 @@
+/* Article page readability */
+.article__content {
+  --text-color: 37, 37, 42;
+  --heading-color: 37, 37, 42;
+  color: var(--unpatched-ink);
+}
+
+.article__content :where(p, li, a, blockquote, strong, em, h1, h2, h3, h4, h5, h6) {
+  color: inherit;
+}

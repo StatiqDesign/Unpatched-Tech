@@ -1,0 +1,54 @@
+<section
+  class="unpatched-about-page unpatched-about-minimal-hero"
+  style="--up-section-bg: {{ section.settings.background }}; --up-section-text: {{ section.settings.text_color }}; --up-section-muted: {{ section.settings.muted_text_color }};"
+>
+  <div class="container">
+    <div class="unpatched-about-minimal-hero__inner">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="heading heading--small unpatched-about-minimal-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h1 class="heading h1">{{ section.settings.title | escape }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.content != blank -%}
+        <div class="rte unpatched-about-minimal-hero__copy">{{ section.settings.content }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.primary_text != blank or section.settings.secondary_text != blank -%}
+        <div class="unpatched-about-minimal-hero__actions">
+          {%- if section.settings.primary_text != blank -%}
+            <a class="button button--primary" href="{{ section.settings.primary_link | default: routes.all_products_collection_url }}">{{ section.settings.primary_text | escape }}</a>
+          {%- endif -%}
+          {%- if section.settings.secondary_text != blank -%}
+            <a class="unpatched-about-minimal-hero__text-link" href="{{ section.settings.secondary_link | default: routes.root_url }}">{{ section.settings.secondary_text | escape }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "About us",
+  "class": "shopify-section--unpatched-about-hero",
+  "disabled_on": {"templates": ["password"], "groups": ["header", "custom.overlay"]},
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "ABOUT UNPATCHED TECH"},
+    {"type": "text", "id": "title", "label": "Heading", "default": "FAMILY OWNED. BUILT AROUND GOOD TECH."},
+    {"type": "richtext", "id": "content", "label": "Text", "default": "<p>Unpatched Tech is a family-owned business built by people who actually use, repair, and care about the hardware we sell.</p><p>We focus on refurbished consoles, custom PCs, repairs, restorations, and practical upgrades that keep good technology in use longer. We are not trying to be a giant electronics warehouse. We would rather do a smaller number of things well, be clear about what we sell, and stand behind the work we put our name on.</p><p>Whether you are buying a system, sending in a repair, or building a new PC, the goal is the same: straightforward service, carefully handled hardware, and tech that is ready to keep going.</p>"},
+    {"type": "text", "id": "primary_text", "label": "Primary button text", "default": "SHOP REFURBISHED"},
+    {"type": "url", "id": "primary_link", "label": "Primary button link"},
+    {"type": "text", "id": "secondary_text", "label": "Secondary link text", "default": "MAIL-IN SERVICES"},
+    {"type": "url", "id": "secondary_link", "label": "Secondary link"},
+    {"type": "header", "content": "Colors"},
+    {"type": "color", "id": "background", "label": "Section background", "default": "#ffffff"},
+    {"type": "color", "id": "text_color", "label": "Heading and link text", "default": "#25252a"},
+    {"type": "color", "id": "muted_text_color", "label": "Body text", "default": "#6f6f73"}
+  ],
+  "presets": [{"name": "About us"}]
+}
+{% endschema %}

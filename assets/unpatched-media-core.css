@@ -1,0 +1,98 @@
+/* ========================================================================== 
+   UNPATCHED TECH — SHARED PRODUCT MEDIA
+   Product cards, homepage cards and cart/search thumbnails only.
+   This asset is deferred globally; owner selectors are specific enough to
+   extend Focal without a late !important layer.
+   ========================================================================== */
+
+:root {
+  --unpatched-product-canvas: #fff;
+  --unpatched-product-media-padding: clamp(12px, 5.5%, 28px);
+}
+
+/* Product grid cards ---------------------------------------------------- */
+.up-global-product-card .product-item__image-wrapper {
+  overflow: visible;
+}
+
+.up-global-product-card .product-item__aspect-ratio {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding-bottom: 0;
+  overflow: hidden;
+  border-radius: var(--block-border-radius-reduced);
+  background: var(--unpatched-product-canvas);
+  box-shadow: inset 0 0 0 1px rgba(37, 37, 42, .055);
+  isolation: isolate;
+}
+
+.up-global-product-card .product-item__aspect-ratio > .product-item__primary-image,
+.up-global-product-card .product-item__aspect-ratio > .product-item__secondary-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  padding: var(--unpatched-product-media-padding);
+  border-radius: 0;
+  background: transparent;
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+  image-rendering: auto;
+}
+
+.up-global-product-card.product-item__image-wrapper--multiple .product-item__primary-image,
+.up-global-product-card.product-item__image-wrapper--multiple .product-item__secondary-image,
+.up-global-product-card .product-item__image-wrapper--multiple .product-item__primary-image,
+.up-global-product-card .product-item__image-wrapper--multiple .product-item__secondary-image {
+  transition: opacity .22s ease-in-out, visibility .22s ease-in-out;
+}
+
+/* Homepage featured product cards -------------------------------------- */
+.unpatched-home-product-card__media {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--unpatched-product-canvas);
+}
+
+.unpatched-home-product-card__image {
+  width: 100%;
+  height: 100%;
+  padding: var(--unpatched-product-media-padding);
+  background: transparent;
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+  image-rendering: auto;
+}
+
+/* Cart / line-item thumbnails ------------------------------------------ */
+.line-item__image-wrapper {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: min(var(--block-border-radius), 6px);
+  background: var(--unpatched-product-canvas);
+  box-shadow: inset 0 0 0 1px rgba(37, 37, 42, .055);
+}
+
+.line-item__image-wrapper > .line-item__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 7%;
+  border-radius: 0;
+  background: transparent;
+  object-fit: contain;
+  object-position: center;
+  image-rendering: auto;
+}
+
+@media screen and (max-width: 749px) {
+  :root {
+    --unpatched-product-media-padding: 10%;
+  }
+}

@@ -1,0 +1,95 @@
+{{ 'unpatched-order-tracker.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign tracker_icon_alt = section.settings.floating_icon.alt | default: section.settings.floating_icon_alt
+-%}
+
+<section id="UnpatchedOrderTracker-{{ section.id }}" class="unpatched-order-tracker unpatched-order-tracker--simple" data-order-tracker data-mode="shopify" data-authenticated="{% if customer %}true{% else %}false{% endif %}" data-accounts-enabled="{% if shop.customer_accounts_enabled %}true{% else %}false{% endif %}" data-login-url="{{ routes.storefront_login_url | escape }}" data-account-url="{{ routes.account_url | escape }}" data-message-validation="{{ section.settings.message_validation | escape }}" data-message-not-found="{{ section.settings.message_not_found | escape }}" data-message-accounts-disabled="{{ section.settings.message_accounts_disabled | escape }}" data-message-verifying="{{ section.settings.message_verifying | escape }}" data-message-login-error="{{ section.settings.message_login_error | escape }}" data-message-opening="{{ section.settings.message_opening | escape }}" style="--up-tracker-hero-bg: {{ section.settings.hero_background }}; --up-tracker-hero-text: {{ section.settings.hero_text_color }}; --up-tracker-hero-muted: {{ section.settings.hero_muted_text_color }}; --up-tracker-accent: {{ section.settings.accent_color }}; --up-tracker-button-text: {{ section.settings.button_text_color }}; --up-tracker-card-bg: {{ section.settings.card_background }}; --up-tracker-card-text: {{ section.settings.card_text_color }}; --up-tracker-border: {{ section.settings.border_color }};">
+  <div class="unpatched-order-tracker__hero">
+    <div class="unpatched-order-tracker__inner">
+      <div class="unpatched-order-tracker__art" aria-hidden="true">
+        {%- if section.settings.floating_icon != blank -%}
+          {{ section.settings.floating_icon | image_url: width: 320 | image_tag: loading: 'eager', widths: '120, 180, 240, 320', sizes: '(max-width: 749px) 76px, 92px', class: 'unpatched-order-tracker__box-icon', alt: tracker_icon_alt }}
+        {%- else -%}
+          <img class="unpatched-order-tracker__box-icon" src="{{ 'unpatched-tracking-box.png' | asset_url }}" width="240" height="240" alt="{{ section.settings.floating_icon_alt | escape }}" loading="eager">
+        {%- endif -%}
+      </div>
+
+      <div class="unpatched-order-tracker__hero-copy">
+        {%- if section.settings.eyebrow != blank -%}<p class="unpatched-order-tracker__eyebrow heading heading--small">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        {%- if section.settings.title != blank -%}<h1 class="unpatched-order-tracker__title heading">{{ section.settings.title | escape }}</h1>{%- endif -%}
+        {%- if section.settings.intro != blank -%}<div class="unpatched-order-tracker__intro rte">{{ section.settings.intro }}</div>{%- endif -%}
+      </div>
+
+      <div class="unpatched-order-tracker__card">
+        <div class="unpatched-order-tracker__content">
+          <form class="unpatched-order-tracker__form" data-order-tracker-form novalidate>
+            <div class="unpatched-order-tracker__field">
+              <label class="unpatched-order-tracker__label" for="UnpatchedOrderNumber-{{ section.id }}">{{ section.settings.order_label | escape }}</label>
+              <input id="UnpatchedOrderNumber-{{ section.id }}" class="unpatched-order-tracker__input" type="text" name="order_number" placeholder="{{ section.settings.order_placeholder | escape }}" autocomplete="off" autocapitalize="characters" spellcheck="false" required data-order-number>
+            </div>
+
+            <div class="unpatched-order-tracker__field">
+              <label class="unpatched-order-tracker__label" for="UnpatchedOrderEmail-{{ section.id }}">{{ section.settings.email_label | escape }}</label>
+              <input id="UnpatchedOrderEmail-{{ section.id }}" class="unpatched-order-tracker__input" type="email" name="email" placeholder="{{ section.settings.email_placeholder | escape }}" autocomplete="email" inputmode="email" required data-order-email>
+            </div>
+
+            <div class="unpatched-order-tracker__actions">
+              <button class="button button--primary unpatched-order-tracker__submit" type="submit" data-track-submit>
+                <span data-track-submit-label>{{ section.settings.button_text | escape }}</span>
+                <span class="unpatched-order-tracker__spinner" aria-hidden="true"></span>
+              </button>
+            </div>
+
+            <div class="unpatched-order-tracker__message" role="status" aria-live="polite" data-order-message hidden></div>
+            <a class="unpatched-order-tracker__orders-link" href="{{ routes.account_url }}" data-orders-link hidden>{{ section.settings.orders_link_text | escape }} →</a>
+          </form>
+
+          {%- if customer -%}
+            <script type="application/json" data-order-tracker-orders>[{%- for order in customer.orders limit: 20 -%}{"number": {{ order.name | json }}, "url": {{ order.customer_order_url | default: order.customer_url | json }}}{% unless forloop.last %},{% endunless %}{%- endfor -%}]</script>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'unpatched-order-tracker.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Order tracker",
+  "tag": "section",
+  "class": "shopify-section--order-tracker",
+  "disabled_on": {"templates": ["password"], "groups": ["header", "custom.overlay"]},
+  "settings": [
+    {"type":"image_picker","id":"floating_icon","label":"Floating package icon"},
+    {"type":"text","id":"floating_icon_alt","label":"Package icon alt text","default":"Package icon"},
+    {"type":"text","id":"eyebrow","label":"Small heading","default":"ORDER TRACKING"},
+    {"type":"text","id":"title","label":"Heading","default":"TRACK YOUR ORDER."},
+    {"type":"richtext","id":"intro","label":"Intro text","default":"<p>Enter your order number and checkout email to see the latest status.</p>"},
+    {"type":"text","id":"order_label","label":"Order number label","default":"Order Number"},
+    {"type":"text","id":"order_placeholder","label":"Order number placeholder","default":"#1001"},
+    {"type":"text","id":"email_label","label":"Email label","default":"Email Address"},
+    {"type":"text","id":"email_placeholder","label":"Email placeholder","default":"email@example.com"},
+    {"type":"text","id":"button_text","label":"Button text","default":"CHECK STATUS"},
+    {"type":"text","id":"orders_link_text","label":"Order history link","default":"View all orders"},
+    {"type":"text","id":"message_validation","label":"Validation error message","default":"Enter your order number and the email address used at checkout."},
+    {"type":"text","id":"message_not_found","label":"Order not found message","default":"We couldn't find that order in this account. Check the order number, or open your order history."},
+    {"type":"text","id":"message_accounts_disabled","label":"Accounts disabled message","default":"Customer accounts must be enabled before secure order lookup can be used."},
+    {"type":"text","id":"message_verifying","label":"Verification message","default":"Securely verifying your email with Shopify…"},
+    {"type":"text","id":"message_login_error","label":"Verification error message","default":"Unable to open secure order verification. Please try again."},
+    {"type":"text","id":"message_opening","label":"Order opening message","default":"Order verified. Opening your tracking details…"},
+    {"type":"header","content":"Colors"},
+    {"type":"color","id":"hero_background","label":"Page background","default":"#ffffff"},
+    {"type":"color","id":"hero_text_color","label":"Heading text","default":"#25252a"},
+    {"type":"color","id":"hero_muted_text_color","label":"Muted text","default":"#6f6f73"},
+    {"type":"color","id":"accent_color","label":"Accent","default":"#405de6"},
+    {"type":"color","id":"button_text_color","label":"Button text","default":"#ffffff"},
+    {"type":"color","id":"card_background","label":"Form background","default":"#ffffff"},
+    {"type":"color","id":"card_text_color","label":"Form text","default":"#25252a"},
+    {"type":"color","id":"border_color","label":"Border","default":"#e5e7eb"}
+  ],
+  "presets": [{"name":"Order tracker"}]
+}
+{% endschema %}

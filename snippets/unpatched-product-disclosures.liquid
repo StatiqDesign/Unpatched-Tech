@@ -1,0 +1,127 @@
+{%- comment -%}
+  Unpatched Tech product disclosures.
+
+  Each disclosure supports an optional per-product metafield override:
+  - custom.inside_the_box
+  - custom.shipping_delivery
+  - custom.warranty_returns
+
+  When an override is blank, copy is selected automatically from Shopify's
+  Product category first, then product type/title/tags as fallback signals.
+{%- endcomment -%}
+
+{%- assign disclosure_category = product.category.name | default: '' | downcase | strip -%}
+{%- capture disclosure_context -%}
+  {{ product.type }} {{ product.title }}
+  {%- for tag in product.tags -%} {{ tag }}{%- endfor -%}
+{%- endcapture -%}
+{%- assign disclosure_context = disclosure_context | downcase -%}
+
+{%- assign is_gaming_pc = false -%}
+{%- assign is_laptop = false -%}
+{%- assign is_handheld = false -%}
+{%- assign is_console = false -%}
+{%- assign is_accessory = false -%}
+{%- assign is_refurbished = false -%}
+{%- assign is_modded_or_restored = false -%}
+
+{%- if disclosure_context contains 'gaming pc' or disclosure_context contains 'gaming computer' or disclosure_context contains 'desktop pc' or disclosure_category contains 'desktop computer' -%}
+  {%- assign is_gaming_pc = true -%}
+{%- elsif disclosure_context contains 'gaming laptop' or disclosure_context contains 'laptop' or disclosure_category contains 'laptop' -%}
+  {%- assign is_laptop = true -%}
+{%- elsif disclosure_category contains 'handheld game console' -%}
+  {%- assign is_handheld = true -%}
+{%- elsif disclosure_category contains 'video game console' -%}
+  {%- assign is_console = true -%}
+{%- elsif disclosure_context contains 'handheld' or disclosure_context contains 'game boy' or disclosure_context contains 'gameboy' or disclosure_context contains 'gba' or disclosure_context contains 'gbc' or disclosure_context contains 'psp' or disclosure_context contains 'vita' or disclosure_context contains 'nintendo ds' or disclosure_context contains 'ds original' or disclosure_context contains 'ds lite' or disclosure_context contains 'dsi' or disclosure_context contains '2ds' or disclosure_context contains '3ds' or disclosure_context contains 'switch lite' -%}
+  {%- assign is_handheld = true -%}
+{%- elsif disclosure_context contains 'console' or disclosure_context contains 'xbox' or disclosure_context contains 'playstation' or disclosure_context contains 'nintendo' or disclosure_context contains 'wii' or disclosure_context contains 'gamecube' or disclosure_context contains 'nes' or disclosure_context contains 'n64' -%}
+  {%- assign is_console = true -%}
+{%- elsif disclosure_context contains 'accessory' or disclosure_context contains 'accessories' or disclosure_context contains 'controller' or disclosure_context contains 'cable' or disclosure_context contains 'adapter' or disclosure_context contains 'charger' -%}
+  {%- assign is_accessory = true -%}
+{%- endif -%}
+
+{%- if disclosure_context contains 'refurbished' or disclosure_context contains 'refurb' -%}
+  {%- assign is_refurbished = true -%}
+{%- endif -%}
+
+{%- if disclosure_context contains 'modded' or disclosure_context contains 'restored' or disclosure_context contains 'restoration' -%}
+  {%- assign is_modded_or_restored = true -%}
+{%- endif -%}
+
+{%- assign inside_the_box = product.metafields.custom.inside_the_box.value | strip -%}
+{%- if inside_the_box == blank -%}
+  {%- if is_gaming_pc -%}
+    {%- assign inside_the_box = 'Includes the configured gaming PC and power cable. Any Wi-Fi antennas, component accessories, or other included items are listed with the selected configuration.' -%}
+  {%- elsif is_laptop -%}
+    {%- assign inside_the_box = 'Includes the gaming laptop and compatible AC power adapter. Any additional accessories or original packaging are listed on the product page.' -%}
+  {%- elsif is_handheld -%}
+    {%- assign inside_the_box = 'Includes the handheld system and the power or charging accessories required by that model when applicable, unless noted otherwise. Any additional accessories or original packaging are listed on the product page.' -%}
+  {%- elsif is_console -%}
+    {%- assign inside_the_box = 'Includes the console, one compatible controller, power cable, and required video cable unless noted otherwise. Any additional accessories or original packaging are listed on the product page.' -%}
+  {%- elsif is_accessory -%}
+    {%- assign inside_the_box = 'Includes the listed accessory and any cables, adapters, or additional items specifically shown or described on the product page.' -%}
+  {%- else -%}
+    {%- assign inside_the_box = 'Includes the product and any standard accessories specifically shown or listed on the product page.' -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- assign shipping_delivery = product.metafields.custom.shipping_delivery.value | strip -%}
+{%- if shipping_delivery == blank -%}
+  {%- if is_gaming_pc -%}
+    {%- assign shipping_delivery = 'Gaming PCs are configured and bench-tested before shipment. Made-to-order systems may require up to 10 business days of preparation. Orders ship with tracking via USPS; transit time depends on destination and the service selected at checkout.' -%}
+  {%- elsif is_laptop -%}
+    {%- assign shipping_delivery = 'Gaming laptops are inspected and tested before shipment. Refurbished or made-to-order hardware may require up to 10 business days of preparation. Orders ship with tracking via USPS; transit time depends on destination and the service selected at checkout.' -%}
+  {%- elsif is_console or is_handheld -%}
+    {%- assign shipping_delivery = 'Console hardware is cleaned, tested, and prepared before shipment. Refurbish-to-order hardware may require up to 10 business days of preparation. Orders ship with tracking via USPS; transit time depends on destination and the service selected at checkout.' -%}
+  {%- elsif is_accessory -%}
+    {%- assign shipping_delivery = 'Orders ship with tracking via USPS. Processing and transit time depend on the item, destination, and shipping service selected at checkout.' -%}
+  {%- else -%}
+    {%- assign shipping_delivery = 'Orders are prepared before shipment and sent with tracking via USPS. Preparation and transit time depend on the product, destination, and shipping service selected at checkout.' -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- assign warranty_returns = product.metafields.custom.warranty_returns.value | strip -%}
+{%- if warranty_returns == blank -%}
+  {%- if is_modded_or_restored -%}
+    {%- assign warranty_returns = 'Modded and restored products include a 90-day workmanship warranty. Returns are accepted within 30 days. Return shipping is paid by the customer unless the issue is our error, and there is no restocking fee.' -%}
+  {%- elsif is_refurbished or is_console or is_handheld -%}
+    {%- assign warranty_returns = 'Refurbished hardware includes a 30-day warranty. Returns are accepted within 30 days. Return shipping is paid by the customer unless the issue is our error, and there is no restocking fee.' -%}
+  {%- elsif is_gaming_pc or is_laptop -%}
+    {%- assign warranty_returns = 'Warranty coverage for configured systems depends on the product and included components. Returns are accepted within 30 days. Return shipping is paid by the customer unless the issue is our error, and there is no restocking fee.' -%}
+  {%- else -%}
+    {%- assign warranty_returns = 'Returns are accepted within 30 days. Return shipping is paid by the customer unless the issue is our error, and there is no restocking fee. Any product-specific warranty coverage will be stated on the product page.' -%}
+  {%- endif -%}
+{%- endif -%}
+
+<div class="unpatched-product-disclosure-stack">
+  <div class="unpatched-accordions">
+    <details class="unpatched-accordion">
+      <summary>
+        <span>Inside the Box</span>
+        <span class="unpatched-accordion-plus" aria-hidden="true"></span>
+      </summary>
+      <div class="unpatched-accordion-content rte"><p>{{ inside_the_box | escape | newline_to_br }}</p></div>
+    </details>
+  </div>
+
+  <div class="unpatched-accordions">
+    <details class="unpatched-accordion">
+      <summary>
+        <span>Shipping &amp; Delivery</span>
+        <span class="unpatched-accordion-plus" aria-hidden="true"></span>
+      </summary>
+      <div class="unpatched-accordion-content rte"><p>{{ shipping_delivery | escape | newline_to_br }}</p></div>
+    </details>
+  </div>
+
+  <div class="unpatched-accordions">
+    <details class="unpatched-accordion">
+      <summary>
+        <span>Warranty &amp; Returns</span>
+        <span class="unpatched-accordion-plus" aria-hidden="true"></span>
+      </summary>
+      <div class="unpatched-accordion-content rte"><p>{{ warranty_returns | escape | newline_to_br }}</p></div>
+    </details>
+  </div>
+</div>

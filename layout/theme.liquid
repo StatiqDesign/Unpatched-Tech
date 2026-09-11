@@ -1,0 +1,134 @@
+<!doctype html>
+
+{%- liquid
+  assign direction = 'ltr'
+  case request.locale.iso_code
+    when 'ar' or 'arc' or 'dv' or 'fa' or 'ha' or 'he' or 'kwh' or 'ks' or 'ku' or 'ps' or 'ur' or 'yi'
+      assign direction = 'rtl'
+  endcase
+
+  assign is_unpatched_tracking_page = false
+  assign is_unpatched_faq_page = false
+  assign is_unpatched_about_page = false
+  assign is_unpatched_services_page = false
+  assign is_unpatched_support_page = false
+  assign is_unpatched_policy_page = false
+  assign is_unpatched_custom_legal_page = false
+
+  if request.page_type == 'page'
+    if template.suffix == 'tracking'
+      assign is_unpatched_tracking_page = true
+    endif
+    if page.handle == 'faq' or template.suffix == 'faq'
+      assign is_unpatched_faq_page = true
+    endif
+    if page.handle == 'about-us' or template.suffix == 'about-us'
+      assign is_unpatched_about_page = true
+    endif
+    if page.handle == 'services' or template.suffix == 'services'
+      assign is_unpatched_services_page = true
+    endif
+    if page.handle == 'support' or template.suffix == 'support' or page.handle == 'contact-us' or page.handle == 'contact' or template.suffix == 'contact'
+      assign is_unpatched_support_page = true
+    endif
+    if template.suffix == 'legal'
+      assign is_unpatched_custom_legal_page = true
+    endif
+  endif
+
+  if request.page_type == 'policy' or canonical_url contains '/policies/'
+    assign is_unpatched_policy_page = true
+  endif
+-%}
+
+<html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ direction }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
+    <meta name="theme-color" content="{{ settings.header_background }}">
+
+    <title>{% if page_title == blank %}{{ shop.name }}{% else %}{{ page_title }}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% endif %}</title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 96 }}" type="image/png">
+    {%- endif -%}
+
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    {%- unless settings.heading_font.system? and settings.text_font.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%}
+
+    {% render 'social-meta-tags' %}
+    {% render 'microdata-schema' %}
+    {% render 'css-variables', direction: direction %}
+    {% render 'js-variables', direction: direction %}
+
+    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+    {% render 'unpatched-style-loader',
+      is_unpatched_tracking_page: is_unpatched_tracking_page,
+      is_unpatched_faq_page: is_unpatched_faq_page,
+      is_unpatched_about_page: is_unpatched_about_page,
+      is_unpatched_services_page: is_unpatched_services_page,
+      is_unpatched_support_page: is_unpatched_support_page,
+      is_unpatched_policy_page: is_unpatched_policy_page,
+      is_unpatched_custom_legal_page: is_unpatched_custom_legal_page
+    %}
+
+    <style>:root { --unpatched-brand-blue-rgb: {{ settings.primary_button_background.red }}, {{ settings.primary_button_background.green }}, {{ settings.primary_button_background.blue }}; }</style>
+
+    <script src="{{ 'vendor.js' | asset_url }}" defer></script>
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    <script src="{{ 'custom.js' | asset_url }}" defer></script>
+    {%- if is_unpatched_services_page -%}<script src="{{ 'unpatched-services.js' | asset_url }}" defer></script>{%- endif -%}
+
+    {{ content_for_header }}
+  </head>
+
+  {%- assign feature_classes = '' -%}
+  {%- if settings.show_image_zoom -%}{%- assign feature_classes = feature_classes | append: ' features--image-zoom' -%}{%- endif -%}
+
+  <body class="no-focus-outline {{ feature_classes }}{% if request.page_type == 'index' %} unpatched-home-page{% endif %}{% if request.page_type == 'product' %} unpatched-product-page{% endif %}{% if request.page_type == 'blog' %} unpatched-blog-page{% endif %}{% if request.page_type == 'article' %} unpatched-article-page{% endif %}{% if is_unpatched_tracking_page %} unpatched-tracking-page{% endif %}{% if is_unpatched_tracking_page or is_unpatched_about_page %} unpatched-short-info-page{% endif %}{% if is_unpatched_about_page %} unpatched-about-page-body{% endif %}{% if is_unpatched_faq_page %} unpatched-faq-page{% endif %}{% if is_unpatched_services_page %} unpatched-services-page{% endif %}{% if is_unpatched_support_page %} unpatched-support-page{% endif %}{% if is_unpatched_policy_page or is_unpatched_custom_legal_page %} unpatched-legal-body{% endif %}">
+    <svg class="visually-hidden" aria-hidden="true"><linearGradient id="rating-star-gradient-half"><stop offset="50%" stop-color="rgb(var(--product-star-rating))" /><stop offset="50%" stop-color="rgb(var(--product-star-rating))" stop-opacity="0.4" /></linearGradient></svg>
+    <a href="#main" class="visually-hidden skip-to-content">{{ 'general.accessibility.skip_to_content' | t }}</a>
+    <loading-bar class="loading-bar"></loading-bar>
+
+    {%- if request.page_type != 'gift_card' and request.page_type != 'password' -%}
+      {%- sections 'header-group' -%}
+      {%- sections 'overlay-group' -%}
+      {%- unless settings.cart_type == 'page' or request.page_type == 'cart' -%}{%- section 'mini-cart' -%}{%- endunless -%}
+    {%- endif -%}
+
+    <div id="main" role="main" class="anchor">
+      {%- if request.page_type == 'collection' or request.page_type == 'search' -%}
+        {%- assign active_filters_count = 0 -%}
+        {%- if request.page_type == 'collection' -%}{%- assign filters = collection.filters -%}{%- else -%}{%- assign filters = search.filters -%}{%- endif -%}
+        {%- for filter in filters -%}
+          {%- if filter.type == 'list' -%}{%- assign active_filters_count = active_filters_count | plus: filter.active_values.size -%}{%- elsif filter.type == 'price_range' and filter.min_value.value or filter.max_value.value -%}{%- assign active_filters_count = active_filters_count | plus: 1 -%}{%- endif -%}
+        {%- endfor -%}
+        {%- assign is_toolbar_collapsed = false -%}
+        {%- if request.page_type == 'search' and search.results.first.object_type != 'product' and search.results_count > 0 -%}{%- assign is_toolbar_collapsed = true -%}{%- endif -%}
+        <div id="mobile-facet-toolbar" class="mobile-toolbar {% if is_toolbar_collapsed %}is-collapsed{% endif %} hidden-lap-and-up">
+          <button is="toggle-button" class="mobile-toolbar__item mobile-toolbar__item--filters {% if active_filters_count > 0 %}has-filters{% endif %}" aria-expanded="false" aria-controls="facet-filters" style="display: none">{%- render 'icon' with 'filters' -%}<span class="mobile-toolbar__item-label">{{- 'collection.general.filters' | t -}}</span></button>
+          {%- if request.page_type == 'collection' -%}
+            {%- assign mobile_collection_sort_by = collection.sort_by | default: collection.default_sort_by -%}
+            <label class="mobile-toolbar__item mobile-toolbar__item--sort unpatched-mobile-sort" style="display: none"><span class="mobile-toolbar__item-label">{{- 'collection.general.sort_by' | t -}}</span>{%- render 'icon' with 'chevron' -%}<select class="unpatched-mobile-sort__select" aria-label="{{ 'collection.general.sort_by' | t | escape }}" data-unpatched-mobile-sort>{%- for sort_option in collection.sort_options -%}<option value="{{ sort_option.value }}" {% if sort_option.value == mobile_collection_sort_by %}selected{% endif %}>{{ sort_option.name }}</option>{%- endfor -%}</select></label>
+          {%- else -%}
+            <button is="toggle-button" class="mobile-toolbar__item mobile-toolbar__item--sort" aria-expanded="false" aria-controls="sort-by-popover" style="display: none"><span class="mobile-toolbar__item-label">{{- 'collection.general.sort_by' | t }}</span>{%- render 'icon' with 'chevron' -%}</button>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {{ content_for_layout }}
+    </div>
+
+    {%- if request.page_type != 'gift_card' and request.page_type != 'password' -%}
+      {%- sections 'footer-group' -%}
+    {%- endif -%}
+  </body>
+</html>

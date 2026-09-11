@@ -1,0 +1,606 @@
+/* ========================================================================== 
+   UNPATCHED TECH — DEFERRED STOREFRONT CHROME
+   Mobile drawer and footer only. The visible header stays in critical core CSS.
+   ========================================================================== */
+
+/* Mobile navigation ----------------------------------------------------- */
+@media screen and (max-width: 740px) {
+  #mobile-menu-drawer,
+  #mobile-menu-drawer button,
+  #mobile-menu-drawer a,
+  #mobile-menu-drawer .heading,
+  #mobile-menu-drawer .mobile-nav__link,
+  #mobile-menu-drawer .mobile-nav__image-heading,
+  #mobile-menu-drawer .mobile-nav__image-text {
+    font-family: var(--text-font-family);
+    font-style: var(--text-font-style);
+  }
+
+  #mobile-menu-drawer {
+    --text-color: 37, 37, 42;
+    background: #f8f9fb;
+    color: #25252a;
+  }
+
+  #mobile-menu-drawer .drawer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 68px;
+    height: auto;
+    padding: 0 20px;
+    background: #25252a;
+    border-bottom: 0;
+    box-shadow: none;
+  }
+
+  #mobile-menu-drawer .drawer__header--shadowed::after {
+    display: none;
+  }
+
+  #mobile-menu-drawer .drawer__close-button {
+    position: static;
+    margin: 0;
+    color: #fff;
+  }
+
+  #mobile-menu-drawer .drawer__close-button svg {
+    stroke: currentColor;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-menu-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-inline-start: auto;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-menu-logo img {
+    display: block;
+    width: auto;
+    max-height: 34px;
+    opacity: 1;
+    visibility: visible;
+    filter: none;
+  }
+
+  #mobile-menu-drawer .drawer__content {
+    padding-top: 0;
+    padding-bottom: 0;
+    background: transparent;
+  }
+
+  #mobile-menu-drawer .drawer__content > .mobile-nav {
+    margin-top: 1px;
+  }
+
+  #mobile-menu-drawer .mobile-nav__item[data-level="1"].unpatched-submenu-active {
+    position: static;
+    border-bottom: 0;
+    box-shadow: none;
+  }
+
+  #mobile-menu-drawer .mobile-nav__item[data-level="1"].unpatched-submenu-active > button {
+    display: none;
+  }
+
+  /* Focal animates this height inline. The active submenu needs content-driven
+     height after the native transition, so this is the one intentional force. */
+  #mobile-menu-drawer .mobile-nav__item[data-level="1"].unpatched-submenu-active > collapsible-content {
+    display: block;
+    width: 100%;
+    height: auto !important;
+    margin-inline: 0;
+    overflow: visible;
+  }
+
+  #mobile-menu-drawer.unpatched-submenu-open .drawer__content > .mobile-nav > .mobile-nav__item[data-level="1"]:not(.unpatched-submenu-active),
+  #mobile-menu-drawer.unpatched-submenu-open .drawer__content > .unpatched-mobile-account-footer {
+    display: none;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-submenu {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #mobile-menu-drawer .drawer__content > .mobile-nav > .mobile-nav__item,
+  #mobile-menu-drawer .unpatched-mobile-submenu > .mobile-nav__item,
+  #mobile-menu-drawer .unpatched-mobile-account-footer {
+    border-bottom: 1px solid rgba(64, 93, 230, .28);
+  }
+
+  #mobile-menu-drawer .drawer__content > .mobile-nav > .mobile-nav__item:first-child,
+  #mobile-menu-drawer .drawer__content > .mobile-nav > .mobile-nav__item[data-level="1"].unpatched-submenu-active {
+    border-top: 0;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-submenu > .mobile-nav__item {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+
+  #mobile-menu-drawer .mobile-nav__link {
+    color: #25252a;
+  }
+
+  #mobile-menu-drawer .drawer__content > .mobile-nav > .mobile-nav__item[data-level="1"] > .mobile-nav__link {
+    min-height: 66px;
+    padding-inline: 16px;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-submenu > .mobile-nav__item > .mobile-nav__link,
+  #mobile-menu-drawer .unpatched-mobile-login {
+    box-sizing: border-box;
+    position: relative;
+    inset: auto;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 64px;
+    margin: 0;
+    padding: 0 16px;
+    transform: none;
+    text-align: left;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-submenu > .mobile-nav__item > .mobile-nav__link {
+    justify-content: space-between;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-submenu > .mobile-nav__back-item > .mobile-nav__back {
+    min-height: 64px;
+    padding: 0 16px;
+    justify-content: flex-start;
+    color: #25252a;
+    font-size: 16px;
+    font-weight: 700;
+    background: transparent;
+    border: 0;
+  }
+
+  #mobile-menu-drawer .mobile-nav__item[data-level="3"] > .mobile-nav__link {
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 0;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-account-footer {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-login {
+    justify-content: flex-start;
+    font-family: var(--heading-font-family);
+    font-weight: 800;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-login .icon-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-login .icon-text > span:last-child {
+    font-weight: 800;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-login svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-login svg * {
+    stroke-width: 2.1;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-forward-arrow,
+  #mobile-menu-drawer .mobile-nav__view-all-arrow {
+    color: #25252a;
+    opacity: 1;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+    text-shadow: none;
+    -webkit-text-stroke: 0;
+  }
+
+  #mobile-menu-drawer .mobile-nav__view-all,
+  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link,
+  #mobile-menu-drawer .unpatched-mobile-account-footer,
+  #mobile-menu-drawer .unpatched-mobile-login {
+    box-shadow: none;
+  }
+
+  #mobile-menu-drawer .mobile-nav__view-all {
+    border-bottom: 0;
+  }
+
+  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link {
+    min-height: 64px;
+    padding: 0 16px;
+    color: #25252a;
+    font-size: 16px;
+    font-weight: 700;
+    justify-content: flex-start;
+    gap: 10px;
+    text-align: left;
+    border-bottom: 0;
+  }
+
+  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link > span:first-child,
+  #mobile-menu-drawer .mobile-nav__view-all-arrow {
+    margin-left: 0;
+  }
+
+  #mobile-menu-drawer .mobile-nav__view-all::before,
+  #mobile-menu-drawer .mobile-nav__view-all::after,
+  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link::before,
+  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link::after,
+  #mobile-menu-drawer .unpatched-mobile-account-footer::before,
+  #mobile-menu-drawer .unpatched-mobile-account-footer::after,
+  #mobile-menu-drawer .unpatched-mobile-login::before,
+  #mobile-menu-drawer .unpatched-mobile-login::after {
+    content: none;
+    display: none;
+  }
+
+  #mobile-menu-drawer button,
+  #mobile-menu-drawer a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #mobile-menu-drawer .mobile-nav__link:active,
+  #mobile-menu-drawer .mobile-nav__link:focus,
+  #mobile-menu-drawer button:active,
+  #mobile-menu-drawer button:focus {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  #mobile-menu-drawer .mobile-nav__link:focus-visible,
+  #mobile-menu-drawer button:focus-visible {
+    outline: 2px solid rgb(var(--unpatched-brand-blue-rgb));
+    outline-offset: -2px;
+  }
+
+  #mobile-menu-drawer .unpatched-submenu-active > collapsible-content {
+    animation: unpatched-submenu-in .2s ease both;
+  }
+}
+
+@keyframes unpatched-submenu-in {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Footer ---------------------------------------------------------------- */
+footer.footer {
+  margin: 0;
+}
+
+.shopify-section--footer footer.footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 26px 0 18px;
+  border-top: 0;
+  background: #25252a;
+  background-image: none;
+  color: rgb(var(--text-color));
+}
+
+.shopify-section--footer footer.footer::before,
+.shopify-section--footer footer.footer::after {
+  content: none;
+  display: none;
+}
+
+footer .footer__brand-center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+footer .footer__brand-socials {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0;
+}
+
+footer .footer__brand-socials ul {
+  width: max-content;
+  margin: 0;
+  padding: 0;
+}
+
+.shopify-section--footer footer .footer__item-list {
+  gap: 14px 44px;
+}
+
+.shopify-section--footer footer .footer__item--text {
+  max-width: 680px;
+}
+
+.shopify-section--footer footer .footer__item--text .footer__item-title {
+  margin-bottom: 7px;
+}
+
+.shopify-section--footer footer .footer__item--text .footer__item-content {
+  line-height: 1.45;
+}
+
+footer form {
+  width: 100%;
+}
+
+.shopify-section--footer footer .footer__aside {
+  margin-top: 10px;
+  row-gap: 8px;
+}
+
+footer .footer__legal-bar {
+  position: relative;
+  width: 100%;
+  min-height: 26px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 0;
+}
+
+footer .footer__bottom-copyright,
+footer .footer__bottom-credit {
+  position: absolute;
+  top: 8px;
+  white-space: nowrap;
+}
+
+footer .footer__bottom-copyright {
+  left: 0;
+  color: rgba(var(--text-color), .92);
+  font-weight: 800;
+}
+
+footer .footer__bottom-credit {
+  right: 0;
+  color: rgba(var(--text-color), .82);
+}
+
+footer .footer__legal-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin: 0;
+  padding: 0 170px;
+}
+
+footer .footer__legal-link-item {
+  margin: 0;
+  padding: 0;
+}
+
+footer .footer__legal-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  color: rgba(var(--text-color), .94);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.shopify-section--footer footer .footer__brand-socials .social-media__item {
+  border: 0;
+  box-shadow: none;
+}
+
+.shopify-section--footer footer .footer__brand-socials .social-media__item::before {
+  display: none;
+}
+
+.shopify-section--footer footer .footer__brand-socials .social-media__link {
+  width: 44px;
+  height: 44px;
+  transition: color 150ms ease, transform 150ms ease;
+}
+
+.shopify-section--footer footer .footer__brand-socials .social-media__link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.shopify-section--footer .footer__brand-center--mobile {
+  display: none;
+}
+
+.shopify-section--footer .footer__brand-center--desktop {
+  display: flex;
+  margin: 0;
+}
+
+.shopify-section--footer footer .footer__statiq-link {
+  display: inline-flex;
+  align-items: baseline;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+.shopify-section--footer footer .footer__statiq-stat {
+  color: rgb(var(--error-color));
+}
+
+.shopify-section--footer footer .footer__statiq-iqde {
+  color: rgb(var(--text-color));
+  white-space: pre;
+}
+
+.shopify-section--footer footer .footer__statiq-sign {
+  color: rgb(var(--unpatched-brand-blue-rgb));
+}
+
+@media screen and (min-width: 750px) {
+  .shopify-section--footer .footer__item-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .shopify-section--footer .footer__item--text {
+    flex: 0 1 680px;
+    width: 100%;
+    min-width: 0;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .shopify-section--footer .footer__item--text .footer__item-content {
+    font-size: 17px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .shopify-section--footer footer.footer {
+    padding: 22px 0 16px;
+  }
+
+  .shopify-section--footer footer .footer__inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .shopify-section--footer footer .footer__item-list {
+    display: block;
+    order: 2;
+    width: 100%;
+  }
+
+  footer .footer__item {
+    display: block;
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    text-align: center;
+  }
+
+  footer .footer__item-content,
+  footer .footer__item-title {
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  footer .footer__item + .footer__item {
+    margin-top: 18px;
+  }
+
+  footer form {
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .shopify-section--footer .footer__brand-center--mobile {
+    display: flex;
+    order: 1;
+    margin: 0 0 12px;
+  }
+
+  .shopify-section--footer .footer__brand-center--desktop {
+    display: none;
+  }
+
+  footer .footer__aside {
+    order: 3;
+    width: 100%;
+    margin-top: 8px;
+    text-align: center;
+    justify-content: center;
+  }
+
+  footer .footer__legal-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-top: 10px;
+    padding-top: 6px;
+    padding-bottom: 0;
+  }
+
+  footer .footer__bottom-copyright,
+  footer .footer__bottom-credit {
+    position: static;
+    width: 100%;
+    text-align: center;
+  }
+
+  footer .footer__bottom-copyright { order: 2; }
+  footer .footer__bottom-credit { order: 3; }
+
+  footer .footer__legal-links {
+    order: 1;
+    width: 100%;
+    justify-content: center;
+    gap: 0 8px;
+    padding: 0;
+    white-space: normal;
+  }
+
+  footer .footer__legal-links a {
+    min-height: 44px;
+    padding-inline: 4px;
+    font-size: 10px;
+    line-height: 1.3;
+  }
+
+  .shopify-section--footer footer .footer__brand-socials .social-media__link {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #mobile-menu-drawer .mobile-nav__link:hover,
+  .shopify-section--footer footer .footer__brand-socials .social-media__link:hover {
+    color: rgb(var(--unpatched-brand-blue-rgb));
+  }
+
+  .shopify-section--footer footer .footer__brand-socials .social-media__link:hover {
+    transform: translateY(-2px);
+  }
+
+  .shopify-section--footer footer .footer__legal-links a:hover,
+  .shopify-section--footer footer .footer__legal-links a:focus-visible,
+  .shopify-section--footer footer .footer__bottom-credit a:hover {
+    color: rgb(var(--text-color));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #mobile-menu-drawer .unpatched-submenu-active > collapsible-content {
+    animation: none;
+  }
+
+  .shopify-section--footer footer .footer__brand-socials .social-media__link {
+    transition: none;
+  }
+}

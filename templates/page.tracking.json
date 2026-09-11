@@ -1,0 +1,43 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "tracker": {
+      "type": "order-tracker-simple",
+      "settings": {
+        "floating_icon_alt": "Package icon",
+        "eyebrow": "ORDER TRACKING",
+        "title": "TRACK YOUR ORDER.",
+        "intro": "<p>Enter your order number and checkout email to see the latest status.</p>",
+        "order_label": "Order Number",
+        "order_placeholder": "#1001",
+        "email_label": "Email Address",
+        "email_placeholder": "email@example.com",
+        "button_text": "CHECK STATUS",
+        "orders_link_text": "View all orders",
+        "message_validation": "Enter your order number and the email address used at checkout.",
+        "message_not_found": "We couldn't find that order in this account. Check the order number, or open your order history.",
+        "message_accounts_disabled": "Customer accounts must be enabled before secure order lookup can be used.",
+        "message_verifying": "Securely verifying your email with Shopify…",
+        "message_login_error": "Unable to open secure order verification. Please try again.",
+        "message_opening": "Order verified. Opening your tracking details…",
+        "hero_background": "#ffffff",
+        "hero_text_color": "#25252a",
+        "hero_muted_text_color": "#6f6f73",
+        "accent_color": "#405de6",
+        "button_text_color": "#ffffff",
+        "card_background": "#ffffff",
+        "card_text_color": "#25252a",
+        "border_color": "#e5e7eb"
+      }
+    }
+  },
+  "order": ["tracker"]
+}

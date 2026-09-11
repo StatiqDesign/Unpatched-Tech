@@ -1,0 +1,61 @@
+/* ========================================================================== 
+   UNPATCHED TECH — HOMEPAGE BRANDS
+   Keep the logo marquee first and place its heading beneath it on the homepage.
+   ========================================================================== */
+
+/* The Brands section follows Why Unpatched directly. Neutralize the native
+   section spacing on both sides of that handoff so their padding does not
+   stack into a large blank band. */
+body.unpatched-home-page #main .shopify-section--multi-column .container {
+  padding-bottom: 24px;
+}
+
+body.unpatched-home-page #main .shopify-section--logo-list,
+body.unpatched-home-page #main .shopify-section--logo-list > .section,
+body.unpatched-home-page #main .shopify-section--logo-list .section__color-wrapper {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+body.unpatched-home-page #main .shopify-section--logo-list .container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  padding-top: 10px;
+  padding-bottom: var(--up-home-section-pad);
+}
+
+body.unpatched-home-page #main .shopify-section--logo-list .unpatched-brand-marquee {
+  order: 1;
+  margin-top: 0;
+}
+
+body.unpatched-home-page #main .shopify-section--logo-list .section__header {
+  order: 2;
+  margin: 18px auto 0;
+}
+
+body.unpatched-home-page #main .shopify-section--logo-list .section__footer {
+  order: 3;
+}
+
+/* Keep the marquee continuous. Older homepage interaction CSS paused the
+   animation on hover; the brands rail should never stop under the cursor. */
+body.unpatched-home-page #main .shopify-section--logo-list .unpatched-brand-marquee:hover .unpatched-brand-marquee__track {
+  animation-play-state: running;
+}
+
+@media screen and (max-width: 749px) {
+  body.unpatched-home-page #main .shopify-section--multi-column .container {
+    padding-bottom: 20px;
+  }
+
+  body.unpatched-home-page #main .shopify-section--logo-list .container {
+    padding-top: 8px;
+    padding-bottom: var(--up-home-section-pad);
+  }
+
+  body.unpatched-home-page #main .shopify-section--logo-list .section__header {
+    margin-top: 14px;
+  }
+}

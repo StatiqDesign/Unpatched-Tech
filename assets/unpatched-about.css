@@ -1,0 +1,85 @@
+/* ========================================================================== 
+   UNPATCHED TECH — ABOUT
+   Current About template: one merchant-editable minimal hero.
+   ========================================================================== */
+
+.unpatched-about-minimal-hero {
+  display: flex;
+  align-items: center;
+  min-height: clamp(560px, 72vh, 760px);
+  padding: clamp(76px, 8vw, 108px) 0;
+  background: var(--up-section-bg, #fff);
+  color: var(--up-section-text, #25252a);
+}
+
+.unpatched-about-minimal-hero__inner {
+  width: min(100%, 780px);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.unpatched-about-minimal-hero__eyebrow {
+  margin: 0 0 14px;
+  color: rgb(var(--unpatched-brand-blue-rgb));
+}
+
+.unpatched-about-minimal-hero h1 {
+  max-width: 14ch;
+  margin: 0 auto;
+  color: var(--up-section-text, #25252a);
+}
+
+.unpatched-about-minimal-hero__copy {
+  max-width: 68ch;
+  margin: 24px auto 0;
+  color: var(--up-section-muted, #6f6f73);
+  font-size: 16px;
+  line-height: 1.72;
+}
+
+.unpatched-about-minimal-hero__copy p { margin: 0; }
+.unpatched-about-minimal-hero__copy p + p { margin-top: 16px; }
+
+.unpatched-about-minimal-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 22px;
+  margin-top: 30px;
+}
+
+.unpatched-about-minimal-hero__actions .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-height);
+  line-height: 1;
+  text-align: center;
+}
+
+.unpatched-about-minimal-hero__text-link {
+  color: var(--up-section-text, #25252a);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-xsmall-font-size);
+  font-weight: var(--heading-font-weight);
+  letter-spacing: .06em;
+  text-decoration: none;
+}
+
+.unpatched-about-minimal-hero__text-link:focus-visible {
+  outline: 2px solid rgb(var(--unpatched-brand-blue-rgb));
+  outline-offset: 4px;
+}
+
+@media screen and (max-width: 749px) {
+  .unpatched-about-minimal-hero {
+    min-height: 0;
+    padding: 64px 0 72px;
+  }
+
+  .unpatched-about-minimal-hero__copy {
+    font-size: 15px;
+    line-height: 1.68;
+  }
+}

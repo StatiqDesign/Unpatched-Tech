@@ -1,0 +1,22 @@
+/* ========================================================================== 
+   UNPATCHED TECH — SHORT INFO PAGE SHELL
+   Tracking and About use the shared info-page spacing contract. This file
+   only keeps short pages tall enough for the footer to sit flush.
+   ========================================================================== */
+
+html,
+body.unpatched-short-info-page {
+  min-height: 100%;
+}
+
+body.unpatched-short-info-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.unpatched-short-info-page > #main {
+  width: 100%;
+  flex: 1 0 auto;
+}

@@ -1,0 +1,31 @@
+/* ========================================================================== 
+   UNPATCHED TECH — MOBILE PRODUCT INTERACTIONS
+   Mobile-only product gallery and sticky purchase behavior.
+   ========================================================================== */
+
+@media screen and (max-width: 740px) {
+  /* Keep the mobile gallery swipe/dots navigation, but remove side arrows. */
+  .unpatched-product-page .product__media-prev-next {
+    display: none;
+  }
+
+  /* Native Focal spreads the media nav between the left arrow, dots and right
+     arrow. Once the arrows are removed, explicitly center the remaining dots. */
+  .unpatched-product-page .product__media-nav {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .unpatched-product-page .product__media-nav .dots-nav {
+    margin-inline: auto;
+  }
+
+  /* Header is z-index 4 in the native Focal header. Keep the sticky purchase
+     dock beneath it while preserving the existing drop-off animation. Give
+     the dock a small normal-flow gap so its drop-off point does not sit flush
+     against the bottom of the product card. */
+  .unpatched-product-page .unpatched-product-sticky {
+    z-index: 3;
+    margin-top: 18px;
+  }
+}

@@ -1,0 +1,168 @@
+{%- liquid
+  assign section_link_list = section.settings.navigation_menu
+-%}
+
+<section class="section unpatched-home-section unpatched-home-categories" style="--up-section-background: {{ section.settings.background }}; --up-section-text: {{ section.settings.text_color }};">
+  <div class="container">
+    {%- if section.settings.subheading != blank or section.settings.title != blank or section.settings.content != blank -%}
+      <header class="unpatched-home-section__header">
+        <div class="unpatched-home-section__heading-group">
+          {%- if section.settings.subheading != blank -%}
+            <p class="heading heading--small unpatched-eyebrow">{{ section.settings.subheading | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.title != blank -%}
+            <h2 class="heading h2">{{ section.settings.title | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.content != blank -%}
+            <div class="unpatched-home-section__copy rte">{{ section.settings.content }}</div>
+          {%- endif -%}
+        </div>
+      </header>
+    {%- endif -%}
+
+    <div class="unpatched-home-category-grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign resolved_menu_link = blank
+          assign desired_label = block.settings.navigation_label | strip | downcase
+
+          if section_link_list != blank and desired_label != blank
+            for candidate_link in section_link_list.links
+              assign candidate_title = candidate_link.title | strip | downcase
+              if candidate_title == desired_label
+                assign resolved_menu_link = candidate_link
+                break
+              endif
+            endfor
+          endif
+
+          assign source_collection = block.settings.collection
+          if source_collection == blank and resolved_menu_link != blank and resolved_menu_link.type == 'collection_link'
+            assign source_collection = resolved_menu_link.object
+          endif
+
+          assign resolved_link = block.settings.link
+          if resolved_link == blank and source_collection != blank
+            assign resolved_link = source_collection.url
+          endif
+          if resolved_link == blank and resolved_menu_link != blank
+            assign resolved_link = resolved_menu_link.url
+          endif
+          if resolved_link == blank
+            assign resolved_link = routes.all_products_collection_url
+          endif
+
+          assign card_image = block.settings.image
+          assign stock_image_url = blank
+          assign stock_image_alt = block.settings.title | default: block.settings.navigation_label
+
+          if card_image == blank
+            case block.settings.stock_artwork
+              when 'xbox_series_x'
+                assign stock_image_url = 'https://media.gamestop.com/i/gamestop/11108371?fmt=webp&h=640&w=640'
+                assign stock_image_alt = 'Xbox Series X Carbon Black console'
+              when 'ps5_disc'
+                assign stock_image_url = 'https://media.gamestop.com/i/gamestop/11108140?fmt=webp&h=640&w=640'
+                assign stock_image_alt = 'PlayStation 5 disc console'
+              when 'switch_zelda'
+                assign stock_image_url = 'https://media.gamestop.com/i/gamestop/20004601/Nintendo-Switch---OLED-Model---The-Legend-of-Zelda-Tears-of-the-Kingdom-Edition?fmt=webp&h=640&w=640'
+                assign stock_image_alt = 'Nintendo Switch OLED The Legend of Zelda Tears of the Kingdom Edition'
+            endcase
+          endif
+
+          if card_image == blank and stock_image_url == blank and source_collection != blank
+            assign card_image = source_collection.image
+            if card_image == blank
+              assign card_image = source_collection.products.first.featured_media.preview_image
+            endif
+          endif
+
+          if stock_image_url != blank
+            assign stock_image_320 = stock_image_url | replace: 'h=640&w=640', 'h=320&w=320'
+            assign stock_image_400 = stock_image_url | replace: 'h=640&w=640', 'h=400&w=400'
+            assign stock_image_480 = stock_image_url | replace: 'h=640&w=640', 'h=480&w=480'
+          endif
+        -%}
+
+        <article class="unpatched-home-category-card" {{ block.shopify_attributes }}>
+          <a href="{{ resolved_link }}" class="unpatched-home-category-card__link" aria-label="{{ block.settings.title | default: block.settings.navigation_label | escape }}">
+            <div class="unpatched-home-category-card__media" style="--up-media-scale: {{ block.settings.image_scale | divided_by: 100.0 }}; --up-media-fit: {{ block.settings.image_fit | default: 'cover' }}; --up-desktop-media-fit: {{ block.settings.desktop_image_fit | default: 'contain' }}; --up-media-background: {{ block.settings.media_background }};">
+              {%- if card_image != blank -%}
+                {{ card_image | image_url: width: 800, format: 'webp' | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '280,320,360,400,480,560,640,800', sizes: '(max-width: 749px) min(82vw, 330px), (max-width: 999px) 44vw, 24vw', class: 'unpatched-home-category-card__image' }}
+              {%- elsif stock_image_url != blank -%}
+                <img src="{{ stock_image_400 }}" srcset="{{ stock_image_320 }} 320w, {{ stock_image_400 }} 400w, {{ stock_image_480 }} 480w, {{ stock_image_url }} 640w" sizes="(max-width: 749px) min(82vw, 330px), (max-width: 999px) 44vw, 24vw" alt="{{ stock_image_alt | escape }}" width="640" height="640" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer" class="unpatched-home-category-card__image">
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag: 'unpatched-home-category-card__placeholder placeholder-svg' }}
+              {%- endif -%}
+            </div>
+
+            <div class="unpatched-home-category-card__content">
+              {%- if block.settings.eyebrow != blank -%}
+                <p class="heading heading--small unpatched-eyebrow">{{ block.settings.eyebrow | escape }}</p>
+              {%- endif -%}
+              <h3 class="heading h3">{{ block.settings.title | default: block.settings.navigation_label | escape }}</h3>
+              {%- if block.settings.description != blank -%}
+                <div class="unpatched-home-category-card__description rte">{{ block.settings.description }}</div>
+              {%- endif -%}
+              {%- if block.settings.button_text != blank -%}
+                <span class="unpatched-home-text-link">{{ block.settings.button_text | escape }} <span aria-hidden="true">→</span></span>
+              {%- endif -%}
+            </div>
+          </a>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Unpatched category cards",
+  "class": "shopify-section--unpatched-category-showcase",
+  "max_blocks": 6,
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {"type":"text","id":"subheading","label":"Subheading","default":"CHOOSE YOUR PLATFORM"},
+    {"type":"text","id":"title","label":"Heading","default":"Shop by system"},
+    {"type":"richtext","id":"content","label":"Description"},
+    {"type":"link_list","id":"navigation_menu","label":"Navigation menu used for automatic links","default":"main-menu","info":"If a block's Navigation label matches a top-level item in this menu, the card can inherit that link and collection image automatically."},
+    {"type":"color","id":"background","label":"Background","default":"#ffffff"},
+    {"type":"color","id":"text_color","label":"Text color","default":"#25252a"}
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {"type":"text","id":"navigation_label","label":"Navigation label","info":"Example: Xbox. Used to match a top-level item in the selected navigation menu."},
+        {"type":"collection","id":"collection","label":"Collection","info":"Optional. When selected, its link and imagery can be used automatically."},
+        {"type":"url","id":"link","label":"Custom link","info":"Optional. Overrides the collection or navigation link."},
+        {"type":"image_picker","id":"image","label":"Custom image","info":"Optional. If empty, the collection image or first product image is used when available."},
+        {"type":"select","id":"stock_artwork","label":"Built-in stock artwork","options":[{"value":"none","label":"None / automatic"},{"value":"xbox_series_x","label":"Xbox Series X - Carbon Black"},{"value":"ps5_disc","label":"PlayStation 5 - Disc"},{"value":"switch_zelda","label":"Switch OLED - Zelda TOTK"}],"default":"none","info":"Used only when Custom image is empty. You can replace or disable this at any time."},
+        {"type":"select","id":"image_fit","label":"Mobile and tablet image fit","options":[{"value":"cover","label":"Fill card"},{"value":"contain","label":"Show whole image"}],"default":"cover","info":"Applies below 1000px."},
+        {"type":"select","id":"desktop_image_fit","label":"Desktop image fit","options":[{"value":"contain","label":"Show whole image"},{"value":"cover","label":"Fill card"}],"default":"contain"},
+        {"type":"range","id":"image_scale","label":"Image zoom","min":85,"max":110,"step":1,"unit":"%","default":100},
+        {"type":"color","id":"media_background","label":"Image background","default":"#f4f5f8"},
+        {"type":"text","id":"eyebrow","label":"Small heading","default":"REFURBISHED"},
+        {"type":"text","id":"title","label":"Heading"},
+        {"type":"richtext","id":"description","label":"Description"},
+        {"type":"text","id":"button_text","label":"Link text","default":"Explore"}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Unpatched category cards",
+      "blocks": [
+        {"type":"category","settings":{"navigation_label":"Pre Built PCs","title":"Gaming PCs"}},
+        {"type":"category","settings":{"navigation_label":"Xbox","title":"Xbox"}},
+        {"type":"category","settings":{"navigation_label":"PlayStation","title":"PlayStation"}},
+        {"type":"category","settings":{"navigation_label":"Nintendo","title":"Nintendo"}}
+      ]
+    }
+  ]
+}
+{% endschema %}

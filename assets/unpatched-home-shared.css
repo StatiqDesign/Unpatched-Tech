@@ -1,0 +1,68 @@
+/* ========================================================================== 
+   UNPATCHED TECH — HOMEPAGE WIDTH CONTRACT
+   Every primary homepage surface shares the slideshow's outer edges. Full-
+   bleed section backgrounds remain full width; only the visible content shell
+   is constrained here. This keeps custom and native Focal sections aligned.
+   ========================================================================== */
+
+body.unpatched-home-page #main .unpatched-home-section > .container,
+body.unpatched-home-page #main .shopify-section--multi-column .container,
+body.unpatched-home-page #main .shopify-section--logo-list .container,
+body.unpatched-home-page #main .shopify-section--blog-posts .container {
+  box-sizing: border-box;
+  width: calc(100% - (var(--container-gutter) * 2));
+  max-width: var(--container-content-max-width, 1600px);
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+/* Offscreen sections do not need layout/paint work during the slideshow's
+   critical render. The intrinsic sizes keep scroll geometry stable until the
+   browser approaches each section and renders its real contents. */
+@supports (content-visibility: auto) {
+  body.unpatched-home-page #main > .shopify-section--unpatched-category-showcase,
+  body.unpatched-home-page #main > .shopify-section--unpatched-flagship-pc,
+  body.unpatched-home-page #main > .shopify-section--unpatched-pathways,
+  body.unpatched-home-page #main > .shopify-section--unpatched-featured-collection,
+  body.unpatched-home-page #main > .shopify-section--multi-column,
+  body.unpatched-home-page #main > .shopify-section--blog-posts {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 760px;
+  }
+
+  body.unpatched-home-page #main > .shopify-section--logo-list {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 320px;
+  }
+}
+
+/* Focal's shell includes its desktop gutters inside --container-max-width.
+   The hero is a visible surface, so cap it to the same usable 1600px field. */
+@media screen and (min-width: 1000px) {
+  body.unpatched-home-page #main .shopify-section--slideshow .slideshow {
+    max-width: var(--container-content-max-width, 1600px);
+  }
+}
+
+/* The native slideshow uses the same 24px side gutters through this range. */
+@media screen and (min-width: 750px) and (max-width: 999px) {
+  body.unpatched-home-page #main .unpatched-home-section > .container,
+  body.unpatched-home-page #main .shopify-section--multi-column .container,
+  body.unpatched-home-page #main .shopify-section--logo-list .container,
+  body.unpatched-home-page #main .shopify-section--blog-posts .container {
+    width: calc(100% - 48px);
+    max-width: none;
+  }
+}
+
+/* One 16px mobile edge for Hero, Shop by System, Flagship PC, Three Ways,
+   Featured Tech, Why Unpatched, Brands and Blog. */
+@media screen and (max-width: 749px) {
+  body.unpatched-home-page #main .unpatched-home-section > .container,
+  body.unpatched-home-page #main .shopify-section--multi-column .container,
+  body.unpatched-home-page #main .shopify-section--logo-list .container,
+  body.unpatched-home-page #main .shopify-section--blog-posts .container {
+    width: calc(100% - 32px);
+    max-width: none;
+  }
+}

@@ -1,0 +1,68 @@
+<section
+  class="unpatched-services-page unpatched-services-minimal-main"
+  style="--up-section-bg: {{ section.settings.background }}; --up-section-text: {{ section.settings.text_color }}; --up-section-muted: {{ section.settings.muted_text_color }}; --up-section-card: {{ section.settings.card_background }}; --up-section-border: {{ section.settings.border_color }};"
+>
+  <div class="container">
+    <div class="unpatched-services-minimal-grid" role="list">
+      {%- for block in section.blocks -%}
+        <article class="unpatched-services-minimal-card" role="listitem" {{ block.shopify_attributes }}>
+          {%- if block.settings.kicker != blank -%}<p class="heading heading--small">{{ block.settings.kicker | escape }}</p>{%- endif -%}
+          {%- if block.settings.title != blank -%}<h2 class="heading h4">{{ block.settings.title | escape }}</h2>{%- endif -%}
+          {%- if block.settings.content != blank -%}<div class="rte unpatched-services-minimal-card__copy">{{ block.settings.content }}</div>{%- endif -%}
+          {%- if block.settings.detail_1 != blank or block.settings.detail_2 != blank or block.settings.detail_3 != blank -%}
+            <div class="unpatched-services-minimal-card__details">
+              {%- if block.settings.details_label != blank -%}<strong>{{ block.settings.details_label | escape }}</strong>{%- endif -%}
+              <ul>
+                {%- if block.settings.detail_1 != blank -%}<li>{{ block.settings.detail_1 | escape }}</li>{%- endif -%}
+                {%- if block.settings.detail_2 != blank -%}<li>{{ block.settings.detail_2 | escape }}</li>{%- endif -%}
+                {%- if block.settings.detail_3 != blank -%}<li>{{ block.settings.detail_3 | escape }}</li>{%- endif -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.button_text != blank -%}
+      <div class="unpatched-services-minimal-main__cta">
+        <a class="button button--primary unpatched-services-minimal-main__button" href="{{ section.settings.button_link | default: routes.root_url }}">{{ section.settings.button_text | escape }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Services",
+  "class": "shopify-section--unpatched-services-cards",
+  "max_blocks": 4,
+  "disabled_on": {"templates": ["password"], "groups": ["header", "custom.overlay"]},
+  "settings": [
+    {"type": "text", "id": "button_text", "label": "Button text", "default": "START A SERVICE REQUEST"},
+    {"type": "url", "id": "button_link", "label": "Button link"},
+    {"type": "header", "content": "Colors"},
+    {"type": "color", "id": "background", "label": "Section background", "default": "#ffffff"},
+    {"type": "color", "id": "text_color", "label": "Heading and card text", "default": "#25252a"},
+    {"type": "color", "id": "muted_text_color", "label": "Body and detail text", "default": "#6f6f73"},
+    {"type": "color", "id": "card_background", "label": "Card background", "default": "#ffffff"},
+    {"type": "color", "id": "border_color", "label": "Card border", "default": "#e5e7eb"}
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service card",
+      "settings": [
+        {"type": "text", "id": "kicker", "label": "Kicker", "default": "BUILD + UPGRADE"},
+        {"type": "text", "id": "title", "label": "Heading", "default": "PC BUILDS"},
+        {"type": "richtext", "id": "content", "label": "Description", "default": "<p>Custom gaming and workstation PCs, rebuilds, and component upgrades built around what you need.</p>"},
+        {"type": "text", "id": "details_label", "label": "Requests label", "default": "COMMON REQUESTS"},
+        {"type": "text", "id": "detail_1", "label": "Request 1", "default": "New gaming and workstation builds"},
+        {"type": "text", "id": "detail_2", "label": "Request 2", "default": "Component upgrades and rebuilds"},
+        {"type": "text", "id": "detail_3", "label": "Request 3", "default": "Cooling, cleanup, and cable management"}
+      ]
+    }
+  ],
+  "presets": [{"name": "Services"}]
+}
+{% endschema %}

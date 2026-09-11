@@ -1,0 +1,122 @@
+{%- if section.settings.background != settings.background and section.settings.background != 'rgba(0,0,0,0)' -%}
+  {%- assign blends_with_background = false -%}
+{%- else -%}
+  {%- assign blends_with_background = true -%}
+{%- endif -%}
+
+
+{%- assign categories = section.blocks | where: 'type', 'category' -%}
+{%- assign is_unpatched_faq = false -%}
+{%- if request.page_type == 'page' and page.handle == 'faq' or template.suffix contains 'faq' -%}
+  {%- assign is_unpatched_faq = true -%}
+{%- endif -%}
+
+<section class="section {% if template.name == 'page' and template.suffix contains 'faq' %}section--tight{% endif %} {% unless blends_with_background %}section--flush{% endunless %}" style="--up-faq-hero-bg: {{ section.settings.hero_background }}; --up-faq-hero-text: {{ section.settings.hero_text_color }}; --up-faq-hero-muted: {{ section.settings.hero_muted_text_color }}; --up-faq-accent: {{ section.settings.accent_color }}; --up-faq-main-bg: {{ section.settings.main_background }}; --up-faq-card-bg: {{ section.settings.card_background }}; --up-faq-card-text: {{ section.settings.card_text_color }}; --up-faq-card-muted: {{ section.settings.card_muted_text_color }}; --up-faq-border: {{ section.settings.border_color }};">
+  <div class="section__color-wrapper">
+    {%- if is_unpatched_faq -%}
+      <div class="unpatched-faq-hero">
+        <div class="container">
+          <div class="unpatched-faq-hero__inner">
+            <div>
+              {%- if section.settings.hero_eyebrow != blank -%}<p class="unpatched-faq-eyebrow">{{ section.settings.hero_eyebrow | escape }}</p>{%- endif -%}
+              {%- if section.settings.title != blank -%}<h1 class="heading">{{ section.settings.title | escape }}</h1>{%- endif -%}
+              {%- if section.settings.content != blank -%}<div class="unpatched-faq-hero__content text-container">{{ section.settings.content }}</div>{%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="unpatched-faq-main"><div class="container">
+    {%- else -%}
+      <div class="container"><div class="{% unless blends_with_background %}vertical-breather{% endunless %}">
+        {%- if section.settings.title != blank or section.settings.content != blank -%}
+          <header class="section__header {% if section.settings.content != blank %}section__header--tight{% endif %} text-container">
+            {%- if section.settings.title != blank -%}<h1 class="heading h2">{{ section.settings.title | escape }}</h1>{%- endif -%}
+            {%- if section.settings.content -%}{{- section.settings.content -}}{%- endif -%}
+          </header>
+        {%- endif -%}
+    {%- endif -%}
+
+        <div class="faq">
+          {%- if section.settings.show_navigation and categories.size > 0 -%}
+            <div class="faq-navigation hidden-pocket">
+              <scroll-spy class="scroll-spy">
+                <ul class="scroll-spy__list list--unstyled">
+                  {%- for category in categories -%}
+                    <li class="scroll-spy__item"><a class="scroll-spy__anchor heading heading--small" href="#category-{{ section.id }}-{{ category.id }}" data-smooth-scroll>{{ category.settings.title | escape }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </scroll-spy>
+            </div>
+          {%- endif -%}
+
+          <div class="faq__wrapper" itemscope itemtype="https://schema.org/FAQPage">
+            {%- assign unpatched_category_number = 0 -%}
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'category' -%}
+                  {%- assign unpatched_category_number = unpatched_category_number | plus: 1 -%}
+                  <h2 id="category-{{ section.id }}-{{ block.id }}" class="faq__category heading h6 anchor" {{ block.shopify_attributes }}>
+                    {%- if is_unpatched_faq -%}
+                      <span class="unpatched-faq-category-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          {%- case unpatched_category_number -%}
+                            {%- when 1 -%}<path d="M3 7h11v10H3zM14 10h4l3 3v4h-7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/>
+                            {%- when 2 -%}<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>
+                            {%- when 3 -%}<path d="M14.5 6.5 18 3a6 6 0 0 0-7.5 7.5L3.6 17.4a2.1 2.1 0 0 0 3 3l6.9-6.9A6 6 0 0 0 21 6l-3.5 3.5-3-3Z"/>
+                            {%- when 4 -%}<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/>
+                            {%- when 5 -%}<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v6h10V4M7 20v-6h10v6"/>
+                            {%- when 6 -%}<path d="M12 22s8-3.8 8-10V5l-8-3-8 3v7c0 6.2 8 10 8 10Z"/><path d="m9 12 2 2 4-5"/>
+                            {%- else -%}<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v1"/>
+                          {%- endcase -%}
+                        </svg>
+                      </span>
+                    {%- endif -%}
+                    {{- block.settings.title | escape -}}
+                  </h2>
+                {%- when 'question' -%}
+                  <div class="faq__item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button is="toggle-button" class="collapsible-toggle text--strong" aria-controls="block-{{ section.id }}-{{ block.id }}" aria-expanded="false" itemprop="name">{{- block.settings.title | escape -}}<span class="animated-plus"></span></button>
+                    <collapsible-content id="block-{{ section.id }}-{{ block.id }}" class="collapsible anchor" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" {{ block.shopify_attributes }}>
+                      <div class="collapsible__content text-container" itemprop="text">{{ block.settings.answer }}</div>
+                    </collapsible-content>
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        </div>
+
+    {%- if is_unpatched_faq -%}</div></div>{%- else -%}</div></div>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name":"FAQ",
+  "class":"shopify-section--faq",
+  "disabled_on":{"templates":["password"],"groups":["header","custom.overlay"]},
+  "settings":[
+    {"type":"checkbox","id":"show_navigation","label":"Show navigation","default":false},
+    {"type":"text","id":"title","label":"Heading","default":"FAQ"},
+    {"type":"richtext","id":"content","label":"Content"},
+    {"type":"header","content":"Unpatched FAQ hero"},
+    {"type":"text","id":"hero_eyebrow","label":"Hero eyebrow","default":"UNPATCHED SUPPORT"},
+    {"type":"header","content":"Colors"},
+    {"type":"color","id":"background","label":"Base background","default":"rgba(0,0,0,0)"},
+    {"type":"color","id":"text_color","label":"Base text color","default":"rgba(0,0,0,0)"},
+    {"type":"color","id":"hero_background","label":"Hero background","default":"#ffffff"},
+    {"type":"color","id":"hero_text_color","label":"Hero heading text","default":"#25252a"},
+    {"type":"color","id":"hero_muted_text_color","label":"Hero body text","default":"#6f6f73"},
+    {"type":"color","id":"accent_color","label":"Accent color","default":"#405de6"},
+    {"type":"color","id":"main_background","label":"FAQ list background","default":"#ffffff"},
+    {"type":"color","id":"card_background","label":"Question and navigation cards","default":"#ffffff"},
+    {"type":"color","id":"card_text_color","label":"Question text","default":"#25252a"},
+    {"type":"color","id":"card_muted_text_color","label":"Answer text","default":"#6f6f73"},
+    {"type":"color","id":"border_color","label":"Borders","default":"#e5e7eb"}
+  ],
+  "blocks":[
+    {"type":"category","name":"Category","settings":[{"type":"text","id":"title","label":"Heading","default":"Category"}]},
+    {"type":"question","name":"Question","settings":[{"type":"text","id":"title","label":"Question","default":"About your shop"},{"type":"richtext","id":"answer","label":"Answer","default":"<p>Write content to help your customers to better understand your products or policies.</p>"}]}
+  ],
+  "presets":[{"name":"FAQ","category":"Trust & social proof","blocks":[{"type":"category","settings":{"title":"Shipping"}},{"type":"question","settings":{"title":"Do you ship overseas?","answer":"<p>Add your shipping answer here.</p>"}},{"type":"category","settings":{"title":"Other"}},{"type":"question","settings":{"title":"Any question?","answer":"<p>Add your answer here.</p>"}}]}]
+}
+{% endschema %}

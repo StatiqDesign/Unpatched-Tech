@@ -1,0 +1,293 @@
+<style>
+  /* UNPATCHED DESKTOP NAV — Shopify menu-driven mega-menu system */
+  @media screen and (min-width: 1000px) {
+    .unpatched-menu-panel {
+      border-top: 1px solid rgba(var(--text-color), 0.08);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.08);
+    }
+
+    .unpatched-menu-panel__inner {
+      display: grid;
+      grid-template-columns: minmax(250px, 0.8fr) minmax(0, 2fr);
+      align-items: start;
+      gap: 52px;
+      width: 100%;
+      padding-block: 34px;
+    }
+
+    .unpatched-menu-panel__intro {
+      min-width: 0;
+      padding-top: 3px;
+    }
+
+    .unpatched-menu-panel__eyebrow {
+      display: block;
+      margin-bottom: 7px;
+      color: rgb(var(--unpatched-brand-blue-rgb));
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .unpatched-menu-panel__headline {
+      max-width: 390px;
+      margin: 0;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .unpatched-menu-panel__content {
+      min-width: 0;
+    }
+
+    .unpatched-menu-panel__links {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      width: 100%;
+    }
+
+    .unpatched-menu-card {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-width: 0;
+      min-height: 60px;
+      padding: 0 18px;
+      border: 1px solid rgba(var(--text-color), 0.14);
+      border-radius: var(--button-border-radius);
+      background: rgba(var(--text-color), 0.018);
+      color: rgb(var(--text-color));
+      font-weight: 700;
+      line-height: 1.25;
+      text-decoration: none;
+      transition: border-color 0.16s ease, background-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+    }
+
+    .unpatched-menu-card:hover,
+    .unpatched-menu-card:focus-visible {
+      border-color: rgb(var(--unpatched-brand-blue-rgb));
+      background: rgba(var(--unpatched-brand-blue-rgb), 0.035);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .unpatched-menu-card:focus-visible,
+    .unpatched-menu-card__heading:focus-visible,
+    .unpatched-menu-card__child:focus-visible {
+      outline: 2px solid rgb(var(--unpatched-brand-blue-rgb));
+      outline-offset: 2px;
+    }
+
+    .unpatched-menu-card__label { min-width: 0; }
+
+    .unpatched-menu-card__arrow {
+      flex: 0 0 auto;
+      color: rgb(var(--unpatched-brand-blue-rgb));
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+      transition: transform 0.16s ease;
+    }
+
+    .unpatched-menu-card:hover .unpatched-menu-card__arrow,
+    .unpatched-menu-card:focus-visible .unpatched-menu-card__arrow {
+      transform: translateX(2px);
+    }
+
+    .unpatched-menu-card--group {
+      display: block;
+      height: auto;
+      min-height: 0;
+      padding: 16px 18px 14px;
+    }
+
+    .unpatched-menu-card__heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      color: rgb(var(--text-color));
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .unpatched-menu-card__children {
+      display: grid;
+      gap: 7px;
+      margin: 12px 0 0;
+      padding: 12px 0 0;
+      border-top: 1px solid rgba(var(--text-color), 0.09);
+    }
+
+    .unpatched-menu-card__child {
+      color: rgba(var(--text-color), 0.68);
+      font-size: 12px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+
+    .unpatched-menu-card__child:hover,
+    .unpatched-menu-card__child:focus-visible {
+      color: rgb(var(--unpatched-brand-blue-rgb));
+    }
+
+    .unpatched-menu-panel__promos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .unpatched-menu-panel__promos .mega-menu__image-push {
+      min-width: 0;
+      padding: 10px;
+      border: 1px solid rgba(var(--text-color), 0.1);
+      border-radius: var(--button-border-radius);
+    }
+
+    .unpatched-menu-panel__promos .mega-menu__image-wrapper {
+      border-radius: calc(var(--button-border-radius) * 0.75);
+      overflow: hidden;
+    }
+  }
+</style>
+
+<desktop-navigation>
+  {%- comment -%}
+    The Shopify Navigation menu is the single source of truth.
+    Titles, order, URLs and nesting below come directly from section.settings.navigation_menu.
+    Theme mega-menu blocks only enhance a matching top-level menu item; they never create, rename,
+    hide, reorder or split navigation entries.
+  {%- endcomment -%}
+
+  <ul class="header__linklist list--unstyled {% unless bottom_navigation %}hidden-pocket hidden-lap{% endunless %}" role="list">
+    {%- for link in menu.links -%}
+      {%- assign link_title_downcase = link.title | strip | downcase -%}
+      {%- assign mega_menu_block = '' -%}
+      {%- assign mega_menu_images = '' -%}
+
+      {%- for block in section.blocks -%}
+        {%- assign menu_item_downcase = block.settings.menu_item | strip | downcase -%}
+        {%- if menu_item_downcase == link_title_downcase -%}
+          {%- assign mega_menu_block = block -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <li class="header__linklist-item {% if link.links.size > 0 or mega_menu_block != '' %}has-dropdown{% endif %}" data-item-title="{{ link.title | escape }}">
+        <a class="header__linklist-link link--animated" href="{{ link.url }}" {% if link.links.size > 0 or mega_menu_block != '' %}aria-controls="desktop-menu-{{ forloop.index }}" aria-expanded="false"{% endif %}>
+          {{- link.title -}}
+        </a>
+
+        {%- if mega_menu_block != '' -%}
+          {%- assign images_count = 0 -%}
+
+          {%- capture mega_menu_images -%}
+            {%- for i in (1..6) -%}
+              {%- capture image_setting -%}image_{{ i }}{%- endcapture -%}
+              {%- if mega_menu_block.settings[image_setting] != blank -%}
+                {%- assign images_count = images_count | plus: 1 -%}
+                {%- capture image_heading_setting -%}image_{{ i }}_heading{%- endcapture -%}
+                {%- capture image_text_setting -%}image_{{ i }}_text{%- endcapture -%}
+                {%- capture image_link_setting -%}image_{{ i }}_link{%- endcapture -%}
+
+                {%- capture image_push -%}
+                  <div class="mega-menu__image-wrapper">
+                    {%- assign menu_image = mega_menu_block.settings[image_setting] -%}
+                    {{ menu_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '240,480,720', sizes: '240px', class: 'mega-menu__image' }}
+                  </div>
+                  {%- if mega_menu_block.settings[image_heading_setting] != blank -%}
+                    <p class="mega-menu__heading heading heading--small">{{ mega_menu_block.settings[image_heading_setting] }}</p>
+                  {%- endif -%}
+                  {%- if mega_menu_block.settings[image_text_setting] != blank -%}
+                    <span class="mega-menu__text">{{ mega_menu_block.settings[image_text_setting] }}</span>
+                  {%- endif -%}
+                {%- endcapture -%}
+
+                {%- if mega_menu_block.settings[image_link_setting] != blank -%}
+                  <a href="{{ mega_menu_block.settings[image_link_setting] }}" class="mega-menu__image-push image-zoom">{{- image_push -}}</a>
+                {%- else -%}
+                  <div class="mega-menu__image-push image-zoom">{{- image_push -}}</div>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+
+          {%- if link.links.size > 0 or mega_menu_images != blank -%}
+            <div hidden id="desktop-menu-{{ forloop.index }}" class="mega-menu unpatched-menu-panel" {{ mega_menu_block.shopify_attributes }}>
+              <div class="container">
+                <div class="mega-menu__inner unpatched-menu-panel__inner">
+                  <div class="unpatched-menu-panel__intro">
+                    <span class="unpatched-menu-panel__eyebrow">{{ link.title }}</span>
+                    <p class="unpatched-menu-panel__headline">Explore {{ link.title }}.</p>
+                  </div>
+
+                  <div class="unpatched-menu-panel__content">
+                    {%- if link.links.size > 0 -%}
+                      <div class="unpatched-menu-panel__links">
+                        {%- for sub_link in link.links -%}
+                          {%- if sub_link.links.size > 0 -%}
+                            <div class="unpatched-menu-card unpatched-menu-card--group">
+                              <a href="{{ sub_link.url }}" class="unpatched-menu-card__heading">
+                                <span class="unpatched-menu-card__label">{{ sub_link.title }}</span>
+                                <span class="unpatched-menu-card__arrow" aria-hidden="true">→</span>
+                              </a>
+                              <ul class="unpatched-menu-card__children list--unstyled" role="list">
+                                {%- for sub_sub_link in sub_link.links -%}
+                                  <li><a href="{{ sub_sub_link.url }}" class="unpatched-menu-card__child">{{ sub_sub_link.title }}</a></li>
+                                {%- endfor -%}
+                              </ul>
+                            </div>
+                          {%- else -%}
+                            <a href="{{ sub_link.url }}" class="unpatched-menu-card">
+                              <span class="unpatched-menu-card__label">{{ sub_link.title }}</span>
+                              <span class="unpatched-menu-card__arrow" aria-hidden="true">→</span>
+                            </a>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+
+                    {%- if mega_menu_images != blank -%}
+                      <div class="unpatched-menu-panel__promos {% if images_count >= 3 %}mega-menu__images-wrapper--tight{% endif %}">
+                        {{- mega_menu_images -}}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- elsif link.links.size > 0 -%}
+          <ul hidden id="desktop-menu-{{ forloop.index }}" class="nav-dropdown {% if link.levels == 1 %}nav-dropdown--restrict{% endif %} list--unstyled" role="list">
+            {%- for sub_link in link.links -%}
+              <li class="nav-dropdown__item {% if sub_link.links.size > 0 %}has-dropdown{% endif %}">
+                <a class="nav-dropdown__link link--faded" href="{{ sub_link.url }}" {% if sub_link.links.size > 0 %}aria-controls="desktop-menu-{{ forloop.parentloop.index }}-{{ forloop.index }}" aria-expanded="false"{% endif %}>
+                  {{- sub_link.title -}}
+                  {%- if sub_link.links.size > 0 -%}
+                    {% render 'icon' with 'dropdown-arrow-right', direction_aware: true %}
+                  {%- endif -%}
+                </a>
+
+                {%- if sub_link.links.size > 0 -%}
+                  <ul hidden id="desktop-menu-{{ forloop.parentloop.index }}-{{ forloop.index }}" class="nav-dropdown list--unstyled" role="list">
+                    {%- for sub_sub_link in sub_link.links -%}
+                      <li class="nav-dropdown__item">
+                        <a class="nav-dropdown__link link--faded" href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</desktop-navigation>

@@ -1,0 +1,358 @@
+/* ========================================================================== 
+   UNPATCHED TECH — FEATURED REFURBISHED SHOWCASE
+   Clean floating display treatment for homepage refurbished highlights.
+   ========================================================================== */
+
+body.unpatched-home-page #main .unpatched-home-featured {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep the showcase visibly intentional, but lighter than the original thick
+   double-card treatment. The panel has a soft edge and a controlled cool wash
+   instead of disappearing completely into the page. */
+body.unpatched-home-page #main .unpatched-home-featured__showcase {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(37, 37, 42, .045);
+  border-radius: calc(var(--block-border-radius) + 8px);
+  background: radial-gradient(
+    ellipse at 50% 36%,
+    rgba(235, 239, 247, .86) 0%,
+    rgba(242, 245, 250, .76) 46%,
+    rgba(249, 250, 252, .58) 74%,
+    rgba(255, 255, 255, .92) 100%
+  );
+  box-shadow:
+    0 24px 54px rgba(30, 38, 72, .085),
+    0 7px 18px rgba(30, 38, 72, .035),
+    inset 0 1px 0 rgba(255, 255, 255, .98);
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, .18) 0%,
+    rgba(255, 255, 255, 0) 58%,
+    rgba(255, 255, 255, .28) 100%
+  );
+  pointer-events: none;
+}
+
+/* Heading now belongs to the showcase itself, so the whole refurbished story
+   reads as one composed object from eyebrow through CTA. The header wrapper
+   spans the full showcase; only the copy inside it is width-constrained. */
+body.unpatched-home-page #main .unpatched-home-featured__header {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 34px 24px 4px;
+  text-align: center;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__header .unpatched-home-section__heading-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 760px);
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__header .unpatched-eyebrow,
+body.unpatched-home-page #main .unpatched-home-featured__header .heading,
+body.unpatched-home-page #main .unpatched-home-featured__header .unpatched-home-section__copy,
+body.unpatched-home-page #main .unpatched-home-featured__header .unpatched-home-section__copy p {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__header .unpatched-home-section__copy {
+  width: min(100%, 720px);
+}
+
+/* Collection switcher: intentionally text-first so it reads like a compact
+   storefront menu rather than another row of cards. */
+body.unpatched-home-page #main .unpatched-home-featured__tabs {
+  display: flex;
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  margin: 22px auto 2px;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__tab {
+  position: relative;
+  flex: none;
+  margin: 0;
+  padding: 8px 0 10px;
+  border: 0;
+  background: transparent;
+  color: rgba(37, 37, 42, .56);
+  font-family: var(--heading-font-family);
+  font-size: 12px;
+  font-weight: var(--heading-font-weight);
+  letter-spacing: .08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__tab::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 3px;
+  left: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: #405DE6;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 180ms cubic-bezier(.2, .7, .2, 1);
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__tab.is-active,
+body.unpatched-home-page #main .unpatched-home-featured__tab[aria-selected="true"] {
+  color: #25252a;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__tab.is-active::after,
+body.unpatched-home-page #main .unpatched-home-featured__tab[aria-selected="true"]::after {
+  transform: scaleX(1);
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__tab:focus-visible {
+  outline: 2px solid rgba(64, 93, 230, .65);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__panels {
+  position: relative;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__panel[hidden] {
+  display: none;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__panel.is-active {
+  animation: unpatched-featured-panel-in 180ms ease both;
+}
+
+@keyframes unpatched-featured-panel-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-grid {
+  position: relative;
+  gap: 20px;
+  padding: 24px 24px 18px;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-grid::before {
+  display: none;
+}
+
+/* Keep each product visually light so it does not merge into the larger
+   showcase panel. The image frame remains the dominant card object. */
+body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card {
+  position: relative;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--block-border-radius);
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transform: translateY(0);
+  transition: transform 200ms ease;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__media {
+  overflow: hidden;
+  border: 1px solid rgba(37, 37, 42, .075);
+  border-radius: var(--block-border-radius);
+  background: var(--up-product-media-background, #fff);
+  box-shadow:
+    0 16px 34px rgba(29, 35, 58, .08),
+    0 4px 10px rgba(29, 35, 58, .035),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+}
+
+/* Some source product photos fill their canvas much more aggressively than
+   the rest of the curated row. Normalize only those cards instead of changing
+   the global product-image scale. */
+body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card--compact-media .unpatched-home-product-card__image {
+  transform: scale(.82);
+}
+
+body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__content {
+  padding: 15px 6px 2px;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__meta {
+  margin-bottom: 6px;
+  color: #405DE6;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__title {
+  letter-spacing: -.02em;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__price {
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 10px 24px 20px;
+  border: 0;
+  background: transparent;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured__action .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  text-align: center;
+  box-shadow: 0 10px 24px rgba(64, 93, 230, .18);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.unpatched-home-page #main .unpatched-home-featured__tab:hover {
+    color: #405DE6;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card:hover {
+    transform: translateY(-7px);
+  }
+
+  body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card:hover .unpatched-home-product-card__media {
+    border-color: rgba(64, 93, 230, .14);
+    box-shadow:
+      0 25px 48px rgba(27, 35, 67, .13),
+      0 8px 18px rgba(27, 35, 67, .06),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+  body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card:hover .unpatched-home-product-card__image {
+    transform: scale(calc(var(--up-product-media-scale, 1) * 1.025));
+  }
+
+  body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card--compact-media:hover .unpatched-home-product-card__image {
+    transform: scale(.84);
+  }
+}
+
+@media screen and (max-width: 740px) {
+  body.unpatched-home-page #main .unpatched-home-featured__showcase {
+    border-radius: calc(var(--block-border-radius) + 5px);
+    background: radial-gradient(
+      ellipse at 50% 34%,
+      rgba(239, 242, 248, .78) 0%,
+      rgba(247, 249, 252, .62) 58%,
+      rgba(255, 255, 255, .94) 100%
+    );
+    box-shadow:
+      0 18px 38px rgba(30, 38, 72, .07),
+      inset 0 1px 0 rgba(255, 255, 255, .96);
+  }
+
+  body.unpatched-home-page #main .unpatched-home-featured__header {
+    padding: 24px 16px 2px;
+  }
+
+  /* Size to the tabs themselves and center the rail. If future tabs exceed
+     the available width, safe center falls back to a scrollable start edge. */
+  body.unpatched-home-page #main .unpatched-home-featured__tabs {
+    width: max-content;
+    max-width: calc(100% - 24px);
+    margin: 18px auto 2px;
+    padding: 0;
+    justify-content: safe center;
+    gap: 22px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-featured__tab {
+    font-size: 11px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-grid {
+    gap: 12px;
+    padding: 14px 14px 10px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__media {
+    box-shadow:
+      0 10px 22px rgba(27, 35, 67, .065),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+  body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__content {
+    padding: 12px 3px 1px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-featured__action {
+    padding: 8px 14px 16px;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-featured__action .button {
+    min-width: 0;
+    width: min(100%, 280px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.unpatched-home-page #main .unpatched-home-featured__panel.is-active {
+    animation: none;
+  }
+
+  body.unpatched-home-page #main .unpatched-home-featured__tab,
+  body.unpatched-home-page #main .unpatched-home-featured__tab::after,
+  body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card,
+  body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__media,
+  body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__image {
+    transition: none;
+  }
+}

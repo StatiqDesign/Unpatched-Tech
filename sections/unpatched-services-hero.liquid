@@ -1,0 +1,39 @@
+<section
+  class="unpatched-services-page unpatched-services-minimal-hero"
+  style="--up-section-bg: {{ section.settings.background }}; --up-section-text: {{ section.settings.text_color }}; --up-section-muted: {{ section.settings.muted_text_color }};"
+>
+  <div class="container">
+    <div class="unpatched-services-minimal-hero__inner">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="heading heading--small unpatched-services-minimal-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h1 class="heading h1">{{ section.settings.title | escape }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.content != blank -%}
+        <div class="rte unpatched-services-minimal-hero__copy">{{ section.settings.content }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Services hero",
+  "class": "shopify-section--unpatched-services-hero",
+  "disabled_on": {"templates": ["password"], "groups": ["header", "custom.overlay"]},
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "MAIL-IN SERVICES"},
+    {"type": "text", "id": "title", "label": "Heading", "default": "SEND IT IN."},
+    {"type": "richtext", "id": "content", "label": "Text", "default": "<p>Repairs, upgrades, restorations, and data help for consoles, handhelds, and PCs. Tell us what is going on, ship it in, and we will take it from there.</p>"},
+    {"type": "header", "content": "Colors"},
+    {"type": "color", "id": "background", "label": "Section background", "default": "#ffffff"},
+    {"type": "color", "id": "text_color", "label": "Heading text", "default": "#25252a"},
+    {"type": "color", "id": "muted_text_color", "label": "Body text", "default": "#6f6f73"}
+  ],
+  "presets": [{"name": "Services hero"}]
+}
+{% endschema %}

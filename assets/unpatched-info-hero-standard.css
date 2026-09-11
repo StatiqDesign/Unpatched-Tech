@@ -1,0 +1,114 @@
+/* ========================================================================== 
+   UNPATCHED TECH — INFO HERO RHYTHM
+   Shared geometry for the three current editorial/info hero systems only:
+   order tracking, FAQ and blog. Page assets own colors and component details.
+   ========================================================================== */
+
+:root {
+  --up-info-hero-eyebrow-size: 11px;
+  --up-info-hero-title-size: 52px;
+  --up-info-hero-copy-size: 16px;
+  --up-info-hero-copy-width: 680px;
+  --up-info-hero-width: 860px;
+  --up-info-hero-top: 144px;
+  --up-info-hero-gap: 18px;
+  --up-info-content-gap: 40px;
+  --up-info-page-bottom: 190px;
+}
+
+.unpatched-tracking-page #main .unpatched-order-tracker__hero,
+.unpatched-faq-page #main .unpatched-faq-hero,
+.unpatched-blog-page #main .unpatched-blog-hero {
+  min-height: 0;
+  padding-top: var(--up-info-hero-top);
+}
+
+.unpatched-faq-page #main .unpatched-faq-hero,
+.unpatched-blog-page #main .unpatched-blog-hero {
+  padding-bottom: 0;
+}
+
+.unpatched-tracking-page #main .unpatched-order-tracker__hero {
+  padding-bottom: var(--up-info-page-bottom);
+}
+
+.unpatched-tracking-page #main .unpatched-order-tracker__inner,
+.unpatched-faq-page #main .unpatched-faq-hero__inner,
+.unpatched-blog-page #main .unpatched-blog-hero__inner {
+  width: min(100%, var(--up-info-hero-width));
+  max-width: var(--up-info-hero-width);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.unpatched-tracking-page #main .unpatched-order-tracker__eyebrow,
+.unpatched-faq-page #main .unpatched-faq-eyebrow,
+.unpatched-blog-page #main .unpatched-blog-eyebrow {
+  margin: 0 0 12px;
+  font-size: var(--up-info-hero-eyebrow-size);
+}
+
+.unpatched-tracking-page #main .unpatched-order-tracker__title,
+.unpatched-faq-page #main .unpatched-faq-hero h1.heading,
+.unpatched-blog-page #main .unpatched-blog-hero__title {
+  max-width: 15ch;
+  margin-inline: auto;
+  font-size: var(--up-info-hero-title-size);
+  line-height: .98;
+}
+
+.unpatched-tracking-page #main .unpatched-order-tracker__intro,
+.unpatched-faq-page #main .unpatched-faq-hero__content,
+.unpatched-blog-page #main .unpatched-blog-hero__intro {
+  width: min(100%, var(--up-info-hero-copy-width));
+  max-width: var(--up-info-hero-copy-width);
+  margin: var(--up-info-hero-gap) auto 0;
+  font-size: var(--up-info-hero-copy-size);
+  line-height: 1.65;
+}
+
+.unpatched-tracking-page #main .unpatched-order-tracker__intro p,
+.unpatched-faq-page #main .unpatched-faq-hero__content p {
+  margin-block: 0;
+}
+
+.unpatched-tracking-page #main .unpatched-order-tracker__card {
+  margin-top: var(--up-info-content-gap);
+}
+
+.unpatched-blog-page #main .unpatched-blog-hero + .unpatched-blog-filter-wrap,
+.unpatched-blog-page #main .unpatched-blog-hero + .unpatched-blog-feed {
+  margin-top: 0;
+  padding-top: var(--up-info-content-gap);
+}
+
+.unpatched-blog-page #main .unpatched-blog-filter-wrap + .unpatched-blog-feed {
+  margin-top: 0;
+  padding-top: 24px;
+}
+
+.unpatched-blog-page #main .unpatched-blog-feed {
+  padding-bottom: var(--up-info-page-bottom);
+}
+
+@media screen and (max-width: 749px) {
+  :root {
+    --up-info-hero-eyebrow-size: 10px;
+    --up-info-hero-title-size: 40px;
+    --up-info-hero-copy-size: 15px;
+    --up-info-hero-top: 92px;
+    --up-info-hero-gap: 15px;
+    --up-info-content-gap: 28px;
+    --up-info-page-bottom: 130px;
+  }
+
+  .unpatched-tracking-page #main .unpatched-order-tracker__hero,
+  .unpatched-faq-page #main .unpatched-faq-hero,
+  .unpatched-blog-page #main .unpatched-blog-hero {
+    padding-inline: 16px;
+  }
+
+  .unpatched-blog-page #main .unpatched-blog-filter-wrap + .unpatched-blog-feed {
+    padding-top: 18px;
+  }
+}

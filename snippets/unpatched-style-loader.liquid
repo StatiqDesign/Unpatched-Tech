@@ -1,0 +1,95 @@
+{% doc %}
+Loads Unpatched Tech styles by page context while keeping the global layout focused on document structure.
+
+@param {boolean} is_unpatched_tracking_page - Whether the current page is the order tracking page.
+@param {boolean} is_unpatched_faq_page - Whether the current page is the FAQ page.
+@param {boolean} is_unpatched_about_page - Whether the current page is the About page.
+@param {boolean} is_unpatched_services_page - Whether the current page is the Services page.
+@param {boolean} is_unpatched_support_page - Whether the current page is a Support or Contact page.
+@param {boolean} is_unpatched_policy_page - Whether the current page is a Shopify policy page.
+@param {boolean} is_unpatched_custom_legal_page - Whether the current page is a custom legal page.
+{% enddoc %}
+
+{%- liquid
+  assign needs_info_layers = false
+  if is_unpatched_tracking_page or is_unpatched_faq_page or request.page_type == 'blog' or request.page_type == 'article'
+    assign needs_info_layers = true
+  endif
+
+
+  assign needs_short_page_shell = false
+  if is_unpatched_tracking_page or is_unpatched_about_page
+    assign needs_short_page_shell = true
+  endif
+
+  assign needs_product_cards = false
+  if request.page_type == 'index' or request.page_type == 'product' or request.page_type == 'collection' or request.page_type == 'search' or request.page_type == 'cart'
+    assign needs_product_cards = true
+  endif
+-%}
+
+<link rel="stylesheet" href="{{ 'unpatched-core.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'unpatched-chrome.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'unpatched-chrome.css' | asset_url }}"></noscript>
+<link rel="stylesheet" href="{{ 'unpatched-media-core.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'unpatched-media-core.css' | asset_url }}"></noscript>
+
+{%- case request.page_type -%}
+  {%- when 'product' -%}
+    <link rel="stylesheet" href="{{ 'unpatched-media-product.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'unpatched-product.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'unpatched-disclosure-sync.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'unpatched-product-mobile.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'unpatched-product-page-standard.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'unpatched-computer-specs.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'unpatched-refurbished-certified.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ 'unpatched-computer-specs.css' | asset_url }}"><link rel="stylesheet" href="{{ 'unpatched-refurbished-certified.css' | asset_url }}"></noscript>
+  {%- when 'blog' -%}
+    <link rel="stylesheet" href="{{ 'unpatched-blog.css' | asset_url }}">
+  {%- when 'article' -%}
+    <link rel="stylesheet" href="{{ 'unpatched-article.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'unpatched-blog.css' | asset_url }}">
+  {%- when 'index' -%}
+    <link rel="stylesheet" href="{{ 'unpatched-home-focal.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'unpatched-home.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'unpatched-home-category-cards.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'unpatched-home-shared.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'unpatched-home-flagship-pc.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'unpatched-home-pathways.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'unpatched-home-featured.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'unpatched-home-brands.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="{{ 'unpatched-home.css' | asset_url }}">
+      <link rel="stylesheet" href="{{ 'unpatched-home-category-cards.css' | asset_url }}">
+      <link rel="stylesheet" href="{{ 'unpatched-home-shared.css' | asset_url }}">
+      <link rel="stylesheet" href="{{ 'unpatched-home-flagship-pc.css' | asset_url }}">
+      <link rel="stylesheet" href="{{ 'unpatched-home-pathways.css' | asset_url }}">
+      <link rel="stylesheet" href="{{ 'unpatched-home-featured.css' | asset_url }}">
+      <link rel="stylesheet" href="{{ 'unpatched-home-brands.css' | asset_url }}">
+    </noscript>
+  {%- when 'collection' -%}
+    <link rel="stylesheet" href="{{ 'unpatched-collection.css' | asset_url }}">
+{%- endcase -%}
+
+{%- if is_unpatched_faq_page -%}
+  <link rel="stylesheet" href="{{ 'unpatched-faq.css' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'unpatched-disclosure-sync.css' | asset_url }}">
+{%- endif -%}
+{%- if is_unpatched_about_page -%}<link rel="stylesheet" href="{{ 'unpatched-about.css' | asset_url }}">{%- endif -%}
+{%- if is_unpatched_services_page -%}<link rel="stylesheet" href="{{ 'unpatched-services.css' | asset_url }}">{%- endif -%}
+{%- if is_unpatched_support_page -%}<link rel="stylesheet" href="{{ 'unpatched-support.css' | asset_url }}">{%- endif -%}
+{%- if is_unpatched_policy_page or is_unpatched_custom_legal_page -%}<link rel="stylesheet" href="{{ 'unpatched-legal.css' | asset_url }}">{%- endif -%}
+
+{%- if needs_info_layers -%}
+  <link rel="stylesheet" href="{{ 'unpatched-info-hero-standard.css' | asset_url }}">
+{%- endif -%}
+
+{%- if needs_short_page_shell -%}<link rel="stylesheet" href="{{ 'unpatched-short-page-shell.css' | asset_url }}">{%- endif -%}
+{%- if needs_product_cards -%}
+  {%- if request.page_type == 'index' -%}
+    <link rel="stylesheet" href="{{ 'unpatched-collection-cards.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ 'unpatched-collection-cards.css' | asset_url }}"></noscript>
+  {%- else -%}
+    <link rel="stylesheet" href="{{ 'unpatched-collection-cards.css' | asset_url }}">
+  {%- endif -%}
+{%- endif -%}

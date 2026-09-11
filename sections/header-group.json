@@ -1,0 +1,252 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "message-1": {
+          "type": "message",
+          "settings": {
+            "text": "REFURBISHED. TESTED. READY TO PLAY.",
+            "learn_more_text": "",
+            "title": "",
+            "content": "",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "message-2": {
+          "type": "message",
+          "settings": {
+            "text": "30-DAY RETURNS ON ELIGIBLE ORDERS",
+            "learn_more_text": "",
+            "title": "",
+            "content": "",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "message-3": {
+          "type": "message",
+          "settings": {
+            "text": "SECURE CHECKOUT • TRACKED SHIPPING",
+            "learn_more_text": "",
+            "title": "",
+            "content": "",
+            "button_text": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "message-1",
+        "message-2",
+        "message-3"
+      ],
+      "settings": {
+        "announcement_bar_position": "sticky",
+        "announcement_text_size": "small",
+        "autoplay": true,
+        "cycle_speed": 5,
+        "background": "#405de6",
+        "text_color": "#fcfbf5",
+        "button_background": "#282828",
+        "button_text_color": "#fcfbf5"
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega_menu_KwGAFX": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "refurbished",
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": "",
+            "image_3_heading": "",
+            "image_3_text": "",
+            "image_3_link": "",
+            "image_4_heading": "",
+            "image_4_text": "",
+            "image_4_link": "",
+            "image_5_heading": "",
+            "image_5_text": "",
+            "image_5_link": "",
+            "image_6_heading": "",
+            "image_6_text": "",
+            "image_6_link": ""
+          }
+        },
+        "mega_menu_QqDjrJ": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Computers",
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": "",
+            "image_3_heading": "",
+            "image_3_text": "",
+            "image_3_link": "",
+            "image_4_heading": "",
+            "image_4_text": "",
+            "image_4_link": "",
+            "image_5_heading": "",
+            "image_5_text": "",
+            "image_5_link": "",
+            "image_6_heading": "",
+            "image_6_text": "",
+            "image_6_link": ""
+          }
+        },
+        "mega_menu_nHCXKL": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Help & Info",
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": "",
+            "image_3_heading": "",
+            "image_3_text": "",
+            "image_3_link": "",
+            "image_4_heading": "",
+            "image_4_text": "",
+            "image_4_link": "",
+            "image_5_heading": "",
+            "image_5_text": "",
+            "image_5_link": "",
+            "image_6_heading": "",
+            "image_6_text": "",
+            "image_6_link": ""
+          }
+        },
+        "mega_menu_3mHjfk": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Xbox",
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": "",
+            "image_3_heading": "",
+            "image_3_text": "",
+            "image_3_link": "",
+            "image_4_heading": "",
+            "image_4_text": "",
+            "image_4_link": "",
+            "image_5_heading": "",
+            "image_5_text": "",
+            "image_5_link": "",
+            "image_6_heading": "",
+            "image_6_text": "",
+            "image_6_link": ""
+          }
+        },
+        "mega_menu_HtzaLH": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "PlayStation",
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": "",
+            "image_3_heading": "",
+            "image_3_text": "",
+            "image_3_link": "",
+            "image_4_heading": "",
+            "image_4_text": "",
+            "image_4_link": "",
+            "image_5_heading": "",
+            "image_5_text": "",
+            "image_5_link": "",
+            "image_6_heading": "",
+            "image_6_text": "",
+            "image_6_link": ""
+          }
+        },
+        "mega_menu_bQXF86": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Nintendo",
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": "",
+            "image_3_heading": "",
+            "image_3_text": "",
+            "image_3_link": "",
+            "image_4_heading": "",
+            "image_4_text": "",
+            "image_4_link": "",
+            "image_5_heading": "",
+            "image_5_text": "",
+            "image_5_link": "",
+            "image_6_heading": "",
+            "image_6_text": "",
+            "image_6_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_KwGAFX",
+        "mega_menu_QqDjrJ",
+        "mega_menu_nHCXKL",
+        "mega_menu_3mHjfk",
+        "mega_menu_HtzaLH",
+        "mega_menu_bQXF86"
+      ],
+      "settings": {
+        "enable_sticky_header": true,
+        "logo": "shopify://shop_images/Unpatched_Clear.png",
+        "logo_max_width": 40,
+        "mobile_logo_max_width": 60,
+        "navigation_menu": "main-menu",
+        "sidebar_navigation_menu": "main-menu",
+        "header_layout": "logo_left_navigation_inline",
+        "show_icons": true,
+        "reduce_desktop_padding": true,
+        "show_locale_selector": false,
+        "show_country_selector": false,
+        "enable_transparent_header": false,
+        "transparent_header_text_color": "#ffffff",
+        "search_menu": "",
+        "customer_account_menu": "customer-account-main-menu"
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

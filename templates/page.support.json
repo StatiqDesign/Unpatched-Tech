@@ -1,0 +1,48 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "contact": {
+      "type": "unpatched-support-contact",
+      "settings": {
+        "anchor_id": "SupportForm",
+        "eyebrow": "UNPATCHED SUPPORT",
+        "title": "HOW CAN WE HELP?",
+        "intro": "Tell us what you need and give us the context. Order numbers, device details, and what you've already tried help us get to the useful part faster.",
+        "topic_label": "WHAT CAN WE HELP WITH?",
+        "topic_placeholder": "Choose a support topic",
+        "name_label": "NAME",
+        "name_placeholder": "Your name",
+        "email_label": "EMAIL",
+        "email_placeholder": "you@example.com",
+        "phone_label": "PHONE — OPTIONAL",
+        "phone_placeholder": "Your phone number",
+        "order_label": "ORDER NUMBER — OPTIONAL",
+        "order_placeholder": "#1001",
+        "device_label": "PRODUCT / DEVICE — OPTIONAL",
+        "device_placeholder": "Example: PlayStation 5 Slim, Xbox Series X, custom PC",
+        "message_label": "TELL US WHAT'S GOING ON",
+        "message_placeholder": "Tell us what happened, what you're seeing, what you've already tried, and what outcome you're looking for.",
+        "submit_text": "SEND SUPPORT REQUEST",
+        "success_title": "WE GOT IT.",
+        "success_text": "Your message is in. We'll use the details you sent to figure out the right next step.",
+        "direct_text": "Prefer to contact us directly?",
+        "email": "hello@unpatchedtech.com",
+        "phone": "(818) 253-4658",
+        "background": "#ffffff",
+        "text_color": "#25252a",
+        "muted_text_color": "#6f6f73",
+        "card_background": "#ffffff",
+        "border_color": "#e5e7eb"
+      }
+    }
+  },
+  "order": ["contact"]
+}

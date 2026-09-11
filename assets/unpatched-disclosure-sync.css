@@ -1,0 +1,175 @@
+/* ========================================================================== 
+   UNPATCHED TECH — SHARED DISCLOSURE CARD CONTRACT
+   Product information disclosures visually follow FAQ cards while preserving
+   native <details> state and Focal interaction behavior.
+   ========================================================================== */
+
+body.unpatched-faq-page #main .shopify-section--faq .faq__item,
+body.unpatched-product-page #main .unpatched-accordion {
+  border-radius: var(--block-border-radius);
+}
+
+/* Product disclosure rhythm -------------------------------------------- */
+body.unpatched-product-page #main .unpatched-accordions {
+  width: 100%;
+  margin: 0 0 10px;
+}
+
+body.unpatched-product-page #main .product-form__quantity + .unpatched-accordions {
+  margin-top: 20px;
+}
+
+body.unpatched-product-page #main .unpatched-accordion {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid rgba(37, 37, 42, .085);
+  background: #fff;
+  box-shadow: 0 5px 16px rgba(37, 37, 42, .035);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+body.unpatched-product-page #main .unpatched-accordion::before {
+  display: none;
+  content: none;
+}
+
+/* Summary --------------------------------------------------------------- */
+body.unpatched-product-page #main .unpatched-accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  width: 100%;
+  min-height: 66px;
+  margin: 0;
+  padding: 19px 22px 19px 24px;
+  color: #25252a;
+  font-family: var(--heading-font-family);
+  font-size: 15px;
+  font-weight: 750;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  list-style: none;
+}
+
+body.unpatched-product-page #main .unpatched-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+body.unpatched-product-page #main .unpatched-accordion summary::marker {
+  content: "";
+}
+
+body.unpatched-product-page #main .unpatched-accordion summary > span:first-of-type {
+  flex: 1 1 auto;
+  text-align: left;
+}
+
+/* Animated plus --------------------------------------------------------- */
+body.unpatched-product-page #main .unpatched-accordion-plus {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  border: 0;
+  border-radius: 9px;
+  background: rgba(var(--unpatched-brand-blue-rgb), .08);
+  color: rgb(var(--unpatched-brand-blue-rgb));
+  font-size: 0;
+  line-height: 0;
+  transform: none;
+}
+
+body.unpatched-product-page #main .unpatched-accordion-plus::before,
+body.unpatched-product-page #main .unpatched-accordion-plus::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: currentColor;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  transition: transform .4s ease-in-out, opacity .4s ease-in-out;
+}
+
+body.unpatched-product-page #main .unpatched-accordion-plus::before {
+  width: 10px;
+  height: 2px;
+  opacity: 1;
+}
+
+body.unpatched-product-page #main .unpatched-accordion-plus::after {
+  width: 2px;
+  height: 10px;
+}
+
+body.unpatched-product-page #main .unpatched-accordion[open] .unpatched-accordion-plus::before {
+  opacity: 0;
+}
+
+body.unpatched-product-page #main .unpatched-accordion[open] .unpatched-accordion-plus::before,
+body.unpatched-product-page #main .unpatched-accordion[open] .unpatched-accordion-plus::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+/* Content --------------------------------------------------------------- */
+body.unpatched-product-page #main .unpatched-accordion-content {
+  padding: 0 68px 22px 24px;
+  color: rgba(37, 37, 42, .72);
+  font-size: 14px;
+  line-height: 1.72;
+}
+
+body.unpatched-product-page #main .unpatched-accordion-content p:last-child {
+  margin-bottom: 0;
+}
+
+body.unpatched-product-page #main .unpatched-accordion-content a {
+  color: rgb(var(--unpatched-brand-blue-rgb));
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+body.unpatched-product-page #main .unpatched-accordion[open] {
+  border-color: rgba(var(--unpatched-brand-blue-rgb), .26);
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(37, 37, 42, .07);
+}
+
+body.unpatched-product-page #main .product-form__text {
+  border: 1px solid rgba(37, 37, 42, .10);
+  border-left-color: rgba(37, 37, 42, .10);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.unpatched-product-page #main .unpatched-accordion:hover {
+    transform: translateY(-2px);
+    border-color: rgba(var(--unpatched-brand-blue-rgb), .22);
+    box-shadow: 0 12px 26px rgba(37, 37, 42, .07);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  body.unpatched-product-page #main .unpatched-accordion summary {
+    min-height: 60px;
+    padding: 17px 18px 17px 20px;
+    gap: 18px;
+    font-size: 14px;
+  }
+
+  body.unpatched-product-page #main .unpatched-accordion-content {
+    padding: 0 58px 20px 20px;
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.unpatched-product-page #main .unpatched-accordion,
+  body.unpatched-product-page #main .unpatched-accordion-plus::before,
+  body.unpatched-product-page #main .unpatched-accordion-plus::after {
+    transition: none;
+  }
+}

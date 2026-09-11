@@ -1,0 +1,259 @@
+{%- assign direction = 'ltr' -%}
+{%- case request.locale.iso_code -%}
+  {%- when 'ar' or 'arc' or 'dv' or 'fa' or 'ha' or 'he' or 'kwh' or 'ks' or 'ku' or 'ps' or 'ur' or 'yi' -%}
+    {%- assign direction = 'rtl' -%}
+{%- endcase -%}
+
+<style>
+  #mobile-menu-drawer {
+    --unpatched-mobile-menu-divider: rgba(var(--heading-color), .12);
+    --unpatched-mobile-menu-row-padding: 18px;
+    --unpatched-mobile-menu-font-size: 15px;
+  }
+
+  /* One divider treatment throughout the drawer. */
+  #mobile-menu-drawer .drawer__content > .mobile-nav > .mobile-nav__item,
+  #mobile-menu-drawer .unpatched-mobile-submenu > .mobile-nav__item,
+  #mobile-menu-drawer .unpatched-mobile-account-footer {
+    border-color: var(--unpatched-mobile-menu-divider) !important;
+  }
+
+  #mobile-menu-drawer .drawer__content > .mobile-nav > .mobile-nav__item:first-child {
+    border-top-color: var(--unpatched-mobile-menu-divider) !important;
+  }
+
+  #mobile-menu-drawer .drawer__content > .mobile-nav > .mobile-nav__item:not(:last-child),
+  #mobile-menu-drawer .unpatched-mobile-submenu > .mobile-nav__item:not(:last-child) {
+    border-bottom: 1px solid var(--unpatched-mobile-menu-divider) !important;
+  }
+
+  /* Match row typography and vertical rhythm at every navigation depth. */
+  #mobile-menu-drawer .mobile-nav__link,
+  #mobile-menu-drawer .mobile-nav .mobile-nav .mobile-nav__link {
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    margin: 0;
+    padding: var(--unpatched-mobile-menu-row-padding) 0 !important;
+    font-family: var(--text-font-family);
+    font-size: var(--unpatched-mobile-menu-font-size) !important;
+    font-style: normal;
+    line-height: 1.35;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  #mobile-menu-drawer .drawer__content > .mobile-nav > .mobile-nav__item > .mobile-nav__link {
+    font-family: var(--heading-font-family);
+    font-weight: var(--heading-font-weight);
+    text-transform: var(--heading-text-transform);
+  }
+
+  #mobile-menu-drawer .mobile-nav__back,
+  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link,
+  #mobile-menu-drawer .unpatched-mobile-login {
+    font-family: var(--heading-font-family);
+    font-size: var(--unpatched-mobile-menu-font-size) !important;
+    font-weight: var(--heading-font-weight);
+    text-transform: none;
+  }
+
+  /* One exact chevron shape everywhere. Back is the same shape rotated 180deg. */
+  #mobile-menu-drawer .unpatched-mobile-forward-arrow,
+  #mobile-menu-drawer .unpatched-mobile-back-arrow {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 0 !important;
+    line-height: 0 !important;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-forward-arrow::before,
+  #mobile-menu-drawer .unpatched-mobile-back-arrow::before {
+    content: "";
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+    transform-origin: center;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-forward-arrow {
+    margin-inline-start: auto;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-back-arrow {
+    margin-inline-end: 0;
+  }
+
+  #mobile-menu-drawer .unpatched-mobile-back-arrow::before {
+    transform: rotate(-135deg);
+  }
+
+  #mobile-menu-drawer .mobile-nav__back,
+  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link {
+    justify-content: flex-start;
+    gap: 5px !important;
+  }
+
+  #mobile-menu-drawer .mobile-nav__view-all .unpatched-mobile-forward-arrow {
+    margin-inline-start: 0;
+  }
+
+  #mobile-menu-drawer .mobile-nav__view-all,
+  #mobile-menu-drawer .mobile-nav__view-all::before,
+  #mobile-menu-drawer .mobile-nav__view-all::after,
+  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link,
+  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link::before,
+  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link::after,
+  #mobile-menu-drawer .unpatched-mobile-account-footer,
+  #mobile-menu-drawer .unpatched-mobile-login {
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+  }
+
+  #mobile-menu-drawer .mobile-nav__view-all::before,
+  #mobile-menu-drawer .mobile-nav__view-all::after,
+  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link::before,
+  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link::after,
+  #mobile-menu-drawer .unpatched-mobile-account-footer::before,
+  #mobile-menu-drawer .unpatched-mobile-account-footer::after,
+  #mobile-menu-drawer .unpatched-mobile-login::before,
+  #mobile-menu-drawer .unpatched-mobile-login::after {
+    content: none !important;
+    display: none !important;
+  }
+</style>
+
+<mobile-navigation append-body id="mobile-menu-drawer" class="drawer {% if direction == 'ltr' %}drawer--from-left{% endif %}">
+  <span class="drawer__overlay"></span>
+
+  <div class="drawer__header drawer__header--shadowed">
+    <button type="button" class="drawer__close-button drawer__close-button--block tap-area" data-action="close" title="{{ 'general.accessibility.close' | t | escape }}">
+      {%- render 'icon' with 'close' -%}
+    </button>
+
+    <a href="{{ routes.root_url }}" class="unpatched-mobile-menu-logo">
+      {%- if section.settings.logo != blank -%}
+        {%- assign logo_size = section.settings.logo_max_width | at_least: section.settings.mobile_logo_max_width | times: 2 -%}
+        <img src="{{ section.settings.logo | image_url: width: logo_size }}" alt="{{ section.settings.logo.alt | escape }}" width="{{ section.settings.logo.width }}" height="{{ section.settings.logo.height }}">
+      {%- else -%}
+        {{ shop.name }}
+      {%- endif -%}
+    </a>
+  </div>
+
+  <div class="drawer__content">
+    <ul class="mobile-nav list--unstyled" role="list">
+      {%- for link in menu.links -%}
+        {%- assign link_title_downcase = link.title | strip | downcase -%}
+        {%- assign unpatched_root_title = link.title -%}
+        {%- assign unpatched_root_url = link.url -%}
+        {%- assign mega_menu_block = '' -%}
+        {%- assign mega_menu_images = '' -%}
+
+        {%- for block in section.blocks -%}
+          {%- assign menu_item_downcase = block.settings.menu_item | strip | downcase -%}
+          {%- if menu_item_downcase == link_title_downcase -%}
+            {%- assign mega_menu_block = block -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if mega_menu_block != '' -%}
+          {%- assign images_count = 0 -%}
+          {%- capture mega_menu_images -%}
+            {%- for i in (1..6) -%}
+              {%- capture image_setting -%}image_{{ i }}{%- endcapture -%}
+              {%- if mega_menu_block.settings[image_setting] != blank -%}
+                {%- assign images_count = images_count | plus: 1 -%}
+                {%- capture image_heading_setting -%}image_{{ i }}_heading{%- endcapture -%}
+                {%- capture image_text_setting -%}image_{{ i }}_text{%- endcapture -%}
+                {%- capture image_link_setting -%}image_{{ i }}_link{%- endcapture -%}
+                {%- capture image_push -%}
+                  {%- assign menu_image = mega_menu_block.settings[image_setting] -%}
+                  {{- menu_image | image_url: width: 810 | image_tag: loading: 'lazy', sizes: '270px', widths: '270,540,810', class: 'mobile-nav__image' -}}
+                  {%- if mega_menu_block.settings[image_heading_setting] != '' -%}<p class="mobile-nav__image-heading heading heading--xsmall">{{ mega_menu_block.settings[image_heading_setting] }}</p>{%- endif -%}
+                  {%- if mega_menu_block.settings[image_text_setting] != '' -%}<span class="mobile-nav__image-text text--xsmall">{{ mega_menu_block.settings[image_text_setting] }}</span>{%- endif -%}
+                {%- endcapture -%}
+                {%- if mega_menu_block.settings[image_link_setting] != blank -%}<a href="{{ mega_menu_block.settings[image_link_setting] }}" class="mobile-nav__image-push">{{- image_push -}}</a>{%- else -%}<div class="mobile-nav__image-push">{{- image_push -}}</div>{%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+        {%- endif -%}
+
+        <li class="mobile-nav__item" data-level="1">
+          {%- if link.links.size > 0 or mega_menu_images != blank -%}
+            <button is="toggle-button" class="mobile-nav__link heading {% if settings.heading_text_transform == 'uppercase' %}h6{% else %}h5{% endif %}" aria-controls="mobile-menu-{{ forloop.index }}" aria-expanded="false">{{- unpatched_root_title -}}<span class="mobile-nav__chevron unpatched-mobile-forward-arrow" aria-hidden="true">›</span></button>
+            <collapsible-content id="mobile-menu-{{ forloop.index }}" class="collapsible">
+              {%- if link.links.size > 0 -%}
+                <ul class="mobile-nav list--unstyled unpatched-mobile-submenu" role="list" style="border-bottom:0!important;box-shadow:none!important;">
+                  <li class="mobile-nav__item mobile-nav__back-item"><button type="button" class="mobile-nav__link mobile-nav__back" data-mobile-menu-back><span class="unpatched-mobile-back-arrow" aria-hidden="true">‹</span><span>Back</span></button></li>
+                  {%- for sub_link in link.links -%}
+                    {%- assign sub_link_title_downcase = sub_link.title | strip | downcase -%}
+                    <li class="mobile-nav__item" data-level="2">
+                      {%- if sub_link.links.size > 0 -%}
+                        <button is="toggle-button" class="mobile-nav__link" aria-controls="mobile-menu-{{ forloop.parentloop.index }}-{{ forloop.index }}" aria-expanded="false">{{- sub_link.title -}}<span class="unpatched-mobile-forward-arrow" aria-hidden="true">›</span></button>
+                        <collapsible-content id="mobile-menu-{{ forloop.parentloop.index }}-{{ forloop.index }}" class="collapsible">
+                          <ul class="mobile-nav list--unstyled" role="list">
+                            {%- for sub_sub_link in sub_link.links -%}
+                              {%- assign sub_sub_link_title_downcase = sub_sub_link.title | strip | downcase -%}
+                              <li class="mobile-nav__item" data-level="3"><a href="{{ sub_sub_link.url }}" class="mobile-nav__link"{% if sub_sub_link_title_downcase == 'track your order' %} target="_blank" rel="noopener"{% endif %}>{{ sub_sub_link.title }}</a></li>
+                            {%- endfor -%}
+                          </ul>
+                        </collapsible-content>
+                      {%- else -%}
+                        <a href="{{ sub_link.url }}" class="mobile-nav__link"{% if sub_link_title_downcase == 'track your order' %} target="_blank" rel="noopener"{% endif %}>{{ sub_link.title }}</a>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                  {%- unless unpatched_root_url == '#' or unpatched_root_url == blank -%}
+                    <li class="mobile-nav__item mobile-nav__view-all">
+                      <a href="{{ unpatched_root_url }}" class="mobile-nav__link">
+                        <span>View All</span>
+                        <span class="mobile-nav__view-all-arrow unpatched-mobile-forward-arrow" aria-hidden="true">›</span>
+                      </a>
+                    </li>
+                  {%- endunless -%}
+                </ul>
+              {%- endif -%}
+              {%- if mega_menu_images != blank -%}<div class="mobile-nav__images-wrapper {% if images_count >= 3 %}mobile-nav__images-wrapper--tight{% endif %} hide-scrollbar"><div class="mobile-nav__images-scroller">{{- mega_menu_images -}}</div></div>{%- endif -%}
+            </collapsible-content>
+          {%- else -%}
+            <a href="{{ unpatched_root_url }}" class="mobile-nav__link heading {% if settings.heading_text_transform == 'uppercase' %}h6{% else %}h5{% endif %}"{% if link_title_downcase == 'track your order' %} target="_blank" rel="noopener"{% endif %}>{{ unpatched_root_title }}</a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if shop.customer_accounts_enabled -%}
+      <div class="mobile-nav__footer unpatched-mobile-account-footer"><a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="mobile-nav__link unpatched-mobile-login"><span class="icon-text">{%- render 'icon' with 'header-customer' -%}<span>{% if customer %}{{ 'customer.general.title' | t }}{% else %}{{ 'header.general.login' | t }}{% endif %}</span></span></a></div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_locale_selector and shop.published_locales.size > 1 -%}{%- assign locale_selector = true -%}{%- endif -%}
+  {%- if section.settings.show_country_selector and localization.available_countries.size > 1 -%}{%- assign country_selector = true -%}{%- endif -%}
+  {%- if locale_selector or country_selector -%}
+    <div class="drawer__footer drawer__footer--tight drawer__footer--bordered"><div class="mobile-nav__footer">
+      {%- form 'localization', id: 'header-sidebar-localization-form', class: 'header__cross-border' -%}
+        {%- if country_selector -%}
+          <div class="popover-container"><input type="hidden" name="country_code" value="{{ localization.country.iso_code }}"><span class="visually-hidden">{{ 'header.general.country' | t }}</span><button type="button" is="toggle-button" class="popover-button text--xsmall tap-area" aria-expanded="false" aria-controls="header-sidebar-localization-form-currency">{{- localization.country.name }} ({{ localization.country.currency.iso_code }} {% if localization.country.currency.symbol %}{{ localization.country.currency.symbol }}{%- endif -%}){%- render 'icon' with 'chevron', width: 9, height: 6, inline: true -%}</button>
+          <popover-content id="header-sidebar-localization-form-currency" class="popover popover--top popover--small"><span class="popover__overlay"></span><header class="popover__header"><span class="popover__title heading h6">{{- 'header.general.country' | t -}}</span><button type="button" class="popover__close-button tap-area tap-area--large" data-action="close" title="{{ 'general.accessibility.close' | t | escape }}">{%- render 'icon' with 'close' -%}</button></header><div class="popover__content"><div class="popover__choice-list">{%- for country in localization.available_countries -%}<button type="submit" name="country_code" value="{{ country.iso_code }}" class="popover__choice-item"><span class="popover__choice-label" {% if country.iso_code == localization.country.iso_code %}aria-current="true"{% endif %}>{{- country.name }} ({{ country.currency.iso_code }} {% if localization.country.currency.symbol %}{{ localization.country.currency.symbol }}{%- endif -%})</span></button>{%- endfor -%}</div></div></popover-content></div>
+        {%- endif -%}
+        {%- if locale_selector -%}
+          <div class="popover-container"><input type="hidden" name="locale_code" value="{{ form.current_locale.iso_code }}"><span class="visually-hidden">{{ 'header.general.language' | t }}</span><button type="button" is="toggle-button" class="popover-button text--xsmall tap-area" aria-expanded="false" aria-controls="header-sidebar-localization-form-locale">{{- form.current_locale.endonym_name | capitalize -}}{%- render 'icon' with 'chevron', width: 9, height: 6, inline: true -%}</button><popover-content id="header-sidebar-localization-form-locale" class="popover popover--top popover--small"><span class="popover__overlay"></span><header class="popover__header"><span class="popover__title heading h6">{{- 'header.general.language' | t -}}</span><button type="button" class="popover__close-button tap-area tap-area--large" data-action="close" title="{{ 'general.accessibility.close' | t | escape }}">{%- render 'icon' with 'close' -%}</button></header><div class="popover__content"><div class="popover__choice-list">{%- for locale in form.available_locales -%}<button type="submit" name="locale_code" value="{{ locale.iso_code }}" class="popover__choice-item"><span class="popover__choice-label" {% if locale.iso_code == form.current_locale.iso_code %}aria-current="true"{% endif %}>{{- locale.endonym_name | capitalize -}}</span></button>{%- endfor -%}</div></div></popover-content></div>
+        {%- endif -%}
+      {%- endform -%}
+    </div></div>
+  {%- endif -%}
+</mobile-navigation>

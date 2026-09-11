@@ -1,0 +1,59 @@
+<section class="unpatched-blog-page" style="--up-blog-hero-bg: {{ section.settings.hero_background }}; --up-blog-hero-text: {{ section.settings.hero_text_color }}; --up-blog-hero-muted: {{ section.settings.hero_muted_text_color }}; --up-blog-accent: {{ section.settings.accent_color }}; --up-blog-filter-bg: {{ section.settings.filter_background }}; --up-blog-filter-text: {{ section.settings.filter_text_color }}; --up-blog-feed-bg: {{ section.settings.feed_background }}; --up-blog-card-bg: {{ section.settings.card_background }}; --up-blog-card-text: {{ section.settings.card_text_color }}; --up-blog-card-muted: {{ section.settings.card_muted_text_color }}; --up-blog-border: {{ section.settings.border_color }};">
+  {%- if blog.articles_count == 0 -%}
+    <div class="unpatched-blog-empty">
+      <div class="container">
+        <div class="empty-state text-container">
+          <p class="heading heading--small unpatched-blog-eyebrow">{{ section.settings.hero_kicker | escape }}</p>
+          <h1 class="heading h1">{{ blog.title | escape }}</h1>
+          <p class="text--large">{{ 'blog.general.empty' | t }}</p>
+          <div class="button-wrapper"><a href="{{ routes.root_url }}" class="button button--primary unpatched-blog-button">{{ 'blog.general.back_to_home' | t }}</a></div>
+        </div>
+      </div>
+    </div>
+  {%- else -%}
+    <header class="unpatched-blog-hero">
+      <div class="container unpatched-blog-hero__inner">
+        <div class="unpatched-blog-hero__copy">
+          <p class="heading heading--small unpatched-blog-eyebrow">{{ section.settings.hero_kicker | escape }}</p>
+          {%- if section.settings.show_blog_title -%}<h1 class="heading unpatched-blog-hero__title">{{ blog.title | escape }}</h1>{%- endif -%}
+          {%- if section.settings.hero_intro != blank -%}<p class="unpatched-blog-hero__intro">{{ section.settings.hero_intro | escape }}</p>{%- endif -%}
+        </div>
+      </div>
+    </header>
+
+    {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
+      <div class="unpatched-blog-filter-wrap"><div class="container"><nav class="unpatched-blog-filter" aria-label="Blog categories"><span class="unpatched-blog-filter__label heading heading--small">{{ 'blog.general.view' | t }}</span><div class="unpatched-blog-filter__scroller hide-scrollbar"><ul class="unpatched-blog-filter__list list--unstyled" role="list"><li><a href="{{ blog.url }}" class="unpatched-blog-filter__pill {% if current_tags == blank %}is-selected{% endif %}">{{ 'blog.general.all_posts' | t }}</a></li>{%- for tag in blog.all_tags -%}<li>{%- if current_tags contains tag -%}<a href="{{ blog.url }}" class="unpatched-blog-filter__pill is-selected">{{ tag | escape }}</a>{%- else -%}<a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="unpatched-blog-filter__pill">{{ tag | escape }}</a>{%- endif -%}</li>{%- endfor -%}</ul></div></nav></div></div>
+    {%- endif -%}
+
+    <div class="unpatched-blog-feed"><div class="container">{%- paginate blog.articles by section.settings.articles_per_page -%}<article-list {% if settings.stagger_blog_posts_apparition %}stagger-apparition{% endif %} class="article-list article-list--stacked unpatched-blog-grid">{%- for article in blog.articles -%}{%- render 'article-item', article: article, heading_size: 'h4', show_read_more: true -%}{%- endfor -%}</article-list>{%- render 'pagination', paginate: paginate -%}{%- endpaginate -%}</div></div>
+  {%- endif -%}
+</section>
+
+
+{% schema %}
+{
+  "name":"Blog",
+  "class":"shopify-section--main-blog",
+  "settings":[
+    {"type":"checkbox","id":"show_blog_title","label":"Show blog title","default":true},
+    {"type":"text","id":"hero_kicker","label":"Hero eyebrow","default":"THE UNPATCHED JOURNAL"},
+    {"type":"textarea","id":"hero_intro","label":"Hero intro","default":"Guides, repair notes, builds, restorations, and the tech worth keeping in the game."},
+    {"type":"checkbox","id":"show_tags","label":"Show tags","default":true},
+    {"type":"checkbox","id":"show_category","label":"Show category","info":"The first article's tag will be shown as category.","default":true},
+    {"type":"checkbox","id":"show_excerpt","label":"Show excerpt","info":"Change excerpts by editing your blog posts. [Learn more](https://help.shopify.com/en/manual/online-store/blogs/writing-blogs#display-an-excerpt-from-a-blog-post)","default":true},
+    {"type":"range","id":"articles_per_page","label":"Blog posts per page","min":3,"max":48,"step":3,"default":9},
+    {"type":"header","content":"Colors"},
+    {"type":"color","id":"hero_background","label":"Hero background","default":"#ffffff"},
+    {"type":"color","id":"hero_text_color","label":"Hero heading text","default":"#25252a"},
+    {"type":"color","id":"hero_muted_text_color","label":"Hero secondary text","default":"#6f6f73"},
+    {"type":"color","id":"accent_color","label":"Accent color","default":"#405de6"},
+    {"type":"color","id":"filter_background","label":"Category filter background","default":"#ffffff"},
+    {"type":"color","id":"filter_text_color","label":"Category filter text","default":"#25252a"},
+    {"type":"color","id":"feed_background","label":"Article feed background","default":"#ffffff"},
+    {"type":"color","id":"card_background","label":"Article card background","default":"#ffffff"},
+    {"type":"color","id":"card_text_color","label":"Article card heading text","default":"#25252a"},
+    {"type":"color","id":"card_muted_text_color","label":"Article card body text","default":"#6f6f73"},
+    {"type":"color","id":"border_color","label":"Card and filter border","default":"#e5e7eb"}
+  ]
+}
+{% endschema %}

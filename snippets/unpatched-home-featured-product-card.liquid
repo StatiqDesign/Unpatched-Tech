@@ -1,0 +1,57 @@
+{%- comment -%}
+  Shared product card for the homepage Featured Tech collection switcher.
+  Keeps manually curated products and collection-fallback products visually identical.
+{%- endcomment -%}
+
+{%- if product != blank -%}
+  {%- liquid
+    assign card_media = product.featured_media
+    assign compact_media = false
+
+    # Homepage merchandising: use the iconic Indigo GameCube shot instead of
+    # the product's default Platinum image. This does not alter the PDP media.
+    if product.handle == 'nintendo-gamecube-platinum' and featured_collection.handle == 'nintendo' and product.media[3] != blank
+      assign card_media = product.media[3]
+    endif
+
+    # The Xbox 360 Elite product photo fills more of its source canvas than
+    # the other featured Xbox images, so reduce only this card's visual scale.
+    if product.handle == 'xbox-360-elite'
+      assign compact_media = true
+    endif
+  -%}
+
+  <article class="unpatched-home-product-card{% if compact_media %} unpatched-home-product-card--compact-media{% endif %}">
+    <a class="unpatched-home-product-card__link" href="{{ product.url | within: featured_collection }}">
+      <div class="unpatched-home-product-card__media">
+        {%- if card_media != blank -%}
+          {{ card_media.preview_image | image_url: width: 720, format: 'webp' | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '180,240,320,400,480,560,640,720', sizes: '(max-width: 749px) calc(50vw - 22px), (max-width: 999px) calc(50vw - 34px), 23vw', class: 'unpatched-home-product-card__image' }}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'unpatched-home-product-card__placeholder placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+      <div class="unpatched-home-product-card__content">
+        {%- if show_type -%}
+          {%- assign featured_label = product_label | default: product.type -%}
+          {%- if featured_label != blank -%}
+            <p class="unpatched-home-product-card__meta">{{ featured_label | escape }}</p>
+          {%- endif -%}
+        {%- endif -%}
+
+        <h3 class="heading h4 unpatched-home-product-card__title">{{ product.title | escape }}</h3>
+
+        {%- if show_price -%}
+          <div class="unpatched-home-product-card__price">
+            {%- if product.compare_at_price > product.price -%}
+              <span class="price price--highlight">{{ product.price | money }}</span>
+              <span class="price price--compare">{{ product.compare_at_price | money }}</span>
+            {%- else -%}
+              <span class="price">{{ product.price | money }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </a>
+  </article>
+{%- endif -%}

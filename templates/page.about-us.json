@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "hero": {
+      "type": "unpatched-about-hero",
+      "settings": {
+        "eyebrow": "ABOUT UNPATCHED TECH",
+        "title": "FAMILY OWNED. BUILT AROUND GOOD TECH.",
+        "content": "<p>Unpatched Tech is a family-owned business built by people who actually use, repair, and care about the hardware we sell.</p><p>We focus on refurbished consoles, custom PCs, repairs, restorations, and practical upgrades that keep good technology in use longer. We are not trying to be a giant electronics warehouse. We would rather do a smaller number of things well, be clear about what we sell, and stand behind the work we put our name on.</p><p>Whether you are buying a system, sending in a repair, or building a new PC, the goal is the same: straightforward service, carefully handled hardware, and tech that is ready to keep going.</p>",
+        "primary_text": "SHOP REFURBISHED",
+        "primary_link": "shopify://collections/all",
+        "secondary_text": "MAIL-IN SERVICES",
+        "secondary_link": "shopify://pages/services",
+        "background": "#ffffff",
+        "text_color": "#25252a",
+        "muted_text_color": "#6f6f73"
+      }
+    }
+  },
+  "order": ["hero"]
+}

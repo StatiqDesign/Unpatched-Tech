@@ -1,0 +1,134 @@
+{%- assign breadcrumb_parent_title = blank -%}
+{%- assign breadcrumb_parent_url = blank -%}
+{%- assign breadcrumb_menu = section.settings.breadcrumb_menu | default: linklists['main-menu'] -%}
+
+{%- for breadcrumb_link in breadcrumb_menu.links -%}
+  {%- assign breadcrumb_link_matches = false -%}
+  {%- assign breadcrumb_link_clean_url = breadcrumb_link.url | split: '?' | first -%}
+  {%- if breadcrumb_link.active or breadcrumb_link_clean_url == collection.url -%}
+    {%- assign breadcrumb_link_matches = true -%}
+  {%- elsif breadcrumb_link.type == 'collection_link' and breadcrumb_link.object.handle == collection.handle -%}
+    {%- assign breadcrumb_link_matches = true -%}
+  {%- endif -%}
+
+  {%- if breadcrumb_link_matches -%}
+    {%- assign breadcrumb_parent_title = blank -%}
+    {%- assign breadcrumb_parent_url = blank -%}
+    {%- break -%}
+  {%- endif -%}
+
+  {%- for breadcrumb_child in breadcrumb_link.links -%}
+    {%- assign breadcrumb_child_matches = false -%}
+    {%- assign breadcrumb_child_clean_url = breadcrumb_child.url | split: '?' | first -%}
+    {%- if breadcrumb_child.active or breadcrumb_child_clean_url == collection.url -%}
+      {%- assign breadcrumb_child_matches = true -%}
+    {%- elsif breadcrumb_child.type == 'collection_link' and breadcrumb_child.object.handle == collection.handle -%}
+      {%- assign breadcrumb_child_matches = true -%}
+    {%- endif -%}
+
+    {%- if breadcrumb_child_matches -%}
+      {%- assign breadcrumb_parent_title = breadcrumb_link.title -%}
+      {%- assign breadcrumb_parent_url = breadcrumb_link.url -%}
+      {%- break -%}
+    {%- endif -%}
+
+    {%- for breadcrumb_grandchild in breadcrumb_child.links -%}
+      {%- assign breadcrumb_grandchild_matches = false -%}
+      {%- assign breadcrumb_grandchild_clean_url = breadcrumb_grandchild.url | split: '?' | first -%}
+      {%- if breadcrumb_grandchild.active or breadcrumb_grandchild_clean_url == collection.url -%}
+        {%- assign breadcrumb_grandchild_matches = true -%}
+      {%- elsif breadcrumb_grandchild.type == 'collection_link' and breadcrumb_grandchild.object.handle == collection.handle -%}
+        {%- assign breadcrumb_grandchild_matches = true -%}
+      {%- endif -%}
+
+      {%- if breadcrumb_grandchild_matches -%}
+        {%- assign breadcrumb_parent_title = breadcrumb_child.title -%}
+        {%- assign breadcrumb_parent_url = breadcrumb_child.url -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if breadcrumb_parent_url != blank -%}{%- break -%}{%- endif -%}
+  {%- endfor -%}
+
+  {%- if breadcrumb_parent_url != blank -%}{%- break -%}{%- endif -%}
+{%- endfor -%}
+
+<section class="unpatched-collection-hero-shell" style="--up-collection-ink: {{ section.settings.text_color }}; --up-collection-muted: {{ section.settings.muted_text_color }}; --up-collection-blue: {{ section.settings.accent_color }}; --up-collection-line: {{ section.settings.border_color }}; --up-collection-links-bg: {{ section.settings.links_background }}; --up-collection-links-text: {{ section.settings.links_text_color }};">
+  <div class="unpatched-collection-hero unpatched-collection-hero--no-media">
+    <div class="container unpatched-collection-hero__container">
+      <div class="unpatched-collection-hero__layout unpatched-collection-hero__layout--no-media">
+        <div class="unpatched-collection-hero__copy">
+          {%- if section.settings.show_breadcrumbs -%}
+            <p class="heading heading--small unpatched-collection-eyebrow">
+              {%- if breadcrumb_parent_url != blank -%}
+                <a href="{{ breadcrumb_parent_url }}">{{ breadcrumb_parent_title | upcase | escape }}</a>
+                <span aria-hidden="true"> &gt; </span>
+                <span aria-current="page">{{ collection.title | upcase | escape }}</span>
+              {%- else -%}
+                <a href="{{ routes.root_url }}">{{ section.settings.home_label | upcase | escape }}</a>
+                <span aria-hidden="true"> &gt; </span>
+                <span aria-current="page">{{ collection.title | upcase | escape }}</span>
+              {%- endif -%}
+            </p>
+          {%- endif -%}
+
+          {%- if section.settings.show_collection_title -%}
+            <h1 class="heading h1 unpatched-collection-hero__title">{{ collection.title | escape }}</h1>
+          {%- endif -%}
+
+          {%- if section.settings.show_collection_description and collection.description != blank -%}
+            <div class="unpatched-collection-hero__description rte">{{- collection.description -}}</div>
+          {%- elsif section.settings.fallback_description != blank -%}
+            <p class="unpatched-collection-hero__description unpatched-collection-hero__description--fallback">{{ section.settings.fallback_description | escape }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- assign quick_links_menu = section.settings.quick_links -%}
+  {%- if quick_links_menu.links.size > 0 -%}
+    <div class="unpatched-collection-links">
+      <div class="container unpatched-collection-links__inner">
+        {%- if section.settings.quick_links_label != blank -%}
+          <span class="unpatched-collection-links__label heading heading--small">{{ section.settings.quick_links_label | escape }}</span>
+        {%- endif -%}
+        <div class="unpatched-collection-links__scroller hide-scrollbar">
+          <ul role="list">
+            {%- for link in quick_links_menu.links -%}
+              <li><a href="{{ link.url }}" class="unpatched-collection-link{% if link.active %} is-active{% endif %}">{{- link.title | escape -}}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+
+{% schema %}
+{
+  "name": "Collection banner",
+  "class": "shopify-section--collection-banner",
+  "settings": [
+    {"type": "paragraph", "content": "Collection titles and descriptions come from the collection in Shopify admin. The eyebrow follows the parent/child hierarchy from your navigation menu."},
+    {"type": "checkbox", "id": "show_breadcrumbs", "label": "Show parent / child eyebrow", "default": true},
+    {"type": "link_list", "id": "breadcrumb_menu", "label": "Parent / child navigation menu", "default": "main-menu"},
+    {"type": "text", "id": "home_label", "label": "Top-level parent label", "default": "HOME"},
+    {"type": "checkbox", "id": "show_collection_title", "label": "Show collection title", "default": true},
+    {"type": "checkbox", "id": "show_collection_description", "label": "Show collection description", "default": true},
+    {"type": "textarea", "id": "fallback_description", "label": "Fallback description", "default": "Curated hardware, clear options, and no filler. Find the setup that fits and get back in the game."},
+    {"type": "header", "content": "Navigation"},
+    {"type": "link_list", "id": "quick_links", "label": "Quick links", "info": "Optional. Leave blank for the cleanest collection layout."},
+    {"type": "text", "id": "quick_links_label", "label": "Quick links heading", "default": "EXPLORE"},
+    {"type": "header", "content": "Colors"},
+    {"type": "color", "id": "text_color", "label": "Heading text", "default": "#25252a"},
+    {"type": "color", "id": "muted_text_color", "label": "Description text", "default": "#6f6f73"},
+    {"type": "color", "id": "accent_color", "label": "Accent color", "default": "#405de6"},
+    {"type": "color", "id": "border_color", "label": "Borders", "default": "#e5e7eb"},
+    {"type": "color", "id": "links_background", "label": "Quick links background", "default": "#ffffff"},
+    {"type": "color", "id": "links_text_color", "label": "Quick links text", "default": "#25252a"}
+  ]
+}
+{% endschema %}

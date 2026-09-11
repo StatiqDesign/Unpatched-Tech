@@ -1,0 +1,302 @@
+{%- liquid
+  assign has_collection_blocks = false
+  for block in section.blocks
+    if block.type == 'collection' and block.settings.collection != blank
+      assign has_collection_blocks = true
+      break
+    endif
+  endfor
+
+  assign auto_handles = 'microsoft|sony|nintendo' | split: '|'
+  assign auto_labels = 'Xbox|PlayStation|Nintendo' | split: '|'
+  assign initial_collection = blank
+
+  if has_collection_blocks
+    for block in section.blocks
+      if block.type == 'collection' and block.settings.collection != blank
+        assign initial_collection = block.settings.collection
+        break
+      endif
+    endfor
+  else
+    for auto_handle in auto_handles
+      assign auto_collection = collections[auto_handle]
+      if auto_collection != blank and initial_collection == blank
+        assign initial_collection = auto_collection
+      endif
+    endfor
+  endif
+
+  if initial_collection == blank and section.settings.collection != blank
+    assign initial_collection = section.settings.collection
+  endif
+  if initial_collection == blank
+    assign initial_collection = collections['all']
+  endif
+
+  assign initial_view_all_link = section.settings.button_link
+  if initial_view_all_link == blank and initial_collection != blank
+    assign initial_view_all_link = initial_collection.url
+  endif
+  if initial_view_all_link == blank
+    assign initial_view_all_link = routes.all_products_collection_url
+  endif
+
+  assign has_custom_button_link = false
+  if section.settings.button_link != blank
+    assign has_custom_button_link = true
+  endif
+-%}
+
+<section
+  class="section unpatched-home-section unpatched-home-featured"
+  id="unpatched-featured-{{ section.id }}"
+  style="--up-section-background: {{ section.settings.background }}; --up-section-text: {{ section.settings.text_color }}; --up-featured-panel-background: {{ section.settings.panel_background }}; --up-product-media-background: {{ section.settings.media_background }}; --up-product-media-scale: {{ section.settings.image_scale | divided_by: 100.0 }}; --up-product-media-fit: {{ section.settings.image_fit }};"
+>
+  <div class="container">
+    <div class="unpatched-home-featured__showcase">
+      <header class="unpatched-home-section__header unpatched-home-featured__header">
+        <div class="unpatched-home-section__heading-group">
+          {%- if section.settings.subheading != blank -%}<p class="heading heading--small unpatched-eyebrow">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+          {%- if section.settings.title != blank -%}<h2 class="heading h2">{{ section.settings.title | escape }}</h2>{%- endif -%}
+          {%- if section.settings.content != blank -%}<div class="unpatched-home-section__copy rte">{{ section.settings.content }}</div>{%- endif -%}
+        </div>
+      </header>
+
+      <div class="unpatched-home-featured__tabs" role="tablist" aria-label="Featured collections">
+        {%- if has_collection_blocks -%}
+          {%- assign rendered_tab_index = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'collection' and block.settings.collection != blank -%}
+              {%- assign tab_collection = block.settings.collection -%}
+              {%- assign tab_label = block.settings.label | default: tab_collection.title -%}
+              <button
+                type="button"
+                class="unpatched-home-featured__tab{% if rendered_tab_index == 0 %} is-active{% endif %}"
+                role="tab"
+                id="featured-tab-{{ section.id }}-{{ block.id }}"
+                aria-controls="featured-panel-{{ section.id }}-{{ block.id }}"
+                aria-selected="{% if rendered_tab_index == 0 %}true{% else %}false{% endif %}"
+                tabindex="{% if rendered_tab_index == 0 %}0{% else %}-1{% endif %}"
+                data-featured-tab
+                data-block-id="{{ block.id }}"
+                data-target="featured-panel-{{ section.id }}-{{ block.id }}"
+                {{ block.shopify_attributes }}
+              >{{ tab_label | escape }}</button>
+              {%- assign rendered_tab_index = rendered_tab_index | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- assign rendered_tab_index = 0 -%}
+          {%- for auto_handle in auto_handles -%}
+            {%- assign tab_collection = collections[auto_handle] -%}
+            {%- if tab_collection != blank -%}
+              {%- assign tab_label = auto_labels[forloop.index0] -%}
+              <button
+                type="button"
+                class="unpatched-home-featured__tab{% if rendered_tab_index == 0 %} is-active{% endif %}"
+                role="tab"
+                id="featured-tab-{{ section.id }}-auto-{{ forloop.index0 }}"
+                aria-controls="featured-panel-{{ section.id }}-auto-{{ forloop.index0 }}"
+                aria-selected="{% if rendered_tab_index == 0 %}true{% else %}false{% endif %}"
+                tabindex="{% if rendered_tab_index == 0 %}0{% else %}-1{% endif %}"
+                data-featured-tab
+                data-target="featured-panel-{{ section.id }}-auto-{{ forloop.index0 }}"
+              >{{ tab_label | escape }}</button>
+              {%- assign rendered_tab_index = rendered_tab_index | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+
+      <div class="unpatched-home-featured__panels">
+        {%- if has_collection_blocks -%}
+          {%- assign rendered_panel_index = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'collection' and block.settings.collection != blank -%}
+              {%- assign featured_collection = block.settings.collection -%}
+              {%- assign collection_link = featured_collection.url | default: routes.all_products_collection_url -%}
+              {%- assign has_curated_products = false -%}
+              {%- if block.settings.product_1 != blank or block.settings.product_2 != blank or block.settings.product_3 != blank or block.settings.product_4 != blank -%}
+                {%- assign has_curated_products = true -%}
+              {%- endif -%}
+
+              <div
+                class="unpatched-home-featured__panel{% if rendered_panel_index == 0 %} is-active{% endif %}"
+                id="featured-panel-{{ section.id }}-{{ block.id }}"
+                role="tabpanel"
+                aria-labelledby="featured-tab-{{ section.id }}-{{ block.id }}"
+                data-featured-panel
+                data-collection-url="{{ collection_link }}"
+                {% unless rendered_panel_index == 0 %}hidden{% endunless %}
+              >
+                <div class="unpatched-home-product-grid">
+                  {%- if has_curated_products -%}
+                    {%- if section.settings.products_count >= 1 and block.settings.product_1 != blank -%}
+                      {%- render 'unpatched-home-featured-product-card', product: block.settings.product_1, featured_collection: featured_collection, show_type: section.settings.show_type, product_label: section.settings.product_label, show_price: section.settings.show_price -%}
+                    {%- endif -%}
+                    {%- if section.settings.products_count >= 2 and block.settings.product_2 != blank -%}
+                      {%- render 'unpatched-home-featured-product-card', product: block.settings.product_2, featured_collection: featured_collection, show_type: section.settings.show_type, product_label: section.settings.product_label, show_price: section.settings.show_price -%}
+                    {%- endif -%}
+                    {%- if section.settings.products_count >= 3 and block.settings.product_3 != blank -%}
+                      {%- render 'unpatched-home-featured-product-card', product: block.settings.product_3, featured_collection: featured_collection, show_type: section.settings.show_type, product_label: section.settings.product_label, show_price: section.settings.show_price -%}
+                    {%- endif -%}
+                    {%- if section.settings.products_count >= 4 and block.settings.product_4 != blank -%}
+                      {%- render 'unpatched-home-featured-product-card', product: block.settings.product_4, featured_collection: featured_collection, show_type: section.settings.show_type, product_label: section.settings.product_label, show_price: section.settings.show_price -%}
+                    {%- endif -%}
+                  {%- else -%}
+                    {%- for product in featured_collection.products limit: section.settings.products_count -%}
+                      {%- render 'unpatched-home-featured-product-card', product: product, featured_collection: featured_collection, show_type: section.settings.show_type, product_label: section.settings.product_label, show_price: section.settings.show_price -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                </div>
+              </div>
+              {%- assign rendered_panel_index = rendered_panel_index | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- assign rendered_panel_index = 0 -%}
+          {%- for auto_handle in auto_handles -%}
+            {%- assign featured_collection = collections[auto_handle] -%}
+            {%- if featured_collection != blank -%}
+              {%- assign collection_link = featured_collection.url | default: routes.all_products_collection_url -%}
+              <div
+                class="unpatched-home-featured__panel{% if rendered_panel_index == 0 %} is-active{% endif %}"
+                id="featured-panel-{{ section.id }}-auto-{{ forloop.index0 }}"
+                role="tabpanel"
+                aria-labelledby="featured-tab-{{ section.id }}-auto-{{ forloop.index0 }}"
+                data-featured-panel
+                data-collection-url="{{ collection_link }}"
+                {% unless rendered_panel_index == 0 %}hidden{% endunless %}
+              >
+                <div class="unpatched-home-product-grid">
+                  {%- for product in featured_collection.products limit: section.settings.products_count -%}
+                    {%- render 'unpatched-home-featured-product-card', product: product, featured_collection: featured_collection, show_type: section.settings.show_type, product_label: section.settings.product_label, show_price: section.settings.show_price -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+              {%- assign rendered_panel_index = rendered_panel_index | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if rendered_panel_index == 0 -%}
+            {%- assign fallback_collection = section.settings.collection | default: collections['all'] -%}
+            <div class="unpatched-home-featured__panel is-active" data-featured-panel data-collection-url="{{ fallback_collection.url | default: initial_view_all_link }}">
+              <div class="unpatched-home-product-grid">
+                {%- for product in fallback_collection.products limit: section.settings.products_count -%}
+                  {%- render 'unpatched-home-featured-product-card', product: product, featured_collection: fallback_collection, show_type: section.settings.show_type, product_label: section.settings.product_label, show_price: section.settings.show_price -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.button_text != blank -%}
+        <div class="unpatched-home-featured__action">
+          <a href="{{ initial_view_all_link }}" class="button button--primary" data-featured-collection-link>{{ section.settings.button_text | escape }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.getElementById('unpatched-featured-{{ section.id }}');
+      if (!root || root.dataset.tabsReady === 'true') return;
+      root.dataset.tabsReady = 'true';
+
+      const tabs = Array.from(root.querySelectorAll('[data-featured-tab]'));
+      const panels = Array.from(root.querySelectorAll('[data-featured-panel]'));
+      const collectionLink = root.querySelector('[data-featured-collection-link]');
+      const hasCustomButtonLink = {{ has_custom_button_link | json }};
+      if (!tabs.length || !panels.length) return;
+
+      const activate = (tab, moveFocus = false) => {
+        const targetId = tab.dataset.target;
+        tabs.forEach((item) => {
+          const active = item === tab;
+          item.classList.toggle('is-active', active);
+          item.setAttribute('aria-selected', active ? 'true' : 'false');
+          item.tabIndex = active ? 0 : -1;
+        });
+
+        panels.forEach((panel) => {
+          const active = panel.id === targetId;
+          panel.hidden = !active;
+          panel.classList.toggle('is-active', active);
+          if (active && collectionLink && !hasCustomButtonLink) {
+            collectionLink.href = panel.dataset.collectionUrl || collectionLink.href;
+          }
+        });
+
+        if (moveFocus) tab.focus({ preventScroll: true });
+      };
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => activate(tab));
+        tab.addEventListener('keydown', (event) => {
+          if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+          event.preventDefault();
+          let nextIndex = index;
+          if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+          if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+          if (event.key === 'Home') nextIndex = 0;
+          if (event.key === 'End') nextIndex = tabs.length - 1;
+          activate(tabs[nextIndex], true);
+        });
+      });
+
+      document.addEventListener('shopify:block:select', (event) => {
+        const tab = root.querySelector(`[data-block-id="${event.detail.blockId}"]`);
+        if (tab) activate(tab);
+      });
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name":"Featured tech",
+  "class":"shopify-section--unpatched-featured-collection",
+  "disabled_on":{"templates":["password"],"groups":["header","custom.overlay"]},
+  "max_blocks":8,
+  "settings":[
+    {"type":"text","id":"subheading","label":"Subheading","default":"FEATURED REFURBISHED TECH"},
+    {"type":"text","id":"title","label":"Heading","default":"Refurbished, done right."},
+    {"type":"richtext","id":"content","label":"Description","default":"<p>These aren’t quick wipe-downs. Every featured console is carefully cleaned, inspected, repaired when needed, and fully tested before it’s ready for another player.</p>"},
+    {"type":"collection","id":"collection","label":"Fallback collection","info":"Kept for compatibility. Collection-tab blocks take priority."},
+    {"type":"range","id":"products_count","label":"Products per tab","min":2,"max":4,"step":1,"default":4},
+    {"type":"checkbox","id":"show_type","label":"Show product label","default":true},
+    {"type":"text","id":"product_label","label":"Product label","default":"REFURBISHED","info":"Displayed above each featured product title."},
+    {"type":"checkbox","id":"show_price","label":"Show price","default":true},
+    {"type":"select","id":"image_fit","label":"Product image fit","options":[{"value":"cover","label":"Fill card"},{"value":"contain","label":"Show whole image"}],"default":"cover"},
+    {"type":"range","id":"image_scale","label":"Product image zoom","min":90,"max":110,"step":1,"unit":"%","default":100},
+    {"type":"color","id":"media_background","label":"Product image background","default":"#ffffff"},
+    {"type":"text","id":"button_text","label":"Button text","default":"Shop refurbished"},
+    {"type":"url","id":"button_link","label":"Custom button link","info":"Optional. When empty, the button follows the active collection."},
+    {"type":"color","id":"panel_background","label":"Collection panel background","default":"#f4f4f6"},
+    {"type":"color","id":"background","label":"Background","default":"#ffffff"},
+    {"type":"color","id":"text_color","label":"Text color","default":"#25252a"}
+  ],
+  "blocks":[
+    {
+      "type":"collection",
+      "name":"Collection tab",
+      "settings":[
+        {"type":"collection","id":"collection","label":"Collection"},
+        {"type":"text","id":"label","label":"Tab label","info":"Optional. Uses the collection title when empty."},
+        {"type":"header","content":"Featured products"},
+        {"type":"paragraph","content":"Optional. Pick exact products to feature. Leave all four empty to use the collection order."},
+        {"type":"product","id":"product_1","label":"Featured product 1"},
+        {"type":"product","id":"product_2","label":"Featured product 2"},
+        {"type":"product","id":"product_3","label":"Featured product 3"},
+        {"type":"product","id":"product_4","label":"Featured product 4"}
+      ]
+    }
+  ],
+  "presets":[
+    {"name":"Featured tech","blocks":[{"type":"collection"},{"type":"collection"},{"type":"collection"}]}
+  ]
+}
+{% endschema %}

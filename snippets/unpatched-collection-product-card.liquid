@@ -1,0 +1,10 @@
+{%- comment -%}
+Compatibility wrapper: collection grids use the same global product-item component
+as featured collections, recommendations, search, and other product lists.
+{%- endcomment -%}
+{%- render 'product-item',
+  product: product,
+  sizes_attribute: sizes_attribute,
+  image_loading: image_loading,
+  hide_secondary_image: true
+-%}

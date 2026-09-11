@@ -1,0 +1,94 @@
+{% doc %}
+Renders the product purchase controls for a buy-buttons block. Kept separate from product-form to keep the main selector/form orchestrator maintainable.
+
+@param {product} product - Product being purchased.
+@param {block} block - Buy-buttons section block.
+@param {string} product_form_id - Product form DOM id.
+@param {boolean} update_url - Whether this form owns the main payment container id.
+@param {string} context - Product form rendering context.
+@param {section} section - Owning product section.
+{% enddoc %}
+{%- if request.page_type != 'password' -%}
+  {%- assign recipient_feature_active = false -%}
+
+  {%- if product.gift_card? and block.settings.show_gift_card_recipient -%}
+    {%- assign recipient_feature_active = true -%}
+  {%- endif -%}
+
+  <div data-block-type="buy-buttons" data-block-id="{{ block.id }}" class="product-form__buy-buttons" {{ block.shopify_attributes }}>
+    {%- form 'product', product, is: 'product-form', id: product_form_id -%}
+      {%- if recipient_feature_active -%}
+        <gift-card-recipient class="gift-card-recipient">
+          <div class="input input--checkbox">
+            <div class="checkbox-container">
+              <input type="checkbox" class="checkbox" name="properties[__shopify_send_gift_card_to_recipient]" id="product-{{ section.id }}-{{ product.id }}-send-gift-card-to-recipient">
+              <label for="product-{{ section.id }}-{{ product.id }}-send-gift-card-to-recipient" class="text--subdued">{{ 'gift_card.recipient.checkbox' | t }}</label>
+            </div>
+          </div>
+
+          <div class="gift-card-recipient__fields js:hidden">
+            <div class="input">
+              <input id="product-{{ section.id }}-{{ product.id }}-recipient-email" type="email" class="input__field input__field--text" name="properties[Recipient email]" maxlength="138" required value="{{ form.email }}">
+              <label for="product-{{ section.id }}-{{ product.id }}-recipient-email" class="input__label">{{ 'gift_card.recipient.email_label' | t }}</label>
+            </div>
+
+            <div class="input">
+              <input id="product-{{ section.id }}-{{ product.id }}-recipient-name" type="text" class="input__field input__field--text" name="properties[Recipient name]" value="{{ form.name }}">
+              <label for="product-{{ section.id }}-{{ product.id }}-recipient-name" class="input__label">{{ 'gift_card.recipient.name_label' | t }}</label>
+            </div>
+
+            <div class="input">
+              <input type="hidden" name="properties[__shopify_offset]" value="" disabled>
+              <input id="product-{{ section.id }}-{{ product.id }}-send-on" type="date" class="input__field input__field--text" pattern="\d{4}-\d{2}-\d{2}" name="properties[Send on]" value="{{ form.send_on }}">
+              <label for="product-{{ section.id }}-{{ product.id }}-send-on" class="input__label">{{ 'gift_card.recipient.send_on_label' | t }}</label>
+            </div>
+
+            <div class="input">
+              <textarea id="product-{{ section.id }}-{{ product.id }}-recipient-message" rows="4" maxlength="200" class="input__field input__field--textarea" name="properties[Message]">{{ form.message }}</textarea>
+              <label for="product-{{ section.id }}-{{ product.id }}-recipient-message" class="input__label">{{ 'gift_card.recipient.message_label' | t }}</label>
+            </div>
+          </div>
+        </gift-card-recipient>
+      {%- endif -%}
+
+      <input type="hidden" disabled name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+      <product-payment-container {% if update_url %}id="MainPaymentContainer"{% endif %} class="product-form__payment-container{% unless product.selected_or_first_available_variant.available %} product-form__payment-container--unavailable{% endunless %}" {{ block.shopify_attributes }}>
+        <div class="unpatched-purchase-row">
+
+  <div class="unpatched-purchase-price">
+    {{ product.selected_or_first_available_variant.price | money }}
+  </div>
+
+  <div class="unpatched-purchase-button">
+    <button id="AddToCart" type="submit" is="loader-button" {% unless block.settings.show_payment_button and template.suffix != 'quick-buy-popover' %}data-use-primary{% endunless %} data-product-add-to-cart-button data-button-content="{% if product.template_suffix == 'pre-order' %}{{ 'product.form.pre_order' | t }}{% else %}{{ 'product.form.add_to_cart' | t }}{% endif %}">
+      {%- if product.selected_or_first_available_variant == nil -%}
+{{- 'product.form.unavailable' | t -}}
+      {%- elsif product.selected_or_first_available_variant.available -%}
+{%- if product.template_suffix == 'pre-order' -%}
+  {{- 'product.form.pre_order' | t -}}
+{%- else -%}
+  {{- 'product.form.add_to_cart' | t -}}
+{%- endif -%}
+      {%- else -%}
+{{- 'product.form.sold_out' | t -}}
+      {%- endif -%}
+    </button>
+  </div>
+
+</div>
+
+        {%- if block.settings.show_payment_button and recipient_feature_active == false and template.suffix != 'quick-buy-popover' -%}
+          {{ form | payment_button }}
+
+        {%- endif -%}
+      </product-payment-container>
+    {%- endform -%}
+  </div>
+{%- endif -%}
+
+{%- if context != 'quick-buy' -%}
+  <store-pickup data-block-type="pickup-availability" data-block-id="{{ block.id }}" class="product-form__store-availability-container">
+    {%- render 'store-availability', product_variant: product.selected_or_first_available_variant -%}
+  </store-pickup>
+{%- endif -%}

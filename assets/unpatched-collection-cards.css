@@ -1,0 +1,398 @@
+/* ========================================================================== 
+   UNPATCHED TECH — GLOBAL PRODUCT CARDS
+   One product-card contract for collections, featured lists, recommendations,
+   search results and every other surface that renders snippets/product-item.
+   ========================================================================== */
+
+/* Collection density is owned by sections/main-collection.liquid. */
+.shopify-section--main-collection .product-list__inner {
+  gap: clamp(16px, 1.35vw, 22px);
+  align-items: stretch;
+  overflow: visible;
+}
+
+.up-global-product-card {
+  display: grid;
+  grid-template-rows: auto auto;
+  min-width: 0;
+  height: 100%;
+  align-self: stretch;
+  text-align: center;
+}
+
+.up-global-product-card .product-item__image-wrapper,
+.up-global-product-card__image-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  overflow: visible;
+  background: transparent;
+}
+
+.up-global-product-card .product-item__aspect-ratio,
+.up-global-product-card__media {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  padding-bottom: 0;
+  overflow: hidden;
+  border: 1px solid rgba(37, 37, 42, .09);
+  border-radius: var(--block-border-radius);
+  background: #fff;
+  text-decoration: none;
+  transition: transform 170ms ease, border-color 170ms ease, box-shadow 170ms ease;
+}
+
+.up-global-product-card .product-item__primary-image,
+.up-global-product-card__image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+}
+
+.up-global-product-card .product-item__primary-image[hidden] {
+  display: none;
+}
+
+/* Secondary-image hover is intentionally disabled globally. Variant images are
+   created on demand and switched by Focal's native product-item swatch behavior. */
+.up-global-product-card .product-item__secondary-image,
+.up-global-product-card .product-item__quick-form,
+.up-global-product-card .product-item__quick-buy-button {
+  display: none;
+}
+
+.up-global-product-card .product-item__label-list {
+  z-index: 2;
+}
+
+/* The info area no longer inherits the old collection card's oversized minimum
+   height. The six metadata slots below determine one predictable card height. */
+.up-global-product-card .product-item__info,
+.up-global-product-card__info {
+  display: block;
+  min-height: 0;
+  height: auto;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 15px 9px 16px;
+  text-align: center;
+}
+
+/* Fixed row positions are the important part of this system. Optional content
+   can disappear without moving reviews, price or colors upward. */
+.up-global-product-card .product-item-meta,
+.up-global-product-card__meta {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  flex: 0 0 auto;
+  grid-template-rows: 37px 12px 34px 16px 17px 18px;
+  row-gap: 7px;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.up-global-product-card .product-item-meta__vendor {
+  display: none;
+}
+
+/* Two-line title capacity, but always the exact same title row height. */
+.up-global-product-card .product-item-meta__title,
+.up-global-product-card__title {
+  grid-row: 1;
+  display: -webkit-box;
+  width: 100%;
+  max-width: 100%;
+  min-height: 0;
+  max-height: 37px;
+  margin: 0;
+  overflow: hidden;
+  align-self: center;
+  color: #25252a;
+  font-family: var(--heading-font-family);
+  font-size: 15px;
+  font-weight: var(--heading-font-weight);
+  line-height: 1.22;
+  letter-spacing: -.018em;
+  text-align: center;
+  text-decoration: none;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.up-global-product-card__traits {
+  grid-row: 2;
+  display: flex;
+  width: 100%;
+  height: 12px;
+  min-height: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: rgb(var(--unpatched-brand-blue-rgb));
+  font-family: var(--heading-font-family);
+  font-size: 8px;
+  font-weight: var(--heading-font-weight);
+  line-height: 1;
+  letter-spacing: .13em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.up-global-product-card__trait + .up-global-product-card__trait::before {
+  content: "•";
+  display: inline-block;
+  margin: 0 8px;
+  opacity: .58;
+}
+
+.up-global-product-card__description {
+  grid-row: 3;
+  display: -webkit-box;
+  width: 100%;
+  height: 34px;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  align-self: center;
+  color: rgba(37, 37, 42, .62);
+  font-family: var(--text-font-family);
+  font-size: 11.5px;
+  font-weight: var(--text-font-weight);
+  line-height: 1.45;
+  text-align: center;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.up-global-product-card .product-item-meta__reviews-badge,
+.up-global-product-card__rating {
+  grid-row: 4;
+  display: inline-flex;
+  min-height: 0;
+  height: 16px;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  color: rgba(37, 37, 42, .5);
+  font-size: 10px;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.up-global-product-card .rating,
+.up-global-product-card .rating__stars {
+  justify-content: center;
+}
+
+.up-global-product-card .rating__star {
+  color: rgb(var(--unpatched-brand-blue-rgb));
+}
+
+.up-global-product-card .rating__star--empty {
+  color: rgba(var(--unpatched-brand-blue-rgb), .34);
+}
+
+.up-global-product-card .product-item-meta__price-list-container,
+.up-global-product-card__price {
+  grid-row: 5;
+  width: 100%;
+  height: 17px;
+  margin: 0;
+  align-self: center;
+}
+
+.up-global-product-card .price-list {
+  display: flex;
+  min-height: 0;
+  height: 17px;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 6px;
+  color: #25252a;
+  font-family: var(--heading-font-family);
+  font-size: 13px;
+  font-weight: var(--heading-font-weight);
+  line-height: 1;
+  letter-spacing: -.01em;
+  text-align: center;
+}
+
+.up-global-product-card .price {
+  margin: 0;
+  color: #25252a;
+  font-size: inherit;
+}
+
+.up-global-product-card .price--compare {
+  color: rgba(37, 37, 42, .42);
+  font-size: 11px;
+}
+
+/* Interactive swatches occupy the same bottom row even when another card has
+   no color option. Because this is an explicit grid row, missing swatches do
+   not make the rest of the card shorter or pull its price downward/upward. */
+.up-global-product-card .product-item-meta__swatch-list,
+.up-global-product-card__swatches {
+  grid-row: 6;
+  display: flex;
+  width: 100%;
+  height: 18px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+.up-global-product-card .color-swatch {
+  margin: 0;
+}
+
+.up-global-product-card .color-swatch__item {
+  display: block;
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  min-height: 14px;
+  padding: 0;
+  border: 1px solid rgba(37, 37, 42, .18);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #fff inset;
+  cursor: pointer;
+}
+
+.up-global-product-card .color-swatch--white .color-swatch__item {
+  border-color: rgba(37, 37, 42, .28);
+}
+
+.up-global-product-card .color-swatch__radio:checked + .color-swatch__item {
+  box-shadow: 0 0 0 1px #fff inset, 0 0 0 2px rgb(var(--unpatched-brand-blue-rgb));
+}
+
+.up-global-product-card .product-item__cta-wrapper {
+  margin-top: 14px;
+  text-align: center;
+}
+
+.up-global-product-card--sold-out .product-item__primary-image:not([hidden]) {
+  opacity: .58;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .up-global-product-card:hover .up-global-product-card__media {
+    transform: translateY(-2px);
+    border-color: rgba(var(--unpatched-brand-blue-rgb), .24);
+    box-shadow: 0 10px 24px rgba(37, 37, 42, .055);
+  }
+
+  .up-global-product-card .product-item-meta__title:hover {
+    color: rgb(var(--unpatched-brand-blue-rgb));
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .shopify-section--main-collection .product-list__inner {
+    gap: 24px 12px;
+    align-items: stretch;
+  }
+
+  .up-global-product-card__media {
+    border-radius: min(var(--block-border-radius), 14px);
+  }
+
+  .up-global-product-card .product-item__info,
+  .up-global-product-card__info {
+    min-height: 0;
+    padding: 12px 6px 14px;
+  }
+
+  .up-global-product-card .product-item-meta,
+  .up-global-product-card__meta {
+    grid-template-rows: 34px 10px 28px 16px 15px 18px;
+    row-gap: 6px;
+    min-height: 0;
+  }
+
+  .up-global-product-card .product-item-meta__title,
+  .up-global-product-card__title {
+    max-height: 34px;
+    font-size: 13px;
+    line-height: 1.28;
+  }
+
+  .up-global-product-card__traits {
+    height: 10px;
+    font-size: 7px;
+    letter-spacing: .1em;
+  }
+
+  .up-global-product-card__trait + .up-global-product-card__trait::before {
+    margin: 0 5px;
+  }
+
+  .up-global-product-card__description {
+    height: 28px;
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .up-global-product-card .product-item-meta__reviews-badge,
+  .up-global-product-card__rating {
+    height: 16px;
+    font-size: 9px;
+  }
+
+  .up-global-product-card .product-item-meta__price-list-container,
+  .up-global-product-card__price,
+  .up-global-product-card .price-list {
+    height: 15px;
+  }
+
+  .up-global-product-card .price-list {
+    font-size: 11.5px;
+  }
+
+  .up-global-product-card .price--compare {
+    font-size: 10px;
+  }
+
+  .up-global-product-card .product-item-meta__swatch-list,
+  .up-global-product-card__swatches {
+    height: 18px;
+    gap: 5px;
+  }
+
+  .up-global-product-card .color-swatch__item {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    min-height: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .up-global-product-card__media {
+    transition: none;
+  }
+}

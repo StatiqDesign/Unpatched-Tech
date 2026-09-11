@@ -1,0 +1,232 @@
+<section class="section unpatched-home-section unpatched-home-pathways" style="--up-section-background: {{ section.settings.background }}; --up-section-text: {{ section.settings.text_color }};">
+  <div class="container">
+    <header class="unpatched-home-section__header">
+      <div class="unpatched-home-section__heading-group">
+        {%- if section.settings.subheading != blank -%}
+          <p class="heading heading--small unpatched-eyebrow">{{ section.settings.subheading | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="heading h2">{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.content != blank -%}
+          <div class="unpatched-home-section__copy rte">{{ section.settings.content }}</div>
+        {%- endif -%}
+      </div>
+    </header>
+
+    <div class="unpatched-home-pathway-grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign resolved_link = block.settings.link
+          assign source_collection = block.settings.collection
+          if resolved_link == blank and source_collection != blank
+            assign resolved_link = source_collection.url
+          endif
+          if resolved_link == blank
+            assign resolved_link = routes.all_products_collection_url
+          endif
+
+          assign pathway_image = block.settings.image
+          assign pathway_asset = blank
+          assign pathway_asset_width = 2048
+          assign pathway_asset_height = 1365
+
+          if pathway_image == blank
+            case block.settings.default_artwork
+              when 'retro_pc'
+                assign pathway_asset = 'unpatched-retro-pc.jpg'
+                assign pathway_asset_height = 1151
+              when 'repair'
+                assign pathway_asset = 'unpatched-repair.jpg'
+                assign pathway_asset_height = 1365
+            endcase
+          endif
+
+          if pathway_image == blank and pathway_asset == blank and source_collection != blank
+            assign pathway_image = source_collection.image
+            if pathway_image == blank
+              assign pathway_image = source_collection.products.first.featured_media.preview_image
+            endif
+          endif
+        -%}
+
+        <article class="unpatched-home-pathway-card unpatched-home-pathway-card--{{ forloop.index }}" style="--up-pathway-background: {{ block.settings.card_background }}; --up-pathway-text: {{ block.settings.card_text_color }}; --up-pathway-media-scale: {{ block.settings.image_scale | divided_by: 100.0 }}; --up-pathway-fit: {{ block.settings.image_fit }};" {{ block.shopify_attributes }}>
+          <a class="unpatched-home-pathway-card__link" href="{{ resolved_link }}">
+            <div class="unpatched-home-pathway-card__media">
+              {%- if pathway_image != blank -%}
+                {{ pathway_image | image_url: width: 1200 | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '360,480,600,720,900,1080,1200', sizes: '(max-width: 749px) calc(100vw - 32px), (max-width: 999px) 48vw, 58vw', class: 'unpatched-home-pathway-card__image' }}
+              {%- elsif pathway_asset != blank -%}
+                <img class="unpatched-home-pathway-card__image"
+                  src="{{ pathway_asset | asset_img_url: '720x' }}"
+                  srcset="{{ pathway_asset | asset_img_url: '480x' }} 480w, {{ pathway_asset | asset_img_url: '600x' }} 600w, {{ pathway_asset | asset_img_url: '720x' }} 720w, {{ pathway_asset | asset_img_url: '900x' }} 900w, {{ pathway_asset | asset_img_url: '1200x' }} 1200w"
+                  sizes="(max-width: 749px) calc(100vw - 32px), (max-width: 999px) 48vw, 58vw"
+                  loading="lazy" decoding="async" fetchpriority="low"
+                  width="{{ pathway_asset_width }}" height="{{ pathway_asset_height }}" alt="">
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'unpatched-home-pathway-card__placeholder placeholder-svg' }}
+              {%- endif -%}
+            </div>
+
+            <div class="unpatched-home-pathway-card__content">
+              {%- if block.settings.eyebrow != blank -%}
+                <p class="heading heading--small unpatched-eyebrow">{{ block.settings.eyebrow | escape }}</p>
+              {%- endif -%}
+              <h3 class="heading h3">{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.description != blank -%}
+                <div class="unpatched-home-pathway-card__description rte">{{ block.settings.description }}</div>
+              {%- endif -%}
+              {%- if block.settings.button_text != blank -%}
+                <span class="unpatched-home-text-link">{{ block.settings.button_text | escape }} <span aria-hidden="true">→</span></span>
+              {%- endif -%}
+            </div>
+          </a>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Unpatched pathways",
+  "class": "shopify-section--unpatched-pathways",
+  "max_blocks": 4,
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "YOUR TECH, YOUR WAY"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Three ways to get back in the game"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Description"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#25252a"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pathway",
+      "name": "Pathway",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Small heading"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Refurbished tech"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Cleaned, restored, tested, and ready to play.</p>"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Optional. Provides the card link and can provide imagery automatically."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom link"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Link text",
+          "default": "Explore"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom image",
+          "info": "A custom image always overrides the optional built-in Unpatched artwork below."
+        },
+        {
+          "type": "select",
+          "id": "default_artwork",
+          "label": "Built-in Unpatched artwork",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "retro_pc", "label": "Retro PC" },
+            { "value": "repair", "label": "Repair close-up" }
+          ],
+          "default": "none",
+          "info": "These are the images supplied with this theme revision. Set to None to remove them, or choose a Custom image above to replace them."
+        },
+        {
+          "type": "select",
+          "id": "image_fit",
+          "label": "Image fit",
+          "options": [
+            { "value": "contain", "label": "Contain" },
+            { "value": "cover", "label": "Cover" }
+          ],
+          "default": "contain"
+        },
+        {
+          "type": "range",
+          "id": "image_scale",
+          "label": "Image size",
+          "min": 90,
+          "max": 110,
+          "step": 1,
+          "unit": "%",
+          "default": 100
+        },
+        {
+          "type": "color",
+          "id": "card_background",
+          "label": "Card background",
+          "default": "#f4f5f8"
+        },
+        {
+          "type": "color",
+          "id": "card_text_color",
+          "label": "Card text color",
+          "default": "#25252a"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Unpatched pathways",
+      "blocks": [
+        { "type": "pathway", "settings": { "eyebrow": "BUILT FOR YOU", "title": "Gaming PCs" } },
+        { "type": "pathway", "settings": { "eyebrow": "RESTORED", "title": "Refurbished tech", "default_artwork": "retro_pc" } },
+        { "type": "pathway", "settings": { "eyebrow": "FIX. MOD. UPGRADE.", "title": "Repairs & mods", "default_artwork": "repair" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

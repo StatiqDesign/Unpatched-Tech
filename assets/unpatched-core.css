@@ -1,0 +1,232 @@
+/* ========================================================================== 
+   UNPATCHED TECH — GLOBAL CORE
+   Brand primitives, account UI, announcement bar and visible header only.
+   Closed mobile drawer and footer are owned by deferred unpatched-chrome.css.
+   ========================================================================== */
+
+:root {
+  --unpatched-brand-blue-rgb: var(--primary-button-background);
+  --unpatched-surface-muted: rgb(var(--secondary-background));
+  --unpatched-ink: rgb(var(--heading-color));
+}
+
+.unpatched-eyebrow {
+  color: rgb(var(--unpatched-brand-blue-rgb));
+}
+
+.block-swatch input:checked + label,
+.block-swatch__radio:checked + .block-swatch__item {
+  background: rgb(var(--unpatched-brand-blue-rgb));
+  color: rgb(var(--primary-button-text-color));
+  border-color: rgb(var(--unpatched-brand-blue-rgb));
+}
+
+.block-swatch label,
+.block-swatch__item {
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+/* Account --------------------------------------------------------------- */
+.header__account-link {
+  color: currentColor;
+}
+
+shopify-account {
+  --shopify-account-color-background: rgb(var(--background));
+  --shopify-account-color-text: rgb(var(--text-color));
+  --shopify-account-color-text-subdued: rgba(var(--text-color), .68);
+  --shopify-account-color-border: rgba(var(--text-color), .14);
+  --shopify-account-color-control-background: rgb(var(--secondary-background));
+  --shopify-account-color-accent: rgb(var(--unpatched-brand-blue-rgb));
+  --shopify-account-color-accent-hover: rgba(var(--unpatched-brand-blue-rgb), .88);
+  --shopify-account-color-accent-text: rgb(var(--primary-button-text-color));
+}
+
+.unpatched-account-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 32px 0 8px;
+}
+
+.unpatched-account-avatar {
+  display: inline-flex;
+  flex: 0 0 48px;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgb(var(--unpatched-brand-blue-rgb));
+  color: rgb(var(--primary-button-text-color));
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: var(--heading-font-weight);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.unpatched-account-identity__text {
+  min-width: 0;
+}
+
+.unpatched-account-identity__text > * {
+  margin: 0;
+}
+
+.unpatched-account-identity__text .h5 {
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+}
+
+/* Announcement ---------------------------------------------------------- */
+.shopify-section--announcement-bar .announcement-bar {
+  position: relative;
+  isolation: isolate;
+  min-height: 34px;
+  overflow: hidden;
+  background-color: rgb(var(--unpatched-brand-blue-rgb));
+  background-image: none;
+  color: rgb(var(--primary-button-text-color));
+}
+
+.shopify-section--announcement-bar .announcement-bar__message {
+  padding-block: 8px;
+  color: rgb(var(--primary-button-text-color));
+  font-family: var(--heading-font-family);
+  font-weight: var(--heading-font-weight);
+  letter-spacing: .075em;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.shopify-section--announcement-bar .announcement-bar__message p {
+  margin: 0;
+}
+
+.shopify-section--announcement-bar .unpatched-announcement-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.shopify-section--announcement-bar .unpatched-announcement-arrow {
+  display: inline-block;
+  transition: transform 150ms ease;
+}
+
+.shopify-section--announcement-bar .tap-area {
+  color: rgb(var(--primary-button-text-color));
+}
+
+/* Visible header -------------------------------------------------------- */
+.shopify-section--header .header:not(.header--transparent) {
+  background: rgb(var(--header-background));
+  color: rgb(var(--header-text-color));
+  border-bottom: 1px solid rgba(var(--unpatched-brand-blue-rgb), .20);
+}
+
+.shopify-section--header .header:not(.header--transparent) .header__wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.shopify-section--header .header:not(.header--transparent) .header__linklist-link,
+.shopify-section--header .header:not(.header--transparent) .header__icon-wrapper,
+.shopify-section--header .header:not(.header--transparent) .header__account-link {
+  transition: color 150ms ease, opacity 150ms ease;
+}
+
+.shopify-section--header .header__linklist-link.link--animated::after {
+  content: none;
+}
+
+@media screen and (max-width: 740px) {
+  .shopify-section--header .header__wrapper {
+    min-height: 0;
+    padding-block: 4px;
+  }
+
+  .shopify-section--header .header__logo,
+  .shopify-section--header .header__logo-link {
+    line-height: 0;
+  }
+
+  .shopify-section--header .header__logo-image {
+    display: block;
+  }
+
+  .shopify-section--header .header__secondary-links {
+    align-self: center;
+  }
+
+  .shopify-section--header .header__secondary-links .header__icon-list {
+    align-items: center;
+  }
+
+  .shopify-section--header .header__secondary-links .header__icon-wrapper {
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .shopify-section--header .header__secondary-links .header__cart-count--floating {
+    top: -8px;
+  }
+}
+
+/* Desktop mega menus ---------------------------------------------------- */
+@media screen and (min-width: 1000px) {
+  .shopify-section--header .header__wrapper {
+    padding-block: 10px;
+  }
+
+  .mega-menu {
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+  }
+
+  .mega-menu:not([hidden])::after,
+  .focus-outline :focus-within > .mega-menu::after,
+  .no-js :focus-within > .mega-menu::after,
+  .no-js :hover > .mega-menu::after {
+    opacity: .18;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .shopify-section--announcement-bar .announcement-bar {
+    min-height: 32px;
+  }
+
+  .shopify-section--announcement-bar .announcement-bar__message {
+    padding-block: 7px;
+    font-size: 9px;
+    letter-spacing: .065em;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .shopify-section--announcement-bar .unpatched-announcement-link:hover .unpatched-announcement-arrow {
+    transform: translateX(3px);
+  }
+
+  .shopify-section--header .header:not(.header--transparent) .header__linklist-link:hover,
+  .shopify-section--header .header:not(.header--transparent) .header__icon-wrapper:hover,
+  .shopify-section--header .header:not(.header--transparent) .header__account-link:hover {
+    color: rgb(var(--unpatched-brand-blue-rgb));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shopify-section--announcement-bar .unpatched-announcement-arrow,
+  .shopify-section--header .header__linklist-link,
+  .shopify-section--header .header__icon-wrapper,
+  .shopify-section--header .header__account-link {
+    transition: none;
+  }
+}

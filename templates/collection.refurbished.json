@@ -1,0 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection-banner": {
+      "type": "collection-banner",
+      "settings": {
+        "show_breadcrumbs": true,
+        "breadcrumb_menu": "main-menu",
+        "home_label": "HOME",
+        "show_collection_title": true,
+        "show_collection_description": true,
+        "fallback_description": "Curated hardware, clear options, and no filler. Find the setup that fits and get back in the game.",
+        "quick_links": "",
+        "quick_links_label": "EXPLORE",
+        "text_color": "#25252a",
+        "muted_text_color": "#6f6f73",
+        "accent_color": "#405de6",
+        "border_color": "#e5e7eb",
+        "links_background": "#ffffff",
+        "links_text_color": "#25252a"
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "show_sort_by": true,
+        "products_per_page": 15,
+        "mobile_products_per_row": "2",
+        "desktop_products_per_row": 5,
+        "show_card_cta": false,
+        "keep_card_image_fixed": true,
+        "show_filters": true,
+        "show_filter_group_name": true,
+        "show_color_swatch": true,
+        "open_first_filter_group": false,
+        "filter_position": "drawer",
+        "promotion_position": "top",
+        "promotion_height": "small"
+      }
+    }
+  },
+  "order": ["collection-banner", "main"]
+}
