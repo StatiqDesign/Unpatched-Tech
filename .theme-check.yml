@@ -1,0 +1,7 @@
+extends: theme-check:recommended
+
+OrphanedSnippet:
+  ignore:
+    - snippets/unpatched-computer-specs.liquid
+    - snippets/unpatched-product-disclosures.liquid
+    - snippets/unpatched-refurbished-certified.liquid
