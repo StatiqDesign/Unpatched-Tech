@@ -1,10 +1,8 @@
 /* ========================================================================== 
-   UNPATCHED TECH — SHOP BY SYSTEM 3D CARDS
-   Frosted, lifted card treatment with restrained motion and no heavy effects.
+   UNPATCHED TECH — SHOP BY SYSTEM CARDS
+   Keep the premium lifted treatment without scroll-expensive live blur or 3D.
    ========================================================================== */
 
-/* Every layer around the cards is only layout. The Shopify section wrapper is
-   included here because it becomes visible around the horizontal mobile rail. */
 body.unpatched-home-page #main .shopify-section--unpatched-category-showcase,
 body.unpatched-home-page #main .shopify-section--unpatched-category-showcase > .section,
 body.unpatched-home-page #main .unpatched-home-categories,
@@ -17,7 +15,7 @@ body.unpatched-home-page #main .unpatched-home-category-grid {
 }
 
 body.unpatched-home-page #main .unpatched-home-category-grid {
-  perspective: 1400px;
+  perspective: none;
 }
 
 body.unpatched-home-page #main .unpatched-home-category-card {
@@ -25,28 +23,22 @@ body.unpatched-home-page #main .unpatched-home-category-card {
   isolation: isolate;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, .88);
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, .92), rgba(244, 247, 255, .74));
-  -webkit-backdrop-filter: blur(12px) saturate(118%);
-  backdrop-filter: blur(12px) saturate(118%);
+  background: linear-gradient(145deg, #ffffff, #f4f7ff);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   box-shadow:
-    0 2px 0 rgba(255, 255, 255, .94) inset,
-    0 -1px 0 rgba(37, 37, 42, .04) inset,
-    0 10px 22px rgba(24, 32, 59, .08),
-    0 24px 44px rgba(24, 32, 59, .08);
-  transform: translate3d(0, -2px, 0);
-  transform-style: preserve-3d;
-  transition: transform 220ms cubic-bezier(.2, .7, .2, 1);
+    0 1px 0 rgba(255, 255, 255, .96) inset,
+    0 14px 30px rgba(24, 32, 59, .09);
+  transform: translateY(-2px);
+  transform-style: flat;
+  transition: transform 200ms cubic-bezier(.2, .7, .2, 1);
 }
 
-/* Clip the actual clickable surface too. This prevents nested translucent
-   layers from ever painting square pixels outside the card radius. */
 body.unpatched-home-page #main .unpatched-home-category-card__link {
   overflow: hidden;
   border-radius: inherit;
 }
 
-/* Thin glass highlight gives the top edge a physical, beveled feel. */
 body.unpatched-home-page #main .unpatched-home-category-card::before {
   content: "";
   position: absolute;
@@ -55,15 +47,15 @@ body.unpatched-home-page #main .unpatched-home-category-card::before {
   border-radius: inherit;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, .42) 0,
-    rgba(255, 255, 255, .08) 16%,
+    rgba(255, 255, 255, .30) 0,
+    rgba(255, 255, 255, .06) 16%,
     transparent 42%
   );
   pointer-events: none;
 }
 
 body.unpatched-home-page #main .unpatched-home-category-card__media {
-  background: rgba(255, 255, 255, .68);
+  background: rgba(255, 255, 255, .84);
   box-shadow: 0 1px 0 rgba(255, 255, 255, .72) inset;
 }
 
@@ -71,23 +63,17 @@ body.unpatched-home-page #main .unpatched-home-category-card__content {
   position: relative;
   z-index: 2;
   border-radius: 0 0 calc(var(--block-border-radius) - 1px) calc(var(--block-border-radius) - 1px);
-  background: linear-gradient(180deg, rgba(255, 255, 255, .62), rgba(248, 250, 255, .80));
+  background: linear-gradient(180deg, rgba(255, 255, 255, .86), rgba(248, 250, 255, .96));
   box-shadow: 0 -1px 0 rgba(255, 255, 255, .72) inset;
 }
 
 @media (hover: hover) and (pointer: fine) {
   body.unpatched-home-page #main .unpatched-home-category-card:hover {
-    border-color: rgba(255, 255, 255, 1);
-    transform: translate3d(0, -10px, 0) scale(1.012);
-    box-shadow:
-      0 2px 0 rgba(255, 255, 255, 1) inset,
-      0 -1px 0 rgba(37, 37, 42, .04) inset,
-      0 14px 26px rgba(24, 32, 59, .10),
-      0 34px 64px rgba(24, 32, 59, .16);
+    transform: translateY(-8px) scale(1.008);
   }
 
   body.unpatched-home-page #main .unpatched-home-category-card:hover .unpatched-home-category-card__image {
-    transform: scale(calc(var(--up-media-scale, 1) * 1.025));
+    transform: scale(calc(var(--up-media-scale, 1) * 1.02));
   }
 }
 
@@ -180,18 +166,14 @@ body.unpatched-home-page #main .unpatched-home-category-card__content {
     box-shadow: none;
   }
 
-  /* Mobile browsers can composite backdrop-filter as a rectangular layer even
-     when the element is rounded. Keep the glass color, but disable that blur
-     layer and flatten the 3D context so the corner stays perfectly clipped. */
   body.unpatched-home-page #main .unpatched-home-category-card {
-    transform: translate3d(0, -1px, 0);
+    transform: none;
     transform-style: flat;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     box-shadow:
       0 1px 0 rgba(255, 255, 255, .95) inset,
-      0 8px 18px rgba(24, 32, 59, .08),
-      0 18px 32px rgba(24, 32, 59, .08);
+      0 10px 22px rgba(24, 32, 59, .08);
   }
 
   body.unpatched-home-page #main .unpatched-home-category-card__link {
