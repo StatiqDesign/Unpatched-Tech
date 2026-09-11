@@ -54,11 +54,11 @@
           <a class="unpatched-home-pathway-card__link" href="{{ resolved_link }}">
             <div class="unpatched-home-pathway-card__media">
               {%- if pathway_image != blank -%}
-                {{ pathway_image | image_url: width: 1200 | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '360,480,600,720,900,1080,1200', sizes: '(max-width: 749px) calc(100vw - 32px), (max-width: 999px) 48vw, 58vw', class: 'unpatched-home-pathway-card__image' }}
+                {{ pathway_image | image_url: width: 1000, format: 'webp' | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '360,480,600,720,900,1000', sizes: '(max-width: 749px) calc(100vw - 32px), (max-width: 999px) 48vw, 58vw', class: 'unpatched-home-pathway-card__image' }}
               {%- elsif pathway_asset != blank -%}
                 <img class="unpatched-home-pathway-card__image"
                   src="{{ pathway_asset | asset_img_url: '720x' }}"
-                  srcset="{{ pathway_asset | asset_img_url: '480x' }} 480w, {{ pathway_asset | asset_img_url: '600x' }} 600w, {{ pathway_asset | asset_img_url: '720x' }} 720w, {{ pathway_asset | asset_img_url: '900x' }} 900w, {{ pathway_asset | asset_img_url: '1200x' }} 1200w"
+                  srcset="{{ pathway_asset | asset_img_url: '480x' }} 480w, {{ pathway_asset | asset_img_url: '600x' }} 600w, {{ pathway_asset | asset_img_url: '720x' }} 720w"
                   sizes="(max-width: 749px) calc(100vw - 32px), (max-width: 999px) 48vw, 58vw"
                   loading="lazy" decoding="async" fetchpriority="low"
                   width="{{ pathway_asset_width }}" height="{{ pathway_asset_height }}" alt="">
