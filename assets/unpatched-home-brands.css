@@ -27,7 +27,39 @@ body.unpatched-home-page #main .shopify-section--logo-list .container {
 
 body.unpatched-home-page #main .shopify-section--logo-list .unpatched-brand-marquee {
   order: 1;
+  position: relative;
   margin-top: 0;
+  contain: paint;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* Static edge fades are cheaper to composite than masking the entire moving
+   marquee layer on every frame. */
+body.unpatched-home-page #main .shopify-section--logo-list .unpatched-brand-marquee::before,
+body.unpatched-home-page #main .shopify-section--logo-list .unpatched-brand-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: clamp(28px, 4vw, 58px);
+  pointer-events: none;
+}
+
+body.unpatched-home-page #main .shopify-section--logo-list .unpatched-brand-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0));
+}
+
+body.unpatched-home-page #main .shopify-section--logo-list .unpatched-brand-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, #fff, rgba(255, 255, 255, 0));
+}
+
+body.unpatched-home-page #main .shopify-section--logo-list .unpatched-brand-marquee__track {
+  will-change: auto;
+  backface-visibility: visible;
 }
 
 body.unpatched-home-page #main .shopify-section--logo-list .section__header {
@@ -57,5 +89,10 @@ body.unpatched-home-page #main .shopify-section--logo-list .unpatched-brand-marq
 
   body.unpatched-home-page #main .shopify-section--logo-list .section__header {
     margin-top: 14px;
+  }
+
+  body.unpatched-home-page #main .shopify-section--logo-list .unpatched-brand-marquee::before,
+  body.unpatched-home-page #main .shopify-section--logo-list .unpatched-brand-marquee::after {
+    display: none;
   }
 }
