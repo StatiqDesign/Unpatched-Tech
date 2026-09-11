@@ -71,7 +71,7 @@
       "settings": {
         "section_height": "small",
         "transition_type": "fade",
-        "show_initial_transition": true,
+        "show_initial_transition": false,
         "autoplay": true,
         "cycle_speed": 8,
         "background": "#ffffff"

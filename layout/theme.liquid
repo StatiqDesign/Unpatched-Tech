@@ -100,8 +100,6 @@
 
     {%- if request.page_type != 'gift_card' and request.page_type != 'password' -%}
       {%- sections 'header-group' -%}
-      {%- sections 'overlay-group' -%}
-      {%- unless settings.cart_type == 'page' or request.page_type == 'cart' -%}{%- section 'mini-cart' -%}{%- endunless -%}
     {%- endif -%}
 
     <div id="main" role="main" class="anchor">
@@ -129,6 +127,8 @@
 
     {%- if request.page_type != 'gift_card' and request.page_type != 'password' -%}
       {%- sections 'footer-group' -%}
+      {%- sections 'overlay-group' -%}
+      {%- unless settings.cart_type == 'page' or request.page_type == 'cart' -%}{%- section 'mini-cart' -%}{%- endunless -%}
     {%- endif -%}
   </body>
 </html>

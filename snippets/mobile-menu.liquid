@@ -4,136 +4,7 @@
     {%- assign direction = 'rtl' -%}
 {%- endcase -%}
 
-<style>
-  #mobile-menu-drawer {
-    --unpatched-mobile-menu-divider: rgba(var(--heading-color), .12);
-    --unpatched-mobile-menu-row-padding: 18px;
-    --unpatched-mobile-menu-font-size: 15px;
-  }
 
-  /* One divider treatment throughout the drawer. */
-  #mobile-menu-drawer .drawer__content > .mobile-nav > .mobile-nav__item,
-  #mobile-menu-drawer .unpatched-mobile-submenu > .mobile-nav__item,
-  #mobile-menu-drawer .unpatched-mobile-account-footer {
-    border-color: var(--unpatched-mobile-menu-divider) !important;
-  }
-
-  #mobile-menu-drawer .drawer__content > .mobile-nav > .mobile-nav__item:first-child {
-    border-top-color: var(--unpatched-mobile-menu-divider) !important;
-  }
-
-  #mobile-menu-drawer .drawer__content > .mobile-nav > .mobile-nav__item:not(:last-child),
-  #mobile-menu-drawer .unpatched-mobile-submenu > .mobile-nav__item:not(:last-child) {
-    border-bottom: 1px solid var(--unpatched-mobile-menu-divider) !important;
-  }
-
-  /* Match row typography and vertical rhythm at every navigation depth. */
-  #mobile-menu-drawer .mobile-nav__link,
-  #mobile-menu-drawer .mobile-nav .mobile-nav .mobile-nav__link {
-    min-height: 58px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    width: 100%;
-    margin: 0;
-    padding: var(--unpatched-mobile-menu-row-padding) 0 !important;
-    font-family: var(--text-font-family);
-    font-size: var(--unpatched-mobile-menu-font-size) !important;
-    font-style: normal;
-    line-height: 1.35;
-    letter-spacing: 0;
-    text-transform: none;
-  }
-
-  #mobile-menu-drawer .drawer__content > .mobile-nav > .mobile-nav__item > .mobile-nav__link {
-    font-family: var(--heading-font-family);
-    font-weight: var(--heading-font-weight);
-    text-transform: var(--heading-text-transform);
-  }
-
-  #mobile-menu-drawer .mobile-nav__back,
-  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link,
-  #mobile-menu-drawer .unpatched-mobile-login {
-    font-family: var(--heading-font-family);
-    font-size: var(--unpatched-mobile-menu-font-size) !important;
-    font-weight: var(--heading-font-weight);
-    text-transform: none;
-  }
-
-  /* One exact chevron shape everywhere. Back is the same shape rotated 180deg. */
-  #mobile-menu-drawer .unpatched-mobile-forward-arrow,
-  #mobile-menu-drawer .unpatched-mobile-back-arrow {
-    position: relative;
-    width: 18px;
-    height: 18px;
-    flex: 0 0 18px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    font-size: 0 !important;
-    line-height: 0 !important;
-  }
-
-  #mobile-menu-drawer .unpatched-mobile-forward-arrow::before,
-  #mobile-menu-drawer .unpatched-mobile-back-arrow::before {
-    content: "";
-    display: block;
-    width: 7px;
-    height: 7px;
-    border-top: 2px solid currentColor;
-    border-right: 2px solid currentColor;
-    transform: rotate(45deg);
-    transform-origin: center;
-  }
-
-  #mobile-menu-drawer .unpatched-mobile-forward-arrow {
-    margin-inline-start: auto;
-  }
-
-  #mobile-menu-drawer .unpatched-mobile-back-arrow {
-    margin-inline-end: 0;
-  }
-
-  #mobile-menu-drawer .unpatched-mobile-back-arrow::before {
-    transform: rotate(-135deg);
-  }
-
-  #mobile-menu-drawer .mobile-nav__back,
-  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link {
-    justify-content: flex-start;
-    gap: 5px !important;
-  }
-
-  #mobile-menu-drawer .mobile-nav__view-all .unpatched-mobile-forward-arrow {
-    margin-inline-start: 0;
-  }
-
-  #mobile-menu-drawer .mobile-nav__view-all,
-  #mobile-menu-drawer .mobile-nav__view-all::before,
-  #mobile-menu-drawer .mobile-nav__view-all::after,
-  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link,
-  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link::before,
-  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link::after,
-  #mobile-menu-drawer .unpatched-mobile-account-footer,
-  #mobile-menu-drawer .unpatched-mobile-login {
-    border-bottom: 0 !important;
-    box-shadow: none !important;
-  }
-
-  #mobile-menu-drawer .mobile-nav__view-all::before,
-  #mobile-menu-drawer .mobile-nav__view-all::after,
-  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link::before,
-  #mobile-menu-drawer .mobile-nav__view-all > .mobile-nav__link::after,
-  #mobile-menu-drawer .unpatched-mobile-account-footer::before,
-  #mobile-menu-drawer .unpatched-mobile-account-footer::after,
-  #mobile-menu-drawer .unpatched-mobile-login::before,
-  #mobile-menu-drawer .unpatched-mobile-login::after {
-    content: none !important;
-    display: none !important;
-  }
-</style>
 
 <mobile-navigation append-body id="mobile-menu-drawer" class="drawer {% if direction == 'ltr' %}drawer--from-left{% endif %}">
   <span class="drawer__overlay"></span>
@@ -143,10 +14,10 @@
       {%- render 'icon' with 'close' -%}
     </button>
 
-    <a href="{{ routes.root_url }}" class="unpatched-mobile-menu-logo">
+    <a href="{{ routes.root_url }}" class="unpatched-mobile-menu-logo" aria-label="{{ shop.name | escape }} home">
       {%- if section.settings.logo != blank -%}
         {%- assign logo_size = section.settings.logo_max_width | at_least: section.settings.mobile_logo_max_width | times: 2 -%}
-        <img src="{{ section.settings.logo | image_url: width: logo_size }}" alt="{{ section.settings.logo.alt | escape }}" width="{{ section.settings.logo.width }}" height="{{ section.settings.logo.height }}">
+        <img src="{{ section.settings.logo | image_url: width: logo_size }}" alt="{{ section.settings.logo.alt | default: shop.name | escape }}" width="{{ section.settings.logo.width }}" height="{{ section.settings.logo.height }}">
       {%- else -%}
         {{ shop.name }}
       {%- endif -%}
