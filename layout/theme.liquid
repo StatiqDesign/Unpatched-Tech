@@ -64,11 +64,6 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
-    {% render 'social-meta-tags' %}
-    {% render 'microdata-schema' %}
-    {% render 'css-variables', direction: direction %}
-    {% render 'js-variables', direction: direction %}
-
     <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
     {% render 'unpatched-style-loader',
       is_unpatched_tracking_page: is_unpatched_tracking_page,
@@ -79,6 +74,11 @@
       is_unpatched_policy_page: is_unpatched_policy_page,
       is_unpatched_custom_legal_page: is_unpatched_custom_legal_page
     %}
+
+    {% render 'social-meta-tags' %}
+    {% render 'microdata-schema' %}
+    {% render 'css-variables', direction: direction %}
+    {% render 'js-variables', direction: direction %}
 
     <style>:root { --unpatched-brand-blue-rgb: {{ settings.primary_button_background.red }}, {{ settings.primary_button_background.green }}, {{ settings.primary_button_background.blue }}; }</style>
 
