@@ -61,9 +61,13 @@
 
     {% render 'css-variables', direction: direction %}
 
-    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
     {%- if request.page_type == 'index' -%}
+      {% render 'unpatched-theme-critical' %}
       {% render 'unpatched-home-critical' %}
+      <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}" media="print" onload="this.media='all'">
+      <noscript><link rel="stylesheet" href="{{ 'theme.css' | asset_url }}"></noscript>
+    {%- else -%}
+      <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
     {%- endif -%}
     {% render 'unpatched-style-loader',
       is_unpatched_tracking_page: is_unpatched_tracking_page,
