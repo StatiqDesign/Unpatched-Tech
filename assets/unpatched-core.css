@@ -8,6 +8,7 @@
   --unpatched-brand-blue-rgb: var(--primary-button-background);
   --unpatched-surface-muted: rgb(var(--secondary-background));
   --unpatched-ink: rgb(var(--heading-color));
+  --heading-font-weight: 600;
 }
 
 .unpatched-eyebrow {
