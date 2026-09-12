@@ -16,7 +16,6 @@ Loads Unpatched Tech styles by page context while keeping the global layout focu
     assign needs_info_layers = true
   endif
 
-
   assign needs_short_page_shell = false
   if is_unpatched_tracking_page or is_unpatched_about_page
     assign needs_short_page_shell = true
@@ -28,7 +27,11 @@ Loads Unpatched Tech styles by page context while keeping the global layout focu
   endif
 -%}
 
-<link rel="stylesheet" href="{{ 'unpatched-core.css' | asset_url }}">
+{%- if request.page_type == 'index' -%}
+  <style id="unpatched-core-inline">{{ 'unpatched-core.css' | inline_asset_content }}</style>
+{%- else -%}
+  <link rel="stylesheet" href="{{ 'unpatched-core.css' | asset_url }}">
+{%- endif -%}
 <link rel="stylesheet" href="{{ 'unpatched-chrome.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'unpatched-chrome.css' | asset_url }}"></noscript>
 <link rel="stylesheet" href="{{ 'unpatched-media-core.css' | asset_url }}" media="print" onload="this.media='all'">
