@@ -44,8 +44,8 @@
           <picture>
             <source
               media="(max-width: 749px)"
-              sizes="min(56vw, 320px)"
-              srcset="{{ flagship_image | image_url: width: 320, format: 'webp' }} 320w, {{ flagship_image | image_url: width: 400, format: 'webp' }} 400w, {{ flagship_image | image_url: width: 440, format: 'webp' }} 440w"
+              sizes="min(56vw, 280px)"
+              srcset="{{ flagship_image | image_url: width: 240, format: 'webp' }} 240w, {{ flagship_image | image_url: width: 320, format: 'webp' }} 320w, {{ flagship_image | image_url: width: 400, format: 'webp' }} 400w"
             >
             {{ flagship_image | image_url: width: 1400, format: 'webp' | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '480,560,640,720,800,960,1120,1400', sizes: '(max-width: 999px) calc(100vw - 32px), 52vw', class: 'unpatched-home-flagship__image' }}
           </picture>
