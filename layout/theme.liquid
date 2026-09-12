@@ -59,14 +59,6 @@
       <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 96 }}" type="image/png">
     {%- endif -%}
 
-    {%- if request.page_type == 'index' -%}
-      {%- assign unpatched_home_bold_font = settings.text_font | font_modify: 'weight', '600' -%}
-      <link rel="preload" href="{{ settings.text_font | font_url }}" as="font" type="font/woff2" crossorigin>
-      {%- if unpatched_home_bold_font -%}
-        <link rel="preload" href="{{ unpatched_home_bold_font | font_url }}" as="font" type="font/woff2" crossorigin>
-      {%- endif -%}
-    {%- endif -%}
-
     {% render 'css-variables', direction: direction %}
 
     <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
