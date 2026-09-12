@@ -61,9 +61,11 @@
 
     {% render 'css-variables', direction: direction %}
 
-    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
     {%- if request.page_type == 'index' -%}
+      <style id="unpatched-theme-inline">{{ 'theme.css' | inline_asset_content }}</style>
       {% render 'unpatched-home-critical' %}
+    {%- else -%}
+      <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
     {%- endif -%}
     {% render 'unpatched-style-loader',
       is_unpatched_tracking_page: is_unpatched_tracking_page,
