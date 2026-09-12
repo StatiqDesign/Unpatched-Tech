@@ -48,7 +48,7 @@
     height: 100%;
   }
 
-  #shopify-section-{{ section.id }} .unpatched-home-flagship__image {
+  body.unpatched-home-page #main #shopify-section-{{ section.id }} .unpatched-home-flagship__image {
     width: {{ section.settings.desktop_image_scale }}%;
     height: {{ section.settings.desktop_image_scale }}%;
     object-fit: {{ section.settings.desktop_image_fit }};
@@ -56,11 +56,11 @@
   }
 
   @media screen and (max-width: 749px) {
-    #shopify-section-{{ section.id }} .unpatched-home-flagship__media {
+    body.unpatched-home-page #main #shopify-section-{{ section.id }} .unpatched-home-flagship__media {
       aspect-ratio: {{ section.settings.mobile_media_ratio }};
     }
 
-    #shopify-section-{{ section.id }} .unpatched-home-flagship__image {
+    body.unpatched-home-page #main #shopify-section-{{ section.id }} .unpatched-home-flagship__image {
       width: {{ section.settings.mobile_image_scale }}%;
       height: {{ section.settings.mobile_image_scale }}%;
       object-fit: {{ section.settings.mobile_image_fit }};
