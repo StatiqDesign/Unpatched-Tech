@@ -67,17 +67,16 @@ jobs:
       - name: Theme Check
         uses: shopify/theme-check-action@v2
 
-      - name: Commit final validated state to feature branch
+      - name: Commit validated source changes to feature branch
         shell: bash
         run: |
           set -euo pipefail
-          rm -f .github/workflows/live-performance-pass-2.yml
           git config user.name "Statiq Design"
           git config user.email "hello@statiqdesign.com"
-          git add -A
+          git add sections/header.liquid
           git diff --cached --check
           if git diff --cached --quiet; then
             exit 0
           fi
-          git commit -m "Finish validated storefront performance pass"
+          git commit -m "Remove account component from storefront critical path"
           git push origin HEAD:performance-final-pass
