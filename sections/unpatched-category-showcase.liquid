@@ -98,7 +98,7 @@
                   <source
                     media="(max-width: 749px)"
                     sizes="min(82vw, 330px)"
-                    srcset="{{ card_image | image_url: width: 320, height: 320, crop: 'center', format: 'webp' }} 320w, {{ card_image | image_url: width: 400, height: 400, crop: 'center', format: 'webp' }} 400w, {{ card_image | image_url: width: 480, height: 480, crop: 'center', format: 'webp' }} 480w, {{ card_image | image_url: width: 560, height: 560, crop: 'center', format: 'webp' }} 560w"
+                    srcset="{{ card_image | image_url: width: 280, height: 280, crop: 'center', format: 'webp' }} 280w, {{ card_image | image_url: width: 330, height: 330, crop: 'center', format: 'webp' }} 330w, {{ card_image | image_url: width: 400, height: 400, crop: 'center', format: 'webp' }} 400w, {{ card_image | image_url: width: 480, height: 480, crop: 'center', format: 'webp' }} 480w"
                   >
                   {{ card_image | image_url: width: 800, format: 'webp' | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '320,400,480,560,640,800', sizes: '(max-width: 999px) 44vw, 24vw', class: 'unpatched-home-category-card__image' }}
                 </picture>
