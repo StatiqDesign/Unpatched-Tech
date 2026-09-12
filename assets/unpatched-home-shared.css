@@ -16,27 +16,11 @@ body.unpatched-home-page #main .shopify-section--blog-posts .container {
   padding-inline: 0;
 }
 
-/* Offscreen rendering is useful on phones/tablets, where initial paint budget
-   is tight. On desktop, rendering large sections only as they enter view can
-   create visible scroll hitches, so the full layout stays ready up front. */
-@supports (content-visibility: auto) {
-  @media screen and (max-width: 999px) {
-    body.unpatched-home-page #main > .shopify-section--unpatched-category-showcase,
-    body.unpatched-home-page #main > .shopify-section--unpatched-flagship-pc,
-    body.unpatched-home-page #main > .shopify-section--unpatched-pathways,
-    body.unpatched-home-page #main > .shopify-section--unpatched-featured-collection,
-    body.unpatched-home-page #main > .shopify-section--multi-column,
-    body.unpatched-home-page #main > .shopify-section--blog-posts {
-      content-visibility: auto;
-      contain-intrinsic-size: auto 760px;
-    }
-
-    body.unpatched-home-page #main > .shopify-section--logo-list {
-      content-visibility: auto;
-      contain-intrinsic-size: auto 320px;
-    }
-  }
-}
+/* Do not use content-visibility on the primary homepage sections.
+   This file is intentionally deferred; applying containment after first paint
+   can replace real section geometry with an intrinsic placeholder and create
+   a large layout shift on mobile. Lazy-loaded media already keeps the lower
+   homepage inexpensive without changing layout geometry after paint. */
 
 /* Focal's shell includes its desktop gutters inside --container-max-width.
    The hero is a visible surface, so cap it to the same usable 1600px field. */
