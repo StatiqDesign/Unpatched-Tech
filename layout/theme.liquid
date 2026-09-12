@@ -60,6 +60,9 @@
     {%- endif -%}
 
     <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+    {%- if request.page_type == 'index' -%}
+      {% render 'unpatched-home-critical' %}
+    {%- endif -%}
     {% render 'unpatched-style-loader',
       is_unpatched_tracking_page: is_unpatched_tracking_page,
       is_unpatched_faq_page: is_unpatched_faq_page,
