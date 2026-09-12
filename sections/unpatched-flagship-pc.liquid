@@ -15,6 +15,11 @@
     assign flagship_image = flagship_product.featured_media.preview_image
   endif
 
+  assign flagship_mobile_image = section.settings.mobile_image
+  if flagship_mobile_image == blank
+    assign flagship_mobile_image = flagship_image
+  endif
+
   assign flagship_title = section.settings.title_override
   if flagship_title == blank and flagship_product != blank
     assign flagship_title = flagship_product.title
@@ -36,17 +41,47 @@
   endif
 -%}
 
+<style>
+  #shopify-section-{{ section.id }} .unpatched-home-flagship__media picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .unpatched-home-flagship__image {
+    width: {{ section.settings.desktop_image_scale }}%;
+    height: {{ section.settings.desktop_image_scale }}%;
+    object-fit: {{ section.settings.desktop_image_fit }};
+    object-position: {{ section.settings.desktop_image_position }};
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .unpatched-home-flagship__media {
+      aspect-ratio: {{ section.settings.mobile_media_ratio }};
+    }
+
+    #shopify-section-{{ section.id }} .unpatched-home-flagship__image {
+      width: {{ section.settings.mobile_image_scale }}%;
+      height: {{ section.settings.mobile_image_scale }}%;
+      object-fit: {{ section.settings.mobile_image_fit }};
+      object-position: {{ section.settings.mobile_image_position }};
+    }
+  }
+</style>
+
 <section class="section unpatched-home-section unpatched-home-flagship" aria-label="{{ flagship_title | escape }}">
   <div class="container">
     <article class="unpatched-home-flagship__card">
       <a class="unpatched-home-flagship__media" href="{{ product_url }}" aria-label="View {{ flagship_title | escape }}">
         {%- if flagship_image != blank -%}
           <picture>
-            <source
-              media="(max-width: 749px)"
-              sizes="min(56vw, 280px)"
-              srcset="{{ flagship_image | image_url: width: 240 }} 240w, {{ flagship_image | image_url: width: 320 }} 320w, {{ flagship_image | image_url: width: 400 }} 400w"
-            >
+            {%- if flagship_mobile_image != blank -%}
+              <source
+                media="(max-width: 749px)"
+                sizes="calc(100vw - 32px)"
+                srcset="{{ flagship_mobile_image | image_url: width: 320 }} 320w, {{ flagship_mobile_image | image_url: width: 480 }} 480w, {{ flagship_mobile_image | image_url: width: 640 }} 640w, {{ flagship_mobile_image | image_url: width: 800 }} 800w"
+              >
+            {%- endif -%}
             {{ flagship_image | image_url: width: 1400 | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '480,560,640,720,800,960,1120,1400', sizes: '(max-width: 999px) calc(100vw - 32px), 52vw', class: 'unpatched-home-flagship__image' }}
           </picture>
         {%- else -%}
@@ -124,6 +159,16 @@
   "settings": [
     {"type":"product","id":"product","label":"Featured computer"},
     {"type":"image_picker","id":"image","label":"Custom showcase image","info":"Optional. Uses the selected product image when empty."},
+    {"type":"image_picker","id":"mobile_image","label":"Mobile showcase image","info":"Optional. Uses the main showcase image when empty."},
+    {"type":"header","content":"Image display"},
+    {"type":"select","id":"desktop_image_fit","label":"Desktop image fit","default":"contain","options":[{"value":"contain","label":"Contain - show full image"},{"value":"cover","label":"Cover - fill and crop"}]},
+    {"type":"select","id":"desktop_image_position","label":"Desktop image position","default":"center center","options":[{"value":"center center","label":"Center"},{"value":"center top","label":"Top"},{"value":"center bottom","label":"Bottom"},{"value":"left center","label":"Left"},{"value":"right center","label":"Right"}]},
+    {"type":"range","id":"desktop_image_scale","label":"Desktop image size","min":60,"max":100,"step":2,"unit":"%","default":100},
+    {"type":"header","content":"Mobile image display"},
+    {"type":"select","id":"mobile_image_fit","label":"Mobile image fit","default":"contain","options":[{"value":"contain","label":"Contain - show full image"},{"value":"cover","label":"Cover - fill and crop"}]},
+    {"type":"select","id":"mobile_image_position","label":"Mobile image position","default":"center center","options":[{"value":"center center","label":"Center"},{"value":"center top","label":"Top"},{"value":"center bottom","label":"Bottom"},{"value":"left center","label":"Left"},{"value":"right center","label":"Right"}]},
+    {"type":"range","id":"mobile_image_scale","label":"Mobile image size","min":60,"max":100,"step":2,"unit":"%","default":100},
+    {"type":"select","id":"mobile_media_ratio","label":"Mobile image frame","default":"1 / 1","options":[{"value":"1 / 1","label":"Square"},{"value":"4 / 3","label":"Landscape 4:3"},{"value":"3 / 4","label":"Portrait 3:4"},{"value":"16 / 10","label":"Wide 16:10"}]},
     {"type":"text","id":"eyebrow","label":"Small heading","default":"BUILT BY UNPATCHED"},
     {"type":"text","id":"title_override","label":"Custom product heading","info":"Optional. Uses the selected product title when empty."},
     {"type":"richtext","id":"description","label":"Description","default":"<p>A balanced gaming system built around real-world performance, clean thermals, and an upgrade path that makes sense.</p>"},
