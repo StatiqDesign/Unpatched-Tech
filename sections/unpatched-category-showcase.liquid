@@ -54,18 +54,30 @@
 
           assign card_image = block.settings.image
           assign stock_image_url = blank
+          assign stock_image_320 = blank
+          assign stock_image_400 = blank
+          assign stock_image_480 = blank
           assign stock_image_alt = block.settings.title | default: block.settings.navigation_label
 
           if card_image == blank
             case block.settings.stock_artwork
               when 'xbox_series_x'
-                assign stock_image_url = 'https://media.gamestop.com/i/gamestop/11108371?fmt=webp&h=640&w=640'
+                assign stock_image_url = 'https://cdn.shopify.com/s/files/1/0631/6254/8287/files/11108371.webp?v=1789178548&width=640'
+                assign stock_image_320 = 'https://cdn.shopify.com/s/files/1/0631/6254/8287/files/11108371.webp?v=1789178548&width=320'
+                assign stock_image_400 = 'https://cdn.shopify.com/s/files/1/0631/6254/8287/files/11108371.webp?v=1789178548&width=400'
+                assign stock_image_480 = 'https://cdn.shopify.com/s/files/1/0631/6254/8287/files/11108371.webp?v=1789178548&width=480'
                 assign stock_image_alt = 'Xbox Series X Carbon Black console'
               when 'ps5_disc'
-                assign stock_image_url = 'https://media.gamestop.com/i/gamestop/11108140?fmt=webp&h=640&w=640'
+                assign stock_image_url = 'https://cdn.shopify.com/s/files/1/0631/6254/8287/files/11108140.webp?v=1789178548&width=640'
+                assign stock_image_320 = 'https://cdn.shopify.com/s/files/1/0631/6254/8287/files/11108140.webp?v=1789178548&width=320'
+                assign stock_image_400 = 'https://cdn.shopify.com/s/files/1/0631/6254/8287/files/11108140.webp?v=1789178548&width=400'
+                assign stock_image_480 = 'https://cdn.shopify.com/s/files/1/0631/6254/8287/files/11108140.webp?v=1789178548&width=480'
                 assign stock_image_alt = 'PlayStation 5 disc console'
               when 'switch_zelda'
-                assign stock_image_url = 'https://media.gamestop.com/i/gamestop/20004601/Nintendo-Switch---OLED-Model---The-Legend-of-Zelda-Tears-of-the-Kingdom-Edition?fmt=webp&h=640&w=640'
+                assign stock_image_url = 'https://cdn.shopify.com/s/files/1/0631/6254/8287/files/Nintendo-Switch---OLED-Model---The-Legend-of-Zelda-Tears-of-the-Kingdom-Edition.webp?v=1789178548&width=640'
+                assign stock_image_320 = 'https://cdn.shopify.com/s/files/1/0631/6254/8287/files/Nintendo-Switch---OLED-Model---The-Legend-of-Zelda-Tears-of-the-Kingdom-Edition.webp?v=1789178548&width=320'
+                assign stock_image_400 = 'https://cdn.shopify.com/s/files/1/0631/6254/8287/files/Nintendo-Switch---OLED-Model---The-Legend-of-Zelda-Tears-of-the-Kingdom-Edition.webp?v=1789178548&width=400'
+                assign stock_image_480 = 'https://cdn.shopify.com/s/files/1/0631/6254/8287/files/Nintendo-Switch---OLED-Model---The-Legend-of-Zelda-Tears-of-the-Kingdom-Edition.webp?v=1789178548&width=480'
                 assign stock_image_alt = 'Nintendo Switch OLED The Legend of Zelda Tears of the Kingdom Edition'
             endcase
           endif
@@ -75,12 +87,6 @@
             if card_image == blank
               assign card_image = source_collection.products.first.featured_media.preview_image
             endif
-          endif
-
-          if stock_image_url != blank
-            assign stock_image_320 = stock_image_url | replace: 'h=640&w=640', 'h=320&w=320'
-            assign stock_image_400 = stock_image_url | replace: 'h=640&w=640', 'h=400&w=400'
-            assign stock_image_480 = stock_image_url | replace: 'h=640&w=640', 'h=480&w=480'
           endif
         -%}
 
@@ -97,7 +103,7 @@
                   {{ card_image | image_url: width: 800, format: 'webp' | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '320,400,480,560,640,800', sizes: '(max-width: 999px) 44vw, 24vw', class: 'unpatched-home-category-card__image' }}
                 </picture>
               {%- elsif stock_image_url != blank -%}
-                <img src="{{ stock_image_400 }}" srcset="{{ stock_image_320 }} 320w, {{ stock_image_400 }} 400w, {{ stock_image_480 }} 480w, {{ stock_image_url }} 640w" sizes="(max-width: 749px) min(82vw, 330px), (max-width: 999px) 44vw, 24vw" alt="{{ stock_image_alt | escape }}" width="640" height="640" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer" class="unpatched-home-category-card__image">
+                <img src="{{ stock_image_400 }}" srcset="{{ stock_image_320 }} 320w, {{ stock_image_400 }} 400w, {{ stock_image_480 }} 480w, {{ stock_image_url }} 640w" sizes="(max-width: 749px) min(82vw, 330px), (max-width: 999px) 44vw, 24vw" alt="{{ stock_image_alt | escape }}" width="640" height="640" loading="lazy" decoding="async" fetchpriority="low" class="unpatched-home-category-card__image">
               {%- else -%}
                 {{ 'collection-1' | placeholder_svg_tag: 'unpatched-home-category-card__placeholder placeholder-svg' }}
               {%- endif -%}
