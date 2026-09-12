@@ -268,13 +268,9 @@ IMPLEMENTATION NOTE: the header in Focal is pretty complex as it allows a lot of
                 {%- render 'icon' with 'header-customer' -%}
               </a>
             {%- else -%}
-              <shopify-account menu="{{ section.settings.customer_account_menu }}"{% if section.settings.show_icons %} class="shopify-account--icons"{% endif %}>
-                <div slot="signed-out-avatar">
-                  <span class="header__icon-wrapper tap-area hidden-phone {% unless section.settings.show_icons %}hidden-desk{% endunless %}">
-                    {%- render 'icon' with 'header-customer' -%}
-                  </span>
-                </div>
-              </shopify-account>
+              <a href="{{ routes.account_login_url }}" class="header__icon-wrapper header__account-link tap-area hidden-phone {% unless section.settings.show_icons %}hidden-desk{% endunless %}" aria-label="{{ 'header.general.login' | t | escape }}">
+                {%- render 'icon' with 'header-customer' -%}
+              </a>
             {%- endif -%}
           {%- endif -%}
 
@@ -322,11 +318,7 @@ IMPLEMENTATION NOTE: the header in Focal is pretty complex as it allows a lot of
                 {%- if customer -%}
                   <a href="{{ routes.account_url }}">{{ 'customer.general.title' | t }}</a>
                 {%- else -%}
-                  <shopify-account menu="{{ section.settings.customer_account_menu }}">
-                    <div slot="signed-out-avatar">
-                      <span>{{ 'header.general.login' | t }}</span>
-                    </div>
-                  </shopify-account>
+                  <a href="{{ routes.account_login_url }}">{{ 'header.general.login' | t }}</a>
                 {%- endif -%}
               </li>
             {%- endif -%}
