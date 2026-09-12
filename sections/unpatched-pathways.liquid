@@ -1,4 +1,4 @@
-{%- comment -%}Responsive sources cap mobile pathway imagery at 480px to reduce transfer cost.{%- endcomment -%}
+{%- comment -%}Responsive sources cap mobile pathway imagery at 480px to reduce transfer cost while allowing Shopify to negotiate the best image format.{%- endcomment -%}
 <section class="section unpatched-home-section unpatched-home-pathways" style="--up-section-background: {{ section.settings.background }}; --up-section-text: {{ section.settings.text_color }};">
   <div class="container">
     <header class="unpatched-home-section__header">
@@ -64,9 +64,9 @@
                   <source
                     media="(max-width: 749px)"
                     sizes="calc(100vw - 32px)"
-                    srcset="{{ pathway_image | image_url: width: 320, format: 'webp' }} 320w, {{ pathway_image | image_url: width: 400, format: 'webp' }} 400w, {{ pathway_image | image_url: width: 480, format: 'webp' }} 480w"
+                    srcset="{{ pathway_image | image_url: width: 320 }} 320w, {{ pathway_image | image_url: width: 400 }} 400w, {{ pathway_image | image_url: width: 480 }} 480w"
                   >
-                  {{ pathway_image | image_url: width: 900, format: 'webp' | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '480,600,720,900', sizes: pathway_sizes, class: 'unpatched-home-pathway-card__image' }}
+                  {{ pathway_image | image_url: width: 900 | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '480,600,720,900', sizes: pathway_sizes, class: 'unpatched-home-pathway-card__image' }}
                 </picture>
               {%- elsif pathway_asset != blank -%}
                 <picture style="display:block;width:100%;height:100%">
