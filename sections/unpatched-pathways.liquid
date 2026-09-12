@@ -59,14 +59,28 @@
           <a class="unpatched-home-pathway-card__link" href="{{ resolved_link }}">
             <div class="unpatched-home-pathway-card__media">
               {%- if pathway_image != blank -%}
-                {{ pathway_image | image_url: width: 1000, format: 'webp' | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '360,480,600,720,800,900,1000', sizes: pathway_sizes, class: 'unpatched-home-pathway-card__image' }}
+                <picture style="display:block;width:100%;height:100%">
+                  <source
+                    media="(max-width: 749px)"
+                    sizes="calc(100vw - 32px)"
+                    srcset="{{ pathway_image | image_url: width: 320, format: 'webp' }} 320w, {{ pathway_image | image_url: width: 400, format: 'webp' }} 400w, {{ pathway_image | image_url: width: 480, format: 'webp' }} 480w"
+                  >
+                  {{ pathway_image | image_url: width: 900, format: 'webp' | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '480,600,720,900', sizes: pathway_sizes, class: 'unpatched-home-pathway-card__image' }}
+                </picture>
               {%- elsif pathway_asset != blank -%}
-                <img class="unpatched-home-pathway-card__image"
-                  src="{{ pathway_asset | asset_img_url: '720x' }}"
-                  srcset="{{ pathway_asset | asset_img_url: '480x' }} 480w, {{ pathway_asset | asset_img_url: '600x' }} 600w, {{ pathway_asset | asset_img_url: '720x' }} 720w"
-                  sizes="{{ pathway_sizes }}"
-                  loading="lazy" decoding="async" fetchpriority="low"
-                  width="{{ pathway_asset_width }}" height="{{ pathway_asset_height }}" alt="">
+                <picture style="display:block;width:100%;height:100%">
+                  <source
+                    media="(max-width: 749px)"
+                    sizes="calc(100vw - 32px)"
+                    srcset="{{ pathway_asset | asset_img_url: '360x' }} 360w, {{ pathway_asset | asset_img_url: '480x' }} 480w"
+                  >
+                  <img class="unpatched-home-pathway-card__image"
+                    src="{{ pathway_asset | asset_img_url: '600x' }}"
+                    srcset="{{ pathway_asset | asset_img_url: '480x' }} 480w, {{ pathway_asset | asset_img_url: '600x' }} 600w, {{ pathway_asset | asset_img_url: '720x' }} 720w"
+                    sizes="{{ pathway_sizes }}"
+                    loading="lazy" decoding="async" fetchpriority="low"
+                    width="{{ pathway_asset_width }}" height="{{ pathway_asset_height }}" alt="">
+                </picture>
               {%- else -%}
                 {{ 'lifestyle-1' | placeholder_svg_tag: 'unpatched-home-pathway-card__placeholder placeholder-svg' }}
               {%- endif -%}
