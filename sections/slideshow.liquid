@@ -114,12 +114,23 @@
                   <source
                     media="(max-width: 999px)"
                     sizes="100vw"
-                    srcset="{{ mobile_image | image_url: width: 400 }} 400w, {{ mobile_image | image_url: width: 500 }} 500w, {{ mobile_image | image_url: width: 600 }} 600w, {{ mobile_image | image_url: width: 700 }} 700w, {{ mobile_image | image_url: width: 800 }} 800w, {{ mobile_image | image_url: width: 900 }} 900w, {{ mobile_image | image_url: width: 1000 }} 1000w, {{ mobile_image | image_url: width: 1200 }} 1200w, {{ mobile_image | image_url: width: 1400 }} 1400w"
+                    srcset="{{ mobile_image | image_url: width: 400 }} 400w, {{ mobile_image | image_url: width: 600 }} 600w, {{ mobile_image | image_url: width: 800 }} 800w, {{ mobile_image | image_url: width: 1000 }} 1000w"
+                    width="{{ mobile_image.width }}"
+                    height="{{ mobile_image.height }}"
                   >
-                  {{- image | image_url: width: 2400 | image_tag: loading: loading_attribute_value, fetchpriority: fetch_priority_value, preload: preload_attribute_value, draggable: false, class: 'slideshow__image', sizes: sizes_attributes, widths: '600,800,1000,1200,1400,1600,1800,2000,2200,2400' -}}
+                  {{- image | image_url: width: 2400 | image_tag: loading: loading_attribute_value, fetchpriority: fetch_priority_value, preload: false, draggable: false, class: 'slideshow__image', sizes: sizes_attributes, widths: '800,1200,1600,2000,2400' -}}
                 </picture>
               {%- else -%}
-                {{- image | image_url: width: 2400 | image_tag: loading: loading_attribute_value, fetchpriority: fetch_priority_value, preload: preload_attribute_value, draggable: false, class: 'slideshow__image', sizes: sizes_attributes, widths: '400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400' -}}
+                <picture>
+                  <source
+                    media="(max-width: 749px)"
+                    sizes="calc(100vw - 24px)"
+                    srcset="{{ image | image_url: width: 360 }} 360w, {{ image | image_url: width: 540 }} 540w, {{ image | image_url: width: 720 }} 720w, {{ image | image_url: width: 960 }} 960w"
+                    width="{{ image.width }}"
+                    height="{{ image.height }}"
+                  >
+                  {{- image | image_url: width: 2400 | image_tag: loading: loading_attribute_value, fetchpriority: fetch_priority_value, preload: false, draggable: false, class: 'slideshow__image', sizes: sizes_attributes, widths: '800,1200,1600,2000,2400' -}}
+                </picture>
               {%- endif -%}
             {%- else -%}
               {% capture image_name %}lifestyle-{% cycle '1', '2' %}{%- endcapture -%}
