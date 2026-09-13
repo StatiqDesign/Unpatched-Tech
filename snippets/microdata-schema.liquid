@@ -70,7 +70,7 @@ managed at the theme level.
           }, {
             "@type": "ListItem",
             "position": 3,
-            "name": {{ blog.title | json }},
+            "name": {{ article.title | json }},
             "item": "{{ shop.url }}{{ article.url }}"
           }
       {%- elsif request.page_type == 'page' -%}
@@ -86,15 +86,22 @@ managed at the theme level.
 </script>
 
 {%- if request.page_type == 'index' -%}
-  {%- assign potential_action_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" -%}
+  {%- liquid
+    assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}'
+    assign organization_description = shop.brand.short_description | default: shop.description
+  -%}
 
   <script type="application/ld+json">
   [
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
+      "@id": {{ shop.url | append: '#website' | json }},
       "name": {{ shop.name | json }},
-      "url": {{ shop.url | append: page.url | json }},
+      "url": {{ shop.url | json }},
+      "publisher": {
+        "@id": {{ shop.url | append: '#organization' | json }}
+      },
       "potentialAction": {
         "@type": "SearchAction",
         "target": {{ potential_action_target | json }},
@@ -104,12 +111,13 @@ managed at the theme level.
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": {{ shop.url | append: '#organization' | json }},
       "name": {{ shop.name | json }},
       {%- if shop.brand.logo -%}
         "logo": {{ shop.brand.logo | image_url: width: shop.brand.logo.width | prepend: "https:" | json }},
       {%- endif -%}
-      {%- if shop.brand.short_description -%}
-        "description": {{ shop.brand.short_description | json }},
+      {%- if organization_description -%}
+        "description": {{ organization_description | json }},
       {%- endif -%}
       {%- if shop.brand.slogan -%}
         "slogan": {{ shop.brand.slogan | json }},
@@ -121,7 +129,7 @@ managed at the theme level.
           {%- endfor -%}
         ],
       {%- endif -%}
-      "url": {{ shop.url | append: page.url | json }}
+      "url": {{ shop.url | json }}
     }
   ]
   </script>
