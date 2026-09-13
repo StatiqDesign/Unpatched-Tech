@@ -4,14 +4,14 @@
    ========================================================================== */
 
 .unpatched-support-contact {
-  padding: clamp(64px, 7vw, 96px) 0 clamp(80px, 8vw, 120px);
+  padding: 96px 0;
   background: var(--up-section-bg, #fff);
   color: var(--up-section-text, #25252a);
 }
 
 .unpatched-contact-form__hero {
   max-width: 780px;
-  margin: 0 auto 36px;
+  margin: 0 auto 40px;
   text-align: center;
 }
 
@@ -144,7 +144,7 @@
 }
 
 @media screen and (max-width: 749px) {
-  .unpatched-support-contact { padding: 54px 0 72px; }
+  .unpatched-support-contact { padding: 56px 0 72px; }
   .unpatched-contact-form__hero { margin-bottom: 28px; }
   .unpatched-contact-form__card { padding: 22px; }
   .unpatched-support-form__row { grid-template-columns: 1fr; }
