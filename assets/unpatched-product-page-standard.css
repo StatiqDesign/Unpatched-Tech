@@ -245,14 +245,15 @@
   color: #405DE6 !important;
 }
 
-/* Product Details uses the exact same typography as bold labels in the description. */
+/* Product Details uses the same type family/weight as the description labels,
+   but remains a compact section label rather than a second content heading. */
 .unpatched-product-page .shopify-section--product-content .product-tabs::before {
   color: #25252a;
   font-family: var(--text-font-family);
-  font-size: 15px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 700;
-  line-height: 1.72;
+  line-height: 1.2;
   letter-spacing: normal;
 }
 
@@ -264,9 +265,9 @@
 
 @media screen and (max-width: 740px) {
   .unpatched-product-page .shopify-section--product-content .product-tabs::before {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
-    line-height: 1.72;
+    line-height: 1.2;
     letter-spacing: normal;
   }
 
