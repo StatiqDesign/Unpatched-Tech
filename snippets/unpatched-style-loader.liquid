@@ -6,7 +6,6 @@ Loads Unpatched Tech styles by page context while keeping the global layout focu
 @param {boolean} is_unpatched_about_page - Whether the current page is the About page.
 @param {boolean} is_unpatched_services_page - Whether the current page is the Services page.
 @param {boolean} is_unpatched_support_page - Whether the current page is a Support or Contact page.
-@param {boolean} is_unpatched_policy_page - Whether the current page is a Shopify policy page.
 {% enddoc %}
 
 {%- liquid
@@ -106,7 +105,6 @@ Loads Unpatched Tech styles by page context while keeping the global layout focu
 {%- if is_unpatched_about_page -%}<link rel="stylesheet" href="{{ 'unpatched-about.css' | asset_url }}">{%- endif -%}
 {%- if is_unpatched_services_page -%}<link rel="stylesheet" href="{{ 'unpatched-services.css' | asset_url }}">{%- endif -%}
 {%- if is_unpatched_support_page -%}<link rel="stylesheet" href="{{ 'unpatched-support.css' | asset_url }}">{%- endif -%}
-{%- if is_unpatched_policy_page -%}<link rel="stylesheet" href="{{ 'unpatched-legal.css' | asset_url }}">{%- endif -%}
 
 {%- if needs_info_layers -%}
   <link rel="stylesheet" href="{{ 'unpatched-info-hero-standard.css' | asset_url }}">
@@ -124,4 +122,3 @@ Loads Unpatched Tech styles by page context while keeping the global layout focu
     {%- endif -%}
   {%- endif -%}
 {%- endif -%}
-
