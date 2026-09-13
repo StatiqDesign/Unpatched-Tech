@@ -84,9 +84,9 @@
     <style>:root { --unpatched-brand-blue-rgb: {{ settings.primary_button_background.red }}, {{ settings.primary_button_background.green }}, {{ settings.primary_button_background.blue }}; }</style>
 
     <script src="{{ 'vendor.js' | asset_url }}" defer></script>
-    <script src="{{ 'theme.js' | asset_url }}" defer></script>
-    <script src="{{ 'custom.js' | asset_url }}" defer></script>
-    {%- if is_unpatched_services_page -%}<script src="{{ 'unpatched-services.js' | asset_url }}" defer></script>{%- endif -%}
+    <script src="{{ 'theme.js' | asset_url }}" defer fetchpriority="low"></script>
+    <script src="{{ 'custom.js' | asset_url }}" defer fetchpriority="low"></script>
+    {%- if is_unpatched_services_page -%}<script src="{{ 'unpatched-services.js' | asset_url }}" defer fetchpriority="low"></script>{%- endif -%}
 
     {{ content_for_header }}
   </head>
