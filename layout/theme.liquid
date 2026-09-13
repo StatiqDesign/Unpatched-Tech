@@ -59,9 +59,11 @@
       <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 96 }}" type="image/png">
     {%- endif -%}
 
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
     {% render 'css-variables', direction: direction %}
 
-    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+    {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
     {%- if request.page_type == 'index' -%}
       {% render 'unpatched-home-critical' %}
     {%- endif -%}
