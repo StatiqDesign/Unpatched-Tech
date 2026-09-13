@@ -39,6 +39,7 @@
         },
         "image_RGiNck": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Cover_Image_for_Intel_B860.jpg",
             "image_fit": "cover",
