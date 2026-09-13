@@ -27,6 +27,11 @@
   transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
 
+/* Policy pages ---------------------------------------------------------- */
+.shopify-policy__title {
+  display: none;
+}
+
 /* Account --------------------------------------------------------------- */
 .header__account-link {
   color: currentColor;
