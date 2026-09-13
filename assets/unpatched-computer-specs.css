@@ -11,7 +11,7 @@
 /* Exact match for product option labels such as COLOR: */
 .unpatched-product-page .up-pc-specs-field__label {
   margin-bottom: 10px;
-  color: rgba(37, 37, 42, .62);
+  color: #25252a;
   font-family: var(--heading-font-family);
   font-size: 10px;
   font-style: normal;
@@ -19,6 +19,12 @@
   line-height: 1;
   letter-spacing: .12em;
   text-transform: uppercase;
+}
+
+/* Keep option labels and the Specs label the same solid black. */
+.unpatched-product-page .product-form__option-name,
+.unpatched-product-page .up-pc-specs-field__label {
+  color: #25252a !important;
 }
 
 .unpatched-product-page .up-pc-specs {
@@ -162,7 +168,7 @@
 
   .unpatched-product-page .up-pc-specs-field__label {
     margin-bottom: 10px;
-    color: rgba(37, 37, 42, .62);
+    color: #25252a;
     font-family: var(--heading-font-family);
     font-size: 10px;
     font-style: normal;
