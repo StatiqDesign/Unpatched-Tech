@@ -98,10 +98,19 @@
   <div class="unpatched-accordions">
     <details class="unpatched-accordion">
       <summary>
-        <span>Inside the Box</span>
+        <span>{% if is_gaming_pc %}What’s Included{% else %}Inside the Box{% endif %}</span>
         <span class="unpatched-accordion-plus" aria-hidden="true"></span>
       </summary>
-      <div class="unpatched-accordion-content rte"><p>{{ inside_the_box | escape | newline_to_br }}</p></div>
+      <div class="unpatched-accordion-content rte">
+        {% if is_gaming_pc %}
+          <ul>
+            <li>1× Unpatched Tech Gaming PC</li>
+            <li>Power Cord</li>
+          </ul>
+        {% else %}
+          <p>{{ inside_the_box | escape | newline_to_br }}</p>
+        {% endif %}
+      </div>
     </details>
   </div>
 
