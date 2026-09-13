@@ -248,9 +248,7 @@
   padding: 15px;
   border: 1px solid rgba(37, 37, 42, .10);
   border-radius: var(--block-border-radius);
-  background:
-    linear-gradient(135deg, rgba(var(--unpatched-brand-blue-rgb), .055), transparent 48%),
-    #f8f9fc;
+  background: #fff;
   box-shadow: 0 10px 26px rgba(26, 31, 44, .045);
 }
 
@@ -483,6 +481,7 @@
     display: block;
     width: 100%;
     margin: 0;
+    background: #fff;
   }
 
   .unpatched-product-page .unpatched-product-sticky__inner {
@@ -490,12 +489,8 @@
     min-height: 94px;
     padding: 13px 14px max(11px, env(safe-area-inset-bottom, 0px));
     border-top: 1px solid rgba(37, 37, 42, .10);
-    background-color: #fff;
-    background-image:
-      linear-gradient(rgba(var(--unpatched-brand-blue-rgb), .032) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(var(--unpatched-brand-blue-rgb), .032) 1px, transparent 1px),
-      radial-gradient(circle at 92% 8%, rgba(var(--unpatched-brand-blue-rgb), .09), transparent 34%);
-    background-size: 26px 26px, 26px 26px, auto;
+    background: #fff;
+    background-image: none;
     box-shadow: 0 -6px 22px rgba(21, 25, 37, .09);
   }
 
@@ -509,6 +504,7 @@
     width: 100%;
     column-gap: 14px;
     row-gap: 7px;
+    background: #fff;
   }
 
   .unpatched-product-page .unpatched-product-sticky__price-wrap {
@@ -516,6 +512,7 @@
     min-width: 0;
     align-self: center;
     text-align: left;
+    background: #fff;
   }
 
   .unpatched-product-page .unpatched-product-sticky__price {
@@ -527,6 +524,7 @@
     font-weight: var(--heading-font-weight);
     line-height: 1;
     white-space: nowrap;
+    background: #fff;
   }
 
   .unpatched-product-page .unpatched-product-sticky__button {
@@ -554,6 +552,7 @@
     line-height: 1.25;
     text-align: center;
     white-space: nowrap;
+    background: #fff;
   }
 }
 
