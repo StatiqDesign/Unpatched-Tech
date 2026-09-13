@@ -1,0 +1,6 @@
+/* Product titles stand on their own across every product template. */
+.unpatched-product-page .product-meta__vendor,
+.unpatched-product-page .product-meta::before {
+  display: none !important;
+  content: none !important;
+}
