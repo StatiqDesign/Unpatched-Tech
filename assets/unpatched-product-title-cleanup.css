@@ -4,3 +4,16 @@
   display: none !important;
   content: none !important;
 }
+
+/* Keep product titles prominent without overpowering the rest of the form. */
+.unpatched-product-page .product-meta__title {
+  font-size: clamp(27px, 2.35vw, 36px) !important;
+  line-height: 1.06 !important;
+}
+
+@media screen and (max-width: 740px) {
+  .unpatched-product-page .product-meta__title {
+    font-size: 27px !important;
+    line-height: 1.08 !important;
+  }
+}
