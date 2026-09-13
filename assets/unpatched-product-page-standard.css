@@ -245,13 +245,15 @@
   color: #405DE6 !important;
 }
 
-/* Product Details should visually match the bold labels inside the description. */
+/* Product Details uses the exact same typography as bold labels in the description. */
 .unpatched-product-page .shopify-section--product-content .product-tabs::before {
   color: #25252a;
-  font-size: 11px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: .11em;
+  font-family: var(--text-font-family);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.72;
+  letter-spacing: normal;
 }
 
 /* Keep the purchase-row price prominent without competing with the CTA. */
@@ -262,8 +264,10 @@
 
 @media screen and (max-width: 740px) {
   .unpatched-product-page .shopify-section--product-content .product-tabs::before {
-    font-size: 10px;
-    font-weight: 800;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.72;
+    letter-spacing: normal;
   }
 
   .unpatched-product-page .unpatched-product-sticky__price {
@@ -307,7 +311,10 @@
 .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content strong,
 .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content b {
   color: #25252a;
+  font-family: var(--text-font-family);
+  font-style: normal;
   font-weight: 700;
+  letter-spacing: normal;
 }
 
 @media screen and (max-width: 740px) {
