@@ -120,5 +120,8 @@ Loads Unpatched Tech styles by page context while keeping the global layout focu
     <noscript><link rel="stylesheet" href="{{ 'unpatched-collection-cards.css' | asset_url }}"></noscript>
   {%- else -%}
     <link rel="stylesheet" href="{{ 'unpatched-collection-cards.css' | asset_url }}">
+    {%- if request.page_type == 'product' -%}
+      <link rel="stylesheet" href="{{ 'unpatched-product-recommendation-cards.css' | asset_url }}">
+    {%- endif -%}
   {%- endif -%}
 {%- endif -%}
