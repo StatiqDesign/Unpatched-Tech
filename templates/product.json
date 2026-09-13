@@ -22,10 +22,6 @@
             "size_chart_page": ""
           }
         },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "settings": {}
-        },
         "refurbished_certified": {
           "type": "liquid",
           "settings": {
@@ -52,7 +48,6 @@
       },
       "block_order": [
         "variant_picker",
-        "quantity_selector",
         "refurbished_certified",
         "product_disclosures",
         "buy_buttons"
