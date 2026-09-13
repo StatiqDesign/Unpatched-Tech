@@ -1,63 +1,29 @@
 /* ========================================================================== 
    UNPATCHED TECH — COMPUTER PRODUCT SPECS
-   Dedicated spec card for the Computers product template.
+   Dedicated spec sheet for the Computers product template.
    ========================================================================== */
+
+.unpatched-product-page .up-pc-specs-field {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.unpatched-product-page .up-pc-specs-field__label {
+  margin-bottom: 10px;
+  color: #25252a;
+  font-family: var(--text-font-family);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+}
 
 .unpatched-product-page .up-pc-specs {
   width: 100%;
-  margin-top: 20px;
   overflow: hidden;
-  border: 1px solid rgba(37, 37, 42, .10);
+  border: 1px solid rgba(37, 37, 42, .12);
   border-radius: var(--block-border-radius);
   background: #fff;
-  box-shadow: 0 8px 24px rgba(24, 29, 42, .045);
-}
-
-.unpatched-product-page .up-pc-specs__header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 20px 22px 18px;
-  border-bottom: 1px solid rgba(37, 37, 42, .08);
-  background: #fff;
-}
-
-.unpatched-product-page .up-pc-specs__eyebrow {
-  display: none;
-}
-
-.unpatched-product-page .up-pc-specs__title {
-  margin: 0;
-  color: #25252a;
-  font-family: var(--heading-font-family);
-  font-size: 16px;
-  font-weight: var(--heading-font-weight);
-  line-height: 1.2;
-  letter-spacing: -.015em;
-}
-
-.unpatched-product-page .up-pc-specs__intro {
-  max-width: 48ch;
-  margin: 6px 0 0;
-  color: rgba(37, 37, 42, .55);
-  font-size: 10.5px;
-  line-height: 1.5;
-}
-
-.unpatched-product-page .up-pc-specs__badge {
-  flex: 0 0 auto;
-  margin-top: 1px;
-  padding: 7px 9px;
-  border: 1px solid rgba(var(--unpatched-brand-blue-rgb), .14);
-  border-radius: var(--button-border-radius);
-  background: rgba(var(--unpatched-brand-blue-rgb), .055);
-  color: rgb(var(--unpatched-brand-blue-rgb));
-  font-family: var(--heading-font-family);
-  font-size: 8px;
-  font-weight: var(--heading-font-weight);
-  line-height: 1;
-  letter-spacing: .10em;
+  box-shadow: none;
 }
 
 .unpatched-product-page .up-pc-specs__grid {
@@ -155,20 +121,13 @@
     box-shadow: none !important;
   }
 
-  .unpatched-product-page .up-pc-specs {
-    margin-top: 18px;
+  .unpatched-product-page .up-pc-specs-field {
+    margin-top: 22px;
   }
 
-  .unpatched-product-page .up-pc-specs__header {
-    padding: 17px 16px 15px;
-  }
-
-  .unpatched-product-page .up-pc-specs__intro {
-    font-size: 10px;
-  }
-
-  .unpatched-product-page .up-pc-specs__badge {
-    display: none;
+  .unpatched-product-page .up-pc-specs-field__label {
+    margin-bottom: 9px;
+    font-size: 14px;
   }
 
   .unpatched-product-page .up-pc-specs__item {
