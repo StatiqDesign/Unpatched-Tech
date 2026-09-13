@@ -22,10 +22,6 @@
             "size_chart_page": ""
           }
         },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "settings": {}
-        },
         "computer_specs": {
           "type": "liquid",
           "settings": {
@@ -52,7 +48,6 @@
       },
       "block_order": [
         "variant_picker",
-        "quantity_selector",
         "computer_specs",
         "product_disclosures",
         "buy_buttons"
