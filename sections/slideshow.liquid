@@ -102,7 +102,7 @@
           {%- assign fetch_priority_value = 'high' -%}
         {%- else -%}
           {%- assign loading_attribute_value = 'lazy' -%}
-          {%- assign fetch_priority_value = 'auto' -%}
+          {%- assign fetch_priority_value = 'low' -%}
         {%- endif -%}
 
         {%- capture slide_content -%}
@@ -118,7 +118,7 @@
                     width="{{ mobile_image.width }}"
                     height="{{ mobile_image.height }}"
                   >
-                  {{- image | image_url: width: 2400 | image_tag: loading: loading_attribute_value, fetchpriority: fetch_priority_value, preload: false, draggable: false, class: 'slideshow__image', sizes: sizes_attributes, widths: '800,1200,1600,2000,2400' -}}
+                  {{- image | image_url: width: 2400 | image_tag: loading: loading_attribute_value, fetchpriority: fetch_priority_value, preload: preload_attribute_value, draggable: false, class: 'slideshow__image', sizes: sizes_attributes, widths: '800,1200,1600,2000,2400' -}}
                 </picture>
               {%- else -%}
                 <picture>
@@ -129,7 +129,7 @@
                     width="{{ image.width }}"
                     height="{{ image.height }}"
                   >
-                  {{- image | image_url: width: 2400 | image_tag: loading: loading_attribute_value, fetchpriority: fetch_priority_value, preload: false, draggable: false, class: 'slideshow__image', sizes: sizes_attributes, widths: '800,1200,1600,2000,2400' -}}
+                  {{- image | image_url: width: 2400 | image_tag: loading: loading_attribute_value, fetchpriority: fetch_priority_value, preload: preload_attribute_value, draggable: false, class: 'slideshow__image', sizes: sizes_attributes, widths: '800,1200,1600,2000,2400' -}}
                 </picture>
               {%- endif -%}
             {%- else -%}
