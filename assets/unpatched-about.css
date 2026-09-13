@@ -5,9 +5,9 @@
 
 .unpatched-about-minimal-hero {
   display: flex;
-  align-items: center;
-  min-height: clamp(560px, 72vh, 760px);
-  padding: clamp(76px, 8vw, 108px) 0;
+  align-items: flex-start;
+  min-height: 0;
+  padding: 96px 0;
   background: var(--up-section-bg, #fff);
   color: var(--up-section-text, #25252a);
 }
@@ -19,7 +19,7 @@
 }
 
 .unpatched-about-minimal-hero__eyebrow {
-  margin: 0 0 14px;
+  margin: 0 0 12px;
   color: rgb(var(--unpatched-brand-blue-rgb));
 }
 
@@ -31,7 +31,7 @@
 
 .unpatched-about-minimal-hero__copy {
   max-width: 68ch;
-  margin: 24px auto 0;
+  margin: 18px auto 0;
   color: var(--up-section-muted, #6f6f73);
   font-size: 16px;
   line-height: 1.72;
@@ -75,7 +75,7 @@
 @media screen and (max-width: 749px) {
   .unpatched-about-minimal-hero {
     min-height: 0;
-    padding: 64px 0 72px;
+    padding: 56px 0 72px;
   }
 
   .unpatched-about-minimal-hero__copy {
