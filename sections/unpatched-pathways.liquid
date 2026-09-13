@@ -1,4 +1,4 @@
-{%- comment -%}Responsive sources cap mobile pathway imagery at 480px to reduce transfer cost while allowing Shopify to negotiate the best image format.{%- endcomment -%}
+{%- comment -%}Responsive sources include high-DPR mobile candidates while allowing Shopify to select the smallest suitable image.{%- endcomment -%}
 <section class="section unpatched-home-section unpatched-home-pathways" style="--up-section-background: {{ section.settings.background }}; --up-section-text: {{ section.settings.text_color }};">
   <div class="container">
     <header class="unpatched-home-section__header">
@@ -64,20 +64,20 @@
                   <source
                     media="(max-width: 749px)"
                     sizes="calc(100vw - 32px)"
-                    srcset="{{ pathway_image | image_url: width: 320 }} 320w, {{ pathway_image | image_url: width: 400 }} 400w, {{ pathway_image | image_url: width: 480 }} 480w"
+                    srcset="{{ pathway_image | image_url: width: 320 }} 320w, {{ pathway_image | image_url: width: 400 }} 400w, {{ pathway_image | image_url: width: 480 }} 480w, {{ pathway_image | image_url: width: 640 }} 640w, {{ pathway_image | image_url: width: 800 }} 800w, {{ pathway_image | image_url: width: 960 }} 960w, {{ pathway_image | image_url: width: 1120 }} 1120w"
                   >
-                  {{ pathway_image | image_url: width: 900 | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '480,600,720,900', sizes: pathway_sizes, class: 'unpatched-home-pathway-card__image' }}
+                  {{ pathway_image | image_url: width: 1120 | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '480,600,720,900,960,1120', sizes: pathway_sizes, class: 'unpatched-home-pathway-card__image' }}
                 </picture>
               {%- elsif pathway_asset != blank -%}
                 <picture style="display:block;width:100%;height:100%">
                   <source
                     media="(max-width: 749px)"
                     sizes="calc(100vw - 32px)"
-                    srcset="{{ pathway_asset | asset_img_url: '360x' }} 360w, {{ pathway_asset | asset_img_url: '480x' }} 480w"
+                    srcset="{{ pathway_asset | asset_img_url: '360x' }} 360w, {{ pathway_asset | asset_img_url: '480x' }} 480w, {{ pathway_asset | asset_img_url: '640x' }} 640w, {{ pathway_asset | asset_img_url: '800x' }} 800w, {{ pathway_asset | asset_img_url: '960x' }} 960w, {{ pathway_asset | asset_img_url: '1120x' }} 1120w"
                   >
                   <img class="unpatched-home-pathway-card__image"
-                    src="{{ pathway_asset | asset_img_url: '600x' }}"
-                    srcset="{{ pathway_asset | asset_img_url: '480x' }} 480w, {{ pathway_asset | asset_img_url: '600x' }} 600w, {{ pathway_asset | asset_img_url: '720x' }} 720w"
+                    src="{{ pathway_asset | asset_img_url: '720x' }}"
+                    srcset="{{ pathway_asset | asset_img_url: '480x' }} 480w, {{ pathway_asset | asset_img_url: '600x' }} 600w, {{ pathway_asset | asset_img_url: '720x' }} 720w, {{ pathway_asset | asset_img_url: '900x' }} 900w, {{ pathway_asset | asset_img_url: '1120x' }} 1120w"
                     sizes="{{ pathway_sizes }}"
                     loading="lazy" decoding="async" fetchpriority="low"
                     width="{{ pathway_asset_width }}" height="{{ pathway_asset_height }}" alt="">
