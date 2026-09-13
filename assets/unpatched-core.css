@@ -32,6 +32,10 @@
   display: none;
 }
 
+.shopify-policy__container {
+  padding-top: 64px;
+}
+
 /* Account --------------------------------------------------------------- */
 .header__account-link {
   color: currentColor;
@@ -205,6 +209,10 @@ shopify-account {
 }
 
 @media screen and (max-width: 749px) {
+  .shopify-policy__container {
+    padding-top: 40px;
+  }
+
   .shopify-section--announcement-bar .announcement-bar {
     min-height: 32px;
   }
