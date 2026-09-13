@@ -150,7 +150,9 @@
   }
 
   body.unpatched-product-page #main .shopify-section--main-product .product__info {
-    box-shadow: none;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
   }
 
   .unpatched-product-page .up-pc-specs {
