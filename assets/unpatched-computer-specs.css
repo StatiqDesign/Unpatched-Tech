@@ -70,7 +70,7 @@
 .unpatched-product-page .up-pc-specs__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  background: #f7f8fb;
+  background: #fff;
 }
 
 .unpatched-product-page .up-pc-specs__item {
@@ -82,6 +82,7 @@
   min-height: 72px;
   padding: 13px 17px;
   border-bottom: 1px solid rgba(37, 37, 42, .07);
+  background: #fff;
 }
 
 .unpatched-product-page .up-pc-specs__item:nth-child(odd):not(.up-pc-specs__item--wide) {
