@@ -24,14 +24,7 @@
 }
 
 .unpatched-product-page .up-pc-specs__eyebrow {
-  display: block;
-  margin-bottom: 7px;
-  color: rgb(var(--unpatched-brand-blue-rgb));
-  font-family: var(--heading-font-family);
-  font-size: 9px;
-  font-weight: var(--heading-font-weight);
-  line-height: 1;
-  letter-spacing: .13em;
+  display: none;
 }
 
 .unpatched-product-page .up-pc-specs__title {
