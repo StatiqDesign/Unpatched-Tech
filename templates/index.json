@@ -170,7 +170,7 @@
       "type": "unpatched-flagship-pc",
       "name": "FLAGSHIP PC",
       "settings": {
-        "product": "mid-tier",
+        "product": "entry-tier-gaming-pc",
         "desktop_image_fit": "contain",
         "desktop_image_position": "center center",
         "desktop_image_scale": 100,
