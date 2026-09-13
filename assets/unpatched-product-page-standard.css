@@ -158,9 +158,6 @@
     padding: var(--up-product-shell-top) 0 var(--up-product-shell-bottom);
   }
 
-  /* The media nav lives between the two visual cards. Give that area its own
-     deliberate height so the dots sit in the true center of the gap rather
-     than being followed by a second grid gap. */
   .unpatched-product-page .shopify-section--main-product .product {
     row-gap: 0;
   }
@@ -186,16 +183,10 @@
     padding: var(--up-product-section-gap) 0 52px;
   }
 
-  /* Product description follows the desktop card treatment on mobile: it is
-     informational content, not another disclosure, so keep it permanently
-     visible and remove the mobile collapse control. */
   .unpatched-product-page .shopify-section--product-content .collapsible-toggle {
     display: none;
   }
 
-  /* Focal writes height/overflow on <collapsible-content> at runtime. The
-     launched product description is intentionally static on mobile, so these
-     two properties are the only forced compatibility rules in this module. */
   .unpatched-product-page .shopify-section--product-content collapsible-content.collapsible {
     display: block;
     height: auto !important;
@@ -205,8 +196,6 @@
     opacity: 1;
   }
 
-  /* Focal adds divider borders around mobile product-tab wrappers. With the
-     description permanently open, those read as stray rules inside the card. */
   .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-wrapper,
   .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-wrapper:last-child {
     border-top: 0;
@@ -231,13 +220,10 @@
   }
 }
 
-/* Dynamic checkout is unavailable whenever the selected variant cannot be purchased. */
 .unpatched-product-page .product-form__payment-container--unavailable .shopify-payment-button {
   display: none;
 }
 
-/* GLOBAL PRODUCT UI POLISH ----------------------------------------------- */
-/* Use the exact Unpatched brand blue for every part of the breadcrumb. */
 .unpatched-product-page .shopify-section--main-product .breadcrumb,
 .unpatched-product-page .shopify-section--main-product .breadcrumb__item,
 .unpatched-product-page .shopify-section--main-product .breadcrumb__link,
@@ -245,8 +231,6 @@
   color: #405DE6 !important;
 }
 
-/* Product Details uses the same type family/weight as the description labels,
-   but remains a compact section label rather than a second content heading. */
 .unpatched-product-page .shopify-section--product-content .product-tabs::before {
   color: #25252a;
   font-family: var(--text-font-family);
@@ -257,7 +241,6 @@
   letter-spacing: normal;
 }
 
-/* Keep the purchase-row price prominent without competing with the CTA. */
 .unpatched-product-page .unpatched-purchase-price {
   font-size: clamp(18px, 1.4vw, 22px);
   line-height: 1.1;
@@ -265,10 +248,13 @@
 
 @media screen and (max-width: 740px) {
   .unpatched-product-page .shopify-section--product-content .product-tabs::before {
+    display: block;
+    width: 100%;
     font-size: 12px;
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: normal;
+    text-align: center;
   }
 
   .unpatched-product-page .unpatched-product-sticky__price {
@@ -277,7 +263,6 @@
   }
 }
 
-/* PRODUCT PAGE CLEANUP — consistent white canvas and mobile purchase dock */
 .unpatched-product-page,
 .unpatched-product-page main,
 .unpatched-product-page .shopify-section--main-product,
@@ -294,7 +279,6 @@
   border-top-color: rgba(37, 37, 42, .075);
 }
 
-/* Normalize all description copy so the intro and bullet copy share one type system. */
 .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content,
 .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content p,
 .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content ul,
