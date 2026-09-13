@@ -237,16 +237,21 @@
 }
 
 /* GLOBAL PRODUCT UI POLISH ----------------------------------------------- */
-/* Keep the breadcrumb in the Unpatched blue across every product template. */
+/* Use the exact Unpatched brand blue for every part of the breadcrumb. */
 .unpatched-product-page .shopify-section--main-product .breadcrumb,
-.unpatched-product-page .shopify-section--main-product .breadcrumb__link {
-  color: rgb(var(--unpatched-brand-blue-rgb));
+.unpatched-product-page .shopify-section--main-product .breadcrumb__item,
+.unpatched-product-page .shopify-section--main-product .breadcrumb__link,
+.unpatched-product-page .shopify-section--main-product .breadcrumb__link[aria-current="page"] {
+  color: #405DE6 !important;
 }
 
-/* Product Details should read like a strong content label, not an eyebrow. */
+/* Product Details should visually match the bold labels inside the description. */
 .unpatched-product-page .shopify-section--product-content .product-tabs::before {
   color: #25252a;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .11em;
 }
 
 /* Keep the purchase-row price prominent without competing with the CTA. */
@@ -256,6 +261,11 @@
 }
 
 @media screen and (max-width: 740px) {
+  .unpatched-product-page .shopify-section--product-content .product-tabs::before {
+    font-size: 10px;
+    font-weight: 800;
+  }
+
   .unpatched-product-page .unpatched-product-sticky__price {
     font-size: clamp(18px, 5.2vw, 22px);
     line-height: 1.1;
