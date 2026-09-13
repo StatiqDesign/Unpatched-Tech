@@ -39,10 +39,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
     <meta name="theme-color" content="{{ settings.header_background }}">
 
-    <title>{% if page_title == blank %}{{ shop.name }}{% else %}{{ page_title }}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% endif %}</title>
+    {%- liquid
+      assign seo_page_title = page_title
+      assign seo_page_description = page_description
 
-    {%- if page_description -%}
-      <meta name="description" content="{{ page_description | escape }}">
+      if request.page_type == 'index'
+        assign seo_page_title = 'Unpatched Tech | Refurbished Game Consoles & Gaming PCs'
+        assign seo_page_description = 'Unpatched Tech sells expertly refurbished Nintendo, PlayStation and Xbox consoles, handhelds, and gaming PCs. Cleaned, tested, restored, and ready to play.'
+      endif
+    -%}
+
+    <title>{% if seo_page_title == blank %}{{ shop.name }}{% else %}{{ seo_page_title }}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% endif %}</title>
+
+    {%- if seo_page_description -%}
+      <meta name="description" content="{{ seo_page_description | escape }}">
     {%- endif -%}
 
     <link rel="canonical" href="{{ canonical_url }}">
@@ -94,6 +104,10 @@
     {%- endif -%}
 
     <div id="main" role="main" class="anchor">
+      {%- if request.page_type == 'index' -%}
+        <h1 class="visually-hidden">Unpatched Tech — Refurbished Game Consoles & Gaming PCs</h1>
+      {%- endif -%}
+
       {%- if request.page_type == 'collection' or request.page_type == 'search' -%}
         {%- assign active_filters_count = 0 -%}
         {%- if request.page_type == 'collection' -%}{%- assign filters = collection.filters -%}{%- else -%}{%- assign filters = search.filters -%}{%- endif -%}
