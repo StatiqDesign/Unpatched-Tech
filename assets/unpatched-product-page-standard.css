@@ -68,7 +68,13 @@
   margin-top: 24px;
 }
 
+/* Quantity is intentionally not exposed on product pages. Keep this global
+   so Shopify editor state or alternate product templates cannot reintroduce it. */
 .unpatched-product-page .product-form__quantity,
+.unpatched-product-page [data-block-type="quantity-selector"] {
+  display: none !important;
+}
+
 .unpatched-product-page .unpatched-purchase-row,
 .unpatched-product-page .product-form__text,
 .unpatched-product-page .unpatched-accordion {
