@@ -30,6 +30,37 @@
   box-shadow: none;
 }
 
+.unpatched-product-page .up-pc-specs__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 18px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(37, 37, 42, .07);
+  background: #fff;
+}
+
+.unpatched-product-page .up-pc-specs__product-title,
+.unpatched-product-page .up-pc-specs__product-price {
+  color: #25252a;
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: var(--heading-font-weight);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+}
+
+.unpatched-product-page .up-pc-specs__product-title {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.unpatched-product-page .up-pc-specs__product-price {
+  white-space: nowrap;
+  text-align: right;
+}
+
 .unpatched-product-page .up-pc-specs__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -139,6 +170,17 @@
     line-height: 1;
     letter-spacing: .12em;
     text-transform: uppercase;
+  }
+
+  .unpatched-product-page .up-pc-specs__header {
+    gap: 12px;
+    padding: 15px 14px;
+  }
+
+  .unpatched-product-page .up-pc-specs__product-title,
+  .unpatched-product-page .up-pc-specs__product-price {
+    font-size: 15px;
+    line-height: 1.2;
   }
 
   .unpatched-product-page .up-pc-specs__item {
