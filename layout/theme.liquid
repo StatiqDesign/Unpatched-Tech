@@ -86,6 +86,7 @@
     <script src="{{ 'vendor.js' | asset_url }}" defer></script>
     <script src="{{ 'theme.js' | asset_url }}" defer fetchpriority="low"></script>
     <script src="{{ 'custom.js' | asset_url }}" defer fetchpriority="low"></script>
+    {%- if request.page_type == 'index' -%}<script src="{{ 'unpatched-history-restore.js' | asset_url }}" defer fetchpriority="low"></script>{%- endif -%}
     {%- if is_unpatched_services_page -%}<script src="{{ 'unpatched-services.js' | asset_url }}" defer fetchpriority="low"></script>{%- endif -%}
 
     {{ content_for_header }}
