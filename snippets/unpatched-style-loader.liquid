@@ -72,6 +72,14 @@ Loads Unpatched Tech styles by page context while keeping the global layout focu
     </noscript>
   {%- when 'collection' -%}
     <link rel="stylesheet" href="{{ 'unpatched-collection.css' | asset_url }}">
+    <style>
+      .shopify-section--main-collection,
+      .shopify-section--main-collection > section,
+      .shopify-section--main-collection .product-facet,
+      .shopify-section--main-collection .product-facet__main {
+        background: #fff !important;
+      }
+    </style>
 {%- endcase -%}
 
 {%- if is_unpatched_faq_page -%}
