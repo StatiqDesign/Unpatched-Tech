@@ -8,16 +8,13 @@
   margin-top: 24px;
 }
 
-.unpatched-product-page .up-refurb-certified-field__label {
+/* INFO reuses the exact native product option markup/classes used by COLOR. */
+.unpatched-product-page .up-refurb-certified-field__label-wrap {
   margin-bottom: 10px;
-  color: #25252a;
-  font-family: var(--heading-font-family);
-  font-size: 10px;
-  font-style: normal;
-  font-weight: var(--heading-font-weight);
-  line-height: 1;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+}
+
+.unpatched-product-page .up-refurb-certified-field__label-wrap .product-form__option-name {
+  color: #25252a !important;
 }
 
 .unpatched-product-page .up-refurb-certified {
@@ -27,14 +24,15 @@
   flex-direction: column;
   border: 1px solid rgba(37, 37, 42, .12);
   border-radius: var(--block-border-radius);
-  background: #fff;
+  background: #fff !important;
   box-shadow: none;
 }
 
 .unpatched-product-page .up-refurb-certified__header {
   padding: 16px 17px;
   border-bottom: 1px solid rgba(37, 37, 42, .07);
-  background: #fff;
+  background: #fff !important;
+  background-image: none !important;
 }
 
 .unpatched-product-page .up-refurb-certified__heading {
@@ -50,6 +48,9 @@
   width: 34px;
   height: 34px;
   place-items: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   color: rgb(var(--unpatched-brand-blue-rgb));
 }
 
@@ -94,7 +95,7 @@
 .unpatched-product-page .up-refurb-certified__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  background: #fff;
+  background: #fff !important;
 }
 
 .unpatched-product-page .up-refurb-certified__item {
@@ -106,7 +107,7 @@
   min-height: 86px;
   padding: 13px 17px;
   border-bottom: 1px solid rgba(37, 37, 42, .07);
-  background: #fff;
+  background: #fff !important;
 }
 
 .unpatched-product-page .up-refurb-certified__item:nth-child(odd) {
@@ -166,12 +167,8 @@
     margin-top: 22px;
   }
 
-  .unpatched-product-page .up-refurb-certified-field__label {
+  .unpatched-product-page .up-refurb-certified-field__label-wrap {
     margin-bottom: 10px;
-    color: #25252a;
-    font-size: 10px;
-    line-height: 1;
-    letter-spacing: .12em;
   }
 
   .unpatched-product-page .up-refurb-certified__header {
