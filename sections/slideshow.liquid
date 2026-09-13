@@ -114,7 +114,7 @@
                   <source
                     media="(max-width: 999px)"
                     sizes="100vw"
-                    srcset="{{ mobile_image | image_url: width: 400 }} 400w, {{ mobile_image | image_url: width: 600 }} 600w, {{ mobile_image | image_url: width: 800 }} 800w, {{ mobile_image | image_url: width: 1000 }} 1000w"
+                    srcset="{{ mobile_image | image_url: width: 400 }} 400w, {{ mobile_image | image_url: width: 600 }} 600w, {{ mobile_image | image_url: width: 800 }} 800w, {{ mobile_image | image_url: width: 1000 }} 1000w, {{ mobile_image | image_url: width: 1200 }} 1200w"
                     width="{{ mobile_image.width }}"
                     height="{{ mobile_image.height }}"
                   >
@@ -125,7 +125,7 @@
                   <source
                     media="(max-width: 749px)"
                     sizes="calc(100vw - 24px)"
-                    srcset="{{ image | image_url: width: 360 }} 360w, {{ image | image_url: width: 540 }} 540w, {{ image | image_url: width: 720 }} 720w, {{ image | image_url: width: 960 }} 960w"
+                    srcset="{{ image | image_url: width: 360 }} 360w, {{ image | image_url: width: 540 }} 540w, {{ image | image_url: width: 720 }} 720w, {{ image | image_url: width: 960 }} 960w, {{ image | image_url: width: 1200 }} 1200w"
                     width="{{ image.width }}"
                     height="{{ image.height }}"
                   >
@@ -257,7 +257,6 @@
     {%- endif -%}
   </slide-show>
 </section>
-
 {% schema %}
 {
   "name": "Slideshow",
