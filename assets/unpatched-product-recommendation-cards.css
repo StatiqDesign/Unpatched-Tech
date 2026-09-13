@@ -1,0 +1,57 @@
+/* ========================================================================== 
+   UNPATCHED TECH — PRODUCT RECOMMENDATION CARDS
+   Makes You May Also Like cards use the same complete card shell as collection
+   product cards instead of a floating image + metadata layout.
+   ========================================================================== */
+
+.unpatched-product-page .shopify-section--product-recommendations .up-global-product-card {
+  overflow: hidden;
+  border: 1px solid rgba(37, 37, 42, .095);
+  border-radius: var(--block-border-radius);
+  background: #fff;
+  box-shadow: none;
+  transition: border-color 140ms ease;
+}
+
+.unpatched-product-page .shopify-section--product-recommendations .up-global-product-card .product-item__image-wrapper,
+.unpatched-product-page .shopify-section--product-recommendations .up-global-product-card__image-wrapper {
+  overflow: hidden;
+  background: #fff;
+}
+
+.unpatched-product-page .shopify-section--product-recommendations .up-global-product-card .product-item__aspect-ratio,
+.unpatched-product-page .shopify-section--product-recommendations .up-global-product-card__media {
+  border: 0;
+  border-bottom: 1px solid rgba(37, 37, 42, .075);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.unpatched-product-page .shopify-section--product-recommendations .up-global-product-card .product-item__info,
+.unpatched-product-page .shopify-section--product-recommendations .up-global-product-card__info {
+  padding: 20px 20px 19px;
+  background: #fff;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .unpatched-product-page .shopify-section--product-recommendations .up-global-product-card:hover {
+    border-color: rgba(var(--unpatched-brand-blue-rgb), .30);
+  }
+
+  .unpatched-product-page .shopify-section--product-recommendations .up-global-product-card:hover .up-global-product-card__media {
+    transform: none;
+    border-color: rgba(37, 37, 42, .075);
+    box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .unpatched-product-page .shopify-section--product-recommendations .up-global-product-card {
+    border-radius: min(var(--block-border-radius), 14px);
+  }
+
+  .unpatched-product-page .shopify-section--product-recommendations .up-global-product-card .product-item__info,
+  .unpatched-product-page .shopify-section--product-recommendations .up-global-product-card__info {
+    padding: 15px 13px 13px;
+  }
+}
