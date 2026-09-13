@@ -3,53 +3,59 @@
    Trust-focused companion to the gaming PC specification card.
    ========================================================================== */
 
+.unpatched-product-page .up-refurb-certified-field {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.unpatched-product-page .up-refurb-certified-field__label {
+  margin-bottom: 10px;
+  color: #25252a;
+  font-family: var(--heading-font-family);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: var(--heading-font-weight);
+  line-height: 1;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
 .unpatched-product-page .up-refurb-certified {
   display: flex;
   width: 100%;
-  min-height: 464px;
-  margin-top: 20px;
   overflow: hidden;
   flex-direction: column;
-  border: 1px solid rgba(37, 37, 42, .10);
+  border: 1px solid rgba(37, 37, 42, .12);
   border-radius: var(--block-border-radius);
   background: #fff;
-  box-shadow: 0 8px 24px rgba(24, 29, 42, .045);
+  box-shadow: none;
 }
 
 .unpatched-product-page .up-refurb-certified__header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 20px 22px 18px;
-  border-bottom: 1px solid rgba(37, 37, 42, .08);
-  background:
-    radial-gradient(circle at 0 0, rgba(var(--unpatched-brand-blue-rgb), .055), transparent 42%),
-    #fff;
+  padding: 16px 17px;
+  border-bottom: 1px solid rgba(37, 37, 42, .07);
+  background: #fff;
 }
 
 .unpatched-product-page .up-refurb-certified__heading {
   display: grid;
-  grid-template-columns: 38px minmax(0, 1fr);
-  align-items: start;
-  gap: 12px;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  gap: 11px;
   min-width: 0;
 }
 
 .unpatched-product-page .up-refurb-certified__seal {
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   place-items: center;
-  border: 1px solid rgba(var(--unpatched-brand-blue-rgb), .14);
-  border-radius: 50%;
-  background: rgba(var(--unpatched-brand-blue-rgb), .055);
   color: rgb(var(--unpatched-brand-blue-rgb));
 }
 
 .unpatched-product-page .up-refurb-certified__seal svg {
-  width: 23px;
-  height: 23px;
+  width: 22px;
+  height: 22px;
   stroke: currentColor;
   stroke-width: 1.6;
   stroke-linecap: round;
@@ -58,54 +64,37 @@
 
 .unpatched-product-page .up-refurb-certified__eyebrow {
   display: block;
-  margin-bottom: 7px;
-  color: rgb(var(--unpatched-brand-blue-rgb));
+  margin-bottom: 3px;
+  color: rgba(37, 37, 42, .44);
   font-family: var(--heading-font-family);
-  font-size: 9px;
+  font-size: 8px;
   font-weight: var(--heading-font-weight);
-  line-height: 1;
-  letter-spacing: .13em;
+  line-height: 1.15;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
 
 .unpatched-product-page .up-refurb-certified__title {
   margin: 0;
   color: #25252a;
   font-family: var(--heading-font-family);
-  font-size: 16px;
-  font-weight: var(--heading-font-weight);
-  line-height: 1.2;
-  letter-spacing: -.015em;
+  font-size: 11.5px;
+  font-weight: 650;
+  line-height: 1.35;
 }
 
 .unpatched-product-page .up-refurb-certified__intro {
-  max-width: 52ch;
-  margin: 6px 0 0;
-  color: rgba(37, 37, 42, .55);
+  max-width: 58ch;
+  margin: 4px 0 0;
+  color: rgba(37, 37, 42, .64);
   font-size: 10.5px;
-  line-height: 1.5;
-}
-
-.unpatched-product-page .up-refurb-certified__badge {
-  flex: 0 0 auto;
-  margin-top: 1px;
-  padding: 7px 9px;
-  border: 1px solid rgba(var(--unpatched-brand-blue-rgb), .14);
-  border-radius: var(--button-border-radius);
-  background: rgba(var(--unpatched-brand-blue-rgb), .055);
-  color: rgb(var(--unpatched-brand-blue-rgb));
-  font-family: var(--heading-font-family);
-  font-size: 8px;
-  font-weight: var(--heading-font-weight);
-  line-height: 1;
-  letter-spacing: .10em;
+  line-height: 1.45;
 }
 
 .unpatched-product-page .up-refurb-certified__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-  flex: 1 1 auto;
-  background: #f7f8fb;
+  background: #fff;
 }
 
 .unpatched-product-page .up-refurb-certified__item {
@@ -114,9 +103,10 @@
   align-items: center;
   gap: 11px;
   min-width: 0;
-  min-height: 82px;
-  padding: 18px 17px;
+  min-height: 86px;
+  padding: 13px 17px;
   border-bottom: 1px solid rgba(37, 37, 42, .07);
+  background: #fff;
 }
 
 .unpatched-product-page .up-refurb-certified__item:nth-child(odd) {
@@ -154,8 +144,8 @@
 }
 
 .unpatched-product-page .up-refurb-certified__item small {
-  margin-bottom: 4px;
-  color: rgba(37, 37, 42, .48);
+  margin-bottom: 3px;
+  color: rgba(37, 37, 42, .44);
   font-family: var(--heading-font-family);
   font-size: 8px;
   font-weight: var(--heading-font-weight);
@@ -172,53 +162,51 @@
 }
 
 @media screen and (max-width: 740px) {
-  .unpatched-product-page .up-refurb-certified {
-    min-height: 464px;
-    margin-top: 18px;
+  .unpatched-product-page .up-refurb-certified-field {
+    margin-top: 22px;
+  }
+
+  .unpatched-product-page .up-refurb-certified-field__label {
+    margin-bottom: 10px;
+    color: #25252a;
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: .12em;
   }
 
   .unpatched-product-page .up-refurb-certified__header {
-    padding: 17px 16px 15px;
+    padding: 13px 12px;
   }
 
-  .unpatched-product-page .up-refurb-certified__heading {
-    grid-template-columns: 32px minmax(0, 1fr);
-    gap: 10px;
-  }
-
-  .unpatched-product-page .up-refurb-certified__seal {
-    width: 32px;
-    height: 32px;
-  }
-
-  .unpatched-product-page .up-refurb-certified__seal svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .unpatched-product-page .up-refurb-certified__intro {
-    font-size: 10px;
-  }
-
-  .unpatched-product-page .up-refurb-certified__badge {
-    display: none;
-  }
-
+  .unpatched-product-page .up-refurb-certified__heading,
   .unpatched-product-page .up-refurb-certified__item {
     grid-template-columns: 28px minmax(0, 1fr);
     gap: 8px;
-    min-height: 76px;
-    padding: 16px 12px;
   }
 
+  .unpatched-product-page .up-refurb-certified__seal,
   .unpatched-product-page .up-refurb-certified__icon {
     width: 28px;
     height: 28px;
   }
 
+  .unpatched-product-page .up-refurb-certified__seal svg,
   .unpatched-product-page .up-refurb-certified__icon svg {
     width: 19px;
     height: 19px;
+  }
+
+  .unpatched-product-page .up-refurb-certified__title {
+    font-size: 10.5px;
+  }
+
+  .unpatched-product-page .up-refurb-certified__intro {
+    font-size: 9.75px;
+  }
+
+  .unpatched-product-page .up-refurb-certified__item {
+    min-height: 82px;
+    padding: 11px 12px;
   }
 
   .unpatched-product-page .up-refurb-certified__item small {
@@ -231,22 +219,14 @@
 }
 
 @media screen and (max-width: 420px) {
-  .unpatched-product-page .up-refurb-certified {
-    min-height: 0;
-  }
-
   .unpatched-product-page .up-refurb-certified__grid {
     grid-template-columns: 1fr;
-    grid-template-rows: none;
   }
 
   .unpatched-product-page .up-refurb-certified__item,
   .unpatched-product-page .up-refurb-certified__item:nth-last-child(-n + 2) {
-    border-bottom: 1px solid rgba(37, 37, 42, .07);
-  }
-
-  .unpatched-product-page .up-refurb-certified__item:nth-child(odd) {
     border-right: 0;
+    border-bottom: 1px solid rgba(37, 37, 42, .07);
   }
 
   .unpatched-product-page .up-refurb-certified__item:last-child {
