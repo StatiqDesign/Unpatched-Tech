@@ -7,7 +7,8 @@
 .unpatched-blog-page {
   color: var(--up-blog-card-text, #25252a);
   background: var(--up-blog-feed-bg, #fff);
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .unpatched-blog-page *,
