@@ -124,7 +124,7 @@ body.unpatched-product-page #main .shopify-section--main-product .product-meta::
 /* RELATED PRODUCTS ------------------------------------------------------- */
 .unpatched-product-page .shopify-section--product-recommendations {
   margin: 0;
-  border-top: 1px solid rgba(37, 37, 42, .075);
+  border-top: 0;
   background: var(--up-product-surface);
 }
 
@@ -294,7 +294,7 @@ body.unpatched-product-page #main .shopify-section--main-product .product-meta::
 }
 
 .unpatched-product-page .shopify-section--product-recommendations {
-  border-top-color: rgba(37, 37, 42, .075);
+  border-top: 0;
 }
 
 .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content,
