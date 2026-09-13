@@ -41,7 +41,6 @@
   column-gap: clamp(36px, 4.5vw, 68px);
 }
 
-/* Keep both halves on the same restrained card language as collections. */
 .unpatched-product-page .product__media-list-wrapper,
 .unpatched-product-page .product__info {
   border: 1px solid var(--up-product-line);
@@ -59,7 +58,14 @@
   border-bottom-color: var(--up-product-line);
 }
 
-.unpatched-product-page .product-meta::before,
+/* Product titles do not use the synthetic UNPATCHED TECH eyebrow. */
+body.unpatched-product-page #main .shopify-section--main-product .product-meta::before,
+.unpatched-product-page .shopify-section--main-product .product-meta::before {
+  content: none !important;
+  display: none !important;
+  margin: 0 !important;
+}
+
 .unpatched-product-page .shopify-section--product-content .product-tabs::before {
   letter-spacing: .13em;
 }
@@ -68,8 +74,6 @@
   margin-top: 24px;
 }
 
-/* Quantity is intentionally not exposed on product pages. Keep this global
-   so Shopify editor state or alternate product templates cannot reintroduce it. */
 .unpatched-product-page .product-form__quantity,
 .unpatched-product-page [data-block-type="quantity-selector"] {
   display: none !important;
@@ -82,7 +86,6 @@
   border-radius: var(--block-border-radius);
 }
 
-/* Prepared-with-care should read as a neutral supporting surface. */
 .unpatched-product-page .product-form__text {
   border-left-width: 1px;
   border-left-color: var(--up-product-line);
@@ -144,14 +147,12 @@
   color: var(--up-product-ink);
 }
 
-/* TABLET ---------------------------------------------------------------- */
 @media screen and (max-width: 999px) {
   .unpatched-product-page .shopify-section--main-product .product {
     row-gap: 28px;
   }
 }
 
-/* MOBILE ---------------------------------------------------------------- */
 @media screen and (max-width: 740px) {
   :root {
     --up-product-shell-top: 38px;
