@@ -13,7 +13,6 @@
   assign is_unpatched_services_page = false
   assign is_unpatched_support_page = false
   assign is_unpatched_policy_page = false
-  assign is_unpatched_custom_legal_page = false
 
   if request.page_type == 'page'
     if template.suffix == 'tracking'
@@ -30,9 +29,6 @@
     endif
     if page.handle == 'support' or template.suffix == 'support' or page.handle == 'contact-us' or page.handle == 'contact' or template.suffix == 'contact'
       assign is_unpatched_support_page = true
-    endif
-    if template.suffix == 'legal'
-      assign is_unpatched_custom_legal_page = true
     endif
   endif
 
@@ -73,8 +69,7 @@
       is_unpatched_about_page: is_unpatched_about_page,
       is_unpatched_services_page: is_unpatched_services_page,
       is_unpatched_support_page: is_unpatched_support_page,
-      is_unpatched_policy_page: is_unpatched_policy_page,
-      is_unpatched_custom_legal_page: is_unpatched_custom_legal_page
+      is_unpatched_policy_page: is_unpatched_policy_page
     %}
 
     {% render 'social-meta-tags' %}
@@ -94,7 +89,7 @@
   {%- assign feature_classes = '' -%}
   {%- if settings.show_image_zoom -%}{%- assign feature_classes = feature_classes | append: ' features--image-zoom' -%}{%- endif -%}
 
-  <body class="no-focus-outline {{ feature_classes }}{% if request.page_type == 'index' %} unpatched-home-page{% endif %}{% if request.page_type == 'product' %} unpatched-product-page{% endif %}{% if request.page_type == 'blog' %} unpatched-blog-page{% endif %}{% if request.page_type == 'article' %} unpatched-article-page{% endif %}{% if is_unpatched_tracking_page %} unpatched-tracking-page{% endif %}{% if is_unpatched_tracking_page or is_unpatched_about_page %} unpatched-short-info-page{% endif %}{% if is_unpatched_about_page %} unpatched-about-page-body{% endif %}{% if is_unpatched_faq_page %} unpatched-faq-page{% endif %}{% if is_unpatched_services_page %} unpatched-services-page{% endif %}{% if is_unpatched_support_page %} unpatched-support-page{% endif %}{% if is_unpatched_policy_page or is_unpatched_custom_legal_page %} unpatched-legal-body{% endif %}">
+  <body class="no-focus-outline {{ feature_classes }}{% if request.page_type == 'index' %} unpatched-home-page{% endif %}{% if request.page_type == 'product' %} unpatched-product-page{% endif %}{% if request.page_type == 'blog' %} unpatched-blog-page{% endif %}{% if request.page_type == 'article' %} unpatched-article-page{% endif %}{% if is_unpatched_tracking_page %} unpatched-tracking-page{% endif %}{% if is_unpatched_tracking_page or is_unpatched_about_page %} unpatched-short-info-page{% endif %}{% if is_unpatched_about_page %} unpatched-about-page-body{% endif %}{% if is_unpatched_faq_page %} unpatched-faq-page{% endif %}{% if is_unpatched_services_page %} unpatched-services-page{% endif %}{% if is_unpatched_support_page %} unpatched-support-page{% endif %}{% if is_unpatched_policy_page %} unpatched-legal-body{% endif %}">
     <svg class="visually-hidden" aria-hidden="true"><linearGradient id="rating-star-gradient-half"><stop offset="50%" stop-color="rgb(var(--product-star-rating))" /><stop offset="50%" stop-color="rgb(var(--product-star-rating))" stop-opacity="0.4" /></linearGradient></svg>
     <a href="#main" class="visually-hidden skip-to-content">{{ 'general.accessibility.skip_to_content' | t }}</a>
     <loading-bar class="loading-bar"></loading-bar>
