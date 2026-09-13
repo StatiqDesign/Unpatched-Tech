@@ -183,6 +183,12 @@
     padding: var(--up-product-section-gap) 0 52px;
   }
 
+  .unpatched-product-page .shopify-section--product-content .product-content__tabs {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
   .unpatched-product-page .shopify-section--product-content .collapsible-toggle {
     display: none;
   }
