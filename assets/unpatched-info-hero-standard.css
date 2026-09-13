@@ -1,7 +1,7 @@
 /* ========================================================================== 
-   UNPATCHED TECH — INFO HERO RHYTHM
-   Shared geometry for the three current editorial/info hero systems only:
-   order tracking, FAQ and blog. Page assets own colors and component details.
+   UNPATCHED TECH — INFO PAGE RHYTHM
+   Shared geometry for order tracking, FAQ and blog so the top spacing,
+   hero rhythm, content gap and page ending all follow the same system.
    ========================================================================== */
 
 :root {
@@ -10,17 +10,17 @@
   --up-info-hero-copy-size: 16px;
   --up-info-hero-copy-width: 680px;
   --up-info-hero-width: 860px;
-  --up-info-hero-top: 144px;
+  --up-info-page-top: 96px;
   --up-info-hero-gap: 18px;
   --up-info-content-gap: 40px;
-  --up-info-page-bottom: 190px;
+  --up-info-page-bottom: 96px;
 }
 
 .unpatched-tracking-page #main .unpatched-order-tracker__hero,
 .unpatched-faq-page #main .unpatched-faq-hero,
 .unpatched-blog-page #main .unpatched-blog-hero {
   min-height: 0;
-  padding-top: var(--up-info-hero-top);
+  padding-top: var(--up-info-page-top);
 }
 
 .unpatched-faq-page #main .unpatched-faq-hero,
@@ -76,6 +76,11 @@
   margin-top: var(--up-info-content-gap);
 }
 
+.unpatched-faq-page #main .unpatched-faq-main {
+  padding-top: var(--up-info-content-gap);
+  padding-bottom: var(--up-info-page-bottom);
+}
+
 .unpatched-blog-page #main .unpatched-blog-hero + .unpatched-blog-filter-wrap,
 .unpatched-blog-page #main .unpatched-blog-hero + .unpatched-blog-feed {
   margin-top: 0;
@@ -96,10 +101,10 @@
     --up-info-hero-eyebrow-size: 10px;
     --up-info-hero-title-size: 40px;
     --up-info-hero-copy-size: 15px;
-    --up-info-hero-top: 92px;
+    --up-info-page-top: 56px;
     --up-info-hero-gap: 15px;
     --up-info-content-gap: 28px;
-    --up-info-page-bottom: 130px;
+    --up-info-page-bottom: 72px;
   }
 
   .unpatched-tracking-page #main .unpatched-order-tracker__hero,
