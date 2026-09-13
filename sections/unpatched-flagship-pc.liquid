@@ -79,7 +79,7 @@
               <source
                 media="(max-width: 749px)"
                 sizes="calc(100vw - 32px)"
-                srcset="{{ flagship_mobile_image | image_url: width: 320 }} 320w, {{ flagship_mobile_image | image_url: width: 480 }} 480w, {{ flagship_mobile_image | image_url: width: 640 }} 640w, {{ flagship_mobile_image | image_url: width: 800 }} 800w"
+                srcset="{{ flagship_mobile_image | image_url: width: 320 }} 320w, {{ flagship_mobile_image | image_url: width: 480 }} 480w, {{ flagship_mobile_image | image_url: width: 640 }} 640w, {{ flagship_mobile_image | image_url: width: 800 }} 800w, {{ flagship_mobile_image | image_url: width: 960 }} 960w, {{ flagship_mobile_image | image_url: width: 1120 }} 1120w"
               >
             {%- endif -%}
             {{ flagship_image | image_url: width: 1400 | image_tag: loading: 'lazy', decoding: 'async', fetchpriority: 'low', widths: '480,560,640,720,800,960,1120,1400', sizes: '(max-width: 999px) calc(100vw - 32px), 52vw', class: 'unpatched-home-flagship__image' }}
