@@ -175,6 +175,11 @@
     margin-inline: auto;
   }
 
+  .unpatched-product-page .product__media-nav .dots-nav__item {
+    width: 12px;
+    height: 12px;
+  }
+
   .unpatched-product-page .product__info {
     padding: 20px 17px 18px;
   }
