@@ -133,6 +133,26 @@
 }
 
 @media screen and (max-width: 740px) {
+  body.unpatched-product-page {
+    --up-product-surface: #fff;
+  }
+
+  body.unpatched-product-page #main .shopify-section--main-product,
+  body.unpatched-product-page #main .shopify-section--main-product > section,
+  body.unpatched-product-page #main .shopify-section--main-product > section > .container,
+  body.unpatched-product-page #main .shopify-section--main-product product-rerender,
+  body.unpatched-product-page #main .shopify-section--main-product .product,
+  body.unpatched-product-page #main .shopify-section--main-product .product__info,
+  body.unpatched-product-page #main .unpatched-product-sticky,
+  body.unpatched-product-page #main .unpatched-product-sticky__inner {
+    background: #fff !important;
+    background-image: none !important;
+  }
+
+  body.unpatched-product-page #main .shopify-section--main-product .product__info {
+    box-shadow: none;
+  }
+
   .unpatched-product-page .up-pc-specs {
     margin-top: 18px;
   }
