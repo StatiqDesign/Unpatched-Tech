@@ -57,24 +57,17 @@
 }
 
 .unpatched-product-page .product-meta::before {
-  content: "UNPATCHED TECH";
-  display: block;
-  margin-bottom: 10px;
-  color: rgb(var(--unpatched-brand-blue-rgb));
-  font-family: var(--heading-font-family);
-  font-size: 10px;
-  font-weight: var(--heading-font-weight);
-  line-height: 1;
-  letter-spacing: .16em;
+  content: none;
+  display: none;
 }
 
 .unpatched-product-page .product-meta__title {
   max-width: 720px;
   margin: 0;
   color: var(--unpatched-ink, #25252a);
-  font-size: clamp(30px, 3vw, 42px);
-  line-height: 1.04;
-  letter-spacing: -.035em;
+  font-size: clamp(25px, 2.2vw, 34px);
+  line-height: 1.06;
+  letter-spacing: -.025em;
 }
 
 .unpatched-product-page .product-meta__reference {
@@ -178,7 +171,6 @@
   color: rgb(var(--unpatched-brand-blue-rgb));
 }
 
-/* Keep color choices circular and replace Focal's dark selected outline. */
 .unpatched-product-page .color-swatch__item {
   width: 28px;
   height: 28px;
@@ -372,7 +364,6 @@
   letter-spacing: -.02em;
 }
 
-/* MOBILE STICKY PURCHASE */
 .unpatched-product-page .unpatched-product-sticky {
   display: none;
 }
@@ -421,13 +412,14 @@
   }
 
   .unpatched-product-page .product-meta::before {
-    margin-bottom: 8px;
-    font-size: 9px;
+    display: none;
+    content: none;
   }
 
   .unpatched-product-page .product-meta__title {
-    font-size: clamp(28px, 9vw, 36px);
-    line-height: 1.06;
+    font-size: 24px;
+    line-height: 1.08;
+    letter-spacing: -.02em;
   }
 
   .unpatched-product-page .product-meta__reference {
