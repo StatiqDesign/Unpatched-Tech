@@ -111,9 +111,11 @@
                   {%- assign variant_preload_image = variant_for_value.featured_media.preview_image -%}
                   {%- capture variant_media_marker -%},{{ variant_for_value.featured_media.id }},{%- endcapture -%}
 
-                  {%- if variant_preload_image and preloaded_media_ids contains variant_media_marker == false -%}
-                    {{- variant_preload_image | image_url: width: variant_preload_image.width | image_tag: loading: 'eager', fetchpriority: 'low', decoding: 'async', sizes: recommendation_preload_sizes, widths: '200,300,400,500,600,700,800', alt: '' -}}
-                    {%- assign preloaded_media_ids = preloaded_media_ids | append: variant_for_value.featured_media.id | append: ',' -%}
+                  {%- if variant_preload_image -%}
+                    {%- unless preloaded_media_ids contains variant_media_marker -%}
+                      {{- variant_preload_image | image_url: width: variant_preload_image.width | image_tag: loading: 'eager', fetchpriority: 'low', decoding: 'async', sizes: recommendation_preload_sizes, widths: '200,300,400,500,600,700,800', alt: '' -}}
+                      {%- assign preloaded_media_ids = preloaded_media_ids | append: variant_for_value.featured_media.id | append: ',' -%}
+                    {%- endunless -%}
                   {%- endif -%}
                 {%- endfor -%}
                 {%- break -%}
