@@ -1,3 +1,5 @@
+{{ 'unpatched-icon-system.css' | asset_url | stylesheet_tag }}
+
 <style>
   :root {
     --enable-sticky-announcement-bar: {% if section.settings.announcement_bar_position == 'non_sticky' or section.settings.announcement_bar_position == 'sticky_desktop' %}0{% else %}1{% endif %};
