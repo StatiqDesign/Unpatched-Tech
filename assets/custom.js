@@ -311,8 +311,6 @@
         if (destination.origin !== window.location.origin) return;
         if (destination.href === window.location.href || (destination.pathname === window.location.pathname && destination.search === window.location.search && destination.hash)) return;
 
-        resetMobileNavigationState({ forDeparture: true });
-
         const expectedHref = destination.href;
         window.setTimeout(() => {
           if (document.visibilityState !== 'visible') return;
@@ -327,6 +325,10 @@
       },
       true
     );
+
+    window.addEventListener('pagehide', () => {
+      resetMobileNavigationState({ forDeparture: true });
+    });
 
     window.addEventListener('pageshow', () => {
       restoreMobileNavigationAfterHistory();
