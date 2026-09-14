@@ -1,0 +1,98 @@
+/* ========================================================================== 
+   UNPATCHED TECH — SHARED ICON SYSTEM
+   Mirrors the FAQ icon treatment across high-trust UI: 38px tile, 10px
+   radius, 22px line icon, 1.8 stroke, brand-blue accent and 9% tint.
+   ========================================================================== */
+
+/* PRODUCT PAGE ---------------------------------------------------------- */
+body.unpatched-product-page .unpatched-product-trust__icon,
+body.unpatched-product-page .unpatched-lifetime-support__badge {
+  display: grid !important;
+  flex: 0 0 38px !important;
+  place-items: center !important;
+  width: 38px !important;
+  height: 38px !important;
+  min-width: 38px !important;
+  min-height: 38px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: rgba(var(--unpatched-brand-blue-rgb, 64, 93, 230), .09) !important;
+  color: rgb(var(--unpatched-brand-blue-rgb, 64, 93, 230)) !important;
+  box-shadow: none !important;
+}
+
+body.unpatched-product-page .unpatched-product-trust__icon svg,
+body.unpatched-product-page .unpatched-lifetime-support__badge svg {
+  width: 22px !important;
+  height: 22px !important;
+  stroke: currentColor !important;
+  stroke-width: 1.8 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+/* HOMEPAGE — WHY UNPATCHED --------------------------------------------- */
+/* Replace the four legacy uploaded PNG treatments with the same line-icon
+   tiles used by the FAQ. The section key is stable in templates/index.json. */
+body.unpatched-home-page [id$="__multi_column_pmNkby"] .multi-column__image-wrapper {
+  position: relative !important;
+  display: grid !important;
+  flex: 0 0 38px !important;
+  place-items: center !important;
+  width: 38px !important;
+  height: 38px !important;
+  max-width: 38px !important;
+  min-width: 38px !important;
+  min-height: 38px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: rgba(var(--unpatched-brand-blue-rgb, 64, 93, 230), .09) !important;
+  box-shadow: none !important;
+}
+
+body.unpatched-home-page [id$="__multi_column_pmNkby"] .multi-column__image-wrapper .multi-column__image {
+  display: none !important;
+}
+
+body.unpatched-home-page [id$="__multi_column_pmNkby"] .multi-column__image-wrapper::after {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 22px;
+  background: rgb(var(--unpatched-brand-blue-rgb, 64, 93, 230));
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/* Quality First — check */
+body.unpatched-home-page [id$="__multi_column_pmNkby"] .multi-column__item:nth-child(1) .multi-column__image-wrapper::after {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M20%206%209%2017l-5-5%22%2F%3E%3C%2Fsvg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M20%206%209%2017l-5-5%22%2F%3E%3C%2Fsvg%3E");
+}
+
+/* Built To Last — wrench */
+body.unpatched-home-page [id$="__multi_column_pmNkby"] .multi-column__item:nth-child(2) .multi-column__image-wrapper::after {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M14.5%206.5%2018%203a6%206%200%200%200-7.5%207.5L3.6%2017.4a2.1%202.1%200%200%200%203%203l6.9-6.9A6%206%200%200%200%2021%206l-3.5%203.5-3-3Z%22%2F%3E%3C%2Fsvg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M14.5%206.5%2018%203a6%206%200%200%200-7.5%207.5L3.6%2017.4a2.1%202.1%200%200%200%203%203l6.9-6.9A6%206%200%200%200%2021%206l-3.5%203.5-3-3Z%22%2F%3E%3C%2Fsvg%3E");
+}
+
+/* Ready To Play — gamepad */
+body.unpatched-home-page [id$="__multi_column_pmNkby"] .multi-column__item:nth-child(3) .multi-column__image-wrapper::after {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7.5%208h9a4.5%204.5%200%200%201%204.3%205.8l-1.1%203.6a2%202%200%200%201-3.3.9L14%2016H10l-2.4%202.3a2%202%200%200%201-3.3-.9l-1.1-3.6A4.5%204.5%200%200%201%207.5%208Z%22%2F%3E%3Cpath%20d%3D%22M8%2011v4M6%2013h4%22%2F%3E%3Ccircle%20cx%3D%2216.5%22%20cy%3D%2212%22%20r%3D%22.8%22%20fill%3D%22black%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2218.5%22%20cy%3D%2214%22%20r%3D%22.8%22%20fill%3D%22black%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7.5%208h9a4.5%204.5%200%200%201%204.3%205.8l-1.1%203.6a2%202%200%200%201-3.3.9L14%2016H10l-2.4%202.3a2%202%200%200%201-3.3-.9l-1.1-3.6A4.5%204.5%200%200%201%207.5%208Z%22%2F%3E%3Cpath%20d%3D%22M8%2011v4M6%2013h4%22%2F%3E%3Ccircle%20cx%3D%2216.5%22%20cy%3D%2212%22%20r%3D%22.8%22%20fill%3D%22black%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2218.5%22%20cy%3D%2214%22%20r%3D%22.8%22%20fill%3D%22black%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E");
+}
+
+/* Real Support — shield */
+body.unpatched-home-page [id$="__multi_column_pmNkby"] .multi-column__item:nth-child(4) .multi-column__image-wrapper::after {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203%205%206v5c0%204.8%202.8%208.2%207%2010%204.2-1.8%207-5.2%207-10V6l-7-3Z%22%2F%3E%3Cpath%20d%3D%22m9%2012%202%202%204-4%22%2F%3E%3C%2Fsvg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203%205%206v5c0%204.8%202.8%208.2%207%2010%204.2-1.8%207-5.2%207-10V6l-7-3Z%22%2F%3E%3Cpath%20d%3D%22m9%2012%202%202%204-4%22%2F%3E%3C%2Fsvg%3E");
+}
