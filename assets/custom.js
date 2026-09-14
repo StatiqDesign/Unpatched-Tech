@@ -4,6 +4,8 @@
   const MOBILE_DRAWER = '#mobile-menu-drawer';
   const desktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   const mobileHeroViewport = window.matchMedia('(max-width: 749px)');
+  const isIOSSafari = /iP(ad|hone|od)/.test(navigator.userAgent) && /WebKit/.test(navigator.userAgent) && !/(CriOS|FxiOS|EdgiOS|OPiOS)/.test(navigator.userAgent);
+  const NAVIGATION_RECOVERY_KEY = 'unpatched-navigation-recovery';
 
   function finishPanelAnimation(panel) {
     if (!panel) return;
@@ -33,6 +35,15 @@
     if (drawer && !drawer.querySelector('.mobile-nav__item[data-level="1"].unpatched-submenu-active')) {
       drawer.classList.remove('unpatched-submenu-open');
     }
+  }
+
+  function resetMobileNavigationState() {
+    const drawer = document.querySelector(MOBILE_DRAWER);
+    if (!drawer) return;
+
+    drawer.classList.remove('unpatched-submenu-open');
+    drawer.querySelectorAll('.unpatched-submenu-active').forEach((item) => item.classList.remove('unpatched-submenu-active'));
+    drawer.querySelectorAll('button[aria-expanded="true"]').forEach((button) => button.setAttribute('aria-expanded', 'false'));
   }
 
   function installMobileNavigation() {
@@ -221,6 +232,67 @@
     prototype.__unpatchedMobileFadeTuned = true;
   }
 
+  function recoverBlankIOSPage() {
+    if (!isIOSSafari || document.visibilityState === 'hidden') return;
+
+    const main = document.getElementById('main');
+    const hasVisiblePage = main && main.childElementCount > 0 && main.getBoundingClientRect().height > 24;
+    if (hasVisiblePage) {
+      sessionStorage.removeItem(NAVIGATION_RECOVERY_KEY);
+      return;
+    }
+
+    const previousRecovery = sessionStorage.getItem(NAVIGATION_RECOVERY_KEY);
+    const recoveryToken = `${window.location.pathname}${window.location.search}`;
+    if (previousRecovery === recoveryToken) return;
+
+    sessionStorage.setItem(NAVIGATION_RECOVERY_KEY, recoveryToken);
+    window.location.reload();
+  }
+
+  function installIOSNavigationSafety() {
+    if (!isIOSSafari) return;
+
+    document.addEventListener(
+      'click',
+      (event) => {
+        const link = event.target.closest?.('a[href]');
+        if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        if (link.hasAttribute('download') || link.target === '_blank') return;
+
+        let destination;
+        try {
+          destination = new URL(link.href, window.location.href);
+        } catch (_) {
+          return;
+        }
+
+        if (destination.origin !== window.location.origin) return;
+        if (destination.href === window.location.href || (destination.pathname === window.location.pathname && destination.search === window.location.search && destination.hash)) return;
+
+        resetMobileNavigationState();
+
+        const expectedHref = destination.href;
+        window.setTimeout(() => {
+          if (document.visibilityState !== 'visible') return;
+
+          if (window.location.href !== expectedHref) {
+            window.location.assign(expectedHref);
+            return;
+          }
+
+          recoverBlankIOSPage();
+        }, 1800);
+      },
+      true
+    );
+
+    window.addEventListener('pageshow', () => {
+      resetMobileNavigationState();
+      requestAnimationFrame(() => requestAnimationFrame(recoverBlankIOSPage));
+    });
+  }
+
   function initDesktopNavigation(root = document) {
     const nav = root.matches?.('desktop-navigation') ? root : root.querySelector?.('desktop-navigation');
     if (!nav || nav.dataset.unpatchedTwoClick === 'true') return;
@@ -291,6 +363,7 @@
   installDemandLoadedProductCardMedia();
   installSlideshowControls();
   installMobileHeroFadeTuning();
+  installIOSNavigationSafety();
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => init(document), { once: true });
