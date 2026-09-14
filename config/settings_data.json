@@ -34,7 +34,7 @@
     "product_custom_label_2_background": "#F6A429",
     "product_in_stock_text_color": "#2e9e7b",
     "product_low_stock_text_color": "#de2a2a",
-    "heading_font": "rubik_n4",
+    "heading_font": "tomorrow_n7",
     "heading_font_size": "small",
     "heading_text_transform": "uppercase",
     "text_font": "rubik_n4",
@@ -77,11 +77,6 @@
     },
     "content_for_index": [],
     "blocks": {
-      "14060646107696862457": {
-        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-        "disabled": false,
-        "settings": {}
-      },
       "15683396631634586217": {
         "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
         "disabled": false,
