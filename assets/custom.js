@@ -37,13 +37,49 @@
     }
   }
 
-  function resetMobileNavigationState() {
+  function resetMobileNavigationState({ forDeparture = false } = {}) {
     const drawer = document.querySelector(MOBILE_DRAWER);
     if (!drawer) return;
 
+    if (forDeparture) {
+      drawer.getAnimations?.({ subtree: true }).forEach((animation) => animation.cancel());
+      drawer.style.visibility = 'hidden';
+      drawer.style.pointerEvents = 'none';
+    }
+
     drawer.classList.remove('unpatched-submenu-open');
-    drawer.querySelectorAll('.unpatched-submenu-active').forEach((item) => item.classList.remove('unpatched-submenu-active'));
+
+    drawer.querySelectorAll('.mobile-nav__item[data-level="1"].unpatched-submenu-active').forEach((item) => {
+      const toggle = item.querySelector(':scope > button[aria-controls]');
+      const panel = toggle ? document.getElementById(toggle.getAttribute('aria-controls')) : null;
+
+      toggle?.setAttribute('aria-expanded', 'false');
+      item.classList.remove('unpatched-submenu-active');
+
+      if (forDeparture && panel) {
+        panel.getAnimations?.({ subtree: true }).forEach((animation) => animation.cancel());
+        panel.hidden = true;
+        panel.style.display = 'none';
+        panel.style.height = '0px';
+        panel.style.overflow = 'hidden';
+      }
+    });
+
     drawer.querySelectorAll('button[aria-expanded="true"]').forEach((button) => button.setAttribute('aria-expanded', 'false'));
+  }
+
+  function restoreMobileNavigationAfterHistory() {
+    const drawer = document.querySelector(MOBILE_DRAWER);
+    if (!drawer) return;
+
+    drawer.style.removeProperty('visibility');
+    drawer.style.removeProperty('pointer-events');
+
+    drawer.querySelectorAll('.mobile-nav__item[data-level="1"] > collapsible-content').forEach((panel) => {
+      panel.style.removeProperty('display');
+      panel.style.removeProperty('height');
+      panel.style.removeProperty('overflow');
+    });
   }
 
   function installMobileNavigation() {
@@ -58,6 +94,11 @@
         const panel = document.getElementById(openButton.getAttribute('aria-controls'));
 
         if (item && drawer && panel) {
+          panel.hidden = false;
+          panel.style.removeProperty('display');
+          panel.style.removeProperty('height');
+          panel.style.removeProperty('overflow');
+
           drawer
             .querySelectorAll('.mobile-nav__item[data-level="1"].unpatched-submenu-active')
             .forEach((activeItem) => {
@@ -270,7 +311,7 @@
         if (destination.origin !== window.location.origin) return;
         if (destination.href === window.location.href || (destination.pathname === window.location.pathname && destination.search === window.location.search && destination.hash)) return;
 
-        resetMobileNavigationState();
+        resetMobileNavigationState({ forDeparture: true });
 
         const expectedHref = destination.href;
         window.setTimeout(() => {
@@ -288,7 +329,7 @@
     );
 
     window.addEventListener('pageshow', () => {
-      resetMobileNavigationState();
+      restoreMobileNavigationAfterHistory();
       requestAnimationFrame(() => requestAnimationFrame(recoverBlankIOSPage));
     });
   }
