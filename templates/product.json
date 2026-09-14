@@ -69,13 +69,6 @@
         "transition_effect": "fade"
       }
     },
-    "product_trust": {
-      "type": "product-trust",
-      "settings": {
-        "heading": "Shop with confidence.",
-        "text": "Every Unpatched Tech order is prepared with care, clearly described, and backed by support before and after it reaches you."
-      }
-    },
     "product-content": {
       "type": "product-content",
       "blocks": {
@@ -103,7 +96,6 @@
   },
   "order": [
     "main",
-    "product_trust",
     "product-content",
     "product_recommendations_apWawt"
   ]
