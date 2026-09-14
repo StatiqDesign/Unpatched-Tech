@@ -4,7 +4,6 @@
   Each disclosure supports an optional per-product metafield override:
   - custom.inside_the_box
   - custom.shipping_delivery
-  - custom.warranty_returns
 
   When an override is blank, copy is selected automatically from Shopify's
   Product category first, then product type/title/tags as fallback signals.
@@ -22,8 +21,6 @@
 {%- assign is_handheld = false -%}
 {%- assign is_console = false -%}
 {%- assign is_accessory = false -%}
-{%- assign is_refurbished = false -%}
-{%- assign is_modded_or_restored = false -%}
 
 {%- if disclosure_context contains 'gaming pc' or disclosure_context contains 'gaming computer' or disclosure_context contains 'desktop pc' or disclosure_category contains 'desktop computer' -%}
   {%- assign is_gaming_pc = true -%}
@@ -39,14 +36,6 @@
   {%- assign is_console = true -%}
 {%- elsif disclosure_context contains 'accessory' or disclosure_context contains 'accessories' or disclosure_context contains 'controller' or disclosure_context contains 'cable' or disclosure_context contains 'adapter' or disclosure_context contains 'charger' -%}
   {%- assign is_accessory = true -%}
-{%- endif -%}
-
-{%- if disclosure_context contains 'refurbished' or disclosure_context contains 'refurb' -%}
-  {%- assign is_refurbished = true -%}
-{%- endif -%}
-
-{%- if disclosure_context contains 'modded' or disclosure_context contains 'restored' or disclosure_context contains 'restoration' -%}
-  {%- assign is_modded_or_restored = true -%}
 {%- endif -%}
 
 {%- assign inside_the_box = product.metafields.custom.inside_the_box.value | strip -%}
@@ -81,19 +70,6 @@
   {%- endif -%}
 {%- endif -%}
 
-{%- assign warranty_returns = product.metafields.custom.warranty_returns.value | strip -%}
-{%- if warranty_returns == blank -%}
-  {%- if is_modded_or_restored -%}
-    {%- assign warranty_returns = 'Modded and restored products include a 90-day workmanship warranty. Returns are accepted within 30 days. Return shipping is paid by the customer unless the issue is our error, and there is no restocking fee.' -%}
-  {%- elsif is_refurbished or is_console or is_handheld -%}
-    {%- assign warranty_returns = 'Refurbished hardware includes a 30-day warranty. Returns are accepted within 30 days. Return shipping is paid by the customer unless the issue is our error, and there is no restocking fee.' -%}
-  {%- elsif is_gaming_pc or is_laptop -%}
-    {%- assign warranty_returns = 'Warranty coverage for configured systems depends on the product and included components. Returns are accepted within 30 days. Return shipping is paid by the customer unless the issue is our error, and there is no restocking fee.' -%}
-  {%- else -%}
-    {%- assign warranty_returns = 'Returns are accepted within 30 days. Return shipping is paid by the customer unless the issue is our error, and there is no restocking fee. Any product-specific warranty coverage will be stated on the product page.' -%}
-  {%- endif -%}
-{%- endif -%}
-
 <div class="unpatched-product-disclosure-stack">
   <div class="unpatched-accordions">
     <details class="unpatched-accordion">
@@ -121,16 +97,6 @@
         <span class="unpatched-accordion-plus" aria-hidden="true"></span>
       </summary>
       <div class="unpatched-accordion-content rte"><p>{{ shipping_delivery | escape | newline_to_br }}</p></div>
-    </details>
-  </div>
-
-  <div class="unpatched-accordions">
-    <details class="unpatched-accordion">
-      <summary>
-        <span>Warranty &amp; Returns</span>
-        <span class="unpatched-accordion-plus" aria-hidden="true"></span>
-      </summary>
-      <div class="unpatched-accordion-content rte"><p>{{ warranty_returns | escape | newline_to_br }}</p></div>
     </details>
   </div>
 </div>
