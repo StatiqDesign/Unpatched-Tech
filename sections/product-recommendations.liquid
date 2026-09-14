@@ -1,3 +1,5 @@
+{%- assign recommendation_color_labels = 'general.label.color' | t | replace: ', ', ',' | downcase | split: ',' -%}
+
 {%- if section.settings.background != settings.background and section.settings.background != 'rgba(0,0,0,0)' -%}
   {%- assign blends_with_background = false -%}
 {%- else -%}
@@ -88,6 +90,37 @@
             </prev-next-buttons>
           {%- endif -%}
         </product-list>
+
+        {%- comment -%}
+          Warm the browser cache for color-variant card images. The visible card
+          still swaps media through the existing product-item behavior, but by
+          the time a shopper taps a color circle the matching responsive image
+          is already downloaded or in flight at low priority.
+        {%- endcomment -%}
+        {%- capture recommendation_preload_sizes -%}(max-width: 740px) 75vw, min({{ 100.0 | divided_by: 4 | ceil }}vw, {{ 1520.0 | divided_by: 4 | ceil }}px){%- endcapture -%}
+        <div class="unpatched-recommendation-variant-preload" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;pointer-events:none;">
+          {%- for recommended_product in recommendations.products -%}
+            {%- for color_label in recommendation_color_labels -%}
+              {%- if recommended_product.options_by_name[color_label] != blank -%}
+                {%- assign color_option = recommended_product.options_by_name[color_label] -%}
+                {%- assign variant_option = 'option' | append: color_option.position -%}
+                {%- assign preloaded_media_ids = ',' | append: recommended_product.featured_media.id | append: ',' -%}
+
+                {%- for value in color_option.values -%}
+                  {%- assign variant_for_value = recommended_product.variants | where: variant_option, value | first -%}
+                  {%- assign variant_preload_image = variant_for_value.featured_media.preview_image -%}
+                  {%- capture variant_media_marker -%},{{ variant_for_value.featured_media.id }},{%- endcapture -%}
+
+                  {%- if variant_preload_image and preloaded_media_ids contains variant_media_marker == false -%}
+                    {{- variant_preload_image | image_url: width: variant_preload_image.width | image_tag: loading: 'eager', fetchpriority: 'low', decoding: 'async', sizes: recommendation_preload_sizes, widths: '200,300,400,500,600,700,800', alt: '' -}}
+                    {%- assign preloaded_media_ids = preloaded_media_ids | append: variant_for_value.featured_media.id | append: ',' -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
       </div>
     </div>
   {%- endif -%}
