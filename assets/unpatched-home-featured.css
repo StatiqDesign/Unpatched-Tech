@@ -14,9 +14,6 @@ body.unpatched-home-page #main .unpatched-home-featured > .container {
   z-index: 1;
 }
 
-/* Keep the showcase visibly intentional, but lighter than the original thick
-   double-card treatment. The panel has a soft edge and a controlled cool wash
-   instead of disappearing completely into the page. */
 body.unpatched-home-page #main .unpatched-home-featured__showcase {
   position: relative;
   isolation: isolate;
@@ -50,9 +47,6 @@ body.unpatched-home-page #main .unpatched-home-featured__showcase::before {
   pointer-events: none;
 }
 
-/* Heading now belongs to the showcase itself, so the whole refurbished story
-   reads as one composed object from eyebrow through CTA. The header wrapper
-   spans the full showcase; only the copy inside it is width-constrained. */
 body.unpatched-home-page #main .unpatched-home-featured__header {
   display: block;
   width: 100%;
@@ -85,8 +79,6 @@ body.unpatched-home-page #main .unpatched-home-featured__header .unpatched-home-
   width: min(100%, 720px);
 }
 
-/* Collection switcher: intentionally text-first so it reads like a compact
-   storefront menu rather than another row of cards. */
 body.unpatched-home-page #main .unpatched-home-featured__tabs {
   display: flex;
   width: fit-content;
@@ -187,8 +179,6 @@ body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-
   display: none;
 }
 
-/* Keep each product visually light so it does not merge into the larger
-   showcase panel. The image frame remains the dominant card object. */
 body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card {
   position: relative;
   min-width: 0;
@@ -215,15 +205,22 @@ body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-
   transition: box-shadow 200ms ease, border-color 200ms ease;
 }
 
-/* Some source product photos fill their canvas much more aggressively than
-   the rest of the curated row. Normalize only those cards instead of changing
-   the global product-image scale. */
 body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card--compact-media .unpatched-home-product-card__image {
   transform: scale(.82);
 }
 
 body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__content {
   padding: 15px 6px 2px;
+  text-align: center;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__meta,
+body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__title,
+body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__price {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__meta {
@@ -303,8 +300,6 @@ body.unpatched-home-page #main .unpatched-home-featured__action .button {
     padding: 24px 16px 2px;
   }
 
-  /* Size to the tabs themselves and center the rail. If future tabs exceed
-     the available width, safe center falls back to a scrollable start edge. */
   body.unpatched-home-page #main .unpatched-home-featured__tabs {
     width: max-content;
     max-width: calc(100% - 24px);
