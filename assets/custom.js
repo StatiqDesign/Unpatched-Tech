@@ -178,8 +178,6 @@
   }
 
   function installDemandLoadedProductCardMedia() {
-    if (!document.querySelector('product-item [data-variant-image-src]')) return;
-
     document.addEventListener(
       'change',
       (event) => {
