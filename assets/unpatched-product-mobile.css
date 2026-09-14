@@ -28,4 +28,36 @@
     z-index: 3;
     margin-top: 18px;
   }
+
+  /* The lifetime support block is nested inside the shared product section.
+     Focal/mobile product rules can collapse nested section elements, so force
+     this content back into normal document flow on phones. */
+  .unpatched-product-page .unpatched-lifetime-support,
+  .shopify-section--main-product .unpatched-lifetime-support {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 1px !important;
+    max-height: none !important;
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  .unpatched-lifetime-support .container,
+  .unpatched-lifetime-support__inner,
+  .unpatched-lifetime-support__copy,
+  .unpatched-lifetime-support__panel {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .unpatched-lifetime-support__panel {
+    margin-top: 28px;
+  }
 }
