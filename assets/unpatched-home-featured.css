@@ -233,8 +233,18 @@ body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-
 }
 
 body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   margin-top: 8px;
   font-weight: 600;
+}
+
+body.unpatched-home-page #main .unpatched-home-featured .unpatched-home-product-card__price .price {
+  margin-left: 0;
+  margin-right: 0;
+  text-align: center;
 }
 
 body.unpatched-home-page #main .unpatched-home-featured__action {
