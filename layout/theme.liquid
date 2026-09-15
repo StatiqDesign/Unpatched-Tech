@@ -89,15 +89,6 @@
     {%- if request.page_type == 'index' -%}<script src="{{ 'unpatched-history-restore.js' | asset_url }}" defer fetchpriority="low"></script>{%- endif -%}
     {%- if is_unpatched_services_page -%}<script src="{{ 'unpatched-services.js' | asset_url }}" defer fetchpriority="low"></script>{%- endif -%}
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18449274604"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-18449274604');
-    </script>
-
     {{ content_for_header }}
   </head>
 
