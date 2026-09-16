@@ -1,0 +1,118 @@
+{%- comment -%}
+  Series selector used inside the Gaming PC product card.
+  Entry, Mid, and High stay first by stable handle; visible labels always come
+  from the live Shopify product titles. Any additional published builds in the
+  Gaming PCs collection are appended after the three core tiers.
+{%- endcomment -%}
+
+{%- assign series_collection = pc_collection | default: collections['prebuilt-gaming-pcs'] -%}
+{%- assign entry_pc = blank -%}
+{%- assign mid_pc = blank -%}
+{%- assign high_pc = blank -%}
+
+{%- for series_product in series_collection.products -%}
+  {%- case series_product.handle -%}
+    {%- when 'entry-tier-gaming-pc' -%}
+      {%- assign entry_pc = series_product -%}
+    {%- when 'mid-tier-gaming-pc' -%}
+      {%- assign mid_pc = series_product -%}
+    {%- when 'high-tier-gaming-pc' -%}
+      {%- assign high_pc = series_product -%}
+  {%- endcase -%}
+{%- endfor -%}
+
+<div class="up-pc-series-selector" data-up-pc-series-selector>
+  <span class="up-pc-series-selector__label">Series</span>
+  <div class="up-pc-series-selector__buttons" role="tablist" aria-label="Gaming PC series">
+    {%- if entry_pc != blank -%}
+      <button type="button" class="up-pc-series-selector__button{% if current_product.id == entry_pc.id %} is-active{% endif %}" role="tab" aria-selected="{% if current_product.id == entry_pc.id %}true{% else %}false{% endif %}" data-up-pc-series-target="{{ entry_pc.id }}">{{ entry_pc.title | escape }}</button>
+    {%- endif -%}
+    {%- if mid_pc != blank -%}
+      <button type="button" class="up-pc-series-selector__button{% if current_product.id == mid_pc.id %} is-active{% endif %}" role="tab" aria-selected="{% if current_product.id == mid_pc.id %}true{% else %}false{% endif %}" data-up-pc-series-target="{{ mid_pc.id }}">{{ mid_pc.title | escape }}</button>
+    {%- endif -%}
+    {%- if high_pc != blank -%}
+      <button type="button" class="up-pc-series-selector__button{% if current_product.id == high_pc.id %} is-active{% endif %}" role="tab" aria-selected="{% if current_product.id == high_pc.id %}true{% else %}false{% endif %}" data-up-pc-series-target="{{ high_pc.id }}">{{ high_pc.title | escape }}</button>
+    {%- endif -%}
+
+    {%- for series_product in series_collection.products -%}
+      {%- unless series_product.handle == 'entry-tier-gaming-pc' or series_product.handle == 'mid-tier-gaming-pc' or series_product.handle == 'high-tier-gaming-pc' -%}
+        <button type="button" class="up-pc-series-selector__button{% if current_product.id == series_product.id %} is-active{% endif %}" role="tab" aria-selected="{% if current_product.id == series_product.id %}true{% else %}false{% endif %}" data-up-pc-series-target="{{ series_product.id }}">{{ series_product.title | escape }}</button>
+      {%- endunless -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+<style>
+  .up-pc-series-selector:not(.is-mounted) { display: none; }
+
+  .up-pc-series-selector {
+    width: 100%;
+    margin: 12px 0 10px;
+    text-align: left;
+  }
+
+  .up-pc-series-selector__label {
+    display: block;
+    margin-bottom: 7px;
+    color: #25252a;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 650;
+  }
+
+  .up-pc-series-selector__buttons {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(92px, 1fr);
+    gap: 6px;
+    overflow-x: auto;
+    padding: 1px 1px 3px;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .up-pc-series-selector__button {
+    min-height: 40px;
+    padding: 8px 9px;
+    border: 1px solid #d7d9e0;
+    border-radius: 6px;
+    background: #fff;
+    color: #25252a;
+    font: inherit;
+    font-size: 12px;
+    line-height: 1.15;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+  }
+
+  .up-pc-series-selector__button:hover {
+    border-color: #405DE6;
+  }
+
+  .up-pc-series-selector__button.is-active {
+    border-color: #405DE6;
+    background: #405DE6;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(64, 93, 230, .16);
+  }
+
+  @media screen and (max-width: 740px) {
+    .up-pc-series-selector {
+      margin-top: 10px;
+    }
+
+    .up-pc-series-selector__buttons {
+      grid-auto-columns: minmax(88px, 1fr);
+      gap: 5px;
+    }
+
+    .up-pc-series-selector__button {
+      min-height: 38px;
+      padding: 7px 8px;
+      font-size: 11px;
+    }
+  }
+</style>
