@@ -1,0 +1,197 @@
+{%- comment -%}
+  Unpatched Tech gaming-PC tier selector.
+  The three core builds are kept in the stable order Entry -> Mid -> High by
+  handle, so their visible names can be changed in Shopify without changing
+  this component. Any other published products in the Gaming PCs collection
+  are appended after those three automatically.
+{%- endcomment -%}
+
+{%- assign pc_collection = collections['prebuilt-gaming-pcs'] | default: collection -%}
+{%- assign entry_pc = blank -%}
+{%- assign mid_pc = blank -%}
+{%- assign high_pc = blank -%}
+
+{%- for pc_product in pc_collection.products -%}
+  {%- case pc_product.handle -%}
+    {%- when 'entry-tier-gaming-pc' -%}
+      {%- assign entry_pc = pc_product -%}
+    {%- when 'mid-tier-gaming-pc' -%}
+      {%- assign mid_pc = pc_product -%}
+    {%- when 'high-tier-gaming-pc' -%}
+      {%- assign high_pc = pc_product -%}
+  {%- endcase -%}
+{%- endfor -%}
+
+{%- assign initial_pc = entry_pc | default: mid_pc | default: high_pc | default: pc_collection.products.first -%}
+
+{%- if initial_pc != blank -%}
+  <div class="up-pc-tier-card" data-up-pc-tier-card>
+    <div class="up-pc-tier-card__selector">
+      <p class="up-pc-tier-card__label">Series</p>
+
+      <div class="up-pc-tier-card__tabs" role="tablist" aria-label="Gaming PC series">
+        {%- if entry_pc != blank -%}
+          <button type="button" class="up-pc-tier-card__tab{% if initial_pc.id == entry_pc.id %} is-active{% endif %}" role="tab" aria-selected="{% if initial_pc.id == entry_pc.id %}true{% else %}false{% endif %}" data-up-pc-tier-target="{{ entry_pc.id }}">{{ entry_pc.title | escape }}</button>
+        {%- endif -%}
+        {%- if mid_pc != blank -%}
+          <button type="button" class="up-pc-tier-card__tab{% if initial_pc.id == mid_pc.id %} is-active{% endif %}" role="tab" aria-selected="{% if initial_pc.id == mid_pc.id %}true{% else %}false{% endif %}" data-up-pc-tier-target="{{ mid_pc.id }}">{{ mid_pc.title | escape }}</button>
+        {%- endif -%}
+        {%- if high_pc != blank -%}
+          <button type="button" class="up-pc-tier-card__tab{% if initial_pc.id == high_pc.id %} is-active{% endif %}" role="tab" aria-selected="{% if initial_pc.id == high_pc.id %}true{% else %}false{% endif %}" data-up-pc-tier-target="{{ high_pc.id }}">{{ high_pc.title | escape }}</button>
+        {%- endif -%}
+
+        {%- for pc_product in pc_collection.products -%}
+          {%- unless pc_product.handle == 'entry-tier-gaming-pc' or pc_product.handle == 'mid-tier-gaming-pc' or pc_product.handle == 'high-tier-gaming-pc' -%}
+            <button type="button" class="up-pc-tier-card__tab{% if initial_pc.id == pc_product.id %} is-active{% endif %}" role="tab" aria-selected="{% if initial_pc.id == pc_product.id %}true{% else %}false{% endif %}" data-up-pc-tier-target="{{ pc_product.id }}">{{ pc_product.title | escape }}</button>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="up-pc-tier-card__panels">
+      {%- if entry_pc != blank -%}
+        <div class="up-pc-tier-card__panel{% if initial_pc.id == entry_pc.id %} is-active{% endif %}" role="tabpanel" data-up-pc-tier-panel="{{ entry_pc.id }}" {% unless initial_pc.id == entry_pc.id %}hidden{% endunless %}>
+          {%- render 'product-item', product: entry_pc, sizes_attribute: sizes_attribute, image_loading: image_loading, hide_secondary_image: true -%}
+        </div>
+      {%- endif -%}
+      {%- if mid_pc != blank -%}
+        <div class="up-pc-tier-card__panel{% if initial_pc.id == mid_pc.id %} is-active{% endif %}" role="tabpanel" data-up-pc-tier-panel="{{ mid_pc.id }}" {% unless initial_pc.id == mid_pc.id %}hidden{% endunless %}>
+          {%- render 'product-item', product: mid_pc, sizes_attribute: sizes_attribute, image_loading: 'lazy', hide_secondary_image: true -%}
+        </div>
+      {%- endif -%}
+      {%- if high_pc != blank -%}
+        <div class="up-pc-tier-card__panel{% if initial_pc.id == high_pc.id %} is-active{% endif %}" role="tabpanel" data-up-pc-tier-panel="{{ high_pc.id }}" {% unless initial_pc.id == high_pc.id %}hidden{% endunless %}>
+          {%- render 'product-item', product: high_pc, sizes_attribute: sizes_attribute, image_loading: 'lazy', hide_secondary_image: true -%}
+        </div>
+      {%- endif -%}
+
+      {%- for pc_product in pc_collection.products -%}
+        {%- unless pc_product.handle == 'entry-tier-gaming-pc' or pc_product.handle == 'mid-tier-gaming-pc' or pc_product.handle == 'high-tier-gaming-pc' -%}
+          <div class="up-pc-tier-card__panel{% if initial_pc.id == pc_product.id %} is-active{% endif %}" role="tabpanel" data-up-pc-tier-panel="{{ pc_product.id }}" {% unless initial_pc.id == pc_product.id %}hidden{% endunless %}>
+            {%- render 'product-item', product: pc_product, sizes_attribute: sizes_attribute, image_loading: 'lazy', hide_secondary_image: true -%}
+          </div>
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <style>
+    .up-pc-tier-card {
+      width: 100%;
+      max-width: 560px;
+      margin-inline: auto;
+      grid-column: 1 / -1;
+      justify-self: center;
+      flex: 0 1 560px;
+    }
+
+    .up-pc-tier-card__selector {
+      margin-bottom: 14px;
+    }
+
+    .up-pc-tier-card__label {
+      margin: 0 0 8px;
+      font-size: 13px;
+      line-height: 1.2;
+      font-weight: 650;
+      color: #25252a;
+    }
+
+    .up-pc-tier-card__tabs {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(118px, 1fr);
+      gap: 8px;
+      overflow-x: auto;
+      padding: 1px 1px 4px;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .up-pc-tier-card__tab {
+      min-height: 48px;
+      padding: 10px 14px;
+      border: 1px solid #d7d9e0;
+      border-radius: 7px;
+      background: #ffffff;
+      color: #25252a;
+      font: inherit;
+      font-size: 14px;
+      line-height: 1.2;
+      font-weight: 700;
+      text-align: center;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .up-pc-tier-card__tab:hover {
+      border-color: #405DE6;
+    }
+
+    .up-pc-tier-card__tab.is-active {
+      border-color: #405DE6;
+      background: #405DE6;
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(64, 93, 230, 0.18);
+    }
+
+    .up-pc-tier-card__panel[hidden] {
+      display: none !important;
+    }
+
+    .up-pc-tier-card__panel > product-item {
+      width: 100%;
+    }
+
+    @media screen and (max-width: 740px) {
+      .up-pc-tier-card {
+        max-width: none;
+      }
+
+      .up-pc-tier-card__selector {
+        margin-bottom: 10px;
+      }
+
+      .up-pc-tier-card__tabs {
+        grid-auto-columns: minmax(105px, 1fr);
+        gap: 6px;
+      }
+
+      .up-pc-tier-card__tab {
+        min-height: 44px;
+        padding: 9px 11px;
+        font-size: 13px;
+      }
+    }
+  </style>
+
+  <script>
+    (function () {
+      if (window.__unpatchedPcTierCardReady) return;
+      window.__unpatchedPcTierCardReady = true;
+
+      document.addEventListener('click', function (event) {
+        var button = event.target.closest('[data-up-pc-tier-target]');
+        if (!button) return;
+
+        var root = button.closest('[data-up-pc-tier-card]');
+        if (!root) return;
+
+        var target = button.getAttribute('data-up-pc-tier-target');
+
+        root.querySelectorAll('[data-up-pc-tier-target]').forEach(function (tab) {
+          var active = tab.getAttribute('data-up-pc-tier-target') === target;
+          tab.classList.toggle('is-active', active);
+          tab.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+
+        root.querySelectorAll('[data-up-pc-tier-panel]').forEach(function (panel) {
+          var active = panel.getAttribute('data-up-pc-tier-panel') === target;
+          panel.hidden = !active;
+          panel.classList.toggle('is-active', active);
+        });
+      });
+    })();
+  </script>
+{%- endif -%}
