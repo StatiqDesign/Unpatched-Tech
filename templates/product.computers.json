@@ -57,8 +57,8 @@
         "variant_picker",
         "computer_specs",
         "product_disclosures",
-        "performance_card",
-        "buy_buttons"
+        "buy_buttons",
+        "performance_card"
       ],
       "settings": {
         "show_vendor": false,
