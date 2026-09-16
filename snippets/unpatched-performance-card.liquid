@@ -148,7 +148,13 @@
   function getMobileShell(card,rerender){
     var productId=card.getAttribute('data-product-id');
     var selector='[data-up-performance-mobile-shell="'+productId+'"]';
-    var shell=document.querySelector(selector);
+    var shells=document.querySelectorAll(selector);
+    var shell=shells.length?shells[0]:null;
+
+    for(var i=1;i<shells.length;i++){
+      shells[i].remove();
+    }
+
     if(shell)return shell;
 
     var productSection=rerender.closest('section');
@@ -179,6 +185,8 @@
   }
 
   function placeCard(card){
+    if(!card||!card.isConnected)return;
+
     var sourceBlock=card.closest('[data-block-type="liquid"]');
     var rerender=getRerender(card);
     if(!rerender)return;
@@ -206,7 +214,9 @@
 
   function placePerformanceCards(root){
     var scope=root&&root.querySelectorAll?root:document;
-    scope.querySelectorAll('[data-up-performance-card]').forEach(placeCard);
+    Array.prototype.slice.call(scope.querySelectorAll('[data-up-performance-card]')).forEach(function(card){
+      if(card.isConnected)placeCard(card);
+    });
   }
 
   if(!window.__unpatchedPerformanceCardInitialized){
