@@ -1,27 +1,10 @@
 {%- comment -%}
 Compatibility wrapper: collection grids use the same global product-item component
 as featured collections, recommendations, search, and other product lists.
-
-The Gaming PCs collection intentionally collapses its separate products into one
-NZXT-style tier-switching card. Entry is the stable anchor when it is published;
-if it is ever unavailable, the first published Gaming PC becomes the anchor.
 {%- endcomment -%}
-
-{%- if collection.handle == 'prebuilt-gaming-pcs' -%}
-  {%- assign gaming_pc_collection = collections['prebuilt-gaming-pcs'] -%}
-  {%- assign gaming_pc_anchor = gaming_pc_collection.products | where: 'handle', 'entry-tier-gaming-pc' | first -%}
-  {%- if gaming_pc_anchor == blank -%}
-    {%- assign gaming_pc_anchor = gaming_pc_collection.products.first -%}
-  {%- endif -%}
-
-  {%- if product.id == gaming_pc_anchor.id -%}
-    {%- render 'unpatched-gaming-pc-tier-card', collection: gaming_pc_collection, sizes_attribute: sizes_attribute, image_loading: image_loading -%}
-  {%- endif -%}
-{%- else -%}
-  {%- render 'product-item',
-    product: product,
-    sizes_attribute: sizes_attribute,
-    image_loading: image_loading,
-    hide_secondary_image: true
-  -%}
-{%- endif -%}
+{%- render 'product-item',
+  product: product,
+  sizes_attribute: sizes_attribute,
+  image_loading: image_loading,
+  hide_secondary_image: true
+-%}
