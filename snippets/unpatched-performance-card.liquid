@@ -254,7 +254,7 @@
 
   @media screen and (max-width: 740px) {
     .up-performance-card {
-      margin-top: 20px;
+      margin-top: 16px;
       padding: 18px;
       border-radius: 8px;
     }
@@ -271,6 +271,8 @@
 
 <script>
   (function () {
+    var mobileQuery = window.matchMedia('(max-width: 740px)');
+
     function updatePerformanceCard(card, resolution) {
       card.querySelectorAll('[data-up-fps]').forEach(function (value) {
         var next = value.getAttribute('data-fps-' + resolution);
@@ -291,18 +293,29 @@
       cards.forEach(function (card) {
         var sourceBlock = card.closest('[data-block-type="liquid"]');
         var rerender = card.closest('product-rerender');
-        var media = rerender ? rerender.querySelector('product-media.product__media') : document.querySelector('product-media.product__media');
-        if (!media) return;
+
+        if (!rerender) {
+          var productId = card.getAttribute('data-product-id');
+          rerender = document.querySelector('product-rerender[id^="product-info-' + productId + '-"]');
+        }
+
+        if (!rerender) return;
+
+        var media = rerender.querySelector('product-media.product__media');
+        var buyButtons = rerender.querySelector('[data-block-type="buy-buttons"]');
 
         if (sourceBlock) {
           sourceBlock.style.display = 'none';
           sourceBlock.setAttribute('aria-hidden', 'true');
         }
 
-        var existing = media.querySelector('[data-up-performance-card]');
-        if (existing && existing !== card) existing.remove();
-
-        if (card.parentElement !== media) media.appendChild(card);
+        if (mobileQuery.matches && buyButtons) {
+          if (card.previousElementSibling !== buyButtons) {
+            buyButtons.insertAdjacentElement('afterend', card);
+          }
+        } else if (media && card.parentElement !== media) {
+          media.appendChild(card);
+        }
       });
     }
 
@@ -333,6 +346,16 @@
       });
 
       observer.observe(document.documentElement, { childList: true, subtree: true });
+
+      if (mobileQuery.addEventListener) {
+        mobileQuery.addEventListener('change', function () {
+          placePerformanceCards(document);
+        });
+      } else if (mobileQuery.addListener) {
+        mobileQuery.addListener(function () {
+          placePerformanceCards(document);
+        });
+      }
     }
 
     placePerformanceCards(document);
