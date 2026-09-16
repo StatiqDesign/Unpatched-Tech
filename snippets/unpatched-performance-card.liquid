@@ -1,15 +1,5 @@
 {%- comment -%}
   UNPATCHED TECH — GAMING PC PERFORMANCE CARD
-  NZXT-inspired FPS card for the product.computers template.
-
-  The card reads the same GPU metafield used by the computer spec sheet and
-  selects an estimated benchmark preset automatically. Individual numbers can
-  be overridden per product later with these optional metafields:
-
-  custom.fps_r6_1080 / custom.fps_r6_1440 / custom.fps_r6_4k
-  custom.fps_fortnite_1080 / custom.fps_fortnite_1440 / custom.fps_fortnite_4k
-  custom.fps_gta_1080 / custom.fps_gta_1440 / custom.fps_gta_4k
-  custom.fps_warzone_1080 / custom.fps_warzone_1440 / custom.fps_warzone_4k
 {%- endcomment -%}
 
 {%- assign pc_gpu = product.metafields.custom.pc_gpu.value | default: '' | downcase -%}
@@ -93,26 +83,10 @@
   </div>
 
   <div class="up-performance-card__games" aria-live="polite">
-    <div class="up-performance-card__game">
-      <span>Rainbow Six Siege</span>
-      <strong data-up-fps data-fps-1080="{{ r6_1080 }}" data-fps-1440="{{ r6_1440 }}" data-fps-4k="{{ r6_4k }}">{{ r6_1080 }}</strong>
-      <small>FPS</small>
-    </div>
-    <div class="up-performance-card__game">
-      <span>Fortnite</span>
-      <strong data-up-fps data-fps-1080="{{ fortnite_1080 }}" data-fps-1440="{{ fortnite_1440 }}" data-fps-4k="{{ fortnite_4k }}">{{ fortnite_1080 }}</strong>
-      <small>FPS</small>
-    </div>
-    <div class="up-performance-card__game">
-      <span>GTA V Enhanced</span>
-      <strong data-up-fps data-fps-1080="{{ gta_1080 }}" data-fps-1440="{{ gta_1440 }}" data-fps-4k="{{ gta_4k }}">{{ gta_1080 }}</strong>
-      <small>FPS</small>
-    </div>
-    <div class="up-performance-card__game">
-      <span>Call of Duty: Warzone</span>
-      <strong data-up-fps data-fps-1080="{{ warzone_1080 }}" data-fps-1440="{{ warzone_1440 }}" data-fps-4k="{{ warzone_4k }}">{{ warzone_1080 }}</strong>
-      <small>FPS</small>
-    </div>
+    <div class="up-performance-card__game"><span>Rainbow Six Siege</span><strong data-up-fps data-fps-1080="{{ r6_1080 }}" data-fps-1440="{{ r6_1440 }}" data-fps-4k="{{ r6_4k }}">{{ r6_1080 }}</strong><small>FPS</small></div>
+    <div class="up-performance-card__game"><span>Fortnite</span><strong data-up-fps data-fps-1080="{{ fortnite_1080 }}" data-fps-1440="{{ fortnite_1440 }}" data-fps-4k="{{ fortnite_4k }}">{{ fortnite_1080 }}</strong><small>FPS</small></div>
+    <div class="up-performance-card__game"><span>GTA V Enhanced</span><strong data-up-fps data-fps-1080="{{ gta_1080 }}" data-fps-1440="{{ gta_1440 }}" data-fps-4k="{{ gta_4k }}">{{ gta_1080 }}</strong><small>FPS</small></div>
+    <div class="up-performance-card__game"><span>Call of Duty: Warzone</span><strong data-up-fps data-fps-1080="{{ warzone_1080 }}" data-fps-1440="{{ warzone_1440 }}" data-fps-4k="{{ warzone_4k }}">{{ warzone_1080 }}</strong><small>FPS</small></div>
   </div>
 
   <div class="up-performance-card__resolutions" role="group" aria-label="Gaming resolution">
@@ -125,239 +99,111 @@
 </div>
 
 <style>
-  .up-performance-card {
-    width: 100%;
-    margin: 28px 0 0;
-    padding: 22px;
-    border: 1px solid rgba(24, 24, 24, 0.12);
-    border-radius: 10px;
-    background: #f6f6f7;
-    color: #161616;
-    box-sizing: border-box;
-  }
-
-  .up-performance-card__heading {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 8px;
-  }
-
-  .up-performance-card__eyebrow {
-    margin: 0 0 2px;
-    font-size: 10px;
-    line-height: 1.2;
-    font-weight: 750;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    opacity: 0.55;
-  }
-
-  .up-performance-card__title {
-    margin: 0;
-    font-size: 20px;
-    line-height: 1.2;
-    font-weight: 750;
-    letter-spacing: -0.02em;
-  }
-
-  .up-performance-card__estimate {
-    padding-top: 3px;
-    font-size: 10px;
-    line-height: 1;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    opacity: 0.45;
-  }
-
-  .up-performance-card__games {
-    border-top: 1px solid rgba(24, 24, 24, 0.09);
-  }
-
-  .up-performance-card__game {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto auto;
-    align-items: baseline;
-    gap: 5px;
-    min-height: 43px;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(24, 24, 24, 0.09);
-  }
-
-  .up-performance-card__game > span {
-    min-width: 0;
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  .up-performance-card__game strong {
-    font-size: 16px;
-    line-height: 1;
-    font-weight: 800;
-    color: #405DE6;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .up-performance-card__game small {
-    font-size: 9px;
-    line-height: 1;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    color: #405DE6;
-  }
-
-  .up-performance-card__resolutions {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3px;
-    max-width: 300px;
-    margin: 18px auto 0;
-    padding: 3px;
-    border-radius: 7px;
-    background: #e4e5e8;
-  }
-
-  .up-performance-card__resolutions button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 34px;
-    padding: 7px 10px;
-    border: 0;
-    border-radius: 5px;
-    background: transparent;
-    color: #666a73;
-    font: inherit;
-    font-size: 13px;
-    font-weight: 750;
-    line-height: 1;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
-  }
-
-  .up-performance-card__resolutions button.is-active {
-    background: #ffffff;
-    color: #171717;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
-  }
-
-  .up-performance-card__note {
-    max-width: 390px;
-    margin: 10px auto 0;
-    font-size: 9px;
-    line-height: 1.45;
-    text-align: center;
-    color: #71747b;
-  }
-
-  @media screen and (max-width: 740px) {
-    .up-performance-card {
-      margin-top: 16px;
-      padding: 18px;
-      border-radius: 8px;
-    }
-
-    .up-performance-card__game {
-      min-height: 40px;
-    }
-
-    .up-performance-card__resolutions {
-      max-width: none;
-    }
-  }
+.up-performance-card{width:100%;margin:28px 0 0;padding:22px;border:1px solid rgba(24,24,24,.12);border-radius:10px;background:#f6f6f7;color:#161616;box-sizing:border-box}
+.up-performance-card__heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:8px}
+.up-performance-card__eyebrow{margin:0 0 2px;font-size:10px;line-height:1.2;font-weight:750;letter-spacing:.12em;text-transform:uppercase;opacity:.55}
+.up-performance-card__title{margin:0;font-size:20px;line-height:1.2;font-weight:750;letter-spacing:-.02em}
+.up-performance-card__estimate{padding-top:3px;font-size:10px;line-height:1;font-weight:800;letter-spacing:.08em;opacity:.45}
+.up-performance-card__games{border-top:1px solid rgba(24,24,24,.09)}
+.up-performance-card__game{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:baseline;gap:5px;min-height:43px;padding:10px 0;border-bottom:1px solid rgba(24,24,24,.09)}
+.up-performance-card__game>span{min-width:0;font-size:13px;font-weight:600}
+.up-performance-card__game strong{font-size:16px;line-height:1;font-weight:800;color:#405DE6;font-variant-numeric:tabular-nums}
+.up-performance-card__game small{font-size:9px;line-height:1;font-weight:700;letter-spacing:.06em;color:#405DE6}
+.up-performance-card__resolutions{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;max-width:300px;margin:18px auto 0;padding:3px;border-radius:7px;background:#e4e5e8}
+.up-performance-card__resolutions button{display:flex;align-items:center;justify-content:center;min-height:34px;padding:7px 10px;border:0;border-radius:5px;background:transparent;color:#666a73;font:inherit;font-size:13px;font-weight:750;line-height:1;text-align:center;cursor:pointer;transition:background-color 150ms ease,color 150ms ease,box-shadow 150ms ease}
+.up-performance-card__resolutions button.is-active{background:#fff;color:#171717;box-shadow:0 1px 4px rgba(0,0,0,.10)}
+.up-performance-card__note{max-width:390px;margin:10px auto 0;font-size:9px;line-height:1.45;text-align:center;color:#71747b}
+@media screen and (max-width:740px){.up-performance-card{margin-top:16px;padding:18px;border-radius:8px}.up-performance-card__game{min-height:40px}.up-performance-card__resolutions{max-width:none}}
 </style>
 
 <script>
-  (function () {
-    var mobileQuery = window.matchMedia('(max-width: 740px)');
+(function(){
+  var mobileQuery=window.matchMedia('(max-width: 740px)');
 
-    function updatePerformanceCard(card, resolution) {
-      card.querySelectorAll('[data-up-fps]').forEach(function (value) {
-        var next = value.getAttribute('data-fps-' + resolution);
-        if (next) value.textContent = next;
-      });
+  function updatePerformanceCard(card,resolution){
+    card.querySelectorAll('[data-up-fps]').forEach(function(value){
+      var next=value.getAttribute('data-fps-'+resolution);
+      if(next)value.textContent=next;
+    });
+    card.querySelectorAll('[data-up-resolution]').forEach(function(button){
+      var selected=button.getAttribute('data-up-resolution')===resolution;
+      button.classList.toggle('is-active',selected);
+      button.setAttribute('aria-pressed',selected?'true':'false');
+    });
+  }
 
-      card.querySelectorAll('[data-up-resolution]').forEach(function (button) {
-        var selected = button.getAttribute('data-up-resolution') === resolution;
-        button.classList.toggle('is-active', selected);
-        button.setAttribute('aria-pressed', selected ? 'true' : 'false');
-      });
+  function getRerender(card){
+    var rerender=card.closest('product-rerender');
+    if(rerender)return rerender;
+    var productId=card.getAttribute('data-product-id');
+    return document.querySelector('product-rerender[id^="product-info-'+productId+'-"]');
+  }
+
+  function getMainBuyButtons(rerender){
+    var addToCart=rerender.querySelector('button#AddToCart[data-product-add-to-cart-button]')||rerender.querySelector('button[data-product-add-to-cart-button]');
+    if(addToCart){
+      return addToCart.closest('.product-form__buy-buttons')||addToCart.closest('[data-block-type="buy-buttons"]');
+    }
+    return rerender.querySelector('.product-form__buy-buttons[data-block-type="buy-buttons"]');
+  }
+
+  function placeCard(card){
+    var sourceBlock=card.closest('[data-block-type="liquid"]');
+    var rerender=getRerender(card);
+    if(!rerender)return;
+
+    var media=rerender.querySelector('product-media.product__media');
+    var buyButtons=getMainBuyButtons(rerender);
+
+    if(sourceBlock){
+      sourceBlock.style.display='none';
+      sourceBlock.setAttribute('aria-hidden','true');
     }
 
-    function placePerformanceCards(root) {
-      var scope = root && root.querySelectorAll ? root : document;
-      var cards = scope.querySelectorAll('[data-up-performance-card]');
-
-      cards.forEach(function (card) {
-        var sourceBlock = card.closest('[data-block-type="liquid"]');
-        var rerender = card.closest('product-rerender');
-
-        if (!rerender) {
-          var productId = card.getAttribute('data-product-id');
-          rerender = document.querySelector('product-rerender[id^="product-info-' + productId + '-"]');
-        }
-
-        if (!rerender) return;
-
-        var media = rerender.querySelector('product-media.product__media');
-        var buyButtons = rerender.querySelector('[data-block-type="buy-buttons"]');
-
-        if (sourceBlock) {
-          sourceBlock.style.display = 'none';
-          sourceBlock.setAttribute('aria-hidden', 'true');
-        }
-
-        if (mobileQuery.matches && buyButtons) {
-          if (card.previousElementSibling !== buyButtons) {
-            buyButtons.insertAdjacentElement('afterend', card);
-          }
-        } else if (media && card.parentElement !== media) {
-          media.appendChild(card);
-        }
-      });
-    }
-
-    if (!window.__unpatchedPerformanceCardInitialized) {
-      window.__unpatchedPerformanceCardInitialized = true;
-
-      document.addEventListener('click', function (event) {
-        var button = event.target.closest('[data-up-resolution]');
-        if (!button) return;
-
-        var card = button.closest('[data-up-performance-card]');
-        if (!card) return;
-
-        updatePerformanceCard(card, button.getAttribute('data-up-resolution'));
-      });
-
-      var observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-          mutation.addedNodes.forEach(function (node) {
-            if (node.nodeType !== 1) return;
-            if (node.matches && node.matches('[data-up-performance-card]')) {
-              placePerformanceCards(node.parentElement || document);
-            } else if (node.querySelector && node.querySelector('[data-up-performance-card]')) {
-              placePerformanceCards(node);
-            }
-          });
-        });
-      });
-
-      observer.observe(document.documentElement, { childList: true, subtree: true });
-
-      if (mobileQuery.addEventListener) {
-        mobileQuery.addEventListener('change', function () {
-          placePerformanceCards(document);
-        });
-      } else if (mobileQuery.addListener) {
-        mobileQuery.addListener(function () {
-          placePerformanceCards(document);
-        });
+    if(mobileQuery.matches&&buyButtons){
+      if(card.parentElement!==buyButtons){
+        buyButtons.appendChild(card);
       }
+    }else if(media&&card.parentElement!==media){
+      media.appendChild(card);
     }
+  }
 
-    placePerformanceCards(document);
-  })();
+  function placePerformanceCards(root){
+    var scope=root&&root.querySelectorAll?root:document;
+    scope.querySelectorAll('[data-up-performance-card]').forEach(placeCard);
+  }
+
+  if(!window.__unpatchedPerformanceCardInitialized){
+    window.__unpatchedPerformanceCardInitialized=true;
+
+    document.addEventListener('click',function(event){
+      var button=event.target.closest('[data-up-resolution]');
+      if(!button)return;
+      var card=button.closest('[data-up-performance-card]');
+      if(!card)return;
+      updatePerformanceCard(card,button.getAttribute('data-up-resolution'));
+    });
+
+    var observer=new MutationObserver(function(mutations){
+      mutations.forEach(function(mutation){
+        mutation.addedNodes.forEach(function(node){
+          if(node.nodeType!==1)return;
+          if((node.matches&&node.matches('[data-up-performance-card]'))||(node.querySelector&&node.querySelector('[data-up-performance-card]'))){
+            placePerformanceCards(document);
+          }
+        });
+      });
+    });
+    observer.observe(document.documentElement,{childList:true,subtree:true});
+
+    if(mobileQuery.addEventListener){
+      mobileQuery.addEventListener('change',function(){placePerformanceCards(document)});
+    }else if(mobileQuery.addListener){
+      mobileQuery.addListener(function(){placePerformanceCards(document)});
+    }
+  }
+
+  placePerformanceCards(document);
+})();
 </script>
