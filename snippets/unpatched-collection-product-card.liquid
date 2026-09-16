@@ -1,35 +1,10 @@
 {%- comment -%}
 Compatibility wrapper: collection grids use the same global product-item component
 as featured collections, recommendations, search, and other product lists.
-
-For the Gaming PCs collection only, the three core builds are presented as one
-normal product card with an internal Series selector. Entry is the stable anchor;
-additional published builds are available through that same selector.
 {%- endcomment -%}
-
-{%- if collection.handle == 'prebuilt-gaming-pcs' -%}
-  {%- assign gaming_pc_collection = collections['prebuilt-gaming-pcs'] -%}
-  {%- assign gaming_pc_anchor = blank -%}
-
-  {%- for gaming_pc in gaming_pc_collection.products -%}
-    {%- if gaming_pc.handle == 'entry-tier-gaming-pc' -%}
-      {%- assign gaming_pc_anchor = gaming_pc -%}
-      {%- break -%}
-    {%- endif -%}
-  {%- endfor -%}
-
-  {%- if gaming_pc_anchor == blank -%}
-    {%- assign gaming_pc_anchor = gaming_pc_collection.products.first -%}
-  {%- endif -%}
-
-  {%- if product.id == gaming_pc_anchor.id -%}
-    {%- render 'unpatched-gaming-pc-series-card', collection: gaming_pc_collection, sizes_attribute: sizes_attribute, image_loading: image_loading -%}
-  {%- endif -%}
-{%- else -%}
-  {%- render 'product-item',
-    product: product,
-    sizes_attribute: sizes_attribute,
-    image_loading: image_loading,
-    hide_secondary_image: true
-  -%}
-{%- endif -%}
+{%- render 'product-item',
+  product: product,
+  sizes_attribute: sizes_attribute,
+  image_loading: image_loading,
+  hide_secondary_image: true
+-%}
