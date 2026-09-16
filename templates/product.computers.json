@@ -13,6 +13,12 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "system_selector": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{% render 'unpatched-system-selector', product: product %}"
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -54,6 +60,7 @@
         }
       },
       "block_order": [
+        "system_selector",
         "variant_picker",
         "computer_specs",
         "product_disclosures",
