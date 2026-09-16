@@ -38,7 +38,7 @@
         "performance_card": {
           "type": "liquid",
           "settings": {
-            "liquid": "{% render 'unpatched-performance-card', product: product %}"
+            "liquid": "{% render 'unpatched-performance-card', product: product %}<style>.up-performance-card__resolutions button{display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;}</style>"
           }
         },
         "buy_buttons": {
