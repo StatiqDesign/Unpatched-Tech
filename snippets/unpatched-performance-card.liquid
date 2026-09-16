@@ -284,9 +284,15 @@
       var cards = scope.querySelectorAll('[data-up-performance-card]');
 
       cards.forEach(function (card) {
+        var sourceBlock = card.closest('[data-block-type="liquid"]');
         var rerender = card.closest('product-rerender');
         var media = rerender ? rerender.querySelector('product-media.product__media') : document.querySelector('product-media.product__media');
         if (!media) return;
+
+        if (sourceBlock) {
+          sourceBlock.style.display = 'none';
+          sourceBlock.setAttribute('aria-hidden', 'true');
+        }
 
         var existing = media.querySelector('[data-up-performance-card]');
         if (existing && existing !== card) existing.remove();
