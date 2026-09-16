@@ -35,6 +35,12 @@
             "liquid": "{% render 'unpatched-product-disclosures', product: product %}"
           }
         },
+        "performance_card": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{% render 'unpatched-performance-card', product: product %}"
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -51,6 +57,7 @@
         "variant_picker",
         "computer_specs",
         "product_disclosures",
+        "performance_card",
         "buy_buttons"
       ],
       "settings": {
