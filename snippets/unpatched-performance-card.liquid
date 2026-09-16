@@ -161,6 +161,23 @@
     return shell;
   }
 
+  function removeStaleCards(card){
+    var productId=card.getAttribute('data-product-id');
+    if(!productId)return;
+
+    document.querySelectorAll('[data-up-performance-card]').forEach(function(existing){
+      if(existing!==card&&existing.getAttribute('data-product-id')===productId){
+        existing.remove();
+      }
+    });
+
+    document.querySelectorAll('[data-up-performance-mobile-shell]').forEach(function(shell){
+      if(shell.getAttribute('data-up-performance-mobile-shell')===productId&&!shell.querySelector('[data-up-performance-card]')){
+        shell.remove();
+      }
+    });
+  }
+
   function placeCard(card){
     var sourceBlock=card.closest('[data-block-type="liquid"]');
     var rerender=getRerender(card);
@@ -169,6 +186,7 @@
     var media=rerender.querySelector('product-media.product__media');
 
     if(sourceBlock){
+      removeStaleCards(card);
       sourceBlock.style.display='none';
       sourceBlock.setAttribute('aria-hidden','true');
     }
