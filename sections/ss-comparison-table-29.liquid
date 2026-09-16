@@ -1,0 +1,2021 @@
+{% schema %}
+{
+  "name": "SS - Comparison table #29",
+  "tag": "section",
+  "class": "section-product-comparison",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Primary product"
+    },
+    {
+      "type": "image_picker",
+      "id": "primary_image",
+      "label": "Product image"
+    },
+    {
+      "type": "text",
+      "id": "primary_title",
+      "label": "Title",
+      "default": "R-01"
+    },
+    {
+      "type": "text",
+      "id": "primary_badge",
+      "label": "Badge text",
+      "default": "Convenient"
+    },
+    {
+      "type": "header",
+      "content": "Competitor"
+    },
+    {
+      "type": "image_picker",
+      "id": "competitor_image",
+      "label": "Product image"
+    },
+    {
+      "type": "text",
+      "id": "competitor_title",
+      "label": "Title",
+      "default": "Others"
+    },
+    {
+      "type": "text",
+      "id": "competitor_badge",
+      "label": "Badge text",
+      "default": "Tedious"
+    },
+    {
+        "type": "header",
+        "content": "Content"
+    },
+    {
+        "type": "text_alignment",
+        "id": "content_align",
+        "label": "Alignment",
+        "default": "center"
+    },
+    {
+        "type": "text_alignment",
+        "id": "content_align_mobile",
+        "label": "Alignment - mobile",
+        "default": "center"
+    },     
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout_direction",
+      "label": "Layout direction",
+      "options": [
+        { "value": "heading_first", "label": "Heading left, table right" },
+        { "value": "table_first", "label": "Table left, heading right" },
+        { "value": "heading_first_vertical", "label": "Heading top, table bottom" },
+        { "value": "table_first_vertical", "label": "Table top, heading bottom" }
+      ],
+      "default": "heading_first"
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Gap between heading and table",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "default": 64,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "column_width",
+      "label": "Column width",
+      "min": 100,
+      "max": 200,
+      "step": 5,
+      "default": 140,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "column_radius",
+      "label": "Primary column corner radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "row_padding",
+      "label": "Row padding",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Product image width",
+      "min": 40,
+      "max": 120,
+      "step": 5,
+      "default": 70,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "checkbox",
+      "id": "product_title_custom",
+      "label": "Use custom font",
+      "info": "Applies to the product titles and badges",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "product_title_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4",
+      "visible_if": "{{ section.settings.product_title_custom }}"
+    },
+    {
+      "type": "range",
+      "id": "product_title_size",
+      "label": "Product title size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_custom",
+      "label": "Use custom font",
+      "info": "Applies to the feature labels and row text",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "feature_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4",
+      "visible_if": "{{ section.settings.feature_custom }}"
+    },
+    {
+      "type": "range",
+      "id": "feature_font_size",
+      "label": "Feature text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "feature_font_weight",
+      "label": "Feature text weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600",
+      "visible_if": "{{ section.settings.feature_custom == false }}"
+    },
+    {
+      "type": "header",
+      "content": "Dividers"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dividers",
+      "label": "Show divider lines",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "divider_thickness",
+      "label": "Divider thickness",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "default": 22,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "checkbox",
+      "id": "primary_column_use_gradient",
+      "label": "Primary column background gradient",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "primary_column_color",
+      "label": "Primary column background",
+      "default": "#121212",
+      "visible_if": "{{ section.settings.primary_column_use_gradient == false }}"
+    },
+    {
+      "type": "color",
+      "id": "primary_column_gradient_start",
+      "label": "Primary column gradient (left)",
+      "default": "#121212",
+      "visible_if": "{{ section.settings.primary_column_use_gradient }}"
+    },
+    {
+      "type": "color",
+      "id": "primary_column_gradient_end",
+      "label": "Primary column gradient (right)",
+      "default": "#404040",
+      "visible_if": "{{ section.settings.primary_column_use_gradient }}"
+    },
+    {
+      "type": "color",
+      "id": "primary_column_text_color",
+      "label": "Primary column text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "feature_text_color",
+      "label": "Feature text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "competitor_text_color",
+      "label": "Competitor text",
+      "default": "#3d3d3d"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "check_color",
+      "label": "Primary column icons",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "cross_color",
+      "label": "Competitor column icons",
+      "default": "#3d3d3d"
+    },
+    {
+      "type": "select",
+      "id": "cross_stroke_style",
+      "label": "Competitor icon style",
+      "options": [
+        { "value": "white", "label": "White stroke" },
+        { "value": "transparent", "label": "Transparent stroke (Cutout)" }
+      ],
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "rgba(255, 255, 255, 0.15)"
+    },
+    {
+      "type": "color",
+      "id": "badge_icon_color",
+      "label": "Badge icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "select",
+      "id": "background_style",
+      "label": "Background style",
+      "default": "solid",
+      "options": [
+        { "label": "Solid", "value": "solid" },
+        { "label": "Gradient", "value": "gradient" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff",
+      "visible_if": "{{ section.settings.background_style == 'solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Gradient",
+      "default": "linear-gradient(180deg, #FFFFFF 0%, #F4F4F4 100%)",
+      "visible_if": "{{ section.settings.background_style == 'gradient' }}"
+    },
+    {
+      "type": "header",
+      "content": "Section margin (outside)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_horizontal",
+      "min": 0,
+      "max": 30,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Sides",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_horizontal_mobile",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Sides - mobile",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Section padding (inside)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 0,
+      "max": 30,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Sides",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal_mobile",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Sides - mobile",
+      "default": 1.5
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "default": "page",
+      "options": [
+        {
+          "label": "Page",
+          "value": "page"
+        },
+        {
+          "label": "Full",
+          "value": "full"
+        },
+        {
+          "label": "Custom",
+          "value": "custom"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 800,
+      "max": 2000,
+      "step": 100,
+      "unit": "px",
+      "label": "Content width",
+      "default": 1200,      
+      "visible_if": "{{ section.settings.width == 'custom' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "lazy",
+      "label": "Lazy load",
+      "info": "Lazy load images for speed optimisation",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Heading text",
+          "default": "Comparison table #29"
+        },
+        {
+          "type": "checkbox",
+          "id": "heading_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "heading_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4",
+          "visible_if": "{{ block.settings.heading_custom }}"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading tag",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "p", "label": "Paragraph" }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "label": "Font size",
+          "min": 24,
+          "max": 80,
+          "step": 2,
+          "default": 48,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "mobile_font_size",
+          "label": "Mobile font size",
+          "min": 18,
+          "max": 48,
+          "step": 2,
+          "default": 32,
+          "unit": "px"
+        },
+        {
+          "type": "checkbox",
+          "id": "italic",
+          "label": "Italic",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "use_gradient",
+          "label": "Use gradient text",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "gradient_start",
+          "label": "Gradient start (left)",
+          "default": "#121212",
+          "visible_if": "{{ block.settings.use_gradient }}"
+        },
+        {
+          "type": "color",
+          "id": "gradient_end",
+          "label": "Gradient end (right)",
+          "default": "#404040",
+          "visible_if": "{{ block.settings.use_gradient }}"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading color",
+          "default": "#121212",
+          "visible_if": "{{ block.settings.use_gradient == false }}"
+        }
+      ]
+    },
+    {
+      "type": "subtitle",
+      "name": "Subtitle",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Everything you need in one simple scoop."
+        },
+        {
+          "type": "checkbox",
+          "id": "subtitle_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "subtitle_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4",
+          "visible_if": "{{ block.settings.subtitle_custom }}"
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "label": "Font size",
+          "min": 14,
+          "max": 28,
+          "step": 1,
+          "default": 18,
+          "unit": "px"
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font weight",
+          "options": [
+            { "value": "400", "label": "Regular" },
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semibold" }
+          ],
+          "default": "400",
+          "visible_if": "{{ block.settings.subtitle_custom == false }}"
+        },
+        {
+          "type": "color",
+          "id": "subtitle_color",
+          "label": "Color",
+          "default": "#121212"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button",
+          "label": "Button label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_in_new_tab",
+          "label": "Open link in new tab",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Style",
+          "default": "non_outline",
+          "options": [
+            {
+              "label": "Link",
+              "value": "link"
+            },
+            {
+              "label": "Non-outline",
+              "value": "non_outline"
+            },
+            {
+              "label": "Non-outline & arrow",
+              "value": "non_outline_arrow"
+            },
+            {
+              "label": "Outline",
+              "value": "outline"
+            },
+            {
+              "label": "Outline & arrow",
+              "value": "outline_arrow"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "button_custom",
+          "label": "Use custom font",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "button_font",
+          "label": "Font family",
+          "default": "josefin_sans_n4",
+          "visible_if": "{{ block.settings.button_custom }}"
+        },
+        {
+          "type": "range",
+          "id": "button_size",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "button_size_mobile",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size - mobile",
+          "default": 14
+        },
+        {
+          "type": "checkbox",
+          "id": "button_advanced",
+          "label": "Show advanced settings",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "button_height",
+          "min": 50,
+          "max": 200,
+          "step": 10,
+          "unit": "%",
+          "label": "Line height",
+          "default": 100,
+          "visible_if": "{{ block.settings.button_advanced }}"
+        },
+        {
+          "type": "range",
+          "id": "button_padding_horizontal",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal",
+          "default": 40,
+          "visible_if": "{{ block.settings.button_style != 'link' and block.settings.button_advanced }}"
+        },
+        {
+          "type": "range",
+          "id": "button_padding_horizontal_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding horizontal - mobile",
+          "default": 32,
+          "visible_if": "{{ block.settings.button_style != 'link' and block.settings.button_advanced }}"
+        },
+        {
+          "type": "range",
+          "id": "button_padding_vertical",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical",
+          "default": 20,
+          "visible_if": "{{ block.settings.button_style != 'link' and block.settings.button_advanced }}"
+        },
+        {
+          "type": "range",
+          "id": "button_padding_vertical_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding vertical - mobile",
+          "default": 20,
+          "visible_if": "{{ block.settings.button_style != 'link' and block.settings.button_advanced }}"
+        },
+        {
+          "type": "range",
+          "id": "button_radius",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Roundness",
+          "default": 100,
+          "visible_if": "{{ block.settings.button_style != 'link' }}"
+        },
+        {
+          "type": "range",
+          "id": "button_border_thickness",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "label": "Border thickness",
+          "default": 1,
+          "visible_if": "{{ block.settings.button_style == 'outline' or block.settings.button_style == 'outline_arrow' }}"
+        },
+        {
+          "type": "range",
+          "id": "button_mt",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top",
+          "default": 16,
+          "visible_if": "{{ block.settings.button_advanced }}"
+        },
+        {
+          "type": "range",
+          "id": "button_mt_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top - mobile",
+          "default": 16,
+          "visible_if": "{{ block.settings.button_advanced }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_custom_styling",
+          "label": "Use custom styling",
+          "default": true,
+          "visible_if": "{{ block.settings.button_style != 'link' }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_full_width_mobile",
+          "label": "Full width on mobile",
+          "default": false,
+          "visible_if": "{{ block.settings.button_style != 'link' }}"
+        },          
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "label": "Text",
+          "id": "button_color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "label": "Text hover",
+          "id": "button_hover_color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "label": "Background",
+          "id": "button_bg_color",
+          "default": "#2D2D2D",
+          "visible_if": "{{ block.settings.button_style != 'link' }}"
+        },
+        {
+          "type": "color",
+          "label": "Background hover",
+          "id": "button_bg_hover_color",
+          "default": "#2D2D2D",
+          "visible_if": "{{ block.settings.button_style != 'link' }}"
+        },
+        {
+          "type": "color",
+          "label": "Border",
+          "id": "button_border_color",
+          "default": "#1A1A1A",
+          "visible_if": "{{ block.settings.button_style == 'outline' or block.settings.button_style == 'outline_arrow' }}"
+        },
+        {
+          "type": "color",
+          "label": "Border hover",
+          "id": "button_border_hover_color",
+          "default": "#1A1A1A",
+          "visible_if": "{{ block.settings.button_style == 'outline' or block.settings.button_style == 'outline_arrow' }}"
+        },
+        {
+          "type": "color",
+          "label": "Shadow",
+          "id": "button_shadow_color",
+          "default": "#000000",
+          "visible_if": "{{ block.settings.button_style != 'link' and block.settings.button_custom_styling }}"
+        }
+      ]
+    },
+    {
+      "type": "feature_row",
+      "name": "Feature row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_name",
+          "label": "Feature name",
+          "default": "Feature"
+        },
+        {
+          "type": "checkbox",
+          "id": "primary_has_feature",
+          "label": "Primary product has feature",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "competitor_has_feature",
+          "label": "Competitor has feature",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "text_row",
+      "name": "Text row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_name",
+          "label": "Feature name",
+          "default": "Benefits in"
+        },
+        {
+          "type": "text",
+          "id": "primary_text",
+          "label": "Primary product text",
+          "default": "One Scoop"
+        },
+        {
+          "type": "text",
+          "id": "competitor_text",
+          "label": "Competitor text",
+          "default": "Multi-Supp."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SS - Comparison table #29",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "subtitle"
+        },
+        {
+          "type": "button"
+        },
+        {
+          "type": "feature_row",
+          "settings": {
+            "feature_name": "Multivitamins",
+            "primary_has_feature": true,
+            "competitor_has_feature": false
+          }
+        },
+        {
+          "type": "feature_row",
+          "settings": {
+            "feature_name": "Antioxidants",
+            "primary_has_feature": true,
+            "competitor_has_feature": false
+          }
+        },
+        {
+          "type": "feature_row",
+          "settings": {
+            "feature_name": "Gut-friendly Bacteria",
+            "primary_has_feature": true,
+            "competitor_has_feature": false
+          }
+        },
+        {
+          "type": "feature_row",
+          "settings": {
+            "feature_name": "Gut-friendly Fibre",
+            "primary_has_feature": true,
+            "competitor_has_feature": false
+          }
+        },
+        {
+          "type": "feature_row",
+          "settings": {
+            "feature_name": "High Quality Adaptogens",
+            "primary_has_feature": true,
+            "competitor_has_feature": false
+          }
+        },
+        {
+          "type": "text_row",
+          "settings": {
+            "feature_name": "Benefits in",
+            "primary_text": "One Scoop",
+            "competitor_text": "Multi-Supp."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+{%- liquid
+  assign enable_section = shop.metafields['app--6564759--section_store'].plus_active
+-%}
+{%- if enable_section -%}{% comment %}
+---------------------------------------------------------
+Copyright © 2026 Section Store. All rights reserved.
+Unauthorized copying, modification, distribution, or use
+of this code or any portion of it, is strictly prohibited.
+Violators will be prosecuted to the fullest extent of the law.
+For inquiries or permissions, contact daniel@section.store
+---------------------------------------------------------
+{% endcomment %}
+ 
+{%- liquid 
+  assign width = section.settings.width
+  assign content_width = section.settings.content_width
+
+  assign background_style = section.settings.background_style
+  assign background_color = section.settings.background_color
+  assign background_gradient = section.settings.background_gradient
+
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign margin_horizontal = section.settings.margin_horizontal
+  assign margin_horizontal_mobile = section.settings.margin_horizontal_mobile
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign padding_horizontal = section.settings.padding_horizontal
+  assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
+
+  assign lazy = section.settings.lazy
+
+  assign content_align = section.settings.content_align
+  assign content_align_mobile = section.settings.content_align_mobile  
+
+  assign content_horizontal_align = ""
+  if content_align == "center"
+    assign content_horizontal_align = "center"
+  elsif content_align == "right"
+    assign content_horizontal_align = "end"
+  else
+    assign content_horizontal_align = "start"
+  endif
+
+  assign content_horizontal_align_mobile = ""
+  if content_align_mobile == "center"
+    assign content_horizontal_align_mobile = "center"
+  elsif content_align_mobile == "right"
+    assign content_horizontal_align_mobile = "end"
+  else
+    assign content_horizontal_align_mobile = "start"
+  endif
+
+  assign custom_block = false
+
+  for block in section.blocks
+    if block.type != 'feature_row'
+      assign custom_block = true
+    endif
+  endfor
+
+   assign loading_attribute = 'eager'
+  if lazy
+    assign loading_attribute = 'lazy'
+  endif
+-%}
+
+{%- style -%}
+  .section-{{ section.id }} {
+    --section-padding-top: {{ padding_top }}px;
+    --section-padding-bottom: {{ padding_bottom }}px;
+    --section-padding-sides: {{ padding_horizontal }}rem;
+    margin-top: {{ margin_top }}px;
+    margin-bottom: {{ margin_bottom }}px;
+    margin-left: {{ margin_horizontal }}rem;
+    margin-right: {{ margin_horizontal }}rem;
+    --primary-column-bg: {{ section.settings.primary_column_color }};
+    --primary-column-gradient-start: {{ section.settings.primary_column_gradient_start }};
+    --primary-column-gradient-end: {{ section.settings.primary_column_gradient_end }};
+    --primary-column-text: {{ section.settings.primary_column_text_color }};
+    --feature-text-color: {{ section.settings.feature_text_color }};
+    --competitor-text-color: {{ section.settings.competitor_text_color }};
+    --divider-color: {{ section.settings.divider_color }};
+    --check-color: {{ section.settings.check_color }};
+    --cross-color: {{ section.settings.cross_color }};
+    --column-width: {{ section.settings.column_width }}px;
+    --column-radius: {{ section.settings.column_radius }}px;
+    --icon-size: {{ section.settings.icon_size }}px;
+    --row-padding: {{ section.settings.row_padding }}px;
+    --divider-thickness: {{ section.settings.divider_thickness }}px;
+    --image-width: {{ section.settings.image_width }}px;
+  }
+
+  .section-{{ section.id }} .product-comparison {
+    padding-top: var(--section-padding-top);
+    padding-bottom: var(--section-padding-bottom);
+  }
+
+  .section-{{ section.id }} .product-comparison__container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 var(--section-padding-sides);
+  }
+
+  .section-{{ section.id }} .product-comparison__mobile-button {
+    display: none;
+  }
+
+  .section-{{ section.id }} .product-comparison__content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: {{ section.settings.content_gap }}px;
+    align-items: center;
+  }
+
+  .section-{{ section.id }} .product-comparison__header {
+    display: flex;
+    flex-direction: column;
+    align-items: {{ content_horizontal_align_mobile }};
+  }
+
+  @media(max-width: 1024px) {
+    .comparison-button-desktop-{{ section.id }} {
+      display: none !important;
+    }
+  }
+
+  @media(min-width: 1024px) {
+    .section-{{ section.id }} .product-comparison__header {
+      align-items: {{ content_horizontal_align }} !important;
+    }
+  }
+
+  {%- if section.settings.layout_direction == 'table_first' -%}
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} .product-comparison__content {
+        grid-template-columns: auto 1fr;
+      }
+
+      .section-{{ section.id }} .product-comparison__header {
+        order: 2;
+      }
+
+      .section-{{ section.id }} .product-comparison__table {
+        order: 1;
+      }
+    }
+
+    .section-{{ section.id }} .product-comparison__header {
+      {%- if section.settings.layout_direction == 'table_first' -%}
+      padding-left: 2rem;
+      {%- else -%}
+      padding-right: 2rem;
+      {%- endif -%}
+    }
+  {% elsif section.settings.layout_direction == 'table_first_vertical' %}
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} .product-comparison__content {
+        grid-template-columns: 1fr;
+      }
+
+      .section-{{ section.id }} .product-comparison__header {
+        order: 2;
+      }
+
+      .section-{{ section.id }} .product-comparison__table {
+        order: 1;
+      }
+    }
+  {% elsif section.settings.layout_direction == 'heading_first_vertical' %} 
+    .section-{{ section.id }} .product-comparison__mobile-button {
+      justify-content: {{ content_horizontal_align_mobile  }};
+    }
+
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} .product-comparison__content {
+        grid-template-columns: 1fr;
+      }
+
+      .section-{{ section.id }} .product-comparison__header {
+        order: 1;
+      }
+
+      .section-{{ section.id }} .product-comparison__table {
+        order: 2;
+      }
+
+      .comparison-button-desktop-{{ section.id }} {
+        display: none !important;
+      }
+
+      .section-{{ section.id }} .product-comparison__mobile-button {
+        display: flex !important;
+        order: 3;
+        justify-content: {{ content_horizontal_align }};
+      }
+    }
+  {%- endif -%}
+  
+
+
+
+  .section-{{ section.id }} .product-comparison__heading {
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 1rem;
+    text-align: {{ content_align_mobile }};
+    /* Color is now applied inline via block settings */
+  }
+
+  .section-{{ section.id }} .product-comparison__heading--gradient {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: {{ content_align_mobile }};
+  }
+
+  .section-{{ section.id }} .product-comparison__subheading {
+    font-size: 1.125rem;
+    color: var(--feature-text-color);
+    opacity: 0.8;
+    margin: 0;  
+    text-align: {{ content_align_mobile }};
+  }
+
+  .section-{{ section.id }} .product-comparison__subtitle {
+    text-align: {{ content_align_mobile }};
+    /* Base font size set here, overridden inline */
+    opacity: 0.85;
+    margin: 0 0 0.5rem;
+    line-height: 1.5;
+    /* Color is now applied inline via block settings */
+  }
+
+  @media(min-width: 1024px) {
+    .section-{{ section.id }} .product-comparison__subheading {
+      text-align: {{ content_align }};
+    }
+
+    .section-{{ section.id }} .product-comparison__subtitle {
+      text-align: {{ content_align }};
+    }
+
+    .section-{{ section.id }} .product-comparison__heading {
+      text-align: {{ content_align }};
+      /* Color is now applied inline via block settings */
+    }
+
+    .section-{{ section.id }} .product-comparison__heading--gradient {
+      text-align: {{ content_align }};
+    }
+  }
+
+  .section-{{ section.id }} .product-comparison__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+    margin-top: 1.5rem;
+    
+    /* Variables applied via inline styles in HTML */
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    border-color: var(--btn-border);
+  }
+
+  .section-{{ section.id }} .product-comparison__button:hover {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
+    border-color: var(--btn-hover-border);
+    /* Animation variables controlled by Checkbox */
+    opacity: var(--btn-hover-opacity);
+    transform: var(--btn-hover-transform);
+  }
+
+  /* Keep structural styling for Link style (underline) if selected */
+  .section-{{ section.id }} .product-comparison__button--link {
+    padding: 0.5rem 0 !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    border: none !important;
+  }
+
+  /* Table Structure */
+  .section-{{ section.id }} .product-comparison__table {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-{{ section.id }} .product-comparison__table-header {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) var(--column-width) var(--column-width);
+    gap: 0;
+  }
+
+  .section-{{ section.id }} .product-comparison__rows {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-{{ section.id }} .product-comparison__row {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) var(--column-width) var(--column-width);
+    gap: 0;
+  }
+
+  /* Divider lines - only between rows, not on first or last */
+  {%- if section.settings.show_dividers -%}
+  .section-{{ section.id }} .product-comparison__row .product-comparison__feature-label,
+  .section-{{ section.id }} .product-comparison__row .product-comparison__column--competitor {
+    border-top: var(--divider-thickness) solid var(--divider-color);
+  }
+  {%- endif -%}
+
+  /* Columns */
+  .section-{{ section.id }} .product-comparison__column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--row-padding) 1.25rem;
+    min-height: 52px;
+  }
+
+  .section-{{ section.id }} .product-comparison__column--primary {
+    {% if section.settings.primary_column_use_gradient %}
+      background: linear-gradient(90deg, var(--primary-column-gradient-start) 0%, var(--primary-column-gradient-end) 100%);
+    {% else %}
+      background-color: var(--primary-column-bg);
+    {% endif %}
+    color: var(--primary-column-text);
+  }
+
+  .section-{{ section.id }} .product-comparison__table-header .product-comparison__column--primary {
+    border-radius: var(--column-radius) var(--column-radius) 0 0;
+    padding: 1.5rem 1.25rem 1.25rem;
+  }
+
+  .section-{{ section.id }} .product-comparison__row:last-child .product-comparison__column--primary {
+    border-radius: 0 0 var(--column-radius) var(--column-radius);
+    padding-bottom: 1.5rem;
+  }
+
+  .section-{{ section.id }} .product-comparison__column--competitor {
+    background-color: transparent;
+  }
+
+  /* Feature Label */
+  .section-{{ section.id }} .product-comparison__feature-label {
+    display: flex;
+    align-items: center;
+    padding: var(--row-padding) 1rem var(--row-padding) 0;
+    font-weight: {{ section.settings.feature_font_weight }};
+    color: var(--feature-text-color);
+    font-size: {{ section.settings.feature_font_size }}px;
+  }
+
+  .section-{{ section.id }} .product-comparison__table-header .product-comparison__feature-label {
+    padding: 0;
+  }
+
+  /* Product Header */
+  .section-{{ section.id }} .product-comparison__product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.375rem;
+  }
+
+  .section-{{ section.id }} .product-comparison__product-image {
+    width: var(--image-width);
+    height: auto;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-{{ section.id }} .product-comparison__image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .section-{{ section.id }} .product-comparison__product-title {
+    font-size: {{ section.settings.product_title_size }}px;
+    font-weight: 600;
+    margin: 0;
+    color: inherit;
+  }
+
+  .section-{{ section.id }} .product-comparison__product-title--competitor {
+    color: var(--competitor-text-color);
+  }
+
+  /* Badges */
+  .section-{{ section.id }} .product-comparison__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2rem;
+    font-size: 0.65rem;
+    font-weight: 500;
+  }
+
+  .section-{{ section.id }} .product-comparison__badge--positive {
+    background-color: {{ section.settings.badge_background }};
+    color: {{ section.settings.badge_icon_color }};
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .section-{{ section.id }} .product-comparison__badge--positive svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .section-{{ section.id }} .product-comparison__badge--negative {
+    color: var(--competitor-text-color);
+    opacity: 0.6;
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+
+  /* Icons */
+  .section-{{ section.id }} .product-comparison__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .section-{{ section.id }} .product-comparison__icon svg {
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
+
+  .section-{{ section.id }} .product-comparison__icon--check svg {
+    color: var(--check-color);
+  }
+
+  .section-{{ section.id }} .product-comparison__icon--cross svg {
+    color: var(--cross-color);
+  }
+
+  /* Text Values */
+  .section-{{ section.id }} .product-comparison__text-value {
+    font-weight: 500;
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  .section-{{ section.id }} .product-comparison__text-value--competitor {
+    color: var(--competitor-text-color);
+  }
+
+  /* Responsive */
+  @media screen and (max-width: 990px) {
+    .section-{{ section.id }} {
+      --section-padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
+      --section-padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
+      --section-padding-sides: {{ padding_horizontal_mobile }}rem;
+      margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
+      margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
+      margin-left: {{ margin_horizontal_mobile }}rem;
+      margin-right: {{ margin_horizontal_mobile }}rem;
+    }
+
+    .section-{{ section.id }} .product-comparison__content {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .section-{{ section.id }} .product-comparison__header {
+      padding: 0;
+      text-align: center;
+    }
+
+    .section-{{ section.id }} .product-comparison__header .product-comparison__button {
+      display: none;
+    }
+
+    .section-{{ section.id }} .product-comparison__mobile-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+      padding: 0 var(--section-padding-sides);
+    }
+
+    .section-{{ section.id }} .product-comparison__table {
+      width: 100%;
+    }
+
+    .section-{{ section.id }} .product-comparison__table-header,
+    .section-{{ section.id }} .product-comparison__row {
+      grid-template-columns: 1fr minmax(90px, 1fr) minmax(90px, 1fr);
+    }
+
+    .section-{{ section.id }} .product-comparison__feature-label {
+      padding-left: var(--section-padding-sides);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .section-{{ section.id }} {
+      --icon-size: 20px;
+      --image-width: 60px;
+      --row-padding: 12px;
+    }
+
+    .section-{{ section.id }} .product-comparison__column {
+      padding: var(--row-padding) 0.5rem;
+      min-height: 48px;
+    }
+
+    .section-{{ section.id }} .product-comparison__feature-label {
+      font-size: 0.875rem;
+      padding: var(--row-padding) 0.5rem var(--row-padding) var(--section-padding-sides);
+    }
+
+    .section-{{ section.id }} .product-comparison__product-title {
+      font-size: 1rem;
+    }
+
+    .section-{{ section.id }} .product-comparison__text-value {
+      font-size: 0.8125rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .section-{{ section.id }} {
+      --image-width: 50px;
+      --icon-size: 18px;
+    }
+
+    .section-{{ section.id }} .product-comparison__feature-label {
+      font-size: 0.8125rem;
+    }
+
+    .section-{{ section.id }} .product-comparison__product-title {
+      font-size: 0.9375rem;
+    }
+
+    .section-{{ section.id }} .product-comparison__badge {
+      font-size: 0.6rem;
+      padding: 0.125rem 0.4rem;
+    }
+  }
+{%- endstyle -%}
+
+{% if width == 'custom' %}
+  <style>
+    .section-{{ section.id }} .product-comparison__container {
+      max-width: {{ content_width }}px !important;
+    }
+  </style>
+{% elsif width == 'page' %}
+  <style>
+    .section-{{ section.id }} .product-comparison__container {      
+      max-width: clamp(100px, var(--page-content-width, var(--page-width)), 100%) !important;
+    }
+  </style>
+{% endif %}
+
+{% if section.settings.product_title_custom %}
+  <style>
+    {{ section.settings.product_title_font | font_face: font_display: 'swap' }}
+
+    .section-{{ section.id }} .product-comparison__product-title,
+    .section-{{ section.id }} .product-comparison__badge {
+      font-family: {{ section.settings.product_title_font.family }}, {{ section.settings.product_title_font.fallback_families }};
+      font-weight: {{ section.settings.product_title_font.weight }};
+      font-style: {{ section.settings.product_title_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if section.settings.feature_custom %}
+  <style>
+    {{ section.settings.feature_font | font_face: font_display: 'swap' }}
+
+    .section-{{ section.id }} .product-comparison__feature-label,
+    .section-{{ section.id }} .product-comparison__text-value {
+      font-family: {{ section.settings.feature_font.family }}, {{ section.settings.feature_font.fallback_families }};
+      font-weight: {{ section.settings.feature_font.weight }};
+      font-style: {{ section.settings.feature_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% for block in section.blocks %}
+  {% if block.type == 'heading' and block.settings.heading_custom %}
+    <style>
+      {{ block.settings.heading_font | font_face: font_display: 'swap' }}
+
+      .section-{{ section.id }} .product-comparison__heading[data-block-id="{{ block.id }}"] {
+        font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+        font-weight: {{ block.settings.heading_font.weight }};
+        font-style: {{ block.settings.heading_font.style }};
+      }
+    </style>
+  {% endif %}
+
+  {% if block.type == 'subtitle' and block.settings.subtitle_custom %}
+    <style>
+      {{ block.settings.subtitle_font | font_face: font_display: 'swap' }}
+
+      .section-{{ section.id }} .comparison-subtitle-{{ block.id }} {
+        font-family: {{ block.settings.subtitle_font.family }}, {{ block.settings.subtitle_font.fallback_families }};
+        font-weight: {{ block.settings.subtitle_font.weight }};
+        font-style: {{ block.settings.subtitle_font.style }};
+      }
+    </style>
+  {% endif %}
+
+  {% if block.type == 'button' %}
+      <style>
+        {{  block.settings.button_font | font_face: font_display: 'swap' }}
+        
+        .comparison-button-{{ block.id }} {
+          position: relative;
+          text-decoration: none;
+          margin-top: {{ block.settings.button_mt_mobile }}px !important;
+          {% if block.settings.button_full_width_mobile %}
+            width: 100%;
+          {% else %}
+            width: fit-content;
+          {% endif %}
+        }
+        
+        .comparison-button-inner-{{ block.id }} {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          {% if block.settings.button_full_width_mobile %}
+            max-width: 100%;
+          {% else %}
+            max-width: fit-content;
+          {% endif %}
+          gap: 10px;
+          width: 100%;
+          margin: 0;          
+          font-size: {{ block.settings.button_size_mobile }}px;
+          color: {{ block.settings.button_color }};
+          line-height: {{ block.settings.button_height }}%;
+          text-align: center;
+          text-transform: unset;
+          text-decoration: none;
+          padding: {{ block.settings.button_padding_vertical_mobile }}px {{ block.settings.button_padding_horizontal_mobile }}px;
+          border-radius: {{ block.settings.button_radius }}px;
+          transition: all 0.25s ease 0s;
+          background-color: transparent;
+          border: 0px;
+          cursor: pointer;
+          font-weight: 700;
+          {% if block.settings.button_custom_styling and block.settings.button_style != "link" %}
+            position: relative;
+            overflow: hidden;
+          {% endif %}
+        }
+
+        {% if block.settings.button_custom_styling and block.settings.button_style != "link" %}
+          .comparison-button-inner-{{ block.id }} {
+            background: linear-gradient(180deg, {{ block.settings.button_bg_color | color_lighten: 4 }}, {{ block.settings.button_bg_color | color_darken: 10 }});
+            box-shadow: 0 14px 30px {{ block.settings.button_shadow_color | color_modify: 'alpha', 0.28 }}, 0 5px 12px {{ block.settings.button_shadow_color | color_modify: 'alpha', 0.2 }}, inset 0 1px 0 #ffffff26;
+            backdrop-filter: saturate(1.05);
+            transition: all 0.25s ease 0s;
+          }
+
+          .comparison-button-inner-{{ block.id }}::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+          }
+
+          .comparison-button-inner-{{ block.id }}:hover::before {
+            left: 100%;
+          }
+
+          .comparison-button-inner-{{ block.id }}:hover {
+            color: {{ block.settings.button_hover_color }};
+            background: linear-gradient(180deg, {{ block.settings.button_bg_hover_color | color_lighten: 4 }}, {{ block.settings.button_bg_hover_color | color_darken: 10 }});
+            transform: translateY(-2px);
+            transition: all 0.25s ease 0s;
+            box-shadow: 0 18px 36px {{ block.settings.button_shadow_color | color_modify: 'alpha', 0.34 }}, 0 7px 16px {{ block.settings.button_shadow_color | color_modify: 'alpha', 0.24 }}, inset 0 1px 0 #ffffff33;
+          }
+
+          .comparison-button-inner-{{ block.id }}:active {
+            transform: translateY(1px);
+            filter: brightness(1.00208);
+            box-shadow: 0 4px 8px {{ block.settings.button_shadow_color }}4d, 0 2px 4px {{ block.settings.button_shadow_color }}33, inset 0 1px 0 #ffffff0d, inset 0 -1px 0 {{ block.settings.button_shadow_color }}33;
+          }
+        {% else %}
+          .comparison-button-inner-{{ block.id }}:hover {
+            color: {{ block.settings.button_hover_color }};
+            transition: all 0.25s ease 0s;
+          }
+        {% endif %}
+
+        .comparison-button-inner-{{ block.id }} svg {
+          width: 14px !important;
+          height: 14px !important;
+          background: transparent;
+          min-height: auto !important;
+        }
+
+        @media(min-width: 1024px) {        
+          .comparison-button-{{ block.id }} {
+            margin-top: {{ block.settings.button_mt }}px !important;
+            width: fit-content;
+          }
+
+          .comparison-button-inner-{{ block.id }} {
+            display: flex !important;
+            max-width: fit-content;            
+            padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+            font-size: {{ block.settings.button_size }}px;
+          }
+        }
+      </style>
+
+       {% if block.settings.button_custom %}
+        <style>
+          .comparison-button-inner-{{ block.id }} {
+            font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
+            font-weight: {{ block.settings.button_font.weight }};
+            font-style: {{ block.settings.button_font.style }};
+          }
+        </style>
+      {% endif %} 
+  
+      {% if block.settings.button_style == "non_outline" or block.settings.button_style == "non_outline_arrow" %}
+        <style>
+          .comparison-button-inner-{{ block.id }} {
+            background-color: {{ block.settings.button_bg_color }};
+          }
+  
+          .comparison-button-inner-{{ block.id }}:hover {
+            background-color: {{ block.settings.button_bg_hover_color }};
+          }
+        </style>
+      {% elsif block.settings.button_style == "outline" or block.settings.button_style == "outline_arrow" %}
+        <style>
+          .comparison-button-inner-{{ block.id }} {
+            background-color: {{ block.settings.button_bg_color }};
+            border: {{ block.settings.button_border_thickness }}px solid {{ block.settings.button_border_color }};
+          }
+  
+          .comparison-button-inner-{{ block.id }}:hover {
+            background-color: {{ block.settings.button_bg_hover_color }};
+            border: {{ block.settings.button_border_thickness }}px solid {{ block.settings.button_border_hover_color }};
+          }
+        </style>
+      {% elsif block.settings.button_style == "link" %}
+        <style>
+          .comparison-button-inner-{{ block.id }} {
+            padding: 0px !important;
+          }
+        </style>
+      {% endif %}  
+  {% endif %}
+{% endfor %}
+
+<div
+  class="section-{{ section.id }}"
+  {% if background_style == 'solid' %}
+    style="background-color:{{ background_color }};"
+  {% else %}
+    style="background-image: {{ background_gradient }};"
+  {% endif %}
+>
+  <div class="product-comparison">
+    <div class="product-comparison__container">
+      <div class="product-comparison__content">
+        {%- if custom_block -%}
+          <div class="product-comparison__header">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'heading' -%}
+                {%- liquid
+                  assign heading_classes = 'product-comparison__heading'
+                  if block.settings.use_gradient
+                    assign heading_classes = heading_classes | append: ' product-comparison__heading--gradient'
+                  endif
+                -%}
+                <style>
+                  @media screen and (max-width: 990px) {
+                    .section-{{ section.id }} .product-comparison__heading[data-block-id="{{ block.id }}"] {
+                      font-size: {{ block.settings.mobile_font_size }}px !important;
+                    }
+                  }
+                </style>
+                <{{ block.settings.heading_tag }}
+                  class="{{ heading_classes }}"
+                  data-block-id="{{ block.id }}"
+                  style="font-size: {{ block.settings.font_size }}px;{%- if block.settings.italic %} font-style: italic;{%- endif -%}{%- if block.settings.use_gradient %} background: linear-gradient(90deg, {{ block.settings.gradient_start }} 0%, {{ block.settings.gradient_end }} 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;{%- else %} color: {{ block.settings.heading_color }};{%- endif -%}"
+                  {{ block.shopify_attributes }}
+                >
+                  {{- block.settings.text -}}
+                </{{ block.settings.heading_tag }}>
+              {%- endif -%}
+            {%- endfor -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'subtitle' -%}
+                <p class="product-comparison__subtitle comparison-subtitle-{{ block.id }}" style="font-size: {{ block.settings.font_size }}px;{% unless block.settings.subtitle_custom %} font-weight: {{ block.settings.font_weight }};{% endunless %} color: {{ block.settings.subtitle_color }};" {{ block.shopify_attributes }}>
+                  {{ block.settings.text }}
+                </p>
+              {%- endif -%}
+            {%- endfor -%}
+            
+            {%- comment -%} Desktop Button Logic {%- endcomment -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'button' -%}
+                {% if block.settings.button != blank %}                                 
+                  <{% if block.settings.url != blank %}a href={{ block.settings.url }} {% if block.settings.open_in_new_tab %}target="_blank"{% endif %} {% else %}div{% endif %} class="comparison-button-{{ block.id }} comparison-button-desktop-{{ section.id }}">               
+                    <p class="comparison-button-inner-{{ block.id }}">
+                      {{ block.settings.button }}
+                      {% if block.settings.button_style == "non_outline_arrow" or block.settings.button_style == "outline_arrow" %}
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 18 18"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="M3.75 9H14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M9 3.75L14.25 9L9 14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      {% endif %}
+                    </p>
+                    </{% if block.settings.url != blank %}a{% else %}div{% endif %}>                  
+                {% endif %}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <div class="product-comparison__table">
+          <div class="product-comparison__table-header">
+            <div class="product-comparison__feature-label"></div>
+
+            <div class="product-comparison__column product-comparison__column--primary">
+              <div class="product-comparison__product">
+                {%- if section.settings.primary_image != blank -%}
+                  <div class="product-comparison__product-image">
+                    {{
+                      section.settings.primary_image
+                      | image_url: width: 200
+                      | image_tag: loading: loading_attribute, widths: '100, 150, 200', class: 'product-comparison__image'
+                    }}
+                  </div>
+                {%- endif -%}
+                {%- if section.settings.primary_title != blank -%}
+                  <h3 class="product-comparison__product-title">{{ section.settings.primary_title }}</h3>
+                {%- endif -%}
+                {%- if section.settings.primary_badge != blank -%}
+                  <span class="product-comparison__badge product-comparison__badge--positive">
+                    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <path d="m17.999,10c0-1.097-.567-2.113-1.465-2.707.215-1.054-.103-2.174-.878-2.95-.775-.776-1.896-1.094-2.95-.878-.593-.897-1.609-1.464-2.706-1.464s-2.113.567-2.706,1.464c-1.053-.216-2.174.102-2.95.878s-1.093,1.896-.878,2.949c-.897.593-1.465,1.61-1.465,2.707s.567,2.113,1.465,2.707c-.215,1.054.103,2.174.878,2.95s1.898,1.092,2.95.878c.593.897,1.609,1.464,2.706,1.464s2.113-.568,2.706-1.465c1.059.214,2.176-.103,2.95-.878.776-.776,1.094-1.896.878-2.95.897-.593,1.465-1.609,1.465-2.707Zm-4.218-1.875l-4,5c-.178.222-.442.358-.726.374-.019,0-.037.001-.056.001-.265,0-.52-.105-.707-.293l-2-2c-.391-.391-.391-1.023,0-1.414s1.023-.391,1.414,0l1.21,1.21,3.302-4.127c.347-.43.975-.502,1.406-.156.431.345.501.974.156,1.405Z" fill="{{ section.settings.badge_icon_color }}"/>
+                    </svg>
+                    {{ section.settings.primary_badge }}
+                  </span>
+                {%- endif -%}
+              </div>
+            </div>
+
+            <div class="product-comparison__column product-comparison__column--competitor">
+              <div class="product-comparison__product">
+                {%- if section.settings.competitor_image != blank -%}
+                  <div class="product-comparison__product-image">
+                    {{
+                      section.settings.competitor_image
+                      | image_url: width: 200
+                      | image_tag: loading: loading_attribute, widths: '100, 150, 200', class: 'product-comparison__image'
+                    }}
+                  </div>
+                {%- endif -%}
+                {%- if section.settings.competitor_title != blank -%}
+                  <h3 class="product-comparison__product-title product-comparison__product-title--competitor">
+                    {{ section.settings.competitor_title }}
+                  </h3>
+                {%- endif -%}
+                {%- if section.settings.competitor_badge != blank -%}
+                  <span class="product-comparison__badge product-comparison__badge--negative">
+                    {{ section.settings.competitor_badge }}
+                  </span>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+
+          <div class="product-comparison__rows">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'feature_row' -%}
+                  <div class="product-comparison__row" {{ block.shopify_attributes }}>
+                    <div class="product-comparison__feature-label">
+                      {{ block.settings.feature_name }}
+                    </div>
+                    <div class="product-comparison__column product-comparison__column--primary">
+                      {%- if block.settings.primary_has_feature -%}
+                        <span class="product-comparison__icon product-comparison__icon--check" aria-label="{{ 'accessibility.yes' | t | default: 'Yes' }}">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle cx="12" cy="12" r="11" fill="{{ section.settings.check_color }}"/>
+                            <path d="M7 12l3 3 7-7" stroke="{{ section.settings.primary_column_color }}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </span>
+                      {%- else -%}
+                        <span class="product-comparison__icon product-comparison__icon--cross" aria-label="{{ 'accessibility.no' | t | default: 'No' }}">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle cx="12" cy="12" r="11" fill="{{ section.settings.check_color }}"/>
+                            <path d="M15 9l-6 6M9 9l6 6" stroke="{{ section.settings.primary_column_color }}" stroke-width="2.5" stroke-linecap="round"/>
+                          </svg>
+                        </span>
+                      {%- endif -%}
+                    </div>
+                    <div class="product-comparison__column product-comparison__column--competitor">
+                      {%- if block.settings.competitor_has_feature -%}
+                        <span class="product-comparison__icon product-comparison__icon--check" aria-label="{{ 'accessibility.yes' | t | default: 'Yes' }}">
+                          {%- if section.settings.cross_stroke_style == 'transparent' -%}
+                            {%- comment -%} Transparent (Cutout) Checkmark {%- endcomment -%}
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                              <mask id="check-mask-{{ block.id }}">
+                                <circle cx="12" cy="12" r="11" fill="white"/>
+                                <path d="M7 12l3 3 7-7" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                              </mask>
+                              <circle cx="12" cy="12" r="11" fill="{{ section.settings.cross_color }}" mask="url(#check-mask-{{ block.id }})"/>
+                            </svg>
+                          {%- else -%}
+                            {%- comment -%} White Stroke Checkmark {%- endcomment -%}
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                              <circle cx="12" cy="12" r="11" fill="{{ section.settings.cross_color }}"/>
+                              <path d="M7 12l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          {%- endif -%}
+                        </span>
+                      {%- else -%}
+                        <span class="product-comparison__icon product-comparison__icon--cross" aria-label="{{ 'accessibility.no' | t | default: 'No' }}">
+                          {%- if section.settings.cross_stroke_style == 'transparent' -%}
+                            {%- comment -%} Transparent (Cutout) Cross {%- endcomment -%}
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                              <mask id="cross-mask-{{ block.id }}">
+                                <circle cx="12" cy="12" r="11" fill="white"/>
+                                <path d="M15 9l-6 6M9 9l6 6" stroke="black" stroke-width="2.5" stroke-linecap="round"/>
+                              </mask>
+                              <circle cx="12" cy="12" r="11" fill="{{ section.settings.cross_color }}" mask="url(#cross-mask-{{ block.id }})"/>
+                            </svg>
+                          {%- else -%}
+                            {%- comment -%} White Stroke Cross {%- endcomment -%}
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                              <circle cx="12" cy="12" r="11" fill="{{ section.settings.cross_color }}"/>
+                              <path d="M15 9l-6 6M9 9l6 6" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                            </svg>
+                          {%- endif -%}
+                        </span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+
+                {%- when 'text_row' -%}
+                  <div class="product-comparison__row product-comparison__row--text" {{ block.shopify_attributes }}>
+                    <div class="product-comparison__feature-label">
+                      {{ block.settings.feature_name }}
+                    </div>
+                    <div class="product-comparison__column product-comparison__column--primary">
+                      <span class="product-comparison__text-value">{{ block.settings.primary_text }}</span>
+                    </div>
+                    <div class="product-comparison__column product-comparison__column--competitor">
+                      <span class="product-comparison__text-value product-comparison__text-value--competitor">
+                        {{ block.settings.competitor_text }}
+                      </span>
+                    </div>
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        </div>
+
+        {%- comment -%} Mobile button - shown only on mobile {%- endcomment -%}
+        <div class="product-comparison__mobile-button">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'button' -%}
+             {% if block.settings.button != blank %}                                 
+                  <{% if block.settings.url != blank %}a href={{ block.settings.url }} {% if block.settings.open_in_new_tab %}target="_blank"{% endif %} {% else %}div{% endif %} class="comparison-button-{{ block.id }}">               
+                    <p class="comparison-button-inner-{{ block.id }}">
+                      {{ block.settings.button }}
+                      {% if block.settings.button_style == "non_outline_arrow" or block.settings.button_style == "outline_arrow" %}
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 18 18"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="M3.75 9H14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M9 3.75L14.25 9L9 14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      {% endif %}
+                    </p>
+                    </{% if block.settings.url != blank %}a{% else %}div{% endif %}>                  
+                {% endif %}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>{%- elsif request.design_mode -%}
+<div style="padding: 48px 24px; text-align: center; font-family: sans-serif; color: #616161; background: #f6f6f7; border: 1px dashed #c9cccf; border-radius: 8px;">
+  This section requires an active Section Store Plus&#10133; subscription.
+  <a href="https://admin.shopify.com/store/kh0nfs-a0/apps/section-factory/app_blocks/subscription" target="_blank" rel="noopener" style="display: inline-block; margin-top: 8px; color: #2c6ecb; font-size: 13px;">Subscribe to Plus</a>
+</div>
+{%- endif -%}
