@@ -1,0 +1,101 @@
+{%- liquid
+  assign pc_handles = 'entry-tier-gaming-pc,mid-tier-gaming-pc,high-tier-gaming-pc' | split: ','
+-%}
+
+{%- if pc_handles contains product.handle -%}
+  <div class="up-system-selector" aria-label="Choose gaming PC system">
+    <p class="up-system-selector__label">System:</p>
+
+    <div class="up-system-selector__options" role="list">
+      <a
+        href="/products/entry-tier-gaming-pc"
+        class="up-system-selector__option{% if product.handle == 'entry-tier-gaming-pc' %} is-active{% endif %}"
+        {% if product.handle == 'entry-tier-gaming-pc' %}aria-current="page"{% endif %}
+        role="listitem"
+      >
+        Entry Tier
+      </a>
+
+      <a
+        href="/products/mid-tier-gaming-pc"
+        class="up-system-selector__option{% if product.handle == 'mid-tier-gaming-pc' %} is-active{% endif %}"
+        {% if product.handle == 'mid-tier-gaming-pc' %}aria-current="page"{% endif %}
+        role="listitem"
+      >
+        Mid Tier
+      </a>
+
+      <a
+        href="/products/high-tier-gaming-pc"
+        class="up-system-selector__option{% if product.handle == 'high-tier-gaming-pc' %} is-active{% endif %}"
+        {% if product.handle == 'high-tier-gaming-pc' %}aria-current="page"{% endif %}
+        role="listitem"
+      >
+        High Tier
+      </a>
+    </div>
+  </div>
+
+  <style>
+    .up-system-selector {
+      margin: 0 0 18px;
+    }
+
+    .up-system-selector__label {
+      margin: 0 0 9px;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: inherit;
+    }
+
+    .up-system-selector__options {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      width: 100%;
+    }
+
+    .up-system-selector__option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 8px;
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      border-radius: 4px;
+      background: #fff;
+      color: #171717;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      text-decoration: none;
+      transition: border-color .15s ease, background-color .15s ease, color .15s ease;
+    }
+
+    .up-system-selector__option:hover {
+      border-color: #405DE6;
+      color: #171717;
+    }
+
+    .up-system-selector__option.is-active {
+      border-color: #405DE6;
+      background: #405DE6;
+      color: #fff;
+      pointer-events: none;
+    }
+
+    @media screen and (max-width: 480px) {
+      .up-system-selector__options {
+        gap: 6px;
+      }
+
+      .up-system-selector__option {
+        min-height: 42px;
+        padding: 9px 5px;
+        font-size: 11px;
+      }
+    }
+  </style>
+{%- endif -%}
