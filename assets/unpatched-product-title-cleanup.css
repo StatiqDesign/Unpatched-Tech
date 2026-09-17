@@ -11,9 +11,132 @@
   line-height: 1.06 !important;
 }
 
+/* --------------------------------------------------------------------------
+   Flat product presentation
+   Keep useful controls distinct, but remove unnecessary card shells.
+   -------------------------------------------------------------------------- */
+
+.unpatched-product-page .shopify-section--main-product {
+  background: #fff !important;
+  background-image: none !important;
+}
+
+.unpatched-product-page .product__media-list-wrapper {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.unpatched-product-page .product__media-image-wrapper {
+  background: transparent !important;
+}
+
+.unpatched-product-page .product__info {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* SYSTEM now matches COLOR and SPECS. */
+.unpatched-product-page .up-system-selector__label {
+  color: rgba(37, 37, 42, .62) !important;
+  font-family: var(--heading-font-family) !important;
+  font-size: 10px !important;
+  font-weight: var(--heading-font-weight) !important;
+  line-height: 1 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+}
+
+/* Keep price / purchase grouping without wrapping it in another card. */
+.unpatched-product-page .unpatched-purchase-row {
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* PERFORMANCE stays readable, but blends into the white page. */
+.unpatched-product-page .up-performance-card {
+  padding: 20px 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+.unpatched-product-page .up-performance-card__title {
+  font-family: var(--heading-font-family) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .06em !important;
+}
+
+/* Product Details should be page content, not a floating card. */
+.unpatched-product-page .shopify-section--product-content .product-content__tabs {
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.unpatched-product-page .shopify-section--product-content .product-tabs {
+  padding: clamp(22px, 2.5vw, 34px) 0 !important;
+}
+
+.unpatched-product-page .shopify-section--product-content .product-tabs::before,
+.unpatched-product-page .shopify-section--product-content .product-tabs__content,
+.unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content {
+  text-align: left !important;
+}
+
+/* Extra marketing/lifestyle product images also remain flat. */
+.unpatched-product-page .shopify-section--product-image .up-product-image-section__inner {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 @media screen and (max-width: 740px) {
   .unpatched-product-page .product-meta__title {
     font-size: 27px !important;
     line-height: 1.08 !important;
+  }
+
+  .unpatched-product-page .product__media-list-wrapper {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .unpatched-product-page .product__info {
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .unpatched-product-page .up-performance-mobile-shell .up-performance-card {
+    padding: 18px 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs {
+    padding: 18px 0 !important;
+    text-align: left !important;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs::before,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__content,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-wrapper,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content p,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content li {
+    text-align: left !important;
   }
 }
