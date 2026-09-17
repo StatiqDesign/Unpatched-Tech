@@ -59,3 +59,30 @@
 .shopify-section--footer .footer__cross-border {
   flex-wrap: wrap !important;
 }
+
+/* Keep Shopify payment badges in compact centered rows instead of allowing
+   Focal's auto-fit grid to collapse to a single 38px column inside the
+   centered flex container. */
+.shopify-section--footer .payment-methods-list {
+  width: 100% !important;
+  max-width: 520px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin-top: 8px !important;
+}
+
+.shopify-section--footer .payment-methods-list > svg {
+  display: block !important;
+  flex: 0 0 auto !important;
+  width: 38px !important;
+  height: 24px !important;
+}
+
+@media screen and (max-width: 749px) {
+  .shopify-section--footer .payment-methods-list {
+    max-width: 300px !important;
+  }
+}
