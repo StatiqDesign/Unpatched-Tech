@@ -1,0 +1,62 @@
+{%- assign judgeme_widget = product.metafields.judgeme.widget.value -%}
+
+{%- if judgeme_widget != blank -%}
+  <section class="unpatched-product-reviews-source" data-unpatched-product-reviews hidden>
+    <div class="container">
+      <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-id="{{ product.id }}">
+        {{- judgeme_widget -}}
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .unpatched-product-reviews-source {
+      width: 100%;
+      padding: 12px 0 54px;
+      background: #fff;
+    }
+
+    .unpatched-product-reviews-source[hidden] {
+      display: none !important;
+    }
+
+    .unpatched-product-reviews-source .jdgm-widget {
+      width: 100%;
+      max-width: 1200px;
+      margin-inline: auto;
+    }
+
+    @media screen and (max-width: 740px) {
+      .unpatched-product-reviews-source {
+        padding: 6px 0 38px;
+      }
+    }
+  </style>
+
+  <script>
+    (() => {
+      const mountReviews = () => {
+        const source = document.querySelector('[data-unpatched-product-reviews]');
+        const productContent = document.querySelector('.shopify-section--product-content');
+
+        if (!source || !productContent) return;
+
+        const existingWidget = Array.from(document.querySelectorAll('.jdgm-review-widget')).find((widget) => !source.contains(widget));
+
+        if (existingWidget) {
+          source.remove();
+          return;
+        }
+
+        productContent.insertAdjacentElement('afterend', source);
+        source.hidden = false;
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', mountReviews, { once: true });
+      } else {
+        mountReviews();
+      }
+    })();
+  </script>
+{%- endif -%}
