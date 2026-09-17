@@ -1,7 +1,7 @@
 /* ========================================================================== 
    UNPATCHED TECH — SHARED DISCLOSURE CONTRACT
-   Product information disclosures keep the same interaction behavior while
-   using a flatter presentation with divider lines instead of outer cards.
+   Product information disclosures use clean bordered rows with native
+   <details> interaction behavior.
    ========================================================================== */
 
 body.unpatched-faq-page #main .shopify-section--faq .faq__item {
@@ -10,16 +10,19 @@ body.unpatched-faq-page #main .shopify-section--faq .faq__item {
 
 /* Product disclosure rhythm -------------------------------------------- */
 body.unpatched-product-page #main .unpatched-product-disclosure-stack {
+  display: grid;
   width: 100%;
+  gap: 10px;
 }
 
 body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordions {
   width: 100%;
   margin: 0;
+  border: 0;
 }
 
 body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordions + .unpatched-accordions {
-  border-top: 1px solid rgba(37, 37, 42, .09);
+  border-top: 0;
 }
 
 body.unpatched-product-page #main .product-form__quantity + .unpatched-accordions {
@@ -28,13 +31,13 @@ body.unpatched-product-page #main .product-form__quantity + .unpatched-accordion
 
 body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion {
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   margin: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
+  border: 1px solid rgba(37, 37, 42, .11);
+  border-radius: var(--block-border-radius);
+  background: #fff;
   box-shadow: none;
-  transition: none;
+  transition: border-color 160ms ease;
 }
 
 body.unpatched-product-page #main .unpatched-accordion::before {
@@ -51,7 +54,7 @@ body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched
   width: 100%;
   min-height: 60px;
   margin: 0;
-  padding: 17px 0;
+  padding: 17px 18px 17px 20px;
   color: #25252a;
   font-family: var(--heading-font-family);
   font-size: 15px;
@@ -125,7 +128,7 @@ body.unpatched-product-page #main .unpatched-accordion[open] .unpatched-accordio
 
 /* Content --------------------------------------------------------------- */
 body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion-content {
-  padding: 0 46px 18px 0;
+  padding: 0 58px 18px 20px;
   color: rgba(37, 37, 42, .72);
   font-size: 14px;
   line-height: 1.72;
@@ -142,8 +145,8 @@ body.unpatched-product-page #main .unpatched-accordion-content a {
 }
 
 body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion[open] {
-  border: 0;
-  background: transparent;
+  border-color: rgba(var(--unpatched-brand-blue-rgb), .28);
+  background: #fff;
   box-shadow: none;
 }
 
@@ -155,30 +158,33 @@ body.unpatched-product-page #main .product-form__text {
 @media (hover: hover) and (pointer: fine) {
   body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion:hover {
     transform: none;
-    border-color: transparent;
+    border-color: rgba(var(--unpatched-brand-blue-rgb), .24);
     box-shadow: none;
   }
 }
 
 @media screen and (max-width: 749px) {
+  body.unpatched-product-page #main .unpatched-product-disclosure-stack {
+    gap: 8px;
+  }
+
   body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion summary {
     min-height: 56px;
-    padding: 15px 0;
+    padding: 15px 16px 15px 18px;
     gap: 18px;
     font-size: 14px;
   }
 
   body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion-content {
-    padding: 0 40px 16px 0;
+    padding: 0 48px 16px 18px;
     font-size: 13px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  body.unpatched-product-page #main .unpatched-accordion,
   body.unpatched-product-page #main .unpatched-accordion-plus::before,
   body.unpatched-product-page #main .unpatched-accordion-plus::after {
     transition: none;
   }
 }
-
-/* GitHub-connected live theme sync marker. */
