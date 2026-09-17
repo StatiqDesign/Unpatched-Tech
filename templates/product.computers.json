@@ -54,7 +54,7 @@
         "performance_card": {
           "type": "liquid",
           "settings": {
-            "liquid": "{% render 'unpatched-performance-card', product: product %}<style>.up-performance-card__resolutions button{display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;}@media screen and (min-width:1000px){.unpatched-product-page .shopify-section--main-product .product{align-items:stretch!important}.unpatched-product-page .shopify-section--main-product .product__info{align-self:stretch!important;height:auto!important;box-sizing:border-box}}</style>"
+            "liquid": "{% render 'unpatched-performance-card', product: product %}"
           }
         }
       },
