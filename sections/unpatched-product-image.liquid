@@ -1,0 +1,194 @@
+{%- assign desktop_image = section.settings.image -%}
+{%- assign mobile_image = section.settings.mobile_image -%}
+
+{%- if desktop_image != blank or request.design_mode -%}
+  {%- capture image_sizes -%}
+    {%- if section.settings.full_width -%}
+      100vw
+    {%- else -%}
+      (max-width: 740px) calc(100vw - 32px), {{ section.settings.max_width }}px
+    {%- endif -%}
+  {%- endcapture -%}
+
+  <section
+    class="up-product-image-section{% if section.settings.full_width %} up-product-image-section--full{% endif %}"
+    style="--up-product-image-max-width: {{ section.settings.max_width }}px; --up-product-image-radius: {{ section.settings.radius }}px; --up-product-image-padding-top: {{ section.settings.padding_top }}px; --up-product-image-padding-bottom: {{ section.settings.padding_bottom }}px;"
+  >
+    <div class="{% unless section.settings.full_width %}container{% endunless %}">
+      <div class="up-product-image-section__inner">
+        {%- if desktop_image != blank -%}
+          {%- if section.settings.link != blank -%}
+            <a class="up-product-image-section__link" href="{{ section.settings.link }}">
+          {%- endif -%}
+
+          <picture class="up-product-image-section__picture">
+            {%- if mobile_image != blank -%}
+              <source
+                media="(max-width: 740px)"
+                srcset="
+                  {{ mobile_image | image_url: width: 480 }} 480w,
+                  {{ mobile_image | image_url: width: 720 }} 720w,
+                  {{ mobile_image | image_url: width: 960 }} 960w,
+                  {{ mobile_image | image_url: width: 1200 }} 1200w
+                "
+                sizes="100vw"
+              >
+            {%- endif -%}
+
+            {{- desktop_image
+              | image_url: width: desktop_image.width
+              | image_tag:
+                loading: 'lazy',
+                widths: '480,720,960,1200,1440,1680,1920,2200,2400',
+                sizes: image_sizes,
+                class: 'up-product-image-section__image'
+            -}}
+          </picture>
+
+          {%- if section.settings.link != blank -%}
+            </a>
+          {%- endif -%}
+        {%- elsif request.design_mode -%}
+          <div class="up-product-image-section__placeholder">
+            {{- 'image' | placeholder_svg_tag: 'up-product-image-section__placeholder-svg' -}}
+            <p>Select an image for this section.</p>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+<style>
+  #shopify-section-{{ section.id }} .up-product-image-section {
+    width: 100%;
+    padding-top: var(--up-product-image-padding-top);
+    padding-bottom: var(--up-product-image-padding-bottom);
+    background: #fff;
+  }
+
+  #shopify-section-{{ section.id }} .up-product-image-section__inner {
+    width: 100%;
+    max-width: var(--up-product-image-max-width);
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: var(--up-product-image-radius);
+  }
+
+  #shopify-section-{{ section.id }} .up-product-image-section--full .up-product-image-section__inner {
+    max-width: none;
+  }
+
+  #shopify-section-{{ section.id }} .up-product-image-section__link,
+  #shopify-section-{{ section.id }} .up-product-image-section__picture {
+    display: block;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .up-product-image-section__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  #shopify-section-{{ section.id }} .up-product-image-section__placeholder {
+    display: grid;
+    min-height: 280px;
+    place-items: center;
+    padding: 28px;
+    border: 1px dashed rgba(37, 37, 42, .22);
+    background: #f7f8fb;
+    color: rgba(37, 37, 42, .58);
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .up-product-image-section__placeholder-svg {
+    width: min(100%, 720px);
+    max-height: 300px;
+  }
+
+  #shopify-section-{{ section.id }} .up-product-image-section__placeholder p {
+    margin: 12px 0 0;
+    font-size: 13px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product image",
+  "tag": "section",
+  "class": "shopify-section--product-image",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image (optional)",
+      "info": "If blank, the main image is used on mobile."
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Image link (optional)"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 600,
+      "max": 1800,
+      "step": 50,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Top spacing",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product image"
+    }
+  ]
+}
+{% endschema %}
