@@ -41,8 +41,11 @@
         "muted_text_color": "#6f6f73",
         "card_background": "#ffffff",
         "border_color": "#e5e7eb"
-      }
+      },
+      "name": "Support Form"
     }
   },
-  "order": ["contact"]
+  "order": [
+    "contact"
+  ]
 }

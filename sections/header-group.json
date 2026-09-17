@@ -9,7 +9,7 @@
  */
 {
   "type": "header",
-  "name": "Header group",
+  "name": "Header",
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",

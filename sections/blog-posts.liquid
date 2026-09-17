@@ -150,10 +150,13 @@
 
 {% schema %}
 {
-  "name": "Blog posts",
+  "name": "Unpatched Blog",
   "class": "shopify-section--blog-posts",
   "disabled_on": {
-    "groups": ["header", "custom.overlay"]
+    "groups": [
+      "header",
+      "custom.overlay"
+    ]
   },
   "settings": [
     {
@@ -222,10 +225,18 @@
   ],
   "presets": [
     {
-      "name": "Blog posts",
-      "category": "Content",
+      "name": "Unpatched Blog",
+      "category": "Unpatched Tech",
       "settings": {
-        "blog": "news"
+        "blog": "news",
+        "subheading": "LATEST FROM UNPATCHED",
+        "title": "THE UNPATCHED BLOG",
+        "articles_count": 3,
+        "stack_mobile": false,
+        "show_category": true,
+        "show_excerpt": true,
+        "background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)"
       }
     }
   ]

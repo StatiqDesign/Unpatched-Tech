@@ -93,41 +93,202 @@
 
 {% schema %}
 {
-  "name": "Contact form",
+  "name": "Support Form",
   "class": "shopify-section--unpatched-support-contact",
-  "disabled_on": {"templates": ["password"], "groups": ["header", "custom.overlay"]},
+  "disabled_on": {
+    "templates": [
+      "password"
+    ],
+    "groups": [
+      "header",
+      "custom.overlay"
+    ]
+  },
   "settings": [
-    {"type": "text", "id": "anchor_id", "label": "Section anchor", "default": "SupportForm"},
-    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "UNPATCHED SUPPORT"},
-    {"type": "text", "id": "title", "label": "Heading", "default": "HOW CAN WE HELP?"},
-    {"type": "textarea", "id": "intro", "label": "Intro", "default": "Tell us what you need and give us the context. Order numbers, device details, and what you've already tried help us get to the useful part faster."},
-    {"type": "text", "id": "topic_label", "label": "Topic label", "default": "WHAT CAN WE HELP WITH?"},
-    {"type": "text", "id": "topic_placeholder", "label": "Topic placeholder", "default": "Choose a support topic"},
-    {"type": "text", "id": "name_label", "label": "Name label", "default": "NAME"},
-    {"type": "text", "id": "name_placeholder", "label": "Name placeholder", "default": "Your name"},
-    {"type": "text", "id": "email_label", "label": "Email label", "default": "EMAIL"},
-    {"type": "text", "id": "email_placeholder", "label": "Email placeholder", "default": "you@example.com"},
-    {"type": "text", "id": "phone_label", "label": "Phone label", "default": "PHONE — OPTIONAL"},
-    {"type": "text", "id": "phone_placeholder", "label": "Phone placeholder", "default": "Your phone number"},
-    {"type": "text", "id": "order_label", "label": "Order label", "default": "ORDER NUMBER — OPTIONAL"},
-    {"type": "text", "id": "order_placeholder", "label": "Order placeholder", "default": "#1001"},
-    {"type": "text", "id": "device_label", "label": "Device label", "default": "PRODUCT / DEVICE — OPTIONAL"},
-    {"type": "text", "id": "device_placeholder", "label": "Device placeholder", "default": "Example: PlayStation 5 Slim, Xbox Series X, custom PC"},
-    {"type": "text", "id": "message_label", "label": "Message label", "default": "TELL US WHAT'S GOING ON"},
-    {"type": "textarea", "id": "message_placeholder", "label": "Message placeholder", "default": "Tell us what happened, what you're seeing, what you've already tried, and what outcome you're looking for."},
-    {"type": "text", "id": "submit_text", "label": "Submit button text", "default": "SEND SUPPORT REQUEST"},
-    {"type": "text", "id": "success_title", "label": "Success heading", "default": "WE GOT IT."},
-    {"type": "text", "id": "success_text", "label": "Success text", "default": "Your message is in. We'll use the details you sent to figure out the right next step."},
-    {"type": "text", "id": "direct_text", "label": "Direct contact text", "default": "Prefer to contact us directly?"},
-    {"type": "text", "id": "email", "label": "Support email", "default": "hello@unpatchedtech.com"},
-    {"type": "text", "id": "phone", "label": "Support phone", "default": "(818) 253-4658"},
-    {"type": "header", "content": "Colors"},
-    {"type": "color", "id": "background", "label": "Section background", "default": "#ffffff"},
-    {"type": "color", "id": "text_color", "label": "Text color", "default": "#25252a"},
-    {"type": "color", "id": "muted_text_color", "label": "Secondary text", "default": "#6f6f73"},
-    {"type": "color", "id": "card_background", "label": "Card and input background", "default": "#ffffff"},
-    {"type": "color", "id": "border_color", "label": "Border color", "default": "#e5e7eb"}
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Section anchor",
+      "default": "SupportForm"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "UNPATCHED SUPPORT"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "HOW CAN WE HELP?"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro",
+      "default": "Tell us what you need and give us the context. Order numbers, device details, and what you've already tried help us get to the useful part faster."
+    },
+    {
+      "type": "text",
+      "id": "topic_label",
+      "label": "Topic label",
+      "default": "WHAT CAN WE HELP WITH?"
+    },
+    {
+      "type": "text",
+      "id": "topic_placeholder",
+      "label": "Topic placeholder",
+      "default": "Choose a support topic"
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "Name label",
+      "default": "NAME"
+    },
+    {
+      "type": "text",
+      "id": "name_placeholder",
+      "label": "Name placeholder",
+      "default": "Your name"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "EMAIL"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "you@example.com"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone label",
+      "default": "PHONE — OPTIONAL"
+    },
+    {
+      "type": "text",
+      "id": "phone_placeholder",
+      "label": "Phone placeholder",
+      "default": "Your phone number"
+    },
+    {
+      "type": "text",
+      "id": "order_label",
+      "label": "Order label",
+      "default": "ORDER NUMBER — OPTIONAL"
+    },
+    {
+      "type": "text",
+      "id": "order_placeholder",
+      "label": "Order placeholder",
+      "default": "#1001"
+    },
+    {
+      "type": "text",
+      "id": "device_label",
+      "label": "Device label",
+      "default": "PRODUCT / DEVICE — OPTIONAL"
+    },
+    {
+      "type": "text",
+      "id": "device_placeholder",
+      "label": "Device placeholder",
+      "default": "Example: PlayStation 5 Slim, Xbox Series X, custom PC"
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "Message label",
+      "default": "TELL US WHAT'S GOING ON"
+    },
+    {
+      "type": "textarea",
+      "id": "message_placeholder",
+      "label": "Message placeholder",
+      "default": "Tell us what happened, what you're seeing, what you've already tried, and what outcome you're looking for."
+    },
+    {
+      "type": "text",
+      "id": "submit_text",
+      "label": "Submit button text",
+      "default": "SEND SUPPORT REQUEST"
+    },
+    {
+      "type": "text",
+      "id": "success_title",
+      "label": "Success heading",
+      "default": "WE GOT IT."
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Success text",
+      "default": "Your message is in. We'll use the details you sent to figure out the right next step."
+    },
+    {
+      "type": "text",
+      "id": "direct_text",
+      "label": "Direct contact text",
+      "default": "Prefer to contact us directly?"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Support email",
+      "default": "hello@unpatchedtech.com"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Support phone",
+      "default": "(818) 253-4658"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#25252a"
+    },
+    {
+      "type": "color",
+      "id": "muted_text_color",
+      "label": "Secondary text",
+      "default": "#6f6f73"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card and input background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#e5e7eb"
+    }
   ],
-  "presets": [{"name": "Contact form"}]
+  "presets": [
+    {
+      "name": "Support Form",
+      "category": "Pages"
+    }
+  ]
 }
 {% endschema %}

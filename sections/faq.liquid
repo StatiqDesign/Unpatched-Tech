@@ -91,32 +91,181 @@
 
 {% schema %}
 {
-  "name":"FAQ",
-  "class":"shopify-section--faq",
-  "disabled_on":{"templates":["password"],"groups":["header","custom.overlay"]},
-  "settings":[
-    {"type":"checkbox","id":"show_navigation","label":"Show navigation","default":false},
-    {"type":"text","id":"title","label":"Heading","default":"FAQ"},
-    {"type":"richtext","id":"content","label":"Content"},
-    {"type":"header","content":"Unpatched FAQ hero"},
-    {"type":"text","id":"hero_eyebrow","label":"Hero eyebrow","default":"UNPATCHED SUPPORT"},
-    {"type":"header","content":"Colors"},
-    {"type":"color","id":"background","label":"Base background","default":"rgba(0,0,0,0)"},
-    {"type":"color","id":"text_color","label":"Base text color","default":"rgba(0,0,0,0)"},
-    {"type":"color","id":"hero_background","label":"Hero background","default":"#ffffff"},
-    {"type":"color","id":"hero_text_color","label":"Hero heading text","default":"#25252a"},
-    {"type":"color","id":"hero_muted_text_color","label":"Hero body text","default":"#6f6f73"},
-    {"type":"color","id":"accent_color","label":"Accent color","default":"#405de6"},
-    {"type":"color","id":"main_background","label":"FAQ list background","default":"#ffffff"},
-    {"type":"color","id":"card_background","label":"Question and navigation cards","default":"#ffffff"},
-    {"type":"color","id":"card_text_color","label":"Question text","default":"#25252a"},
-    {"type":"color","id":"card_muted_text_color","label":"Answer text","default":"#6f6f73"},
-    {"type":"color","id":"border_color","label":"Borders","default":"#e5e7eb"}
+  "name": "FAQ",
+  "class": "shopify-section--faq",
+  "disabled_on": {
+    "templates": [
+      "password"
+    ],
+    "groups": [
+      "header",
+      "custom.overlay"
+    ]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Show navigation",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "FAQ"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "header",
+      "content": "Unpatched FAQ hero"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Hero eyebrow",
+      "default": "UNPATCHED SUPPORT"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Base background",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Base text color",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "color",
+      "id": "hero_background",
+      "label": "Hero background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "hero_text_color",
+      "label": "Hero heading text",
+      "default": "#25252a"
+    },
+    {
+      "type": "color",
+      "id": "hero_muted_text_color",
+      "label": "Hero body text",
+      "default": "#6f6f73"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#405de6"
+    },
+    {
+      "type": "color",
+      "id": "main_background",
+      "label": "FAQ list background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Question and navigation cards",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Question text",
+      "default": "#25252a"
+    },
+    {
+      "type": "color",
+      "id": "card_muted_text_color",
+      "label": "Answer text",
+      "default": "#6f6f73"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Borders",
+      "default": "#e5e7eb"
+    }
   ],
-  "blocks":[
-    {"type":"category","name":"Category","settings":[{"type":"text","id":"title","label":"Heading","default":"Category"}]},
-    {"type":"question","name":"Question","settings":[{"type":"text","id":"title","label":"Question","default":"About your shop"},{"type":"richtext","id":"answer","label":"Answer","default":"<p>Write content to help your customers to better understand your products or policies.</p>"}]}
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Category"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Question",
+          "default": "About your shop"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Write content to help your customers to better understand your products or policies.</p>"
+        }
+      ]
+    }
   ],
-  "presets":[{"name":"FAQ","category":"Trust & social proof","blocks":[{"type":"category","settings":{"title":"Shipping"}},{"type":"question","settings":{"title":"Do you ship overseas?","answer":"<p>Add your shipping answer here.</p>"}},{"type":"category","settings":{"title":"Other"}},{"type":"question","settings":{"title":"Any question?","answer":"<p>Add your answer here.</p>"}}]}]
+  "presets": [
+    {
+      "name": "FAQ",
+      "category": "Pages",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Shipping"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "title": "Do you ship overseas?",
+            "answer": "<p>Add your shipping answer here.</p>"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Other"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "title": "Any question?",
+            "answer": "<p>Add your answer here.</p>"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

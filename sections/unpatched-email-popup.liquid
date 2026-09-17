@@ -225,17 +225,74 @@
   "name": "Email Popup",
   "class": "shopify-section--email-popup",
   "limit": 1,
-  "enabled_on": {"groups": ["custom.overlay"]},
+  "enabled_on": {
+    "groups": [
+      "custom.overlay"
+    ]
+  },
   "settings": [
-    {"type": "checkbox", "id": "enabled", "label": "Enable email popup", "default": true},
-    {"type": "text", "id": "heading", "label": "Heading", "default": "Stay in the loop."},
-    {"type": "richtext", "id": "text", "label": "Text", "default": "<p>Get product drops, refurbished restocks, build updates, and useful tech news from Unpatched Tech.</p>"},
-    {"type": "text", "id": "email_placeholder", "label": "Email field placeholder", "default": "Email address"},
-    {"type": "text", "id": "button_text", "label": "Button text", "default": "Sign me up"},
-    {"type": "text", "id": "success_text", "label": "Success message", "default": "You’re in. Thanks for signing up."},
-    {"type": "range", "id": "delay_seconds", "label": "Show after", "min": 0, "max": 30, "step": 1, "unit": "s", "default": 6},
-    {"type": "range", "id": "repeat_days", "label": "Wait before showing again after dismissal", "min": 1, "max": 30, "step": 1, "unit": "d", "default": 14}
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable email popup",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Stay in the loop."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Get product drops, refurbished restocks, build updates, and useful tech news from Unpatched Tech.</p>"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email field placeholder",
+      "default": "Email address"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Sign me up"
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Success message",
+      "default": "You’re in. Thanks for signing up."
+    },
+    {
+      "type": "range",
+      "id": "delay_seconds",
+      "label": "Show after",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "repeat_days",
+      "label": "Wait before showing again after dismissal",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "unit": "d",
+      "default": 14
+    }
   ],
-  "presets": [{"name": "Email Popup"}]
+  "presets": [
+    {
+      "name": "Email Popup",
+      "category": "Popups & Privacy"
+    }
+  ]
 }
 {% endschema %}

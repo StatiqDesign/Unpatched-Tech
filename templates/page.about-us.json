@@ -13,8 +13,11 @@
         "background": "#ffffff",
         "text_color": "#25252a",
         "muted_text_color": "#6f6f73"
-      }
+      },
+      "name": "About Us"
     }
   },
-  "order": ["hero"]
+  "order": [
+    "hero"
+  ]
 }

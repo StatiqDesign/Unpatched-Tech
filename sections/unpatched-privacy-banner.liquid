@@ -97,14 +97,48 @@
   "name": "Privacy & Cookies",
   "class": "shopify-section--privacy-banner",
   "limit": 1,
-  "enabled_on": {"groups": ["custom.overlay"]},
+  "enabled_on": {
+    "groups": [
+      "custom.overlay"
+    ]
+  },
   "settings": [
-    {"type": "checkbox", "id": "enabled", "label": "Enable privacy banner", "default": true},
-    {"type": "text", "id": "heading", "label": "Heading", "default": "Your privacy matters."},
-    {"type": "richtext", "id": "text", "label": "Text", "default": "<p>We use cookies to keep the store working, understand site usage, and improve your experience.</p>"},
-    {"type": "text", "id": "accept_text", "label": "Accept button", "default": "Accept"},
-    {"type": "text", "id": "decline_text", "label": "Decline button", "default": "Decline"}
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable privacy banner",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your privacy matters."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>We use cookies to keep the store working, understand site usage, and improve your experience.</p>"
+    },
+    {
+      "type": "text",
+      "id": "accept_text",
+      "label": "Accept button",
+      "default": "Accept"
+    },
+    {
+      "type": "text",
+      "id": "decline_text",
+      "label": "Decline button",
+      "default": "Decline"
+    }
   ],
-  "presets": [{"name": "Privacy & Cookies"}]
+  "presets": [
+    {
+      "name": "Privacy & Cookies",
+      "category": "Popups & Privacy"
+    }
+  ]
 }
 {% endschema %}

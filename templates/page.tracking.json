@@ -36,8 +36,11 @@
         "card_background": "#ffffff",
         "card_text_color": "#25252a",
         "border_color": "#e5e7eb"
-      }
+      },
+      "name": "Order Tracker"
     }
   },
-  "order": ["tracker"]
+  "order": [
+    "tracker"
+  ]
 }

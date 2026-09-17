@@ -153,36 +153,240 @@
   "name": "Flagship PC",
   "class": "shopify-section--unpatched-flagship-pc",
   "disabled_on": {
-    "templates": ["password"],
-    "groups": ["header", "custom.overlay"]
+    "templates": [
+      "password"
+    ],
+    "groups": [
+      "header",
+      "custom.overlay"
+    ]
   },
   "settings": [
-    {"type":"product","id":"product","label":"Featured computer"},
-    {"type":"image_picker","id":"image","label":"Custom showcase image","info":"Optional. Uses the selected product image when empty."},
-    {"type":"image_picker","id":"mobile_image","label":"Mobile showcase image","info":"Optional. Uses the main showcase image when empty."},
-    {"type":"header","content":"Image display"},
-    {"type":"select","id":"desktop_image_fit","label":"Desktop image fit","default":"contain","options":[{"value":"contain","label":"Contain - show full image"},{"value":"cover","label":"Cover - fill and crop"}]},
-    {"type":"select","id":"desktop_image_position","label":"Desktop image position","default":"center center","options":[{"value":"center center","label":"Center"},{"value":"center top","label":"Top"},{"value":"center bottom","label":"Bottom"},{"value":"left center","label":"Left"},{"value":"right center","label":"Right"}]},
-    {"type":"range","id":"desktop_image_scale","label":"Desktop image size","min":60,"max":100,"step":2,"unit":"%","default":100},
-    {"type":"header","content":"Mobile image display"},
-    {"type":"select","id":"mobile_image_fit","label":"Mobile image fit","default":"contain","options":[{"value":"contain","label":"Contain - show full image"},{"value":"cover","label":"Cover - fill and crop"}]},
-    {"type":"select","id":"mobile_image_position","label":"Mobile image position","default":"center center","options":[{"value":"center center","label":"Center"},{"value":"center top","label":"Top"},{"value":"center bottom","label":"Bottom"},{"value":"left center","label":"Left"},{"value":"right center","label":"Right"}]},
-    {"type":"range","id":"mobile_image_scale","label":"Mobile image size","min":60,"max":100,"step":2,"unit":"%","default":100},
-    {"type":"select","id":"mobile_media_ratio","label":"Mobile image frame","default":"1 / 1","options":[{"value":"1 / 1","label":"Square"},{"value":"4 / 3","label":"Landscape 4:3"},{"value":"3 / 4","label":"Portrait 3:4"},{"value":"16 / 10","label":"Wide 16:10"}]},
-    {"type":"text","id":"eyebrow","label":"Small heading","default":"BUILT BY UNPATCHED"},
-    {"type":"text","id":"title_override","label":"Custom product heading","info":"Optional. Uses the selected product title when empty."},
-    {"type":"richtext","id":"description","label":"Description","default":"<p>A balanced gaming system built around real-world performance, clean thermals, and an upgrade path that makes sense.</p>"},
-    {"type":"header","content":"Fallback specifications"},
-    {"type":"paragraph","content":"The selected product's PC metafields override these values when available."},
-    {"type":"text","id":"cpu","label":"Processor","default":"AMD Ryzen processor"},
-    {"type":"text","id":"gpu","label":"Graphics","default":"AMD Radeon graphics"},
-    {"type":"text","id":"memory","label":"Memory","default":"32GB DDR5"},
-    {"type":"text","id":"storage","label":"Storage","default":"1TB NVMe SSD"},
-    {"type":"text","id":"button_text","label":"Button text","default":"VIEW BUILD"},
-    {"type":"text","id":"supporting_text","label":"Supporting text","default":"Built, configured, and bench tested by Unpatched Tech."}
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Featured computer"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Custom showcase image",
+      "info": "Optional. Uses the selected product image when empty."
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile showcase image",
+      "info": "Optional. Uses the main showcase image when empty."
+    },
+    {
+      "type": "header",
+      "content": "Image display"
+    },
+    {
+      "type": "select",
+      "id": "desktop_image_fit",
+      "label": "Desktop image fit",
+      "default": "contain",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Contain - show full image"
+        },
+        {
+          "value": "cover",
+          "label": "Cover - fill and crop"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "desktop_image_position",
+      "label": "Desktop image position",
+      "default": "center center",
+      "options": [
+        {
+          "value": "center center",
+          "label": "Center"
+        },
+        {
+          "value": "center top",
+          "label": "Top"
+        },
+        {
+          "value": "center bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "left center",
+          "label": "Left"
+        },
+        {
+          "value": "right center",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "desktop_image_scale",
+      "label": "Desktop image size",
+      "min": 60,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Mobile image display"
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_fit",
+      "label": "Mobile image fit",
+      "default": "contain",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Contain - show full image"
+        },
+        {
+          "value": "cover",
+          "label": "Cover - fill and crop"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_position",
+      "label": "Mobile image position",
+      "default": "center center",
+      "options": [
+        {
+          "value": "center center",
+          "label": "Center"
+        },
+        {
+          "value": "center top",
+          "label": "Top"
+        },
+        {
+          "value": "center bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "left center",
+          "label": "Left"
+        },
+        {
+          "value": "right center",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_scale",
+      "label": "Mobile image size",
+      "min": 60,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "mobile_media_ratio",
+      "label": "Mobile image frame",
+      "default": "1 / 1",
+      "options": [
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 3",
+          "label": "Landscape 4:3"
+        },
+        {
+          "value": "3 / 4",
+          "label": "Portrait 3:4"
+        },
+        {
+          "value": "16 / 10",
+          "label": "Wide 16:10"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small heading",
+      "default": "BUILT BY UNPATCHED"
+    },
+    {
+      "type": "text",
+      "id": "title_override",
+      "label": "Custom product heading",
+      "info": "Optional. Uses the selected product title when empty."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>A balanced gaming system built around real-world performance, clean thermals, and an upgrade path that makes sense.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Fallback specifications"
+    },
+    {
+      "type": "paragraph",
+      "content": "The selected product's PC metafields override these values when available."
+    },
+    {
+      "type": "text",
+      "id": "cpu",
+      "label": "Processor",
+      "default": "AMD Ryzen processor"
+    },
+    {
+      "type": "text",
+      "id": "gpu",
+      "label": "Graphics",
+      "default": "AMD Radeon graphics"
+    },
+    {
+      "type": "text",
+      "id": "memory",
+      "label": "Memory",
+      "default": "32GB DDR5"
+    },
+    {
+      "type": "text",
+      "id": "storage",
+      "label": "Storage",
+      "default": "1TB NVMe SSD"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "VIEW BUILD"
+    },
+    {
+      "type": "text",
+      "id": "supporting_text",
+      "label": "Supporting text",
+      "default": "Built, configured, and bench tested by Unpatched Tech."
+    }
   ],
   "presets": [
-    {"name":"Flagship PC"}
+    {
+      "name": "Flagship PC",
+      "category": "Unpatched Tech"
+    }
   ]
 }
 {% endschema %}

@@ -37,32 +37,117 @@
   "name": "Services",
   "class": "shopify-section--unpatched-services-cards",
   "max_blocks": 4,
-  "disabled_on": {"templates": ["password"], "groups": ["header", "custom.overlay"]},
+  "disabled_on": {
+    "templates": [
+      "password"
+    ],
+    "groups": [
+      "header",
+      "custom.overlay"
+    ]
+  },
   "settings": [
-    {"type": "text", "id": "button_text", "label": "Button text", "default": "START A SERVICE REQUEST"},
-    {"type": "url", "id": "button_link", "label": "Button link"},
-    {"type": "header", "content": "Colors"},
-    {"type": "color", "id": "background", "label": "Section background", "default": "#ffffff"},
-    {"type": "color", "id": "text_color", "label": "Heading and card text", "default": "#25252a"},
-    {"type": "color", "id": "muted_text_color", "label": "Body and detail text", "default": "#6f6f73"},
-    {"type": "color", "id": "card_background", "label": "Card background", "default": "#ffffff"},
-    {"type": "color", "id": "border_color", "label": "Card border", "default": "#e5e7eb"}
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "START A SERVICE REQUEST"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading and card text",
+      "default": "#25252a"
+    },
+    {
+      "type": "color",
+      "id": "muted_text_color",
+      "label": "Body and detail text",
+      "default": "#6f6f73"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Card border",
+      "default": "#e5e7eb"
+    }
   ],
   "blocks": [
     {
       "type": "service",
       "name": "Service card",
       "settings": [
-        {"type": "text", "id": "kicker", "label": "Kicker", "default": "BUILD + UPGRADE"},
-        {"type": "text", "id": "title", "label": "Heading", "default": "PC BUILDS"},
-        {"type": "richtext", "id": "content", "label": "Description", "default": "<p>Custom gaming and workstation PCs, rebuilds, and component upgrades built around what you need.</p>"},
-        {"type": "text", "id": "details_label", "label": "Requests label", "default": "COMMON REQUESTS"},
-        {"type": "text", "id": "detail_1", "label": "Request 1", "default": "New gaming and workstation builds"},
-        {"type": "text", "id": "detail_2", "label": "Request 2", "default": "Component upgrades and rebuilds"},
-        {"type": "text", "id": "detail_3", "label": "Request 3", "default": "Cooling, cleanup, and cable management"}
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "Kicker",
+          "default": "BUILD + UPGRADE"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "PC BUILDS"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Description",
+          "default": "<p>Custom gaming and workstation PCs, rebuilds, and component upgrades built around what you need.</p>"
+        },
+        {
+          "type": "text",
+          "id": "details_label",
+          "label": "Requests label",
+          "default": "COMMON REQUESTS"
+        },
+        {
+          "type": "text",
+          "id": "detail_1",
+          "label": "Request 1",
+          "default": "New gaming and workstation builds"
+        },
+        {
+          "type": "text",
+          "id": "detail_2",
+          "label": "Request 2",
+          "default": "Component upgrades and rebuilds"
+        },
+        {
+          "type": "text",
+          "id": "detail_3",
+          "label": "Request 3",
+          "default": "Cooling, cleanup, and cable management"
+        }
       ]
     }
   ],
-  "presets": [{"name": "Services"}]
+  "presets": [
+    {
+      "name": "Services",
+      "category": "Pages"
+    }
+  ]
 }
 {% endschema %}

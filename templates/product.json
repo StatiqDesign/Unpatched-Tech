@@ -67,7 +67,8 @@
         "show_thumbnails_on_mobile": false,
         "desktop_thumbnails_position": "bottom",
         "transition_effect": "fade"
-      }
+      },
+      "name": "Product"
     },
     "product_image_1": {
       "type": "unpatched-product-image",
@@ -79,7 +80,8 @@
         "radius": 0,
         "padding_top": 8,
         "padding_bottom": 8
-      }
+      },
+      "name": "Refurbished Banner 1"
     },
     "unpatched_product_image_VBi9Mc": {
       "type": "unpatched-product-image",
@@ -91,7 +93,8 @@
         "radius": 0,
         "padding_top": 8,
         "padding_bottom": 8
-      }
+      },
+      "name": "Refurbished Banner 2"
     },
     "unpatched_product_image_fkYyx9": {
       "type": "unpatched-product-image",
@@ -103,7 +106,8 @@
         "radius": 0,
         "padding_top": 8,
         "padding_bottom": 8
-      }
+      },
+      "name": "Support Banner"
     },
     "product-content": {
       "type": "product-content",
@@ -116,7 +120,8 @@
       "block_order": [
         "description"
       ],
-      "settings": {}
+      "settings": {},
+      "name": "Product Details"
     },
     "17883174235e4e13bc": {
       "type": "apps",
@@ -141,7 +146,7 @@
     },
     "product_recommendations_apWawt": {
       "type": "product-recommendations",
-      "name": "Related products",
+      "name": "Related Products",
       "settings": {
         "subheading": "",
         "title": "You may also like",

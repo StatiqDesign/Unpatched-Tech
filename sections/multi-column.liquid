@@ -210,10 +210,13 @@
 
 {% schema %}
 {
-  "name": "Multi-column",
+  "name": "Why Unpatched",
   "class": "shopify-section--multi-column",
   "disabled_on": {
-    "groups": ["header", "custom.overlay"]
+    "groups": [
+      "header",
+      "custom.overlay"
+    ]
   },
   "blocks": [
     {
@@ -458,34 +461,79 @@
   ],
   "presets": [
     {
-      "name": "Multi-column",
-      "category": "Storytelling",
+      "name": "Why Unpatched",
+      "category": "Unpatched Tech",
       "blocks": [
         {
           "type": "item",
           "settings": {
-            "title": "Column 1"
+            "title": "QUALITY FIRST",
+            "content": "<p>Every PC and refurb is carefully built, tested, and checked before it leaves us.</p>",
+            "image_width": 10,
+            "image_border": "rgba(0,0,0,0)",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
           }
         },
         {
           "type": "item",
           "settings": {
-            "title": "Column 1"
+            "title": "BUILT TO LAST",
+            "content": "<p>Thoughtful builds and repairs designed to perform now and stay useful longer.</p>",
+            "image_width": 10,
+            "image_border": "rgba(0,0,0,0)",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
           }
         },
         {
           "type": "item",
           "settings": {
-            "title": "Column 1"
+            "title": "READY TO PLAY",
+            "content": "<p>Hardware arrives tested, prepared, and ready to become part of your setup.</p>",
+            "image_width": 10,
+            "image_border": "rgba(0,0,0,0)",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
           }
         },
         {
           "type": "item",
           "settings": {
-            "title": "Column 1"
+            "title": "REAL SUPPORT",
+            "content": "<p>When you need help, you can reach a real team that knows the hardware.</p>",
+            "image_width": 10,
+            "image_border": "rgba(0,0,0,0)",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
           }
         }
-      ]
+      ],
+      "settings": {
+        "reveal_on_scroll": false,
+        "stack_items": true,
+        "subheading": "WHY BUY FROM US",
+        "title": "Built around the hardware. Backed by real support.",
+        "content": "<p>Buying refurbished or custom-built tech should feel as dependable as buying new.</p>",
+        "column_alignment": "left",
+        "mobile_item_size": "medium",
+        "desktop_item_size": "medium",
+        "spacing": "normal",
+        "background": "#ffffff",
+        "text_color": "#25252a"
+      }
     }
   ]
 }

@@ -257,46 +257,197 @@
 
 {% schema %}
 {
-  "name":"Featured tech",
-  "class":"shopify-section--unpatched-featured-collection",
-  "disabled_on":{"templates":["password"],"groups":["header","custom.overlay"]},
-  "max_blocks":8,
-  "settings":[
-    {"type":"text","id":"subheading","label":"Subheading","default":"FEATURED REFURBISHED TECH"},
-    {"type":"text","id":"title","label":"Heading","default":"Refurbished, done right."},
-    {"type":"richtext","id":"content","label":"Description","default":"<p>These aren’t quick wipe-downs. Every featured console is carefully cleaned, inspected, repaired when needed, and fully tested before it’s ready for another player.</p>"},
-    {"type":"collection","id":"collection","label":"Fallback collection","info":"Kept for compatibility. Collection-tab blocks take priority."},
-    {"type":"range","id":"products_count","label":"Products per tab","min":2,"max":4,"step":1,"default":4},
-    {"type":"checkbox","id":"show_type","label":"Show product label","default":true},
-    {"type":"text","id":"product_label","label":"Product label","default":"REFURBISHED","info":"Displayed above each featured product title."},
-    {"type":"checkbox","id":"show_price","label":"Show price","default":true},
-    {"type":"select","id":"image_fit","label":"Product image fit","options":[{"value":"cover","label":"Fill card"},{"value":"contain","label":"Show whole image"}],"default":"cover"},
-    {"type":"range","id":"image_scale","label":"Product image zoom","min":90,"max":110,"step":1,"unit":"%","default":100},
-    {"type":"color","id":"media_background","label":"Product image background","default":"#ffffff"},
-    {"type":"text","id":"button_text","label":"Button text","default":"Shop refurbished"},
-    {"type":"url","id":"button_link","label":"Custom button link","info":"Optional. When empty, the button follows the active collection."},
-    {"type":"color","id":"panel_background","label":"Collection panel background","default":"#f4f4f6"},
-    {"type":"color","id":"background","label":"Background","default":"#ffffff"},
-    {"type":"color","id":"text_color","label":"Text color","default":"#25252a"}
-  ],
-  "blocks":[
+  "name": "Featured Tech",
+  "class": "shopify-section--unpatched-featured-collection",
+  "disabled_on": {
+    "templates": [
+      "password"
+    ],
+    "groups": [
+      "header",
+      "custom.overlay"
+    ]
+  },
+  "max_blocks": 8,
+  "settings": [
     {
-      "type":"collection",
-      "name":"Collection tab",
-      "settings":[
-        {"type":"collection","id":"collection","label":"Collection"},
-        {"type":"text","id":"label","label":"Tab label","info":"Optional. Uses the collection title when empty."},
-        {"type":"header","content":"Featured products"},
-        {"type":"paragraph","content":"Optional. Pick exact products to feature. Leave all four empty to use the collection order."},
-        {"type":"product","id":"product_1","label":"Featured product 1"},
-        {"type":"product","id":"product_2","label":"Featured product 2"},
-        {"type":"product","id":"product_3","label":"Featured product 3"},
-        {"type":"product","id":"product_4","label":"Featured product 4"}
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "FEATURED REFURBISHED TECH"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Refurbished, done right."
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Description",
+      "default": "<p>These aren’t quick wipe-downs. Every featured console is carefully cleaned, inspected, repaired when needed, and fully tested before it’s ready for another player.</p>"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Fallback collection",
+      "info": "Kept for compatibility. Collection-tab blocks take priority."
+    },
+    {
+      "type": "range",
+      "id": "products_count",
+      "label": "Products per tab",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_type",
+      "label": "Show product label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "product_label",
+      "label": "Product label",
+      "default": "REFURBISHED",
+      "info": "Displayed above each featured product title."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show price",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Product image fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Fill card"
+        },
+        {
+          "value": "contain",
+          "label": "Show whole image"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "range",
+      "id": "image_scale",
+      "label": "Product image zoom",
+      "min": 90,
+      "max": 110,
+      "step": 1,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "media_background",
+      "label": "Product image background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop refurbished"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Custom button link",
+      "info": "Optional. When empty, the button follows the active collection."
+    },
+    {
+      "type": "color",
+      "id": "panel_background",
+      "label": "Collection panel background",
+      "default": "#f4f4f6"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#25252a"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection tab",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Tab label",
+          "info": "Optional. Uses the collection title when empty."
+        },
+        {
+          "type": "header",
+          "content": "Featured products"
+        },
+        {
+          "type": "paragraph",
+          "content": "Optional. Pick exact products to feature. Leave all four empty to use the collection order."
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Featured product 1"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Featured product 2"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Featured product 3"
+        },
+        {
+          "type": "product",
+          "id": "product_4",
+          "label": "Featured product 4"
+        }
       ]
     }
   ],
-  "presets":[
-    {"name":"Featured tech","blocks":[{"type":"collection"},{"type":"collection"},{"type":"collection"}]}
+  "presets": [
+    {
+      "name": "Featured Tech",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ],
+      "category": "Unpatched Tech"
+    }
   ]
 }
 {% endschema %}

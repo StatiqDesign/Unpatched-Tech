@@ -221,10 +221,13 @@
 
 {% schema %}
 {
-  "name": "Logo list",
+  "name": "Brands We Trust",
   "class": "shopify-section--logo-list",
   "disabled_on": {
-    "groups": ["header", "custom.overlay"]
+    "groups": [
+      "header",
+      "custom.overlay"
+    ]
   },
   "settings": [
     {
@@ -318,8 +321,8 @@
   ],
   "presets": [
     {
-      "name": "Logo list",
-      "category": "Media",
+      "name": "Brands We Trust",
+      "category": "Unpatched Tech",
       "blocks": [
         {
           "type": "logo"
@@ -335,11 +338,21 @@
         },
         {
           "type": "logo"
-        },
-        {
-          "type": "logo"
         }
-      ]
+      ],
+      "settings": {
+        "reveal_on_scroll": false,
+        "subheading": "Powered by the Best",
+        "title": "Brands We Trust",
+        "button_text": "",
+        "button_link": "",
+        "stack_logos": false,
+        "background": "rgba(0,0,0,0)",
+        "text_color": "#25252a",
+        "button_background": "rgba(0,0,0,0)",
+        "button_text_color": "rgba(0,0,0,0)",
+        "logo_background": "rgba(0,0,0,0)"
+      }
     }
   ]
 }

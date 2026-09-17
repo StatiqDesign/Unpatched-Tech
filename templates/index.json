@@ -68,7 +68,7 @@
         "image_MbfwkP",
         "image_RGiNck"
       ],
-      "name": "HERO",
+      "name": "Hero",
       "settings": {
         "section_height": "small",
         "transition_type": "fade",
@@ -157,7 +157,7 @@
         "playstation",
         "nintendo"
       ],
-      "name": "SHOP BY SYSTEM",
+      "name": "Shop by System",
       "settings": {
         "subheading": "CHOOSE YOUR PLATFORM",
         "title": "Shop by system",
@@ -169,7 +169,7 @@
     },
     "unpatched_flagship_pc": {
       "type": "unpatched-flagship-pc",
-      "name": "FLAGSHIP PC",
+      "name": "Flagship PC",
       "settings": {
         "product": "entry-tier-gaming-pc",
         "desktop_image_fit": "contain",
@@ -248,7 +248,7 @@
         "refurbished",
         "services"
       ],
-      "name": "HOW WE HELP",
+      "name": "How We Help",
       "settings": {
         "subheading": "YOUR TECH, YOUR WAY",
         "title": "Three ways to get back in the game",
@@ -299,7 +299,7 @@
         "featured_playstation",
         "featured_nintendo"
       ],
-      "name": "FEATURED TECH",
+      "name": "Featured Tech",
       "settings": {
         "subheading": "EXPERTLY REFURBISHED",
         "title": "Featured tech",
@@ -390,7 +390,7 @@
         "item_63LD94"
       ],
       "custom_css": [],
-      "name": "WHY UNPATCHED",
+      "name": "Why Unpatched",
       "settings": {
         "reveal_on_scroll": false,
         "stack_items": true,
@@ -452,7 +452,7 @@
         "logo-4"
       ],
       "custom_css": [],
-      "name": "Brands",
+      "name": "Brands We Trust",
       "settings": {
         "reveal_on_scroll": false,
         "subheading": "Powered by the Best",
@@ -469,7 +469,7 @@
     },
     "blog-posts": {
       "type": "blog-posts",
-      "name": "Blog",
+      "name": "Unpatched Blog",
       "settings": {
         "blog": "news",
         "subheading": "LATEST FROM UNPATCHED",

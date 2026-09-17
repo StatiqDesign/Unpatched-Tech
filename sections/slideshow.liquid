@@ -251,10 +251,13 @@
 </section>
 {% schema %}
 {
-  "name": "Slideshow",
+  "name": "Hero",
   "class": "shopify-section--slideshow",
   "disabled_on": {
-    "groups": ["header", "custom.overlay"]
+    "groups": [
+      "header",
+      "custom.overlay"
+    ]
   },
   "max_blocks": 5,
   "settings": [
@@ -263,11 +266,26 @@
       "id": "section_height",
       "label": "Section height",
       "options": [
-        { "value": "auto", "label": "Original image ratio" },
-        { "value": "small", "label": "Small" },
-        { "value": "medium", "label": "Medium" },
-        { "value": "large", "label": "Large" },
-        { "value": "fit", "label": "Fit screen height" }
+        {
+          "value": "auto",
+          "label": "Original image ratio"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "fit",
+          "label": "Fit screen height"
+        }
       ],
       "info": "Choose \"Original image ratio\" to not cut images. [Learn more](https://help.shopify.com/en/manual/online-store/images/theme-images#best-practices-for-slideshows-and-full-width-images)",
       "default": "auto"
@@ -277,9 +295,18 @@
       "id": "transition_type",
       "label": "Transition type",
       "options": [
-        { "value": "sweep", "label": "Sweep" },
-        { "value": "reveal", "label": "Reveal" },
-        { "value": "fade", "label": "Fade" }
+        {
+          "value": "sweep",
+          "label": "Sweep"
+        },
+        {
+          "value": "reveal",
+          "label": "Reveal"
+        },
+        {
+          "value": "fade",
+          "label": "Fade"
+        }
       ],
       "default": "sweep"
     },
@@ -319,16 +346,37 @@
       "type": "image",
       "name": "Image",
       "settings": [
-        { "type": "image_picker", "id": "image", "info": "2160 x 1080px .jpg recommended, 1080 x 1080px .jpg recommended if split", "label": "Image" },
-        { "type": "image_picker", "id": "split_image", "info": "1080 x 1080px .jpg recommended. Won't show up on mobile.", "label": "Split image" },
-        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image", "info": "1000 x 1400px .jpg recommended. If none is set, desktop image will be used." },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "info": "2160 x 1080px .jpg recommended, 1080 x 1080px .jpg recommended if split",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "split_image",
+          "info": "1080 x 1080px .jpg recommended. Won't show up on mobile.",
+          "label": "Split image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile image",
+          "info": "1000 x 1400px .jpg recommended. If none is set, desktop image will be used."
+        },
         {
           "type": "select",
           "id": "image_fit",
           "label": "Image fit",
           "options": [
-            { "value": "cover", "label": "Cover" },
-            { "value": "contain", "label": "Contain" }
+            {
+              "value": "cover",
+              "label": "Cover"
+            },
+            {
+              "value": "contain",
+              "label": "Contain"
+            }
           ],
           "default": "cover",
           "info": "Use Contain for product or logo imagery so it never gets blown up or cropped."
@@ -348,43 +396,137 @@
           "id": "image_position",
           "label": "Image position",
           "options": [
-            { "value": "center center", "label": "Center" },
-            { "value": "center top", "label": "Top" },
-            { "value": "center bottom", "label": "Bottom" },
-            { "value": "left center", "label": "Left" },
-            { "value": "right center", "label": "Right" }
+            {
+              "value": "center center",
+              "label": "Center"
+            },
+            {
+              "value": "center top",
+              "label": "Top"
+            },
+            {
+              "value": "center bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "left center",
+              "label": "Left"
+            },
+            {
+              "value": "right center",
+              "label": "Right"
+            }
           ],
           "default": "center center"
         },
-        { "type": "color", "id": "image_background", "label": "Image background", "default": "#f4f5f8" },
-        { "type": "header", "content": "Content" },
+        {
+          "type": "color",
+          "id": "image_background",
+          "label": "Image background",
+          "default": "#f4f5f8"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
         {
           "type": "select",
           "id": "text_position",
           "label": "Text position",
           "options": [
-            { "value": "top_left", "label": "Top left" },
-            { "value": "top_center", "label": "Top center" },
-            { "value": "top_right", "label": "Top right" },
-            { "value": "middle_left", "label": "Middle left" },
-            { "value": "middle_center", "label": "Middle center" },
-            { "value": "middle_right", "label": "Middle right" },
-            { "value": "bottom_left", "label": "Bottom left" },
-            { "value": "bottom_center", "label": "Bottom center" },
-            { "value": "bottom_right", "label": "Bottom right" }
+            {
+              "value": "top_left",
+              "label": "Top left"
+            },
+            {
+              "value": "top_center",
+              "label": "Top center"
+            },
+            {
+              "value": "top_right",
+              "label": "Top right"
+            },
+            {
+              "value": "middle_left",
+              "label": "Middle left"
+            },
+            {
+              "value": "middle_center",
+              "label": "Middle center"
+            },
+            {
+              "value": "middle_right",
+              "label": "Middle right"
+            },
+            {
+              "value": "bottom_left",
+              "label": "Bottom left"
+            },
+            {
+              "value": "bottom_center",
+              "label": "Bottom center"
+            },
+            {
+              "value": "bottom_right",
+              "label": "Bottom right"
+            }
           ],
           "default": "middle_center"
         },
-        { "type": "text", "id": "subheading", "label": "Subheading", "default": "Tell your story" },
-        { "type": "text", "id": "title", "label": "Heading", "default": "Slide title" },
-        { "type": "richtext", "id": "content", "label": "Description" },
-        { "type": "text", "id": "button_1_text", "label": "Button 1 text" },
-        { "type": "url", "id": "button_1_link", "label": "Button 1 link", "info": "Leave the \"Button 1 text\" and \"Button 2\" settings empty to make the slide fully clickable." },
-        { "type": "text", "id": "button_2_text", "label": "Button 2 text" },
-        { "type": "url", "id": "button_2_link", "label": "Button 2 link" },
-        { "type": "header", "content": "Colors" },
-        { "type": "color", "id": "text_color", "label": "Text", "default": "#25252a" },
-        { "type": "color", "id": "content_backdrop_color", "label": "Text backdrop", "default": "#ffffff" },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Tell your story"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Slide title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "button_1_text",
+          "label": "Button 1 text"
+        },
+        {
+          "type": "url",
+          "id": "button_1_link",
+          "label": "Button 1 link",
+          "info": "Leave the \"Button 1 text\" and \"Button 2\" settings empty to make the slide fully clickable."
+        },
+        {
+          "type": "text",
+          "id": "button_2_text",
+          "label": "Button 2 text"
+        },
+        {
+          "type": "url",
+          "id": "button_2_link",
+          "label": "Button 2 link"
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text",
+          "default": "#25252a"
+        },
+        {
+          "type": "color",
+          "id": "content_backdrop_color",
+          "label": "Text backdrop",
+          "default": "#ffffff"
+        },
         {
           "type": "range",
           "id": "content_backdrop_opacity",
@@ -396,9 +538,24 @@
           "default": 0,
           "info": "Adds a soft local backdrop behind the copy without washing out the whole image. Useful when a photo makes the text hard to read."
         },
-        { "type": "color", "id": "button_background", "label": "Button background", "default": "#ffffff" },
-        { "type": "color", "id": "button_text_color", "label": "Button text", "default": "#000000" },
-        { "type": "color", "id": "overlay_color", "label": "Overlay", "default": "#000000" },
+        {
+          "type": "color",
+          "id": "button_background",
+          "label": "Button background",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button text",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "overlay_color",
+          "label": "Overlay",
+          "default": "#000000"
+        },
         {
           "type": "range",
           "id": "overlay_opacity",
@@ -414,12 +571,36 @@
   ],
   "presets": [
     {
-      "name": "Slideshow",
-      "category": "Banners",
+      "name": "Hero",
+      "category": "Unpatched Tech",
       "blocks": [
-        { "type": "image", "settings": { "title": "Slide 1" } },
-        { "type": "image", "settings": { "title": "Slide 2" } }
-      ]
+        {
+          "type": "image",
+          "settings": {
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "image_background": "#f4f5f8",
+            "text_position": "middle_center",
+            "title": "Welcome to Unpatched Tech",
+            "text_color": "#ffffff",
+            "content_backdrop_color": "#ffffff",
+            "content_backdrop_opacity": 0,
+            "button_background": "#ffffff",
+            "button_text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
+        }
+      ],
+      "settings": {
+        "section_height": "small",
+        "transition_type": "fade",
+        "show_initial_transition": false,
+        "autoplay": true,
+        "cycle_speed": 8,
+        "background": "#ffffff"
+      }
     }
   ]
 }

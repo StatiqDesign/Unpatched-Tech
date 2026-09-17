@@ -58,38 +58,178 @@
 
 {% schema %}
 {
-  "name": "Order tracker",
+  "name": "Order Tracker",
   "tag": "section",
   "class": "shopify-section--order-tracker",
-  "disabled_on": {"templates": ["password"], "groups": ["header", "custom.overlay"]},
+  "disabled_on": {
+    "templates": [
+      "password"
+    ],
+    "groups": [
+      "header",
+      "custom.overlay"
+    ]
+  },
   "settings": [
-    {"type":"image_picker","id":"floating_icon","label":"Floating package icon"},
-    {"type":"text","id":"floating_icon_alt","label":"Package icon alt text","default":"Package icon"},
-    {"type":"text","id":"eyebrow","label":"Small heading","default":"ORDER TRACKING"},
-    {"type":"text","id":"title","label":"Heading","default":"TRACK YOUR ORDER."},
-    {"type":"richtext","id":"intro","label":"Intro text","default":"<p>Enter your order number and checkout email to see the latest status.</p>"},
-    {"type":"text","id":"order_label","label":"Order number label","default":"Order Number"},
-    {"type":"text","id":"order_placeholder","label":"Order number placeholder","default":"#1001"},
-    {"type":"text","id":"email_label","label":"Email label","default":"Email Address"},
-    {"type":"text","id":"email_placeholder","label":"Email placeholder","default":"email@example.com"},
-    {"type":"text","id":"button_text","label":"Button text","default":"CHECK STATUS"},
-    {"type":"text","id":"orders_link_text","label":"Order history link","default":"View all orders"},
-    {"type":"text","id":"message_validation","label":"Validation error message","default":"Enter your order number and the email address used at checkout."},
-    {"type":"text","id":"message_not_found","label":"Order not found message","default":"We couldn't find that order in this account. Check the order number, or open your order history."},
-    {"type":"text","id":"message_accounts_disabled","label":"Accounts disabled message","default":"Customer accounts must be enabled before secure order lookup can be used."},
-    {"type":"text","id":"message_verifying","label":"Verification message","default":"Securely verifying your email with Shopify…"},
-    {"type":"text","id":"message_login_error","label":"Verification error message","default":"Unable to open secure order verification. Please try again."},
-    {"type":"text","id":"message_opening","label":"Order opening message","default":"Order verified. Opening your tracking details…"},
-    {"type":"header","content":"Colors"},
-    {"type":"color","id":"hero_background","label":"Page background","default":"#ffffff"},
-    {"type":"color","id":"hero_text_color","label":"Heading text","default":"#25252a"},
-    {"type":"color","id":"hero_muted_text_color","label":"Muted text","default":"#6f6f73"},
-    {"type":"color","id":"accent_color","label":"Accent","default":"#405de6"},
-    {"type":"color","id":"button_text_color","label":"Button text","default":"#ffffff"},
-    {"type":"color","id":"card_background","label":"Form background","default":"#ffffff"},
-    {"type":"color","id":"card_text_color","label":"Form text","default":"#25252a"},
-    {"type":"color","id":"border_color","label":"Border","default":"#e5e7eb"}
+    {
+      "type": "image_picker",
+      "id": "floating_icon",
+      "label": "Floating package icon"
+    },
+    {
+      "type": "text",
+      "id": "floating_icon_alt",
+      "label": "Package icon alt text",
+      "default": "Package icon"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small heading",
+      "default": "ORDER TRACKING"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "TRACK YOUR ORDER."
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "<p>Enter your order number and checkout email to see the latest status.</p>"
+    },
+    {
+      "type": "text",
+      "id": "order_label",
+      "label": "Order number label",
+      "default": "Order Number"
+    },
+    {
+      "type": "text",
+      "id": "order_placeholder",
+      "label": "Order number placeholder",
+      "default": "#1001"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email Address"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "email@example.com"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "CHECK STATUS"
+    },
+    {
+      "type": "text",
+      "id": "orders_link_text",
+      "label": "Order history link",
+      "default": "View all orders"
+    },
+    {
+      "type": "text",
+      "id": "message_validation",
+      "label": "Validation error message",
+      "default": "Enter your order number and the email address used at checkout."
+    },
+    {
+      "type": "text",
+      "id": "message_not_found",
+      "label": "Order not found message",
+      "default": "We couldn't find that order in this account. Check the order number, or open your order history."
+    },
+    {
+      "type": "text",
+      "id": "message_accounts_disabled",
+      "label": "Accounts disabled message",
+      "default": "Customer accounts must be enabled before secure order lookup can be used."
+    },
+    {
+      "type": "text",
+      "id": "message_verifying",
+      "label": "Verification message",
+      "default": "Securely verifying your email with Shopify…"
+    },
+    {
+      "type": "text",
+      "id": "message_login_error",
+      "label": "Verification error message",
+      "default": "Unable to open secure order verification. Please try again."
+    },
+    {
+      "type": "text",
+      "id": "message_opening",
+      "label": "Order opening message",
+      "default": "Order verified. Opening your tracking details…"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "hero_background",
+      "label": "Page background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "hero_text_color",
+      "label": "Heading text",
+      "default": "#25252a"
+    },
+    {
+      "type": "color",
+      "id": "hero_muted_text_color",
+      "label": "Muted text",
+      "default": "#6f6f73"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#405de6"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Form background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Form text",
+      "default": "#25252a"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#e5e7eb"
+    }
   ],
-  "presets": [{"name":"Order tracker"}]
+  "presets": [
+    {
+      "name": "Order Tracker",
+      "category": "Pages"
+    }
+  ]
 }
 {% endschema %}

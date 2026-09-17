@@ -33,22 +33,86 @@
 
 {% schema %}
 {
-  "name": "About us",
+  "name": "About Us",
   "class": "shopify-section--unpatched-about-hero",
-  "disabled_on": {"templates": ["password"], "groups": ["header", "custom.overlay"]},
+  "disabled_on": {
+    "templates": [
+      "password"
+    ],
+    "groups": [
+      "header",
+      "custom.overlay"
+    ]
+  },
   "settings": [
-    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "ABOUT UNPATCHED TECH"},
-    {"type": "text", "id": "title", "label": "Heading", "default": "FAMILY OWNED. BUILT AROUND GOOD TECH."},
-    {"type": "richtext", "id": "content", "label": "Text", "default": "<p>Unpatched Tech is a family-owned business built by people who actually use, repair, and care about the hardware we sell.</p><p>We focus on refurbished consoles, custom PCs, repairs, restorations, and practical upgrades that keep good technology in use longer. We are not trying to be a giant electronics warehouse. We would rather do a smaller number of things well, be clear about what we sell, and stand behind the work we put our name on.</p><p>Whether you are buying a system, sending in a repair, or building a new PC, the goal is the same: straightforward service, carefully handled hardware, and tech that is ready to keep going.</p>"},
-    {"type": "text", "id": "primary_text", "label": "Primary button text", "default": "SHOP REFURBISHED"},
-    {"type": "url", "id": "primary_link", "label": "Primary button link"},
-    {"type": "text", "id": "secondary_text", "label": "Secondary link text", "default": "MAIL-IN SERVICES"},
-    {"type": "url", "id": "secondary_link", "label": "Secondary link"},
-    {"type": "header", "content": "Colors"},
-    {"type": "color", "id": "background", "label": "Section background", "default": "#ffffff"},
-    {"type": "color", "id": "text_color", "label": "Heading and link text", "default": "#25252a"},
-    {"type": "color", "id": "muted_text_color", "label": "Body text", "default": "#6f6f73"}
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "ABOUT UNPATCHED TECH"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "FAMILY OWNED. BUILT AROUND GOOD TECH."
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Text",
+      "default": "<p>Unpatched Tech is a family-owned business built by people who actually use, repair, and care about the hardware we sell.</p><p>We focus on refurbished consoles, custom PCs, repairs, restorations, and practical upgrades that keep good technology in use longer. We are not trying to be a giant electronics warehouse. We would rather do a smaller number of things well, be clear about what we sell, and stand behind the work we put our name on.</p><p>Whether you are buying a system, sending in a repair, or building a new PC, the goal is the same: straightforward service, carefully handled hardware, and tech that is ready to keep going.</p>"
+    },
+    {
+      "type": "text",
+      "id": "primary_text",
+      "label": "Primary button text",
+      "default": "SHOP REFURBISHED"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_text",
+      "label": "Secondary link text",
+      "default": "MAIL-IN SERVICES"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading and link text",
+      "default": "#25252a"
+    },
+    {
+      "type": "color",
+      "id": "muted_text_color",
+      "label": "Body text",
+      "default": "#6f6f73"
+    }
   ],
-  "presets": [{"name": "About us"}]
+  "presets": [
+    {
+      "name": "About Us",
+      "category": "Pages"
+    }
+  ]
 }
 {% endschema %}
