@@ -396,3 +396,21 @@
     transition: none;
   }
 }
+
+/* Collection pages already have a bordered outer product card. Keep the media
+   flush inside that card so the image does not render as a second rounded,
+   bordered card inside the first one. */
+.shopify-section--main-collection .up-global-product-card .product-item__aspect-ratio,
+.shopify-section--main-collection .up-global-product-card .up-global-product-card__media {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .shopify-section--main-collection .up-global-product-card:hover .up-global-product-card__media {
+    transform: none;
+    border-color: transparent;
+    box-shadow: none;
+  }
+}
