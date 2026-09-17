@@ -29,6 +29,18 @@
     margin-top: 18px;
   }
 
+  /* Let merchandising images in the Product Details area use more of the
+     phone width without cropping. Text keeps its normal padding, while images
+     gently bleed into that padding and retain a clean 12px-ish outer gutter. */
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content img {
+    display: block;
+    width: calc(100% + 36px) !important;
+    max-width: calc(100% + 36px) !important;
+    height: auto !important;
+    margin-inline: -18px !important;
+    object-fit: contain;
+  }
+
   /* The lifetime support block is nested inside the shared product section.
      Focal/mobile product rules can collapse nested section elements, so force
      this content back into normal document flow on phones. */
