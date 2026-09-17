@@ -1,30 +1,60 @@
 {%- liquid
-  assign pc_tier_config = 'entry-tier-gaming-pc|Entry Tier,mid-tier-gaming-pc|Mid Tier,high-tier-gaming-pc|High Tier' | split: ','
-  assign pc_handles = 'entry-tier-gaming-pc,mid-tier-gaming-pc,high-tier-gaming-pc' | split: ','
+  assign configured_systems = product.metafields.custom.pc_systems.value
+  assign fallback_tiers = 'entry-tier-gaming-pc|Entry Tier,mid-tier-gaming-pc|Mid Tier,high-tier-gaming-pc|High Tier' | split: ','
 -%}
 
-{%- if pc_handles contains product.handle -%}
+{%- if configured_systems != blank -%}
   <div class="up-system-selector" aria-label="Choose gaming PC system">
     <p class="up-system-selector__label">System:</p>
 
     <div class="up-system-selector__options" role="list">
-      {%- for tier_config in pc_tier_config -%}
-        {%- assign tier_parts = tier_config | split: '|' -%}
-        {%- assign tier_handle = tier_parts[0] -%}
-        {%- assign tier_label = tier_parts[1] -%}
-        {%- assign tier_product = all_products[tier_handle] -%}
-
-        {%- if tier_product != blank -%}
-          <a
-            href="{{ tier_product.url }}"
-            class="up-system-selector__option{% if product.handle == tier_handle %} is-active{% endif %}"
-            {% if product.handle == tier_handle %}aria-current="page"{% endif %}
-            role="listitem"
-          >
-            {{ tier_label }}
-          </a>
-        {%- endif -%}
+      {%- for tier_product in configured_systems -%}
+        {%- assign tier_label = tier_product.metafields.custom.pc_tier_label.value | default: tier_product.title -%}
+        <a
+          href="{{ tier_product.url }}"
+          class="up-system-selector__option{% if product.id == tier_product.id %} is-active{% endif %}"
+          {% if product.id == tier_product.id %}aria-current="page"{% endif %}
+          role="listitem"
+        >
+          {{ tier_label | escape }}
+        </a>
       {%- endfor -%}
     </div>
   </div>
+{%- else -%}
+  {%- assign is_fallback_pc = false -%}
+  {%- for tier_config in fallback_tiers -%}
+    {%- assign tier_parts = tier_config | split: '|' -%}
+    {%- if tier_parts[0] == product.handle -%}
+      {%- assign is_fallback_pc = true -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if is_fallback_pc -%}
+    <div class="up-system-selector" aria-label="Choose gaming PC system">
+      <p class="up-system-selector__label">System:</p>
+
+      <div class="up-system-selector__options" role="list">
+        {%- for tier_config in fallback_tiers -%}
+          {%- assign tier_parts = tier_config | split: '|' -%}
+          {%- assign tier_handle = tier_parts[0] -%}
+          {%- assign fallback_label = tier_parts[1] -%}
+          {%- assign tier_product = all_products[tier_handle] -%}
+
+          {%- if tier_product != blank -%}
+            {%- assign tier_label = tier_product.metafields.custom.pc_tier_label.value | default: fallback_label -%}
+            <a
+              href="{{ tier_product.url }}"
+              class="up-system-selector__option{% if product.handle == tier_handle %} is-active{% endif %}"
+              {% if product.handle == tier_handle %}aria-current="page"{% endif %}
+              role="listitem"
+            >
+              {{ tier_label | escape }}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
 {%- endif -%}
