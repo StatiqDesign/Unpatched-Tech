@@ -5,7 +5,6 @@
  * This file may be updated by the Shopify admin theme editor
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
- * Synced from GitHub to keep the computers template aligned and include product image sections.
  * ------------------------------------------------------------
  */
 {
@@ -41,12 +40,6 @@
             "liquid": "{% render 'unpatched-product-disclosures', product: product %}"
           }
         },
-        "performance_card": {
-          "type": "liquid",
-          "settings": {
-            "liquid": "{% render 'unpatched-performance-card', product: product %}<style>.up-performance-card__resolutions button{display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;}@media screen and (min-width:1000px){.unpatched-product-page .shopify-section--main-product .product{align-items:stretch!important}.unpatched-product-page .shopify-section--main-product .product__info{align-self:stretch!important;height:auto!important;box-sizing:border-box}}</style>"
-          }
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -56,6 +49,12 @@
             "atc_button_text_color": "rgba(0,0,0,0)",
             "buy_now_button_background": "rgba(0,0,0,0)",
             "buy_now_button_text_color": "rgba(0,0,0,0)"
+          }
+        },
+        "performance_card": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{% render 'unpatched-performance-card', product: product %}<style>.up-performance-card__resolutions button{display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;}@media screen and (min-width:1000px){.unpatched-product-page .shopify-section--main-product .product{align-items:stretch!important}.unpatched-product-page .shopify-section--main-product .product__info{align-self:stretch!important;height:auto!important;box-sizing:border-box}}</style>"
           }
         }
       },
@@ -87,6 +86,8 @@
     "product_image_1": {
       "type": "unpatched-product-image",
       "settings": {
+        "image": "shopify://shop_images/31537ee6-2f03-4684-8340-dc30e3b83d75.png",
+        "link": "",
         "full_width": false,
         "max_width": 1800,
         "radius": 0,
