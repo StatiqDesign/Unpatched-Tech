@@ -9,7 +9,34 @@
  */
 {
   "type": "custom.overlay",
-  "name": "Overlay group",
-  "sections": {},
-  "order": []
+  "name": "Popups & Privacy",
+  "sections": {
+    "email_popup": {
+      "type": "unpatched-email-popup",
+      "settings": {
+        "enabled": true,
+        "heading": "Stay in the loop.",
+        "text": "<p>Get product drops, refurbished restocks, build updates, and useful tech news from Unpatched Tech.</p>",
+        "email_placeholder": "Email address",
+        "button_text": "Sign me up",
+        "success_text": "You’re in. Thanks for signing up.",
+        "delay_seconds": 6,
+        "repeat_days": 14
+      }
+    },
+    "privacy_banner": {
+      "type": "unpatched-privacy-banner",
+      "settings": {
+        "enabled": true,
+        "heading": "Your privacy matters.",
+        "text": "<p>We use cookies to keep the store working, understand site usage, and improve your experience.</p>",
+        "accept_text": "Accept",
+        "decline_text": "Decline"
+      }
+    }
+  },
+  "order": [
+    "email_popup",
+    "privacy_banner"
+  ]
 }
