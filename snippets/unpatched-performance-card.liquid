@@ -2,13 +2,19 @@
   UNPATCHED TECH — GAMING PC PERFORMANCE CARD
   Product metafields override the fallback FPS presets below. Presentation lives
   in unpatched-product-components.css and behavior in unpatched-performance-card.js.
+
+  Optional metafield:
+  custom.performance_preset = entry | mid | high
 {%- endcomment -%}
 
 {%- assign pc_gpu = product.metafields.custom.pc_gpu.value | default: '' | downcase -%}
 {%- assign product_name = product.title | downcase -%}
+{%- assign configured_preset = product.metafields.custom.performance_preset.value | default: '' | downcase | strip -%}
 {%- assign performance_preset = 'entry' -%}
 
-{%- if pc_gpu contains '9070 xt' or pc_gpu contains '9070xt' -%}
+{%- if configured_preset == 'entry' or configured_preset == 'mid' or configured_preset == 'high' -%}
+  {%- assign performance_preset = configured_preset -%}
+{%- elsif pc_gpu contains '9070 xt' or pc_gpu contains '9070xt' -%}
   {%- assign performance_preset = 'high' -%}
 {%- elsif pc_gpu contains '9070' -%}
   {%- assign performance_preset = 'mid' -%}
