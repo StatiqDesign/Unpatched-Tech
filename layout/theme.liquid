@@ -85,6 +85,7 @@
 
     <script src="{{ 'vendor.js' | asset_url }}" defer></script>
     <script src="{{ 'theme.js' | asset_url }}" defer fetchpriority="low"></script>
+    <script src="{{ 'unpatched-focal-compat.js' | asset_url }}" defer fetchpriority="low"></script>
     <script src="{{ 'custom.js' | asset_url }}" defer fetchpriority="low"></script>
     {%- if request.page_type == 'product' and template.suffix == 'computers' -%}<script src="{{ 'unpatched-performance-card.js' | asset_url }}" defer fetchpriority="low"></script>{%- endif -%}
     {%- if request.page_type == 'index' -%}<script src="{{ 'unpatched-history-restore.js' | asset_url }}" defer fetchpriority="low"></script>{%- endif -%}
