@@ -72,6 +72,8 @@
     "product_image_1": {
       "type": "unpatched-product-image",
       "settings": {
+        "image": "shopify://shop_images/refurb_1.png",
+        "link": "",
         "full_width": false,
         "max_width": 1400,
         "radius": 0,
