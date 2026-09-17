@@ -1,68 +1,68 @@
-<div class="unpatched-product-trust" aria-label="Shop with confidence">
+{%- assign is_gaming_pc = false -%}
+{%- if product.template_suffix == 'computers' -%}
+  {%- assign is_gaming_pc = true -%}
+{%- endif -%}
+
+<div class="unpatched-product-trust" aria-label="Product care">
   <div class="container">
-    <div class="unpatched-product-trust__header">
-      <h2 class="heading h3">Shop with confidence.</h2>
-      <p>Every Unpatched Tech order is prepared with care and clearly described so you know what to expect.</p>
-    </div>
-
-    <div class="unpatched-product-trust__grid">
-      <div class="unpatched-product-trust__item">
-        <span class="unpatched-product-trust__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-        </span>
-        <div>
-          <h3>Checked Before Shipping</h3>
-          <p>Every product is reviewed and prepared before it leaves us.</p>
-        </div>
-      </div>
-
-      <div class="unpatched-product-trust__item">
-        <span class="unpatched-product-trust__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14.5"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
-        </span>
-        <div>
-          <h3>Clear, Honest Details</h3>
-          <p>Specifications, condition, configuration, and what’s included are stated up front.</p>
-        </div>
-      </div>
-
-      <div class="unpatched-product-trust__item">
-        <span class="unpatched-product-trust__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.8 2.8 8.2 7 10 4.2-1.8 7-5.2 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
-        </span>
-        <div>
-          <h3>Lifetime Product Support</h3>
-          <p>24/7 help with troubleshooting, setup, and keeping your gear working as it should.</p>
-        </div>
-      </div>
+    <div class="unpatched-product-trust__copy">
+      {%- if is_gaming_pc -%}
+        <h2 class="heading h3">Built with Love.</h2>
+        <p>Every Unpatched Tech gaming PC is assembled, tested, and tuned with care before it reaches your setup.</p>
+      {%- else -%}
+        <h2 class="heading h3">Life Restored with Love.</h2>
+        <p>Each refurbished system is carefully cleaned, tested, and restored so great hardware can keep playing for years to come.</p>
+      {%- endif -%}
     </div>
   </div>
 </div>
 
 <style>
-  .unpatched-product-trust{background:#fff;border:0;padding:44px 0}
-  .unpatched-product-trust__header{max-width:680px;margin:0 auto 30px;text-align:center}
-  .unpatched-product-trust__header .heading,.unpatched-product-trust__header p{margin:0}
-  .unpatched-product-trust__header p{margin-top:10px;color:rgba(0,0,0,.68);line-height:1.6}
-  .unpatched-product-trust__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-  .unpatched-product-trust__item{display:flex;align-items:flex-start;gap:14px;padding:4px 28px}
-  .unpatched-product-trust__item+.unpatched-product-trust__item{border-left:1px solid rgba(0,0,0,.1)}
-  .unpatched-product-trust__icon{display:grid;flex:0 0 38px;place-items:center;width:38px;height:38px;border:0;border-radius:10px;background:rgba(64,93,230,.09);color:#405DE6}
-  .unpatched-product-trust__icon svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .unpatched-product-trust__item h3{margin:1px 0 5px;font-size:.88rem;font-weight:700;line-height:1.3}
-  .unpatched-product-trust__item p{margin:0;color:rgba(0,0,0,.64);font-size:.84rem;line-height:1.5}
-
-  @media screen and (max-width:999px){
-    .unpatched-product-trust__item{padding:4px 18px}
+  .unpatched-product-trust {
+    padding: 34px 0 28px;
+    border: 0;
+    background: #fff;
   }
 
-  @media screen and (max-width:599px){
-    .unpatched-product-trust{padding:34px 0}
-    .unpatched-product-trust__header{margin-bottom:24px}
-    .unpatched-product-trust__grid{grid-template-columns:1fr}
-    .unpatched-product-trust__item{padding:18px 0}
-    .unpatched-product-trust__item:first-child{padding-top:0}
-    .unpatched-product-trust__item:last-child{padding-bottom:0}
-    .unpatched-product-trust__item+.unpatched-product-trust__item{border-left:0;border-top:1px solid rgba(0,0,0,.1)}
+  .unpatched-product-trust__copy {
+    max-width: 760px;
+    margin: 0;
+    text-align: left;
+  }
+
+  .unpatched-product-trust__copy .heading,
+  .unpatched-product-trust__copy p {
+    margin: 0;
+  }
+
+  .unpatched-product-trust__copy .heading {
+    color: #25252a;
+    font-size: clamp(25px, 2.2vw, 34px);
+    line-height: 1.08;
+    letter-spacing: -.025em;
+  }
+
+  .unpatched-product-trust__copy p {
+    margin-top: 10px;
+    max-width: 680px;
+    color: rgba(37, 37, 42, .68);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  @media screen and (max-width: 740px) {
+    .unpatched-product-trust {
+      padding: 24px 0 20px;
+    }
+
+    .unpatched-product-trust__copy .heading {
+      font-size: 24px;
+    }
+
+    .unpatched-product-trust__copy p {
+      margin-top: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
   }
 </style>
