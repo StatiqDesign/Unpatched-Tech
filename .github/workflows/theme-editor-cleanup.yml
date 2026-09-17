@@ -1,0 +1,262 @@
+name: One-time theme editor cleanup
+
+on:
+  push:
+    paths:
+      - '.github/workflows/theme-editor-cleanup.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    if: github.event.head_commit.message == 'Run one-time theme editor cleanup'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Normalize theme editor sections
+        run: |
+          python <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          ROOT = Path('.')
+
+          def edit_schema(relpath, editor):
+              path = ROOT / relpath
+              text = path.read_text(encoding='utf-8')
+              match = re.search(r'{%\s*schema\s*%}\s*(\{.*?\})\s*{%\s*endschema\s*%}', text, re.S)
+              if not match:
+                  raise RuntimeError(f'No schema found in {relpath}')
+              data = json.loads(match.group(1))
+              editor(data)
+              schema = json.dumps(data, ensure_ascii=False, indent=2)
+              text = text[:match.start(1)] + schema + text[match.end(1):]
+              path.write_text(text, encoding='utf-8')
+
+          def rename_section(relpath, name, category=None):
+              def editor(data):
+                  data['name'] = name
+                  for preset in data.get('presets', []):
+                      preset['name'] = name
+                      if category:
+                          preset['category'] = category
+              edit_schema(relpath, editor)
+
+          # Homepage section names should mirror the storefront instead of old Focal/internal names.
+          rename_section('sections/slideshow.liquid', 'Hero', 'Unpatched Tech')
+          rename_section('sections/unpatched-category-showcase.liquid', 'Shop by System', 'Unpatched Tech')
+          rename_section('sections/unpatched-flagship-pc.liquid', 'Flagship PC', 'Unpatched Tech')
+          rename_section('sections/unpatched-pathways.liquid', 'How We Help', 'Unpatched Tech')
+          rename_section('sections/unpatched-featured-collection.liquid', 'Featured Tech', 'Unpatched Tech')
+          rename_section('sections/multi-column.liquid', 'Why Unpatched', 'Unpatched Tech')
+          rename_section('sections/logo-list.liquid', 'Brands We Trust', 'Unpatched Tech')
+          rename_section('sections/blog-posts.liquid', 'Unpatched Blog', 'Unpatched Tech')
+
+          # Page/product utilities use customer-facing names instead of implementation names.
+          rename_section('sections/unpatched-about-hero.liquid', 'About Us', 'Pages')
+          rename_section('sections/faq.liquid', 'FAQ', 'Pages')
+          rename_section('sections/unpatched-services-hero.liquid', 'Services Hero', 'Pages')
+          rename_section('sections/unpatched-services-cards.liquid', 'Services', 'Pages')
+          rename_section('sections/unpatched-support-contact.liquid', 'Support Form', 'Pages')
+          rename_section('sections/order-tracker-simple.liquid', 'Order Tracker', 'Pages')
+          rename_section('sections/unpatched-product-image.liquid', 'Product Banner', 'Products')
+          rename_section('sections/product-recommendations.liquid', 'Related Products', 'Products')
+
+          # Keep overlay controls together and named consistently.
+          rename_section('sections/unpatched-email-popup.liquid', 'Email Popup', 'Popups & Privacy')
+          rename_section('sections/unpatched-privacy-banner.liquid', 'Privacy & Cookies', 'Popups & Privacy')
+
+          # Make add-section previews/defaults resemble the actual homepage.
+          def hero_preview(data):
+              if data.get('presets'):
+                  data['presets'][0]['settings'] = {
+                      'section_height': 'small',
+                      'transition_type': 'fade',
+                      'show_initial_transition': False,
+                      'autoplay': True,
+                      'cycle_speed': 8,
+                      'background': '#ffffff'
+                  }
+                  data['presets'][0]['blocks'] = [{
+                      'type': 'image',
+                      'settings': {
+                          'image_fit': 'cover',
+                          'image_scale': 100,
+                          'image_position': 'center center',
+                          'image_background': '#f4f5f8',
+                          'text_position': 'middle_center',
+                          'title': 'Welcome to Unpatched Tech',
+                          'text_color': '#ffffff',
+                          'content_backdrop_color': '#ffffff',
+                          'content_backdrop_opacity': 0,
+                          'button_background': '#ffffff',
+                          'button_text_color': '#000000',
+                          'overlay_color': '#000000',
+                          'overlay_opacity': 30
+                      }
+                  }]
+          edit_schema('sections/slideshow.liquid', hero_preview)
+
+          def why_preview(data):
+              if data.get('presets'):
+                  p = data['presets'][0]
+                  p['settings'] = {
+                      'reveal_on_scroll': False,
+                      'stack_items': True,
+                      'subheading': 'WHY BUY FROM US',
+                      'title': 'Built around the hardware. Backed by real support.',
+                      'content': '<p>Buying refurbished or custom-built tech should feel as dependable as buying new.</p>',
+                      'column_alignment': 'left',
+                      'mobile_item_size': 'medium',
+                      'desktop_item_size': 'medium',
+                      'spacing': 'normal',
+                      'background': '#ffffff',
+                      'text_color': '#25252a'
+                  }
+                  items = [
+                      ('QUALITY FIRST', '<p>Every PC and refurb is carefully built, tested, and checked before it leaves us.</p>'),
+                      ('BUILT TO LAST', '<p>Thoughtful builds and repairs designed to perform now and stay useful longer.</p>'),
+                      ('READY TO PLAY', '<p>Hardware arrives tested, prepared, and ready to become part of your setup.</p>'),
+                      ('REAL SUPPORT', '<p>When you need help, you can reach a real team that knows the hardware.</p>')
+                  ]
+                  p['blocks'] = [
+                      {'type': 'item', 'settings': {
+                          'title': title,
+                          'content': content,
+                          'image_width': 10,
+                          'image_border': 'rgba(0,0,0,0)',
+                          'link_text': '',
+                          'link_url': '',
+                          'link_style': 'link',
+                          'text_alignment': 'center',
+                          'vertical_alignment': 'start'
+                      }} for title, content in items
+                  ]
+          edit_schema('sections/multi-column.liquid', why_preview)
+
+          def brands_preview(data):
+              if data.get('presets'):
+                  p = data['presets'][0]
+                  p['settings'] = {
+                      'reveal_on_scroll': False,
+                      'subheading': 'Powered by the Best',
+                      'title': 'Brands We Trust',
+                      'button_text': '',
+                      'button_link': '',
+                      'stack_logos': False,
+                      'background': 'rgba(0,0,0,0)',
+                      'text_color': '#25252a',
+                      'button_background': 'rgba(0,0,0,0)',
+                      'button_text_color': 'rgba(0,0,0,0)',
+                      'logo_background': 'rgba(0,0,0,0)'
+                  }
+                  p['blocks'] = [{'type': 'logo'} for _ in range(5)]
+          edit_schema('sections/logo-list.liquid', brands_preview)
+
+          def blog_preview(data):
+              if data.get('presets'):
+                  data['presets'][0]['settings'] = {
+                      'blog': 'news',
+                      'subheading': 'LATEST FROM UNPATCHED',
+                      'title': 'THE UNPATCHED BLOG',
+                      'articles_count': 3,
+                      'stack_mobile': False,
+                      'show_category': True,
+                      'show_excerpt': True,
+                      'background': 'rgba(0,0,0,0)',
+                      'text_color': 'rgba(0,0,0,0)'
+                  }
+          edit_schema('sections/blog-posts.liquid', blog_preview)
+
+          def edit_json(relpath, editor):
+              path = ROOT / relpath
+              text = path.read_text(encoding='utf-8')
+              start = text.find('{')
+              if start < 0:
+                  raise RuntimeError(f'No JSON object in {relpath}')
+              prefix = text[:start]
+              data = json.loads(text[start:])
+              editor(data)
+              path.write_text(prefix + json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          # Clean, consistent sidebar labels for every custom storefront template.
+          home_names = {
+              'slideshow': 'Hero',
+              'unpatched_categories': 'Shop by System',
+              'unpatched_flagship_pc': 'Flagship PC',
+              'unpatched_pathways': 'How We Help',
+              'unpatched_featured': 'Featured Tech',
+              'multi_column_pmNkby': 'Why Unpatched',
+              'logo-list': 'Brands We Trust',
+              'blog-posts': 'Unpatched Blog'
+          }
+          edit_json('templates/index.json', lambda d: [d['sections'][k].__setitem__('name', v) for k, v in home_names.items() if k in d.get('sections', {})])
+
+          edit_json('templates/page.about-us.json', lambda d: d['sections']['hero'].__setitem__('name', 'About Us'))
+          edit_json('templates/page.services.json', lambda d: (d['sections']['hero'].__setitem__('name', 'Services Hero'), d['sections']['cards'].__setitem__('name', 'Services')))
+          edit_json('templates/page.support.json', lambda d: d['sections']['contact'].__setitem__('name', 'Support Form'))
+          edit_json('templates/page.tracking.json', lambda d: d['sections']['tracker'].__setitem__('name', 'Order Tracker'))
+
+          def product_names(d, computer=False):
+              sections = d.get('sections', {})
+              if 'main' in sections:
+                  sections['main']['name'] = 'Gaming PC' if computer else 'Product'
+              image_keys = [k for k, v in sections.items() if v.get('type') == 'unpatched-product-image']
+              for idx, key in enumerate(image_keys):
+                  img = sections[key].get('settings', {}).get('image', '').lower()
+                  if 'support' in img:
+                      sections[key]['name'] = 'Support Banner'
+                  else:
+                      sections[key]['name'] = ('PC Banner ' if computer else 'Refurbished Banner ') + str(idx + 1)
+              if 'product-content' in sections:
+                  sections['product-content']['name'] = 'Product Details'
+              for v in sections.values():
+                  if v.get('type') == 'product-recommendations':
+                      v['name'] = 'Related Products'
+          edit_json('templates/product.json', lambda d: product_names(d, False))
+          edit_json('templates/product.computers.json', lambda d: product_names(d, True))
+
+          # Group titles in the editor.
+          edit_json('sections/header-group.json', lambda d: d.__setitem__('name', 'Header'))
+          edit_json('sections/footer-group.json', lambda d: d.__setitem__('name', 'Footer'))
+
+          # Validate every JSON template/group and every Liquid schema we touched before committing.
+          for rel in [
+              'templates/index.json', 'templates/page.about-us.json', 'templates/page.services.json',
+              'templates/page.support.json', 'templates/page.tracking.json', 'templates/product.json',
+              'templates/product.computers.json', 'sections/header-group.json', 'sections/footer-group.json'
+          ]:
+              text = (ROOT / rel).read_text(encoding='utf-8')
+              json.loads(text[text.find('{'):])
+
+          for rel in [
+              'sections/slideshow.liquid', 'sections/unpatched-category-showcase.liquid',
+              'sections/unpatched-flagship-pc.liquid', 'sections/unpatched-pathways.liquid',
+              'sections/unpatched-featured-collection.liquid', 'sections/multi-column.liquid',
+              'sections/logo-list.liquid', 'sections/blog-posts.liquid', 'sections/unpatched-about-hero.liquid',
+              'sections/faq.liquid', 'sections/unpatched-services-hero.liquid', 'sections/unpatched-services-cards.liquid',
+              'sections/unpatched-support-contact.liquid', 'sections/order-tracker-simple.liquid',
+              'sections/unpatched-product-image.liquid', 'sections/product-recommendations.liquid',
+              'sections/unpatched-email-popup.liquid', 'sections/unpatched-privacy-banner.liquid'
+          ]:
+              text = (ROOT / rel).read_text(encoding='utf-8')
+              m = re.search(r'{%\s*schema\s*%}\s*(\{.*?\})\s*{%\s*endschema\s*%}', text, re.S)
+              json.loads(m.group(1))
+          PY
+
+      - name: Commit cleanup
+        run: |
+          git config user.name "Statiq Design"
+          git config user.email "hello@statiqdesign.com"
+          git add sections templates
+          if git diff --cached --quiet; then
+            echo "No changes needed."
+          else
+            git commit -m "Finish theme editor section cleanup"
+            git push origin main
+          fi
