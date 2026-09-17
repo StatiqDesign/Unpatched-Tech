@@ -1,3 +1,5 @@
+{{ 'unpatched-about.css' | asset_url | stylesheet_tag }}
+
 <section
   class="unpatched-about-page unpatched-about-minimal-hero"
   style="--up-section-bg: {{ section.settings.background }}; --up-section-text: {{ section.settings.text_color }}; --up-section-muted: {{ section.settings.muted_text_color }};"
@@ -30,7 +32,6 @@
   </div>
 </section>
 
-
 {% schema %}
 {
   "name": "About Us",
@@ -60,14 +61,14 @@
     {
       "type": "richtext",
       "id": "content",
-      "label": "Text",
-      "default": "<p>Unpatched Tech is a family-owned business built by people who actually use, repair, and care about the hardware we sell.</p><p>We focus on refurbished consoles, custom PCs, repairs, restorations, and practical upgrades that keep good technology in use longer. We are not trying to be a giant electronics warehouse. We would rather do a smaller number of things well, be clear about what we sell, and stand behind the work we put our name on.</p><p>Whether you are buying a system, sending in a repair, or building a new PC, the goal is the same: straightforward service, carefully handled hardware, and tech that is ready to keep going.</p>"
+      "label": "Content",
+      "default": "<p>We restore, rebuild, and sell hardware we would be comfortable putting in our own setup. Clear listings, careful testing, and support after the sale are the standard.</p>"
     },
     {
       "type": "text",
       "id": "primary_text",
       "label": "Primary button text",
-      "default": "SHOP REFURBISHED"
+      "default": "SHOP TECH"
     },
     {
       "type": "url",
@@ -78,7 +79,7 @@
       "type": "text",
       "id": "secondary_text",
       "label": "Secondary link text",
-      "default": "MAIL-IN SERVICES"
+      "default": "EXPLORE SERVICES"
     },
     {
       "type": "url",
@@ -92,13 +93,13 @@
     {
       "type": "color",
       "id": "background",
-      "label": "Section background",
+      "label": "Background",
       "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "text_color",
-      "label": "Heading and link text",
+      "label": "Heading text",
       "default": "#25252a"
     },
     {
