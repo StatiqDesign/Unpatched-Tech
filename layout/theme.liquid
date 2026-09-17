@@ -85,7 +85,9 @@
 
     <script src="{{ 'vendor.js' | asset_url }}" defer></script>
     <script src="{{ 'theme.js' | asset_url }}" defer fetchpriority="low"></script>
+    <script src="{{ 'unpatched-focal-compat.js' | asset_url }}" defer fetchpriority="low"></script>
     <script src="{{ 'custom.js' | asset_url }}" defer fetchpriority="low"></script>
+    {%- if request.page_type == 'product' and template.suffix == 'computers' -%}<script src="{{ 'unpatched-performance-card.js' | asset_url }}" defer fetchpriority="low"></script>{%- endif -%}
     {%- if request.page_type == 'index' -%}<script src="{{ 'unpatched-history-restore.js' | asset_url }}" defer fetchpriority="low"></script>{%- endif -%}
     {%- if is_unpatched_services_page -%}<script src="{{ 'unpatched-services.js' | asset_url }}" defer fetchpriority="low"></script>{%- endif -%}
 
@@ -95,7 +97,7 @@
   {%- assign feature_classes = '' -%}
   {%- if settings.show_image_zoom -%}{%- assign feature_classes = feature_classes | append: ' features--image-zoom' -%}{%- endif -%}
 
-  <body class="no-focus-outline {{ feature_classes }}{% if request.page_type == 'index' %} unpatched-home-page{% endif %}{% if request.page_type == 'product' %} unpatched-product-page{% endif %}{% if request.page_type == 'blog' %} unpatched-blog-page{% endif %}{% if request.page_type == 'article' %} unpatched-article-page{% endif %}{% if is_unpatched_tracking_page %} unpatched-tracking-page{% endif %}{% if is_unpatched_tracking_page or is_unpatched_about_page %} unpatched-short-info-page{% endif %}{% if is_unpatched_about_page %} unpatched-about-page-body{% endif %}{% if is_unpatched_faq_page %} unpatched-faq-page{% endif %}{% if is_unpatched_services_page %} unpatched-services-page{% endif %}{% if is_unpatched_support_page %} unpatched-support-page{% endif %}">
+  <body class="no-focus-outline {{ feature_classes }}{% if request.page_type == 'index' %} unpatched-home-page{% endif %}{% if request.page_type == 'product' %} unpatched-product-page{% endif %}{% if request.page_type == 'product' and template.suffix == 'computers' %} unpatched-computer-product-page{% endif %}{% if request.page_type == 'blog' %} unpatched-blog-page{% endif %}{% if request.page_type == 'article' %} unpatched-article-page{% endif %}{% if is_unpatched_tracking_page %} unpatched-tracking-page{% endif %}{% if is_unpatched_tracking_page or is_unpatched_about_page %} unpatched-short-info-page{% endif %}{% if is_unpatched_about_page %} unpatched-about-page-body{% endif %}{% if is_unpatched_faq_page %} unpatched-faq-page{% endif %}{% if is_unpatched_services_page %} unpatched-services-page{% endif %}{% if is_unpatched_support_page %} unpatched-support-page{% endif %}">
     <svg class="visually-hidden" aria-hidden="true"><linearGradient id="rating-star-gradient-half"><stop offset="50%" stop-color="rgb(var(--product-star-rating))" /><stop offset="50%" stop-color="rgb(var(--product-star-rating))" stop-opacity="0.4" /></linearGradient></svg>
     <a href="#main" class="visually-hidden skip-to-content">{{ 'general.accessibility.skip_to_content' | t }}</a>
     <loading-bar class="loading-bar"></loading-bar>

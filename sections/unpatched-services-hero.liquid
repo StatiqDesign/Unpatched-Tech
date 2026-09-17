@@ -1,3 +1,5 @@
+{{ 'unpatched-services.css' | asset_url | stylesheet_tag }}
+
 <section
   class="unpatched-services-page unpatched-services-minimal-hero"
   style="--up-section-bg: {{ section.settings.background }}; --up-section-text: {{ section.settings.text_color }}; --up-section-muted: {{ section.settings.muted_text_color }};"
@@ -18,7 +20,6 @@
     </div>
   </div>
 </section>
-
 
 {% schema %}
 {

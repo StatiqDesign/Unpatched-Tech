@@ -7,6 +7,8 @@
 
   When an override is blank, copy is selected automatically from Shopify's
   Product category first, then product type/title/tags as fallback signals.
+  Carrier names intentionally stay out of theme fallbacks so Shopify shipping
+  settings remain the source of truth as markets and services change.
 {%- endcomment -%}
 
 {%- assign disclosure_category = product.category.name | default: '' | downcase | strip -%}
@@ -58,15 +60,15 @@
 {%- assign shipping_delivery = product.metafields.custom.shipping_delivery.value | strip -%}
 {%- if shipping_delivery == blank -%}
   {%- if is_gaming_pc -%}
-    {%- assign shipping_delivery = 'Gaming PCs are configured and bench-tested before shipment. Made-to-order systems may require up to 10 business days of preparation. Orders ship with tracking via USPS; transit time depends on destination and the service selected at checkout.' -%}
+    {%- assign shipping_delivery = 'Gaming PCs are configured and bench-tested before shipment. Made-to-order systems may require up to 10 business days of preparation. Orders ship with tracking using the carrier and service shown at checkout; transit time depends on destination and service.' -%}
   {%- elsif is_laptop -%}
-    {%- assign shipping_delivery = 'Gaming laptops are inspected and tested before shipment. Refurbished or made-to-order hardware may require up to 10 business days of preparation. Orders ship with tracking via USPS; transit time depends on destination and the service selected at checkout.' -%}
+    {%- assign shipping_delivery = 'Gaming laptops are inspected and tested before shipment. Refurbished or made-to-order hardware may require up to 10 business days of preparation. Orders ship with tracking using the carrier and service shown at checkout; transit time depends on destination and service.' -%}
   {%- elsif is_console or is_handheld -%}
-    {%- assign shipping_delivery = 'Console hardware is cleaned, tested, and prepared before shipment. Refurbish-to-order hardware may require up to 10 business days of preparation. Orders ship with tracking via USPS; transit time depends on destination and the service selected at checkout.' -%}
+    {%- assign shipping_delivery = 'Console hardware is cleaned, tested, and prepared before shipment. Refurbish-to-order hardware may require up to 10 business days of preparation. Orders ship with tracking using the carrier and service shown at checkout; transit time depends on destination and service.' -%}
   {%- elsif is_accessory -%}
-    {%- assign shipping_delivery = 'Orders ship with tracking via USPS. Processing and transit time depend on the item, destination, and shipping service selected at checkout.' -%}
+    {%- assign shipping_delivery = 'Orders ship with tracking using the carrier and service shown at checkout. Processing and transit time depend on the item, destination, and shipping service.' -%}
   {%- else -%}
-    {%- assign shipping_delivery = 'Orders are prepared before shipment and sent with tracking via USPS. Preparation and transit time depend on the product, destination, and shipping service selected at checkout.' -%}
+    {%- assign shipping_delivery = 'Orders are prepared before shipment and sent with tracking using the carrier and service shown at checkout. Preparation and transit time depend on the product, destination, and shipping service.' -%}
   {%- endif -%}
 {%- endif -%}
 

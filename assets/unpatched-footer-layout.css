@@ -1,0 +1,61 @@
+/* ========================================================================== 
+   UNPATCHED TECH — FOOTER FINAL LAYOUT
+   Final layout corrections for Focal footer internals. These selectors are
+   intentionally narrow; important declarations are retained only where Focal
+   inline/theme rules otherwise win.
+   ========================================================================== */
+
+.shopify-section--footer .footer__bottom-credit {
+  display: none !important;
+}
+
+.shopify-section--footer .footer__legal-bar {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  min-height: 0 !important;
+}
+
+.shopify-section--footer .footer__legal-links {
+  order: 1 !important;
+  width: 100% !important;
+  padding-inline: 0 !important;
+  justify-content: center !important;
+}
+
+.shopify-section--footer .footer__bottom-copyright {
+  position: static !important;
+  order: 2 !important;
+  width: 100% !important;
+  margin-top: 0 !important;
+  text-align: center !important;
+}
+
+.shopify-section--footer .footer__aside,
+.shopify-section--footer .footer__cross-border,
+.shopify-section--footer .footer__follow-and-payment,
+.shopify-section--footer .footer__payment-methods {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.shopify-section--footer .footer__aside,
+.shopify-section--footer .footer__payment-methods {
+  flex-direction: column !important;
+}
+
+.shopify-section--footer .footer__cross-border,
+.shopify-section--footer .footer__follow-and-payment,
+.shopify-section--footer .payment-methods-list {
+  margin-inline: auto !important;
+  justify-content: center !important;
+}
+
+.shopify-section--footer .footer__cross-border {
+  flex-wrap: wrap !important;
+}

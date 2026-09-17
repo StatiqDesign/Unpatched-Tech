@@ -1,0 +1,539 @@
+/* ========================================================================== 
+   UNPATCHED TECH — PRODUCT FINAL PRESENTATION
+   Final product-page surface, spacing, flat presentation, title, review and
+   mobile alignment rules. This file intentionally loads after component and
+   interaction CSS so there is one predictable final presentation layer.
+   ========================================================================== */
+
+:root {
+  --up-product-shell-top: clamp(54px, 5.8vw, 82px);
+  --up-product-shell-bottom: clamp(64px, 6vw, 88px);
+  --up-product-section-gap: 40px;
+  --up-product-page-bottom: clamp(104px, 9vw, 144px);
+  --up-product-surface: #f7f8fb;
+  --up-product-panel: #ffffff;
+  --up-product-line: rgba(37, 37, 42, .09);
+  --up-product-ink: #25252a;
+  --up-product-muted: rgba(37, 37, 42, .64);
+}
+
+/* Main product shell ---------------------------------------------------- */
+.unpatched-product-page .shopify-section--main-product {
+  overflow: visible;
+  border-bottom: 0;
+  background: #fff;
+  background-image: none;
+}
+
+.unpatched-product-page .shopify-section--main-product > section {
+  margin: 0;
+  padding: var(--up-product-shell-top) 0 var(--up-product-shell-bottom);
+}
+
+.unpatched-product-page .shopify-section--main-product .breadcrumb {
+  margin: 0 0 30px;
+  color: #405de6;
+  opacity: 1;
+}
+
+.unpatched-product-page .shopify-section--main-product .breadcrumb__item,
+.unpatched-product-page .shopify-section--main-product .breadcrumb__link,
+.unpatched-product-page .shopify-section--main-product .breadcrumb__link[aria-current="page"] {
+  color: #405de6;
+}
+
+.unpatched-product-page .shopify-section--main-product .product {
+  align-items: start;
+  column-gap: clamp(36px, 4.5vw, 68px);
+}
+
+/* Media stays flat so white product photography blends into the page. */
+.unpatched-product-page .product__media-list-wrapper,
+.unpatched-product-page .product__media-list,
+.unpatched-product-page .product__media-list .flickity-viewport,
+.unpatched-product-page .product__media-item,
+.unpatched-product-page .product__media-image-wrapper,
+.unpatched-product-page .product__media-image-wrapper img {
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: none;
+}
+
+.unpatched-product-page .product__thumbnail {
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: none;
+}
+
+.unpatched-product-page .product__thumbnail-item[aria-current="true"] .product__thumbnail {
+  border-color: #111;
+}
+
+/* Product info ---------------------------------------------------------- */
+.unpatched-product-page .product__info {
+  padding: clamp(28px, 3vw, 40px);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.unpatched-product-page .product-meta {
+  padding-bottom: 24px;
+  border-bottom-color: var(--up-product-line);
+}
+
+.unpatched-product-page .product-meta__vendor,
+body.unpatched-product-page #main .shopify-section--main-product .product-meta::before,
+.unpatched-product-page .shopify-section--main-product .product-meta::before,
+.unpatched-product-page .product-meta::before {
+  display: none;
+  content: none;
+  margin: 0;
+}
+
+.unpatched-product-page .product-meta__title {
+  font-size: clamp(27px, 2.35vw, 36px);
+  line-height: 1.06;
+}
+
+.unpatched-product-page .product-form {
+  margin-top: 24px;
+}
+
+.unpatched-product-page .product-form__quantity,
+.unpatched-product-page [data-block-type="quantity-selector"] {
+  display: none;
+}
+
+.unpatched-product-page .up-system-selector__label {
+  color: #25252a;
+  font-family: var(--heading-font-family);
+  font-size: 10px;
+  font-weight: var(--heading-font-weight);
+  line-height: 1;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.unpatched-product-page .unpatched-purchase-row {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.unpatched-product-page .unpatched-purchase-price {
+  font-size: clamp(18px, 1.4vw, 22px);
+  line-height: 1.1;
+}
+
+.unpatched-product-page .product-form__text,
+.unpatched-product-page .unpatched-accordion {
+  border-color: var(--up-product-line);
+  border-radius: var(--block-border-radius);
+}
+
+.unpatched-product-page .product-form__text {
+  border-left-width: 1px;
+  border-left-color: var(--up-product-line);
+  background: #fafbfc;
+}
+
+/* Performance card remains distinct through dividers and spacing. */
+.unpatched-product-page .up-performance-card {
+  padding: 20px 0;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: none;
+}
+
+.unpatched-product-page .up-performance-card__title {
+  font-family: var(--heading-font-family);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* Product details ------------------------------------------------------- */
+.unpatched-product-page .shopify-section--product-content {
+  margin: 0;
+  padding: var(--up-product-section-gap) 0 clamp(64px, 6vw, 88px);
+  background: #fff;
+}
+
+.unpatched-product-page .shopify-section--product-content .product-content__tabs {
+  width: 100%;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.unpatched-product-page .shopify-section--product-content .product-tabs {
+  width: 100%;
+  padding: clamp(22px, 2.5vw, 34px) 0;
+}
+
+.unpatched-product-page .shopify-section--product-content .product-tabs::before {
+  color: #25252a;
+  font-family: var(--text-font-family);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+.unpatched-product-page .shopify-section--product-content .product-tabs__content {
+  width: 100%;
+  max-width: none;
+}
+
+.unpatched-product-page .shopify-section--product-content .product-tabs::before,
+.unpatched-product-page .shopify-section--product-content .product-tabs__content,
+.unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content {
+  text-align: left;
+}
+
+.unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content,
+.unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content p,
+.unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content ul,
+.unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content ol,
+.unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content li {
+  color: rgba(37, 37, 42, .72);
+  font-family: var(--text-font-family);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.72;
+  letter-spacing: normal;
+}
+
+.unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content strong,
+.unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content b {
+  color: #25252a;
+  font-family: var(--text-font-family);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: normal;
+}
+
+/* Product marketing images remain flat. */
+.unpatched-product-page .shopify-section--product-image .up-product-image-section__inner {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Reviews --------------------------------------------------------------- */
+.unpatched-product-page .shopify-section--apps,
+.unpatched-product-page .shopify-section--apps .jdgm-widget,
+.unpatched-product-page .shopify-section--apps .jdgm-review-widget {
+  visibility: visible;
+  opacity: 1;
+}
+
+.unpatched-product-page .shopify-section--apps {
+  display: block;
+  margin: 0;
+  background: #fff;
+}
+
+.unpatched-product-page .shopify-section--apps > .container.vertical-breather {
+  margin-block: 0;
+  padding-block: 0 clamp(64px, 6vw, 88px);
+}
+
+/* Related products ------------------------------------------------------ */
+.unpatched-product-page .shopify-section--product-recommendations {
+  margin: 0;
+  border-top: 0;
+  background: #fff;
+}
+
+.unpatched-product-page .shopify-section--product-recommendations .section,
+.unpatched-product-page .shopify-section--product-recommendations .section__color-wrapper {
+  margin: 0;
+  background: transparent;
+}
+
+.unpatched-product-page .shopify-section--product-recommendations .container {
+  padding-top: clamp(64px, 6vw, 82px);
+  padding-bottom: var(--up-product-page-bottom);
+}
+
+.unpatched-product-page .shopify-section--product-recommendations .section__header {
+  margin-bottom: 40px;
+}
+
+.unpatched-product-page .shopify-section--product-recommendations .section__header .heading {
+  color: var(--up-product-ink);
+}
+
+.unpatched-product-page .product-form__payment-container--unavailable .shopify-payment-button {
+  display: none;
+}
+
+@media screen and (max-width: 999px) {
+  .unpatched-product-page .shopify-section--main-product .product {
+    row-gap: 28px;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  :root {
+    --up-product-shell-top: 38px;
+    --up-product-shell-bottom: 36px;
+    --up-product-section-gap: 20px;
+    --up-product-page-bottom: 104px;
+  }
+
+  .unpatched-product-page .shopify-section--main-product > section {
+    padding: var(--up-product-shell-top) 0 var(--up-product-shell-bottom);
+  }
+
+  .unpatched-product-page .shopify-section--main-product .product {
+    row-gap: 0;
+  }
+
+  .unpatched-product-page .product__media-list-wrapper,
+  .unpatched-product-page .product__media-list,
+  .unpatched-product-page .product__media-item,
+  .unpatched-product-page .product__media-image-wrapper {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .unpatched-product-page .product__media-nav {
+    display: flex;
+    width: 100%;
+    min-height: 42px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .unpatched-product-page .product__media-nav .dots-nav {
+    margin-inline: auto;
+  }
+
+  .unpatched-product-page .product__media-nav .dots-nav__item {
+    width: 12px;
+    height: 12px;
+  }
+
+  .unpatched-product-page .product__info {
+    padding: 8px 17px;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .unpatched-product-page .product-meta {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .unpatched-product-page .product-meta__title {
+    margin-top: 0;
+    font-size: 27px;
+    line-height: 1.08;
+  }
+
+  .unpatched-product-page .shopify-section--product-content {
+    padding: var(--up-product-section-gap) 0 52px;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-content__tabs {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .collapsible-toggle {
+    display: none;
+  }
+
+  .unpatched-product-page .shopify-section--product-content collapsible-content.collapsible {
+    display: block;
+    height: auto !important;
+    max-height: none;
+    overflow: visible !important;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-wrapper,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-wrapper:last-child {
+    border-top: 0;
+    border-bottom: 0;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs {
+    padding: 18px;
+    text-align: left;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs::before {
+    display: block;
+    width: 100%;
+    margin: 0 0 14px;
+    padding: 0;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs__content,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-wrapper,
+  .unpatched-product-page .shopify-section--product-content collapsible-content,
+  .unpatched-product-page .shopify-section--product-content .collapsible,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content p {
+    margin-left: 0;
+    padding-left: 0;
+    text-align: left;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content ul,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content ol {
+    margin-inline: 0;
+    padding-inline-start: 20px;
+    text-align: left;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content li {
+    text-align: left;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content p,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content ul,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content ol,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content li {
+    font-size: 14px;
+    line-height: 1.72;
+  }
+
+  .unpatched-product-page .shopify-section--apps > .container.vertical-breather {
+    padding-bottom: 52px;
+  }
+
+  .unpatched-product-page .shopify-section--product-recommendations .container {
+    padding-top: 52px;
+    padding-bottom: var(--up-product-page-bottom);
+  }
+
+  .unpatched-product-page .shopify-section--product-recommendations .section__header {
+    margin-bottom: 28px;
+  }
+
+  .unpatched-product-page .up-performance-mobile-shell .up-performance-card {
+    padding: 18px 0;
+    border: 0;
+    border-radius: 0;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  .unpatched-product-page .unpatched-product-disclosure-stack {
+    display: grid;
+    gap: 8px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .unpatched-product-page .unpatched-product-disclosure-stack .unpatched-accordions {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .unpatched-product-page .unpatched-product-disclosure-stack .unpatched-accordion,
+  .unpatched-product-page .unpatched-product-disclosure-stack .unpatched-accordion[open] {
+    border: 1px solid rgba(37, 37, 42, .11);
+    border-radius: var(--block-border-radius);
+    background: #fff;
+    box-shadow: none;
+    filter: none;
+  }
+
+  .unpatched-product-page .unpatched-product-disclosure-stack .unpatched-accordion[open] {
+    border-color: rgba(var(--unpatched-brand-blue-rgb), .28);
+  }
+
+  .unpatched-product-page .unpatched-product-sticky,
+  .unpatched-product-page .unpatched-product-sticky__inner,
+  .unpatched-product-page .unpatched-product-sticky__purchase {
+    border: 0;
+    background: #fff;
+    box-shadow: none;
+    filter: none;
+  }
+
+  .unpatched-product-page .unpatched-product-sticky {
+    margin-top: 8px;
+  }
+
+  .unpatched-product-page .unpatched-product-sticky__inner {
+    min-height: 94px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: #fff;
+    background-image: none;
+  }
+
+  .unpatched-product-page .unpatched-product-sticky__purchase {
+    align-items: start;
+  }
+
+  .unpatched-product-page .unpatched-product-sticky__price-wrap {
+    display: flex;
+    align-items: center;
+    align-self: start;
+    height: 48px;
+    margin-left: 0;
+  }
+
+  .unpatched-product-page .unpatched-product-sticky__price {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    margin: 0 0 0 0;
+    font-size: clamp(18px, 5.2vw, 22px);
+    line-height: 1.1;
+  }
+
+  .unpatched-product-page .unpatched-product-sticky__button {
+    align-self: start;
+  }
+
+  .unpatched-product-page .unpatched-product-sticky::before,
+  .unpatched-product-page .unpatched-product-sticky::after,
+  .unpatched-product-page .unpatched-product-sticky__inner::before,
+  .unpatched-product-page .unpatched-product-sticky__inner::after {
+    box-shadow: none;
+    filter: none;
+  }
+
+  .unpatched-product-page .unpatched-mobile-dock-enabled .product-form__buy-buttons,
+  .unpatched-product-page .unpatched-mobile-dock-enabled .product-form__payment-container {
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}

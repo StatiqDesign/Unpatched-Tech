@@ -1,12 +1,20 @@
 {%- comment -%}
   UNPATCHED TECH — GAMING PC PERFORMANCE CARD
+  Product metafields override the fallback FPS presets below. Presentation lives
+  in unpatched-product-components.css and behavior in unpatched-performance-card.js.
+
+  Optional metafield:
+  custom.performance_preset = entry | mid | high
 {%- endcomment -%}
 
 {%- assign pc_gpu = product.metafields.custom.pc_gpu.value | default: '' | downcase -%}
 {%- assign product_name = product.title | downcase -%}
+{%- assign configured_preset = product.metafields.custom.performance_preset.value | default: '' | downcase | strip -%}
 {%- assign performance_preset = 'entry' -%}
 
-{%- if pc_gpu contains '9070 xt' or pc_gpu contains '9070xt' -%}
+{%- if configured_preset == 'entry' or configured_preset == 'mid' or configured_preset == 'high' -%}
+  {%- assign performance_preset = configured_preset -%}
+{%- elsif pc_gpu contains '9070 xt' or pc_gpu contains '9070xt' -%}
   {%- assign performance_preset = 'high' -%}
 {%- elsif pc_gpu contains '9070' -%}
   {%- assign performance_preset = 'mid' -%}
@@ -75,9 +83,7 @@
 
 <div class="up-performance-card" data-up-performance-card data-performance-preset="{{ performance_preset }}" data-product-id="{{ product.id }}">
   <div class="up-performance-card__heading">
-    <div>
-      <h2 class="up-performance-card__title">Performance</h2>
-    </div>
+    <h2 class="up-performance-card__title">Performance</h2>
   </div>
 
   <div class="up-performance-card__games" aria-live="polite">
@@ -95,156 +101,3 @@
 
   <p class="up-performance-card__note">Estimated average FPS at high settings, native resolution and ray tracing off. Actual performance varies by game version, drivers and configuration.</p>
 </div>
-
-<style>
-.up-performance-card{width:100%;margin:28px 0 0;padding:22px;border:1px solid rgba(24,24,24,.12);border-radius:10px;background:#f6f6f7;color:#161616;box-sizing:border-box}
-.up-performance-card__heading{display:flex;align-items:center;justify-content:center;margin-bottom:8px;text-align:center}
-.up-performance-card__title{margin:0;font-size:20px;line-height:1.2;font-weight:750;letter-spacing:-.02em;text-align:center}
-.up-performance-card__games{border-top:1px solid rgba(24,24,24,.09)}
-.up-performance-card__game{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:baseline;gap:5px;min-height:43px;padding:10px 0;border-bottom:1px solid rgba(24,24,24,.09)}
-.up-performance-card__game>span{min-width:0;font-size:13px;font-weight:600}
-.up-performance-card__game strong{font-size:16px;line-height:1;font-weight:800;color:#405DE6;font-variant-numeric:tabular-nums}
-.up-performance-card__game small{font-size:9px;line-height:1;font-weight:700;letter-spacing:.06em;color:#405DE6}
-.up-performance-card__resolutions{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;max-width:300px;margin:18px auto 0;padding:3px;border-radius:7px;background:#e4e5e8}
-.up-performance-card__resolutions button{display:flex;align-items:center;justify-content:center;min-height:34px;padding:7px 10px;border:0;border-radius:5px;background:transparent;color:#666a73;font:inherit;font-size:13px;font-weight:750;line-height:1;text-align:center;cursor:pointer;transition:background-color 150ms ease,color 150ms ease,box-shadow 150ms ease}
-.up-performance-card__resolutions button.is-active{background:#fff;color:#171717;box-shadow:0 1px 4px rgba(0,0,0,.10)}
-.up-performance-card__note{max-width:390px;margin:10px auto 0;font-size:9px;line-height:1.45;text-align:center;color:#71747b}
-.up-performance-mobile-shell{display:none}
-@media screen and (max-width:740px){
-  .up-performance-mobile-shell{display:block}
-  .up-performance-mobile-shell .up-performance-card{margin:16px 0 24px;padding:18px;border-radius:8px}
-  .up-performance-card__game{min-height:40px}
-  .up-performance-card__resolutions{max-width:none}
-}
-</style>
-
-<script>
-(function(){
-  var mobileQuery=window.matchMedia('(max-width: 740px)');
-
-  function updatePerformanceCard(card,resolution){
-    card.querySelectorAll('[data-up-fps]').forEach(function(value){
-      var next=value.getAttribute('data-fps-'+resolution);
-      if(next)value.textContent=next;
-    });
-    card.querySelectorAll('[data-up-resolution]').forEach(function(button){
-      var selected=button.getAttribute('data-up-resolution')===resolution;
-      button.classList.toggle('is-active',selected);
-      button.setAttribute('aria-pressed',selected?'true':'false');
-    });
-  }
-
-  function getRerender(card){
-    var rerender=card.closest('product-rerender');
-    if(rerender)return rerender;
-    var productId=card.getAttribute('data-product-id');
-    return document.querySelector('product-rerender[id^="product-info-'+productId+'-"]');
-  }
-
-  function getMobileShell(card,rerender){
-    var productId=card.getAttribute('data-product-id');
-    var selector='[data-up-performance-mobile-shell="'+productId+'"]';
-    var shells=document.querySelectorAll(selector);
-    var shell=shells.length?shells[0]:null;
-
-    for(var i=1;i<shells.length;i++){
-      shells[i].remove();
-    }
-
-    if(shell)return shell;
-
-    var productSection=rerender.closest('section');
-    if(!productSection||!productSection.parentNode)return null;
-
-    shell=document.createElement('div');
-    shell.className='container up-performance-mobile-shell';
-    shell.setAttribute('data-up-performance-mobile-shell',productId);
-    productSection.insertAdjacentElement('afterend',shell);
-    return shell;
-  }
-
-  function removeStaleCards(card){
-    var productId=card.getAttribute('data-product-id');
-    if(!productId)return;
-
-    document.querySelectorAll('[data-up-performance-card]').forEach(function(existing){
-      if(existing!==card&&existing.getAttribute('data-product-id')===productId){
-        existing.remove();
-      }
-    });
-
-    document.querySelectorAll('[data-up-performance-mobile-shell]').forEach(function(shell){
-      if(shell.getAttribute('data-up-performance-mobile-shell')===productId&&!shell.querySelector('[data-up-performance-card]')){
-        shell.remove();
-      }
-    });
-  }
-
-  function placeCard(card){
-    if(!card||!card.isConnected)return;
-
-    var sourceBlock=card.closest('[data-block-type="liquid"]');
-    var rerender=getRerender(card);
-    if(!rerender)return;
-
-    var media=rerender.querySelector('product-media.product__media');
-
-    if(sourceBlock){
-      removeStaleCards(card);
-      sourceBlock.style.display='none';
-      sourceBlock.setAttribute('aria-hidden','true');
-    }
-
-    if(mobileQuery.matches){
-      var shell=getMobileShell(card,rerender);
-      if(shell&&card.parentElement!==shell){
-        shell.appendChild(card);
-      }
-    }else if(media&&card.parentElement!==media){
-      media.appendChild(card);
-      var productId=card.getAttribute('data-product-id');
-      var shell=document.querySelector('[data-up-performance-mobile-shell="'+productId+'"]');
-      if(shell&&shell.children.length===0)shell.remove();
-    }
-  }
-
-  function placePerformanceCards(root){
-    var scope=root&&root.querySelectorAll?root:document;
-    Array.prototype.slice.call(scope.querySelectorAll('[data-up-performance-card]')).forEach(function(card){
-      if(card.isConnected)placeCard(card);
-    });
-  }
-
-  if(!window.__unpatchedPerformanceCardInitialized){
-    window.__unpatchedPerformanceCardInitialized=true;
-
-    document.addEventListener('click',function(event){
-      var button=event.target.closest('[data-up-resolution]');
-      if(!button)return;
-      var card=button.closest('[data-up-performance-card]');
-      if(!card)return;
-      updatePerformanceCard(card,button.getAttribute('data-up-resolution'));
-    });
-
-    var observer=new MutationObserver(function(mutations){
-      mutations.forEach(function(mutation){
-        mutation.addedNodes.forEach(function(node){
-          if(node.nodeType!==1)return;
-          if((node.matches&&node.matches('[data-up-performance-card]'))||(node.querySelector&&node.querySelector('[data-up-performance-card]'))){
-            placePerformanceCards(document);
-          }
-        });
-      });
-    });
-    observer.observe(document.documentElement,{childList:true,subtree:true});
-
-    if(mobileQuery.addEventListener){
-      mobileQuery.addEventListener('change',function(){placePerformanceCards(document)});
-    }else if(mobileQuery.addListener){
-      mobileQuery.addListener(function(){placePerformanceCards(document)});
-    }
-  }
-
-  placePerformanceCards(document);
-})();
-</script>

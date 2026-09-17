@@ -1,0 +1,284 @@
+/* ========================================================================== 
+   UNPATCHED TECH — PRODUCT COMPONENTS
+   Reusable product-page components that were previously embedded in Liquid
+   and JSON template blocks. Keep component structure in Liquid and styling here.
+   ========================================================================== */
+
+/* Gaming PC system selector -------------------------------------------- */
+.up-system-selector {
+  margin: 0 0 18px;
+}
+
+.up-system-selector__label {
+  margin: 0 0 9px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: inherit;
+}
+
+.up-system-selector__options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+
+.up-system-selector__option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 8px;
+  border: 1px solid rgba(0, 0, 0, .18);
+  border-radius: 4px;
+  background: #fff;
+  color: #171717;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
+}
+
+.up-system-selector__option:hover {
+  border-color: #405de6;
+  color: #171717;
+}
+
+.up-system-selector__option:focus-visible {
+  outline: 2px solid #405de6;
+  outline-offset: 2px;
+}
+
+.up-system-selector__option.is-active {
+  border-color: #405de6;
+  background: #405de6;
+  color: #fff;
+  pointer-events: none;
+}
+
+/* Gaming PC performance card ------------------------------------------ */
+.up-performance-card {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 28px 0 0;
+  padding: 22px;
+  border: 1px solid rgba(24, 24, 24, .12);
+  border-radius: 10px;
+  background: #f6f6f7;
+  color: #161616;
+}
+
+.up-performance-card__heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.up-performance-card__title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 750;
+  letter-spacing: -.02em;
+  text-align: center;
+}
+
+.up-performance-card__games {
+  border-top: 1px solid rgba(24, 24, 24, .09);
+}
+
+.up-performance-card__game {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: baseline;
+  gap: 5px;
+  min-height: 43px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(24, 24, 24, .09);
+}
+
+.up-performance-card__game > span {
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.up-performance-card__game strong {
+  color: #405de6;
+  font-size: 16px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.up-performance-card__game small {
+  color: #405de6;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  line-height: 1;
+}
+
+.up-performance-card__resolutions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  max-width: 300px;
+  margin: 18px auto 0;
+  padding: 3px;
+  border-radius: 7px;
+  background: #e4e5e8;
+}
+
+.up-performance-card__resolutions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #666a73;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1;
+  text-align: center;
+  transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+
+.up-performance-card__resolutions button.is-active {
+  background: #fff;
+  color: #171717;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .10);
+}
+
+.up-performance-card__resolutions button:focus-visible {
+  outline: 2px solid #405de6;
+  outline-offset: 2px;
+}
+
+.up-performance-card__note {
+  max-width: 390px;
+  margin: 10px auto 0;
+  color: #71747b;
+  font-size: 9px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.up-performance-mobile-shell {
+  display: none;
+}
+
+/* Reusable product banner --------------------------------------------- */
+.up-product-image-section {
+  width: 100%;
+  padding-top: var(--up-product-image-padding-top);
+  padding-bottom: var(--up-product-image-padding-bottom);
+  background: #fff;
+}
+
+.up-product-image-section__inner {
+  width: 100%;
+  max-width: var(--up-product-image-max-width);
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: var(--up-product-image-radius);
+}
+
+.up-product-image-section--full .up-product-image-section__inner {
+  max-width: none;
+}
+
+.up-product-image-section__link,
+.up-product-image-section__picture {
+  display: block;
+  width: 100%;
+}
+
+.up-product-image-section__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.up-product-image-section__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 360px;
+  background: #f3f3f3;
+  color: #c7c7c7;
+}
+
+.up-product-image-section__placeholder-svg {
+  display: block;
+  width: 100%;
+  height: 360px;
+}
+
+/* Product layout contract for PC pages. The extra body class keeps this
+   intentional stretch behavior stronger than the generic final product layer. */
+@media screen and (min-width: 1000px) {
+  .unpatched-product-page.unpatched-computer-product-page .shopify-section--main-product .product {
+    align-items: stretch;
+  }
+
+  .unpatched-product-page.unpatched-computer-product-page .shopify-section--main-product .product__info {
+    box-sizing: border-box;
+    align-self: stretch;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .up-system-selector__options {
+    gap: 6px;
+  }
+
+  .up-system-selector__option {
+    min-height: 42px;
+    padding: 9px 5px;
+    font-size: 11px;
+  }
+
+  .up-performance-mobile-shell {
+    display: block;
+  }
+
+  .up-performance-mobile-shell .up-performance-card {
+    margin: 16px 0 24px;
+    padding: 18px;
+    border-radius: 8px;
+  }
+
+  .up-performance-card__game {
+    min-height: 40px;
+  }
+
+  .up-performance-card__resolutions {
+    max-width: none;
+  }
+
+  .up-product-image-section__placeholder,
+  .up-product-image-section__placeholder-svg {
+    min-height: 220px;
+    height: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .up-system-selector__option,
+  .up-performance-card__resolutions button {
+    transition: none;
+  }
+}

@@ -1,101 +1,60 @@
 {%- liquid
-  assign pc_handles = 'entry-tier-gaming-pc,mid-tier-gaming-pc,high-tier-gaming-pc' | split: ','
+  assign configured_systems = product.metafields.custom.pc_systems.value
+  assign fallback_tiers = 'entry-tier-gaming-pc|Entry Tier,mid-tier-gaming-pc|Mid Tier,high-tier-gaming-pc|High Tier' | split: ','
 -%}
 
-{%- if pc_handles contains product.handle -%}
+{%- if configured_systems != blank -%}
   <div class="up-system-selector" aria-label="Choose gaming PC system">
     <p class="up-system-selector__label">System:</p>
 
     <div class="up-system-selector__options" role="list">
-      <a
-        href="/products/entry-tier-gaming-pc"
-        class="up-system-selector__option{% if product.handle == 'entry-tier-gaming-pc' %} is-active{% endif %}"
-        {% if product.handle == 'entry-tier-gaming-pc' %}aria-current="page"{% endif %}
-        role="listitem"
-      >
-        Entry Tier
-      </a>
-
-      <a
-        href="/products/mid-tier-gaming-pc"
-        class="up-system-selector__option{% if product.handle == 'mid-tier-gaming-pc' %} is-active{% endif %}"
-        {% if product.handle == 'mid-tier-gaming-pc' %}aria-current="page"{% endif %}
-        role="listitem"
-      >
-        Mid Tier
-      </a>
-
-      <a
-        href="/products/high-tier-gaming-pc"
-        class="up-system-selector__option{% if product.handle == 'high-tier-gaming-pc' %} is-active{% endif %}"
-        {% if product.handle == 'high-tier-gaming-pc' %}aria-current="page"{% endif %}
-        role="listitem"
-      >
-        High Tier
-      </a>
+      {%- for tier_product in configured_systems -%}
+        {%- assign tier_label = tier_product.metafields.custom.pc_tier_label.value | default: tier_product.title -%}
+        <a
+          href="{{ tier_product.url }}"
+          class="up-system-selector__option{% if product.id == tier_product.id %} is-active{% endif %}"
+          {% if product.id == tier_product.id %}aria-current="page"{% endif %}
+          role="listitem"
+        >
+          {{ tier_label | escape }}
+        </a>
+      {%- endfor -%}
     </div>
   </div>
+{%- else -%}
+  {%- assign is_fallback_pc = false -%}
+  {%- for tier_config in fallback_tiers -%}
+    {%- assign tier_parts = tier_config | split: '|' -%}
+    {%- if tier_parts[0] == product.handle -%}
+      {%- assign is_fallback_pc = true -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
 
-  <style>
-    .up-system-selector {
-      margin: 0 0 18px;
-    }
+  {%- if is_fallback_pc -%}
+    <div class="up-system-selector" aria-label="Choose gaming PC system">
+      <p class="up-system-selector__label">System:</p>
 
-    .up-system-selector__label {
-      margin: 0 0 9px;
-      font-size: 13px;
-      font-weight: 600;
-      line-height: 1.35;
-      color: inherit;
-    }
+      <div class="up-system-selector__options" role="list">
+        {%- for tier_config in fallback_tiers -%}
+          {%- assign tier_parts = tier_config | split: '|' -%}
+          {%- assign tier_handle = tier_parts[0] -%}
+          {%- assign fallback_label = tier_parts[1] -%}
+          {%- assign tier_product = all_products[tier_handle] -%}
 
-    .up-system-selector__options {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-      width: 100%;
-    }
-
-    .up-system-selector__option {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 10px 8px;
-      border: 1px solid rgba(0, 0, 0, 0.18);
-      border-radius: 4px;
-      background: #fff;
-      color: #171717;
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1.2;
-      text-align: center;
-      text-decoration: none;
-      transition: border-color .15s ease, background-color .15s ease, color .15s ease;
-    }
-
-    .up-system-selector__option:hover {
-      border-color: #405DE6;
-      color: #171717;
-    }
-
-    .up-system-selector__option.is-active {
-      border-color: #405DE6;
-      background: #405DE6;
-      color: #fff;
-      pointer-events: none;
-    }
-
-    @media screen and (max-width: 480px) {
-      .up-system-selector__options {
-        gap: 6px;
-      }
-
-      .up-system-selector__option {
-        min-height: 42px;
-        padding: 9px 5px;
-        font-size: 11px;
-      }
-    }
-  </style>
+          {%- if tier_product != blank -%}
+            {%- assign tier_label = tier_product.metafields.custom.pc_tier_label.value | default: fallback_label -%}
+            <a
+              href="{{ tier_product.url }}"
+              class="up-system-selector__option{% if product.handle == tier_handle %} is-active{% endif %}"
+              {% if product.handle == tier_handle %}aria-current="page"{% endif %}
+              role="listitem"
+            >
+              {{ tier_label | escape }}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
 {%- endif -%}
