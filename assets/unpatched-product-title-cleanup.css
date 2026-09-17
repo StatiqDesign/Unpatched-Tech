@@ -39,9 +39,9 @@
   box-shadow: none !important;
 }
 
-/* SYSTEM now matches COLOR and SPECS. */
+/* SYSTEM matches the solid black COLOR and SPECS labels. */
 .unpatched-product-page .up-system-selector__label {
-  color: rgba(37, 37, 42, .62) !important;
+  color: #25252a !important;
   font-family: var(--heading-font-family) !important;
   font-size: 10px !important;
   font-weight: var(--heading-font-weight) !important;
@@ -76,6 +76,7 @@
 
 /* Product Details should be page content, not a floating card. */
 .unpatched-product-page .shopify-section--product-content .product-content__tabs {
+  width: 100% !important;
   overflow: visible !important;
   border: 0 !important;
   border-radius: 0 !important;
@@ -84,7 +85,14 @@
 }
 
 .unpatched-product-page .shopify-section--product-content .product-tabs {
+  width: 100% !important;
   padding: clamp(22px, 2.5vw, 34px) 0 !important;
+}
+
+/* Let Product Details use the same container width as the merchandising images. */
+.unpatched-product-page .shopify-section--product-content .product-tabs__content {
+  width: 100% !important;
+  max-width: none !important;
 }
 
 .unpatched-product-page .shopify-section--product-content .product-tabs::before,
@@ -113,6 +121,7 @@
   }
 
   .unpatched-product-page .product__info {
+    padding-bottom: 8px !important;
     border-radius: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
@@ -126,9 +135,16 @@
     box-shadow: none !important;
   }
 
+  /* Restore a real mobile gutter for Product Details text and bullets. */
   .unpatched-product-page .shopify-section--product-content .product-tabs {
-    padding: 18px 0 !important;
+    padding: 18px !important;
     text-align: left !important;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content ul,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content ol {
+    margin-inline: 0 !important;
+    padding-inline-start: 20px !important;
   }
 
   .unpatched-product-page .shopify-section--product-content .product-tabs::before,
@@ -138,5 +154,18 @@
   .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content p,
   .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content li {
     text-align: left !important;
+  }
+
+  /* The normal buy-button row is replaced by the mobile dock. Remove its dead
+     spacing so the dock follows the disclosure controls at the same rhythm. */
+  .unpatched-product-page .unpatched-mobile-dock-enabled .product-form__buy-buttons,
+  .unpatched-product-page .unpatched-mobile-dock-enabled .product-form__payment-container {
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .unpatched-product-page .unpatched-product-sticky {
+    margin-top: 8px !important;
   }
 }
