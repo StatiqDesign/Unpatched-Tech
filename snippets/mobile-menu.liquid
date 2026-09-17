@@ -69,7 +69,7 @@
             <collapsible-content id="mobile-menu-{{ forloop.index }}" class="collapsible">
               {%- if link.links.size > 0 -%}
                 <ul class="mobile-nav list--unstyled unpatched-mobile-submenu" role="list" style="border-bottom:0!important;box-shadow:none!important;">
-                  <li class="mobile-nav__item mobile-nav__back-item"><button type="button" class="mobile-nav__link mobile-nav__back" data-mobile-menu-back><span class="unpatched-mobile-back-arrow" aria-hidden="true">‹</span><span>Back</span></button></li>
+                  <li class="mobile-nav__item mobile-nav__back-item"><button type="button" class="mobile-nav__link mobile-nav__back" data-mobile-menu-back style="justify-content:flex-start!important;gap:6px!important;"><span class="unpatched-mobile-back-arrow" aria-hidden="true" style="margin:0!important;">‹</span><span style="margin:0!important;">Back</span></button></li>
                   {%- for sub_link in link.links -%}
                     {%- assign sub_link_title_downcase = sub_link.title | strip | downcase -%}
                     <li class="mobile-nav__item" data-level="2">
@@ -90,9 +90,9 @@
                   {%- endfor -%}
                   {%- unless unpatched_root_url == '#' or unpatched_root_url == blank -%}
                     <li class="mobile-nav__item mobile-nav__view-all">
-                      <a href="{{ unpatched_root_url }}" class="mobile-nav__link">
-                        <span>View All</span>
-                        <span class="mobile-nav__view-all-arrow unpatched-mobile-forward-arrow" aria-hidden="true">›</span>
+                      <a href="{{ unpatched_root_url }}" class="mobile-nav__link" style="justify-content:flex-start!important;gap:6px!important;">
+                        <span style="margin:0!important;">View All</span>
+                        <span class="mobile-nav__view-all-arrow unpatched-mobile-forward-arrow" aria-hidden="true" style="margin:0!important;">›</span>
                       </a>
                     </li>
                   {%- endunless -%}
@@ -122,7 +122,7 @@
           <popover-content id="header-sidebar-localization-form-currency" class="popover popover--top popover--small"><span class="popover__overlay"></span><header class="popover__header"><span class="popover__title heading h6">{{- 'header.general.country' | t -}}</span><button type="button" class="popover__close-button tap-area tap-area--large" data-action="close" title="{{ 'general.accessibility.close' | t | escape }}">{%- render 'icon' with 'close' -%}</button></header><div class="popover__content"><div class="popover__choice-list">{%- for country in localization.available_countries -%}<button type="submit" name="country_code" value="{{ country.iso_code }}" class="popover__choice-item"><span class="popover__choice-label" {% if country.iso_code == localization.country.iso_code %}aria-current="true"{% endif %}>{{- country.name }} ({{ country.currency.iso_code }} {% if localization.country.currency.symbol %}{{ localization.country.currency.symbol }}{%- endif -%})</span></button>{%- endfor -%}</div></div></popover-content></div>
         {%- endif -%}
         {%- if locale_selector -%}
-          <div class="popover-container"><input type="hidden" name="locale_code" value="{{ form.current_locale.iso_code }}"><span class="visually-hidden">{{ 'header.general.language' | t }}</span><button type="button" is="toggle-button" class="popover-button text--xsmall tap-area" aria-expanded="false" aria-controls="header-sidebar-localization-form-locale">{{- form.current_locale.endonym_name | capitalize -}}{%- render 'icon' with 'chevron', width: 9, height: 6, inline: true -%}</button><popover-content id="header-sidebar-localization-form-locale" class="popover popover--top popover--small"><span class="popover__overlay"></span><header class="popover__header"><span class="popover__title heading h6">{{- 'header.general.language' | t -}}</span><button type="button" class="popover__close-button tap-area tap-area--large" data-action="close" title="{{ 'general.accessibility.close' | t | escape }}">{%- render 'icon' with 'close' -%}</button></header><div class="popover__content"><div class="popover__choice-list">{%- for locale in form.available_locales -%}<button type="submit" name="locale_code" value="{{ locale.iso_code }}" class="popover__choice-item"><span class="popover__choice-label" {% if locale.iso_code == form.current_locale.iso_code %}aria-current="true"{% endif %}>{{- locale.endonym_name | capitalize -}}</span></button>{%- endfor -%}</div></div></popover-content></div>
+          <div class="popover-container"><input type="hidden" name="locale_code" value="{{ form.current_locale.iso_code }}"><span class="visually-hidden">{{ 'header.general.language' | t }}</span><button type="button" is="toggle-button" class="popover-button text--xsmall tap-area" aria-expanded="false" aria-controls="header-sidebar-localization-form-locale">{{- form.current_locale.endonym_name | capitalize -}}{%- render 'icon' with 'chevron', width: 9, height: 6, inline: true -%}</button><popover-content id="header-sidebar-localization-form-locale" class="popover popover--top popover--small"><span class="popover__overlay"></span><header class="popover__header"><span class="popover__title heading h6">{{- 'header.general.language' | t -}}</span><button type="button" class="popover__close-button tap-area tap-area--large" data-action="close" title="{{ 'general.accessibility.close' | t | escape }}">{%- render 'icon' with 'close' -%}</button></header><div class="popover__content"><div class="popover__choice-list">{%- for locale in form.available_locales -%}<button type="submit" name="locale_code" value="{{ locale.iso_code }}" class="popover__choice-item"><span class="popover__choice-label" {% if locale.iso_code == localization.country.iso_code %}aria-current="true"{% endif %}>{{- locale.endonym_name | capitalize -}}</span></button>{%- endfor -%}</div></div></popover-content></div>
         {%- endif -%}
       {%- endform -%}
     </div></div>
