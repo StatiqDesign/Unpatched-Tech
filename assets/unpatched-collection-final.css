@@ -1,0 +1,29 @@
+/* ========================================================================== 
+   UNPATCHED TECH — COLLECTION FINAL PRESENTATION
+   Final spacing and white-surface rules for collection templates.
+   ========================================================================== */
+
+.unpatched-collection-hero {
+  padding: 96px 0 0 !important;
+}
+
+.shopify-section--main-collection,
+.shopify-section--main-collection > section,
+.shopify-section--main-collection .product-facet,
+.shopify-section--main-collection .product-facet__main {
+  background: #fff !important;
+}
+
+.shopify-section--main-collection > section {
+  padding: 40px 0 96px !important;
+}
+
+@media screen and (max-width: 749px) {
+  .unpatched-collection-hero {
+    padding: 56px 16px 0 !important;
+  }
+
+  .shopify-section--main-collection > section {
+    padding: 28px 0 72px !important;
+  }
+}
