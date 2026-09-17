@@ -50,6 +50,36 @@
     line-height: 1.65;
   }
 
+  /* Restore the clean bordered disclosure rows without bringing the old shadow back. */
+  body.unpatched-product-page #main .unpatched-product-disclosure-stack {
+    display: grid !important;
+    gap: 10px !important;
+  }
+
+  body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordions {
+    border: 0 !important;
+  }
+
+  body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion,
+  body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion[open] {
+    border: 1px solid rgba(37, 37, 42, .11) !important;
+    border-radius: var(--block-border-radius) !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+
+  body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion[open] {
+    border-color: rgba(var(--unpatched-brand-blue-rgb), .28) !important;
+  }
+
+  body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion summary {
+    padding-inline: 20px 18px !important;
+  }
+
+  body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion-content {
+    padding-inline: 20px 58px !important;
+  }
+
   @media screen and (max-width: 740px) {
     .unpatched-product-trust {
       padding: 24px 0 20px;
@@ -63,6 +93,52 @@
       margin-top: 8px;
       font-size: 14px;
       line-height: 1.6;
+    }
+
+    /* Give the sticky price / add-to-cart row a real phone gutter. */
+    body.unpatched-product-page #main .unpatched-product-sticky__inner {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+    }
+
+    body.unpatched-product-page #main .unpatched-product-sticky__price-wrap,
+    body.unpatched-product-page #main .unpatched-product-sticky__price {
+      margin-left: 0 !important;
+    }
+
+    /* Keep Product Details heading and body on the exact same left edge. */
+    body.unpatched-product-page #main .shopify-section--product-content .product-tabs,
+    body.unpatched-product-page #main .shopify-section--product-content .product-tabs__content,
+    body.unpatched-product-page #main .shopify-section--product-content .product-tabs__tab-item-wrapper,
+    body.unpatched-product-page #main .shopify-section--product-content .product-tabs__tab-item-content,
+    body.unpatched-product-page #main .shopify-section--product-content collapsible-content,
+    body.unpatched-product-page #main .shopify-section--product-content .collapsible {
+      margin-left: 0 !important;
+      padding-left: 0 !important;
+    }
+
+    body.unpatched-product-page #main .shopify-section--product-content .product-tabs {
+      padding-left: 18px !important;
+      padding-right: 18px !important;
+    }
+
+    body.unpatched-product-page #main .shopify-section--product-content .product-tabs::before,
+    body.unpatched-product-page #main .shopify-section--product-content .product-tabs__tab-item-content,
+    body.unpatched-product-page #main .shopify-section--product-content .product-tabs__tab-item-content p {
+      margin-left: 0 !important;
+      text-align: left !important;
+    }
+
+    body.unpatched-product-page #main .unpatched-product-disclosure-stack {
+      gap: 8px !important;
+    }
+
+    body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion summary {
+      padding-inline: 18px 16px !important;
+    }
+
+    body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion-content {
+      padding-inline: 18px 48px !important;
     }
   }
 </style>
