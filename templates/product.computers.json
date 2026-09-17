@@ -95,6 +95,30 @@
         "padding_bottom": 16
       }
     },
+    "unpatched_product_image_CmLbdY": {
+      "type": "unpatched-product-image",
+      "settings": {
+        "image": "shopify://shop_images/pc_2.png",
+        "link": "",
+        "full_width": false,
+        "max_width": 1800,
+        "radius": 0,
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    },
+    "unpatched_product_image_EU79KB": {
+      "type": "unpatched-product-image",
+      "settings": {
+        "image": "shopify://shop_images/Support.png",
+        "link": "",
+        "full_width": false,
+        "max_width": 1800,
+        "radius": 0,
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    },
     "product-content": {
       "type": "product-content",
       "blocks": {
@@ -123,6 +147,8 @@
   "order": [
     "main",
     "product_image_1",
+    "unpatched_product_image_CmLbdY",
+    "unpatched_product_image_EU79KB",
     "product-content",
     "product_recommendations_apWawt"
   ]
