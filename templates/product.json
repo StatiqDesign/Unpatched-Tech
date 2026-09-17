@@ -81,6 +81,18 @@
         "padding_bottom": 16
       }
     },
+    "unpatched_product_image_fkYyx9": {
+      "type": "unpatched-product-image",
+      "settings": {
+        "image": "shopify://shop_images/Support.png",
+        "link": "",
+        "full_width": false,
+        "max_width": 1400,
+        "radius": 0,
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    },
     "product-content": {
       "type": "product-content",
       "blocks": {
@@ -109,6 +121,7 @@
   "order": [
     "main",
     "product_image_1",
+    "unpatched_product_image_fkYyx9",
     "product-content",
     "product_recommendations_apWawt"
   ]
