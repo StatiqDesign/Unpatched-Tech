@@ -34,64 +34,8 @@ Reusable custom sections load their own component styles so they remain portable
 
 <link rel="stylesheet" href="{{ 'unpatched-chrome.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'unpatched-chrome.css' | asset_url }}"></noscript>
-
-<style id="unpatched-footer-legal-cleanup">
-  .shopify-section--footer .footer__bottom-credit {
-    display: none !important;
-  }
-
-  .shopify-section--footer .footer__legal-bar {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 2px !important;
-    min-height: 0 !important;
-  }
-
-  .shopify-section--footer .footer__legal-links {
-    order: 1 !important;
-    width: 100% !important;
-    padding-inline: 0 !important;
-    justify-content: center !important;
-  }
-
-  .shopify-section--footer .footer__bottom-copyright {
-    position: static !important;
-    order: 2 !important;
-    width: 100% !important;
-    margin-top: 0 !important;
-    text-align: center !important;
-  }
-
-  .shopify-section--footer .footer__aside,
-  .shopify-section--footer .footer__cross-border,
-  .shopify-section--footer .footer__follow-and-payment,
-  .shopify-section--footer .footer__payment-methods {
-    width: 100% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-  }
-
-  .shopify-section--footer .footer__aside,
-  .shopify-section--footer .footer__payment-methods {
-    flex-direction: column !important;
-  }
-
-  .shopify-section--footer .footer__cross-border,
-  .shopify-section--footer .footer__follow-and-payment,
-  .shopify-section--footer .payment-methods-list {
-    margin-inline: auto !important;
-    justify-content: center !important;
-  }
-
-  .shopify-section--footer .footer__cross-border {
-    flex-wrap: wrap !important;
-  }
-</style>
-
+<link rel="stylesheet" href="{{ 'unpatched-footer-layout.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'unpatched-footer-layout.css' | asset_url }}"></noscript>
 <link rel="stylesheet" href="{{ 'unpatched-media-core.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'unpatched-media-core.css' | asset_url }}"></noscript>
 
@@ -130,32 +74,7 @@ Reusable custom sections load their own component styles so they remain portable
     </noscript>
   {%- when 'collection' -%}
     <link rel="stylesheet" href="{{ 'unpatched-collection.css' | asset_url }}">
-    <style>
-      .unpatched-collection-hero {
-        padding: 96px 0 0 !important;
-      }
-
-      .shopify-section--main-collection,
-      .shopify-section--main-collection > section,
-      .shopify-section--main-collection .product-facet,
-      .shopify-section--main-collection .product-facet__main {
-        background: #fff !important;
-      }
-
-      .shopify-section--main-collection > section {
-        padding: 40px 0 96px !important;
-      }
-
-      @media screen and (max-width: 749px) {
-        .unpatched-collection-hero {
-          padding: 56px 16px 0 !important;
-        }
-
-        .shopify-section--main-collection > section {
-          padding: 28px 0 72px !important;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="{{ 'unpatched-collection-final.css' | asset_url }}">
 {%- endcase -%}
 
 {%- if is_unpatched_faq_page -%}
