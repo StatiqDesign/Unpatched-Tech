@@ -87,7 +87,7 @@
           "background_color": "#ffffff",
           "font_color": "#25252a",
           "agent_invert_activator_colors": true,
-          "button_color": "#405DE6",
+          "button_color": "#405de6",
           "button_icon": "chat_bubble",
           "button_text": "no_text",
           "button_horizontal_position": "bottom_right",
@@ -95,8 +95,8 @@
           "agent_inherit_fonts": true,
           "agent_font": "system_ui_n4",
           "agent_font_size": 14,
-          "agent_activator_font_size": 13,
-          "agent_border_radius": 8
+          "agent_activator_font_size": 15,
+          "agent_border_radius": 4
         }
       }
     }
