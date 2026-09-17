@@ -226,13 +226,14 @@
   height: 360px;
 }
 
-/* Product layout contract for PC pages ------------------------------- */
+/* Product layout contract for PC pages. The extra body class keeps this
+   intentional stretch behavior stronger than the generic final product layer. */
 @media screen and (min-width: 1000px) {
-  .unpatched-product-page .shopify-section--main-product .product {
+  .unpatched-product-page.unpatched-computer-product-page .shopify-section--main-product .product {
     align-items: stretch;
   }
 
-  .unpatched-product-page .shopify-section--main-product .product__info {
+  .unpatched-product-page.unpatched-computer-product-page .shopify-section--main-product .product__info {
     box-sizing: border-box;
     align-self: stretch;
     height: auto;
