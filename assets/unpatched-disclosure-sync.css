@@ -1,32 +1,40 @@
 /* ========================================================================== 
-   UNPATCHED TECH — SHARED DISCLOSURE CARD CONTRACT
-   Product information disclosures visually follow FAQ cards while preserving
-   native <details> state and Focal interaction behavior.
+   UNPATCHED TECH — SHARED DISCLOSURE CONTRACT
+   Product information disclosures keep the same interaction behavior while
+   using a flatter presentation with divider lines instead of outer cards.
    ========================================================================== */
 
-body.unpatched-faq-page #main .shopify-section--faq .faq__item,
-body.unpatched-product-page #main .unpatched-accordion {
+body.unpatched-faq-page #main .shopify-section--faq .faq__item {
   border-radius: var(--block-border-radius);
 }
 
 /* Product disclosure rhythm -------------------------------------------- */
-body.unpatched-product-page #main .unpatched-accordions {
+body.unpatched-product-page #main .unpatched-product-disclosure-stack {
   width: 100%;
-  margin: 0 0 10px;
+}
+
+body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordions {
+  width: 100%;
+  margin: 0;
+}
+
+body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordions + .unpatched-accordions {
+  border-top: 1px solid rgba(37, 37, 42, .09);
 }
 
 body.unpatched-product-page #main .product-form__quantity + .unpatched-accordions {
   margin-top: 20px;
 }
 
-body.unpatched-product-page #main .unpatched-accordion {
+body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   margin: 0;
-  border: 1px solid rgba(37, 37, 42, .085);
-  background: #fff;
-  box-shadow: 0 5px 16px rgba(37, 37, 42, .035);
-  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transition: none;
 }
 
 body.unpatched-product-page #main .unpatched-accordion::before {
@@ -35,15 +43,15 @@ body.unpatched-product-page #main .unpatched-accordion::before {
 }
 
 /* Summary --------------------------------------------------------------- */
-body.unpatched-product-page #main .unpatched-accordion summary {
+body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 22px;
   width: 100%;
-  min-height: 66px;
+  min-height: 60px;
   margin: 0;
-  padding: 19px 22px 19px 24px;
+  padding: 17px 0;
   color: #25252a;
   font-family: var(--heading-font-family);
   font-size: 15px;
@@ -116,8 +124,8 @@ body.unpatched-product-page #main .unpatched-accordion[open] .unpatched-accordio
 }
 
 /* Content --------------------------------------------------------------- */
-body.unpatched-product-page #main .unpatched-accordion-content {
-  padding: 0 68px 22px 24px;
+body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion-content {
+  padding: 0 46px 18px 0;
   color: rgba(37, 37, 42, .72);
   font-size: 14px;
   line-height: 1.72;
@@ -133,10 +141,10 @@ body.unpatched-product-page #main .unpatched-accordion-content a {
   text-underline-offset: 3px;
 }
 
-body.unpatched-product-page #main .unpatched-accordion[open] {
-  border-color: rgba(var(--unpatched-brand-blue-rgb), .26);
-  background: #fff;
-  box-shadow: 0 12px 30px rgba(37, 37, 42, .07);
+body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion[open] {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 body.unpatched-product-page #main .product-form__text {
@@ -145,29 +153,28 @@ body.unpatched-product-page #main .product-form__text {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  body.unpatched-product-page #main .unpatched-accordion:hover {
-    transform: translateY(-2px);
-    border-color: rgba(var(--unpatched-brand-blue-rgb), .22);
-    box-shadow: 0 12px 26px rgba(37, 37, 42, .07);
+  body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion:hover {
+    transform: none;
+    border-color: transparent;
+    box-shadow: none;
   }
 }
 
 @media screen and (max-width: 749px) {
-  body.unpatched-product-page #main .unpatched-accordion summary {
-    min-height: 60px;
-    padding: 17px 18px 17px 20px;
+  body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion summary {
+    min-height: 56px;
+    padding: 15px 0;
     gap: 18px;
     font-size: 14px;
   }
 
-  body.unpatched-product-page #main .unpatched-accordion-content {
-    padding: 0 58px 20px 20px;
+  body.unpatched-product-page #main .unpatched-product-disclosure-stack .unpatched-accordion-content {
+    padding: 0 40px 16px 0;
     font-size: 13px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body.unpatched-product-page #main .unpatched-accordion,
   body.unpatched-product-page #main .unpatched-accordion-plus::before,
   body.unpatched-product-page #main .unpatched-accordion-plus::after {
     transition: none;
