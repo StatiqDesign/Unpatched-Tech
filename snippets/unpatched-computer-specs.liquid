@@ -1,18 +1,16 @@
 {%- comment -%}
   UNPATCHED TECH — COMPUTER SPECS
-  Dedicated gaming-computer spec sheet for the product.computers template.
-  Product metafields override the preview fallbacks below.
+  Buyer-facing gaming-computer spec sheet for the product.computers template.
+  Keep the visible list focused on the details most prebuilt shoppers actually
+  use to compare systems. Product metafields override the preview fallbacks.
 
-  Metafields:
+  Visible metafields:
   custom.pc_operating_system
   custom.pc_cpu
   custom.pc_gpu
   custom.pc_memory
   custom.pc_storage
-  custom.pc_motherboard
-  custom.pc_cooling
   custom.pc_power_supply
-  custom.pc_case
 {%- endcomment -%}
 
 {%- assign pc_operating_system = product.metafields.custom.pc_operating_system.value | default: 'Windows 11 Home' -%}
@@ -20,10 +18,7 @@
 {%- assign pc_gpu = product.metafields.custom.pc_gpu.value | default: 'AMD Radeon graphics' -%}
 {%- assign pc_memory = product.metafields.custom.pc_memory.value | default: '32GB DDR5 memory' -%}
 {%- assign pc_storage = product.metafields.custom.pc_storage.value | default: '1TB NVMe SSD' -%}
-{%- assign pc_motherboard = product.metafields.custom.pc_motherboard.value | default: 'B650 Wi-Fi motherboard' -%}
-{%- assign pc_cooling = product.metafields.custom.pc_cooling.value | default: '240mm liquid cooling' -%}
 {%- assign pc_power_supply = product.metafields.custom.pc_power_supply.value | default: '750W 80+ Gold PSU' -%}
-{%- assign pc_case = product.metafields.custom.pc_case.value | default: 'Premium gaming chassis' -%}
 
 <div class="up-pc-specs-field" data-unpatched-computer-specs>
   <div class="up-pc-specs-field__label">Specs:</div>
@@ -51,28 +46,13 @@
       </div>
 
       <div class="up-pc-specs__item">
-        <span class="up-pc-specs__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="12" r="4"/><path d="M7 3v3M17 3v3M7 18v3M17 18v3"/></svg></span>
-        <span><small>Motherboard</small><strong>{{ pc_motherboard }}</strong></span>
-      </div>
-
-      <div class="up-pc-specs__item">
-        <span class="up-pc-specs__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3"/><path d="M12 3c2.5 0 4 2.2 3.2 4.4C14.5 9.2 12 9 12 12M21 12c0 2.5-2.2 4-4.4 3.2C14.8 14.5 15 12 12 12M12 21c-2.5 0-4-2.2-3.2-4.4C9.5 14.8 12 15 12 12M3 12c0-2.5 2.2-4 4.4-3.2C9.2 9.5 9 12 12 12"/></svg></span>
-        <span><small>Cooling</small><strong>{{ pc_cooling }}</strong></span>
+        <span class="up-pc-specs__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 22h8M12 18v4M7 9h10"/></svg></span>
+        <span><small>Operating System</small><strong>{{ pc_operating_system }}</strong></span>
       </div>
 
       <div class="up-pc-specs__item">
         <span class="up-pc-specs__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 5 14h6l-1 8 9-13h-6V2z"/></svg></span>
         <span><small>Power Supply</small><strong>{{ pc_power_supply }}</strong></span>
-      </div>
-
-      <div class="up-pc-specs__item">
-        <span class="up-pc-specs__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="16" r="3"/><path d="M9 6h6"/></svg></span>
-        <span><small>Case</small><strong>{{ pc_case }}</strong></span>
-      </div>
-
-      <div class="up-pc-specs__item up-pc-specs__item--wide">
-        <span class="up-pc-specs__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 22h8M12 18v4M7 9h10"/></svg></span>
-        <span><small>Operating System</small><strong>{{ pc_operating_system }}</strong></span>
       </div>
     </div>
   </div>
