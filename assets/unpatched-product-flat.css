@@ -1,0 +1,127 @@
+/* ========================================================================== 
+   UNPATCHED TECH — PRODUCT PAGE FLAT PRESENTATION
+   Removes unnecessary card shells so product content blends into the page.
+   ========================================================================== */
+
+/* Keep the entire product experience on one clean white canvas. */
+.unpatched-product-page .shopify-section--main-product {
+  background: #fff;
+  background-image: none;
+}
+
+/* Main product imagery should feel like imagery, not a card. */
+.unpatched-product-page .product__media-list-wrapper {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.unpatched-product-page .product__media-image-wrapper {
+  background: transparent;
+}
+
+/* Remove the outer card treatment from the information column. */
+.unpatched-product-page .product__info {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Match SYSTEM to COLOR / SPECS label styling. */
+.unpatched-product-page .up-system-selector__label {
+  color: rgba(37, 37, 42, .62);
+  font-family: var(--heading-font-family);
+  font-size: 10px;
+  font-weight: var(--heading-font-weight);
+  line-height: 1;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+/* Price + ATC stays grouped without another card shell. */
+.unpatched-product-page .unpatched-purchase-row {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Performance remains distinct through spacing/dividers, not a gray card. */
+.unpatched-product-page .up-performance-card {
+  padding: 20px 0;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: none;
+}
+
+.unpatched-product-page .up-performance-card__title {
+  font-family: var(--heading-font-family);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* Product details should flow directly on the page instead of inside a card. */
+.unpatched-product-page .shopify-section--product-content .product-content__tabs {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.unpatched-product-page .shopify-section--product-content .product-tabs {
+  padding: clamp(22px, 2.5vw, 34px) 0;
+}
+
+.unpatched-product-page .shopify-section--product-content .product-tabs::before,
+.unpatched-product-page .shopify-section--product-content .product-tabs__content,
+.unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content {
+  text-align: left;
+}
+
+/* Marketing / lifestyle image sections should also stay visually flat. */
+.unpatched-product-page .shopify-section--product-image .up-product-image-section__inner {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+@media screen and (max-width: 740px) {
+  .unpatched-product-page .product__media-list-wrapper {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .unpatched-product-page .product__info {
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .unpatched-product-page .up-performance-mobile-shell .up-performance-card {
+    padding: 18px 0;
+    border: 0;
+    border-radius: 0;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs {
+    padding: 18px 0;
+    text-align: left;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs::before,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__content,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-wrapper,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content p,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content li {
+    text-align: left;
+  }
+}
