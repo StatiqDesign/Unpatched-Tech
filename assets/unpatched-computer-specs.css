@@ -27,11 +27,12 @@
   color: #25252a !important;
 }
 
+/* Flat outer shell; the internal divider grid remains intact. */
 .unpatched-product-page .up-pc-specs {
   width: 100%;
   overflow: hidden;
-  border: 1px solid rgba(37, 37, 42, .12);
-  border-radius: var(--block-border-radius);
+  border: 0;
+  border-radius: 0;
   background: #fff;
   box-shadow: none;
 }
