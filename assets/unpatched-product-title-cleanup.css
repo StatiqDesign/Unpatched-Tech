@@ -21,7 +21,7 @@
   background-image: none !important;
 }
 
-/* Let the pure-white product photography disappear into the white page. */
+/* Let pure-white product photography disappear into the white page. */
 .unpatched-product-page .product__media-list-wrapper,
 .unpatched-product-page .product__media-list,
 .unpatched-product-page .product__media-list .flickity-viewport,
@@ -34,7 +34,7 @@
   box-shadow: none !important;
 }
 
-/* Thumbnail selection should be unmistakable without adding visual noise. */
+/* Thumbnail selection should be crisp and unmistakable. */
 .unpatched-product-page .product__thumbnail {
   box-sizing: border-box !important;
   overflow: hidden !important;
@@ -66,7 +66,7 @@
   text-transform: uppercase !important;
 }
 
-/* Keep price / purchase grouping without wrapping it in another card. */
+/* Keep price / purchase grouping without another desktop card shell. */
 .unpatched-product-page .unpatched-purchase-row {
   padding: 0 !important;
   border: 0 !important;
@@ -105,7 +105,6 @@
   padding: clamp(22px, 2.5vw, 34px) 0 !important;
 }
 
-/* Let Product Details use the same container width as the merchandising images. */
 .unpatched-product-page .shopify-section--product-content .product-tabs__content {
   width: 100% !important;
   max-width: none !important;
@@ -117,12 +116,25 @@
   text-align: left !important;
 }
 
-/* Extra marketing/lifestyle product images also remain flat. */
+/* Extra marketing/lifestyle product images remain flat. */
 .unpatched-product-page .shopify-section--product-image .up-product-image-section__inner {
   border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
+}
+
+/* The Judge.me review section should be available immediately below Product Details. */
+.unpatched-product-page .shopify-section--apps,
+.unpatched-product-page .shopify-section--apps .jdgm-widget,
+.unpatched-product-page .shopify-section--apps .jdgm-review-widget {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.unpatched-product-page .shopify-section--apps {
+  display: block !important;
+  background: #fff !important;
 }
 
 @media screen and (max-width: 740px) {
@@ -141,7 +153,7 @@
     box-shadow: none !important;
   }
 
-  /* Pull the title visually closer to the gallery without crowding the dots. */
+  /* Pull the title closer to the gallery without crowding navigation. */
   .unpatched-product-page .product__media-nav {
     min-height: 42px !important;
     margin: 0 !important;
@@ -169,9 +181,28 @@
     box-shadow: none !important;
   }
 
-  /* Restore a real mobile gutter for Product Details text and bullets. */
+  /* Product Details: the heading and first body character share one exact left edge. */
   .unpatched-product-page .shopify-section--product-content .product-tabs {
     padding: 18px !important;
+    text-align: left !important;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs::before {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 0 14px !important;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+
+  .unpatched-product-page .shopify-section--product-content .product-tabs__content,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-wrapper,
+  .unpatched-product-page .shopify-section--product-content collapsible-content,
+  .unpatched-product-page .shopify-section--product-content .collapsible,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content,
+  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content p {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
     text-align: left !important;
   }
 
@@ -179,22 +210,42 @@
   .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content ol {
     margin-inline: 0 !important;
     padding-inline-start: 20px !important;
+    text-align: left !important;
   }
 
-  .unpatched-product-page .shopify-section--product-content .product-tabs::before,
-  .unpatched-product-page .shopify-section--product-content .product-tabs__content,
-  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-wrapper,
-  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content,
-  .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content p,
   .unpatched-product-page .shopify-section--product-content .product-tabs__tab-item-content li {
     text-align: left !important;
   }
 
-  /* Flatten the mobile disclosure area and the quick-purchase dock completely. */
-  .unpatched-product-page .unpatched-product-disclosure-stack,
-  .unpatched-product-page .unpatched-product-disclosure-stack .unpatched-accordions,
+  /* Inside the Box + Shipping & Delivery return to clean bordered controls. */
+  .unpatched-product-page .unpatched-product-disclosure-stack {
+    display: grid !important;
+    gap: 8px !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .unpatched-product-page .unpatched-product-disclosure-stack .unpatched-accordions {
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
   .unpatched-product-page .unpatched-product-disclosure-stack .unpatched-accordion,
-  .unpatched-product-page .unpatched-product-disclosure-stack .unpatched-accordion[open],
+  .unpatched-product-page .unpatched-product-disclosure-stack .unpatched-accordion[open] {
+    border: 1px solid rgba(37, 37, 42, .11) !important;
+    border-radius: var(--block-border-radius) !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    filter: none !important;
+  }
+
+  .unpatched-product-page .unpatched-product-disclosure-stack .unpatched-accordion[open] {
+    border-color: rgba(var(--unpatched-brand-blue-rgb), .28) !important;
+  }
+
+  /* Keep the mobile purchase dock clean but give the price a real screen gutter. */
   .unpatched-product-page .unpatched-product-sticky,
   .unpatched-product-page .unpatched-product-sticky__inner,
   .unpatched-product-page .unpatched-product-sticky__purchase {
@@ -202,6 +253,16 @@
     background: #fff !important;
     box-shadow: none !important;
     filter: none !important;
+  }
+
+  .unpatched-product-page .unpatched-product-sticky__inner {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .unpatched-product-page .unpatched-product-sticky__price-wrap,
+  .unpatched-product-page .unpatched-product-sticky__price {
+    margin-left: 0 !important;
   }
 
   .unpatched-product-page .unpatched-product-sticky::before,
@@ -212,8 +273,7 @@
     filter: none !important;
   }
 
-  /* The normal buy-button row is replaced by the mobile dock. Remove its dead
-     spacing so the dock follows the disclosure controls at the same rhythm. */
+  /* The normal buy-button row is replaced by the mobile dock. Remove dead space. */
   .unpatched-product-page .unpatched-mobile-dock-enabled .product-form__buy-buttons,
   .unpatched-product-page .unpatched-mobile-dock-enabled .product-form__payment-container {
     min-height: 0 !important;
