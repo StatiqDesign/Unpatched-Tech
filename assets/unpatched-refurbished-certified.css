@@ -1,6 +1,6 @@
 /* ========================================================================== 
-   UNPATCHED TECH — CERTIFIED REFURBISHED PRODUCT CARD
-   Trust-focused companion to the gaming PC specification card.
+   UNPATCHED TECH — CERTIFIED REFURBISHED CONSOLE INFO
+   Matches the clean stacked-list treatment used by gaming PC specs.
    ========================================================================== */
 
 .unpatched-product-page .up-refurb-certified-field {
@@ -8,127 +8,62 @@
   margin-top: 24px;
 }
 
-/* INFO reuses the exact native product option markup/classes used by COLOR. */
-.unpatched-product-page .up-refurb-certified-field__label-wrap {
+/* Exact match for product option/spec labels such as COLOR: and SPECS: */
+.unpatched-product-page .up-refurb-certified-field__label {
   margin-bottom: 10px;
-}
-
-.unpatched-product-page .up-refurb-certified-field__label-wrap .product-form__option-name {
-  color: #25252a !important;
-}
-
-.unpatched-product-page .up-refurb-certified {
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-  flex-direction: column;
-  border: 1px solid rgba(37, 37, 42, .12);
-  border-radius: var(--block-border-radius);
-  background: #fff !important;
-  box-shadow: none;
-}
-
-.unpatched-product-page .up-refurb-certified__header {
-  padding: 16px 17px;
-  border-bottom: 1px solid rgba(37, 37, 42, .07);
-  background: #fff !important;
-  background-image: none !important;
-}
-
-.unpatched-product-page .up-refurb-certified__heading {
-  display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
-  align-items: center;
-  gap: 11px;
-  min-width: 0;
-}
-
-.unpatched-product-page .up-refurb-certified__seal {
-  display: grid;
-  width: 34px;
-  height: 34px;
-  place-items: center;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: rgb(var(--unpatched-brand-blue-rgb));
-}
-
-.unpatched-product-page .up-refurb-certified__seal svg {
-  width: 22px;
-  height: 22px;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.unpatched-product-page .up-refurb-certified__eyebrow {
-  display: block;
-  margin-bottom: 3px;
-  color: rgba(37, 37, 42, .44);
+  color: #25252a;
   font-family: var(--heading-font-family);
-  font-size: 8px;
+  font-size: 10px;
+  font-style: normal;
   font-weight: var(--heading-font-weight);
-  line-height: 1.15;
-  letter-spacing: .08em;
+  line-height: 1;
+  letter-spacing: .12em;
   text-transform: uppercase;
 }
 
-.unpatched-product-page .up-refurb-certified__title {
-  margin: 0;
-  color: #25252a;
-  font-family: var(--heading-font-family);
-  font-size: 11.5px;
-  font-weight: 650;
-  line-height: 1.35;
-}
-
-.unpatched-product-page .up-refurb-certified__intro {
-  max-width: 58ch;
-  margin: 4px 0 0;
-  color: rgba(37, 37, 42, .64);
-  font-size: 10.5px;
-  line-height: 1.45;
+.unpatched-product-page .up-refurb-certified {
+  width: 100%;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: none;
 }
 
 .unpatched-product-page .up-refurb-certified__grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  background: #fff !important;
+  grid-template-columns: 1fr;
+  background: #fff;
 }
 
 .unpatched-product-page .up-refurb-certified__item {
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
+  grid-template-columns: 30px minmax(0, 1fr);
   align-items: center;
-  gap: 11px;
+  gap: 10px;
   min-width: 0;
-  min-height: 86px;
-  padding: 13px 17px;
-  border-bottom: 1px solid rgba(37, 37, 42, .07);
-  background: #fff !important;
+  min-height: 62px;
+  padding: 11px 4px;
+  border-right: 0;
+  border-bottom: 1px solid rgba(37, 37, 42, .08);
+  background: #fff;
 }
 
-.unpatched-product-page .up-refurb-certified__item:nth-child(odd) {
-  border-right: 1px solid rgba(37, 37, 42, .07);
-}
-
-.unpatched-product-page .up-refurb-certified__item:nth-last-child(-n + 2) {
+.unpatched-product-page .up-refurb-certified__item:last-child {
   border-bottom: 0;
 }
 
 .unpatched-product-page .up-refurb-certified__icon {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   place-items: center;
   color: rgb(var(--unpatched-brand-blue-rgb));
 }
 
 .unpatched-product-page .up-refurb-certified__icon svg {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   stroke: currentColor;
   stroke-width: 1.6;
   stroke-linecap: round;
@@ -145,10 +80,10 @@
 }
 
 .unpatched-product-page .up-refurb-certified__item small {
-  margin-bottom: 3px;
+  margin-bottom: 2px;
   color: rgba(37, 37, 42, .44);
   font-family: var(--heading-font-family);
-  font-size: 8px;
+  font-size: 7px;
   font-weight: var(--heading-font-weight);
   line-height: 1.15;
   letter-spacing: .08em;
@@ -156,10 +91,16 @@
 }
 
 .unpatched-product-page .up-refurb-certified__item strong {
+  overflow-wrap: anywhere;
   color: #25252a;
-  font-size: 10.5px;
-  font-weight: 600;
-  line-height: 1.42;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.32;
+}
+
+.unpatched-product-page .up-refurb-certified__item--warranty small,
+.unpatched-product-page .up-refurb-certified__item--warranty .up-refurb-certified__icon {
+  color: rgb(var(--unpatched-brand-blue-rgb));
 }
 
 @media screen and (max-width: 740px) {
@@ -167,66 +108,7 @@
     margin-top: 22px;
   }
 
-  .unpatched-product-page .up-refurb-certified-field__label-wrap {
-    margin-bottom: 10px;
-  }
-
-  .unpatched-product-page .up-refurb-certified__header {
-    padding: 13px 12px;
-  }
-
-  .unpatched-product-page .up-refurb-certified__heading,
-  .unpatched-product-page .up-refurb-certified__item {
-    grid-template-columns: 28px minmax(0, 1fr);
-    gap: 8px;
-  }
-
-  .unpatched-product-page .up-refurb-certified__seal,
-  .unpatched-product-page .up-refurb-certified__icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .unpatched-product-page .up-refurb-certified__seal svg,
-  .unpatched-product-page .up-refurb-certified__icon svg {
-    width: 19px;
-    height: 19px;
-  }
-
-  .unpatched-product-page .up-refurb-certified__title {
-    font-size: 10.5px;
-  }
-
-  .unpatched-product-page .up-refurb-certified__intro {
-    font-size: 9.75px;
-  }
-
-  .unpatched-product-page .up-refurb-certified__item {
-    min-height: 82px;
-    padding: 11px 12px;
-  }
-
-  .unpatched-product-page .up-refurb-certified__item small {
-    font-size: 7px;
-  }
-
-  .unpatched-product-page .up-refurb-certified__item strong {
-    font-size: 9.75px;
-  }
-}
-
-@media screen and (max-width: 420px) {
-  .unpatched-product-page .up-refurb-certified__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .unpatched-product-page .up-refurb-certified__item,
-  .unpatched-product-page .up-refurb-certified__item:nth-last-child(-n + 2) {
-    border-right: 0;
-    border-bottom: 1px solid rgba(37, 37, 42, .07);
-  }
-
-  .unpatched-product-page .up-refurb-certified__item:last-child {
-    border-bottom: 0;
+  .unpatched-product-page .up-refurb-certified-field__label {
+    margin-bottom: 8px;
   }
 }
