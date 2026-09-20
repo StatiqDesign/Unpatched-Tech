@@ -1,59 +1,71 @@
 {%- comment -%}
-  UNPATCHED TECH — CERTIFIED REFURBISHED
-  Trust card for standard refurbished product pages.
-  Only renders for products tagged "Refurbished".
+  UNPATCHED TECH — CERTIFIED REFURBISHED CONSOLE INFO
+  Spec-style buyer-facing information list for refurbished console products.
+  Mirrors the visual language of the gaming PC specs section.
 {%- endcomment -%}
 
+{%- assign refurb_category = product.category.name | default: '' | downcase | strip -%}
+{%- capture refurb_context -%}
+  {{ product.type }} {{ product.title }}
+  {%- for tag in product.tags -%} {{ tag }}{%- endfor -%}
+{%- endcapture -%}
+{%- assign refurb_context = refurb_context | downcase -%}
+
+{%- assign is_refurbished = false -%}
+{%- assign is_console = false -%}
+
 {%- if product.tags contains 'Refurbished' -%}
+  {%- assign is_refurbished = true -%}
+{%- endif -%}
+
+{%- if refurb_category contains 'video game console' or refurb_category contains 'handheld game console' -%}
+  {%- assign is_console = true -%}
+{%- elsif refurb_context contains 'console' or refurb_context contains 'xbox' or refurb_context contains 'playstation' or refurb_context contains 'nintendo' or refurb_context contains 'switch' or refurb_context contains 'wii' or refurb_context contains 'gamecube' or refurb_context contains 'nes' or refurb_context contains 'n64' or refurb_context contains 'game boy' or refurb_context contains 'gameboy' or refurb_context contains 'gba' or refurb_context contains 'gbc' or refurb_context contains 'psp' or refurb_context contains 'vita' or refurb_context contains '2ds' or refurb_context contains '3ds' or refurb_context contains 'dsi' -%}
+  {%- assign is_console = true -%}
+{%- endif -%}
+
+{%- if is_refurbished and is_console -%}
   <div class="up-refurb-certified-field" data-unpatched-refurbished-certified>
-    <div class="product-form__option-info up-refurb-certified-field__label-wrap">
-      <span class="product-form__option-name">Info:</span>
-    </div>
+    <div class="up-refurb-certified-field__label">Info:</div>
 
     <div class="up-refurb-certified">
-      <div class="up-refurb-certified__header">
-        <div class="up-refurb-certified__heading">
-          <span class="up-refurb-certified__seal" aria-hidden="true">
+      <div class="up-refurb-certified__grid">
+        <div class="up-refurb-certified__item">
+          <span class="up-refurb-certified__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M12 3.25 14.1 5l2.7-.25.95 2.55 2.35 1.4-.75 2.6.75 2.6-2.35 1.4-.95 2.55-2.7-.25L12 19.35 9.9 17.6l-2.7.25-.95-2.55-2.35-1.4.75-2.6-.75-2.6 2.35-1.4.95-2.55L9.9 5 12 3.25Z"/>
               <path d="m8.5 11.35 2.25 2.2 4.75-5"/>
             </svg>
           </span>
-          <div>
-            <span class="up-refurb-certified__eyebrow">CERTIFIED REFURBISHED</span>
-            <h3 class="up-refurb-certified__title">The Unpatched Refurbished Standard</h3>
-            <p class="up-refurb-certified__intro">Every refurbished console is cleaned, inspected, repaired when needed, and fully tested before it leaves us.</p>
-          </div>
+          <span><small>Certified Refurbished</small><strong>The Unpatched Refurbished Standard</strong></span>
         </div>
-      </div>
 
-      <div class="up-refurb-certified__grid">
         <div class="up-refurb-certified__item">
           <span class="up-refurb-certified__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5c3.5-1 5-2.5 6-6l2.5 2.5c-3.5 1-5 2.5-6 6L4 17.5Z"/><path d="m13.5 4 .8 2.2L16.5 7l-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2ZM18.5 12l.55 1.45L20.5 14l-1.45.55L18.5 16l-.55-1.45L16.5 14l1.45-.55L18.5 12Z"/></svg>
           </span>
-          <span><small>Cleaned & Detailed</small><strong>Exterior, vents, ports, and included hardware are carefully cleaned and prepared.</strong></span>
+          <span><small>Cleaned &amp; Detailed</small><strong>Exterior, vents, ports, and included hardware are carefully cleaned and prepared.</strong></span>
         </div>
 
         <div class="up-refurb-certified__item">
           <span class="up-refurb-certified__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none"><path d="m14.5 5.5 4 4M13 7l4 4-7.5 7.5a2.1 2.1 0 0 1-3 0l-1-1a2.1 2.1 0 0 1 0-3L13 7Z"/><path d="m15.5 4.5 1-1a2.1 2.1 0 0 1 3 0l1 1a2.1 2.1 0 0 1 0 3l-1 1"/></svg>
           </span>
-          <span><small>Inspected & Repaired</small><strong>Wear, common failure points, and functional issues are checked and repaired when needed.</strong></span>
+          <span><small>Inspected &amp; Repaired</small><strong>Wear, common failure points, and functional issues are checked and repaired when needed.</strong></span>
         </div>
 
         <div class="up-refurb-certified__item">
           <span class="up-refurb-certified__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none"><path d="M7.5 8.5h9a4.5 4.5 0 0 1 4.2 6.1l-.9 2.4a2 2 0 0 1-3.2.8l-2.1-1.8h-5l-2.1 1.8a2 2 0 0 1-3.2-.8l-.9-2.4a4.5 4.5 0 0 1 4.2-6.1Z"/><path d="M7.5 11v4M5.5 13h4M15.5 12h.01M18 14h.01"/></svg>
           </span>
-          <span><small>Fully Tested</small><strong>Core console functions are verified so the system arrives ready for another player.</strong></span>
+          <span><small>Fully Tested</small><strong>Core console functions are verified so the system arrives ready to play.</strong></span>
         </div>
 
-        <div class="up-refurb-certified__item">
+        <div class="up-refurb-certified__item up-refurb-certified__item--warranty">
           <span class="up-refurb-certified__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 19 6v5c0 4.5-2.6 7.8-7 10-4.4-2.2-7-5.5-7-10V6l7-3Z"/><path d="m8.8 12 2.1 2 4.3-4.5"/></svg>
           </span>
-          <span><small>30-Day Warranty</small><strong>Refurbished hardware is backed by our 30-day warranty for added confidence.</strong></span>
+          <span><small>Lifetime Hassle-Free Warranty</small><strong>Your refurbished console is covered for life. If it breaks, send it in — we’ll repair it and send it back.</strong></span>
         </div>
       </div>
     </div>
